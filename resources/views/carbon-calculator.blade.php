@@ -1,16 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    @vite('resources/css/app.css')
-    <title>Document</title>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</head>
-<body>
-
+<x-layout>
     <div class="flex items-center gap-[7vw] mt-[7vw] px-[10vw]">
         <div class="flex flex-col w-[40vw] gap-[1vw]">
             <h1 class="text-[3.5vw] font-bold">What's your personal contribution to carbon emissions?</h1>
@@ -19,5 +7,4 @@
         </div>
         <img src="{{ asset('images/elvinson.jpg') }}" alt="elvinson" class="w-[35vw] h-[35vw] rounded-[2vw] object-cover">
     </div>
-</body>
-</html>
+</x-layout>

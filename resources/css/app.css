@@ -16,6 +16,7 @@
     --color-yellow-1: #FCF43E;
     --color-yellow-2: #F7F6EB;
     --color-orange-1: #D1764F;
+
     --animate-dropdown: slideDown 0.2s ease-out;
 
     --font-oswald: "Oswald";
@@ -45,5 +46,6 @@
     }
     
 }
+
 
 

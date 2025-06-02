@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    @vite('resources/css/app.css')
-    <title>Document</title>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</head>
-<body>
+<x-layout>
     <div class="flex mx-[5vw] my-[2vw]">
         <div class="relative flex flex-col items-center w-[16vw] h-fit px-[1.5vw] pb-[3vw] bg-green-200 rounded-[1vw]">
             <div class="flex flex-col items-center gap-[0.25vw] mb-[1.5vw]">
@@ -184,5 +173,4 @@
             icon.classList.toggle('rotate-180')
         });
     </script>
-</body>
-</html>
+</x-layout>

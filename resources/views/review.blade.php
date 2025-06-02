@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    @vite('resources/css/app.css')
-    <title>Document</title>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</head>
-<body>
+<x-layout>
     <div class="mx-[5vw] my-[2vw]">
         <h1 class="text-[2vw] font-bold mb-[1.5vw]">Product Review</h1>
         <div class="flex items-center h-fit pb-[1.5vw] border-0 border-b-1 border-b-gray-300">
@@ -170,11 +159,4 @@
             }
         }   
     </script>
-</body>
-</html>
-
-{{-- <form action="{{ route('checkout') }}" method="POST">
-        @csrf
-
-        <button type="submit">Submit</button>
-    </form> --}}
+</x-layout>
