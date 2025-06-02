@@ -1,0 +1,107 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+
+class UserController extends Controller
+{
+    public function registerForm(){
+        return view('register');
+    }
+
+    public function register(Request $request){
+        $validatedData = $request->validate([
+            'name' => ['required'],
+            'username' => ['required', 'min:4', 'max:15', 'unique:users,username'],
+            'email' => ['required', 'email', 'unique:users,email'],
+            'phone_number' => ['required'],
+            'address' => ['required'],
+            'gender' => ['required'],
+            'password' => ['required','min:8','regex:/[A-Z]/','regex:/[a-z]/', 'regex:/[0-9]/'],
+            'role' => ['prohibited']
+        ]);
+
+        $validatedData['password'] = Hash::make($validatedData['password']);
+        unset($validatedData['role']);
+
+        User::create($validatedData);
+
+        return redirect('/login')->with('success', 'Register successfully');
+    }
+
+    public function loginForm(){
+        return view('login');
+    }
+
+    public function login(Request $request){
+        $credential = $request->validate([
+            'username' => ['required'],
+            'password' => ['required']
+        ]);
+
+        if(Auth::attempt($credential)){
+            $request->session()->regenerate();
+
+            return redirect('/catalogue');
+        }
+
+        return redirect('/login')->with('loginError','The provided username and password do not match our records.');
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $username)
+    {
+        $user = User::where('username', $username)->firstOrFail();
+        return view('edit-profile', ['user' => $user]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $username)
+    {
+        $user = User::where('username', $username)->firstOrFail();
+        if($user){
+            $rules =[
+                'name' => ['required', 'min:5'],
+                'address' => ['required'],
+                'phone_number' => ['required', 'regex:/^(\+62|62|0)[2-9][0-9]{8,14}$/'],
+                'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:1024']
+            ];
+            if($request->email != $user->email){
+                $rules['email'] = ['required', 'email', 'unique:users,email,'];
+            } else if ($request->username != $user->username){
+                $rules['username'] = ['required', 'min:5', 'unique:users,username'];
+            }
+            
+            $validatedData = $request->validate($rules);
+            
+            if($request->image){
+                if($user->image != 'profile-image/elvinson.jpg'){
+                    Storage::delete($user->image);
+                }
+                $validatedData['image'] = $request->image->store('profile-image');
+            }
+
+            $user->update(Arr::except($validatedData, ['role']));
+            return redirect('/')->with('updateSuccess', 'Profile updated successfully');
+        }
+        return redirect('/')->with('updateError', 'There is no user with this username');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        //
+    }
+}
