@@ -2,7 +2,15 @@
     <img src="{{ asset('images/logo.png') }}" alt="logo" class="w-[10vw]">
     <div class="flex flex-col items-center justify-center gap-[0.75vw]">
         <form action="" class="flex items-center gap-[0.5vw] pl-[1vw] pr-[0.5vw] w-[60vw] h-[3vw] bg-yellow-2">
-            <input type="text" name="search" id="search" class="w-[90%] focus:outline-none">
+            @php
+                $params = ["category"];
+            @endphp
+            @foreach ($params as $param)
+                @if (request($param))
+                    <input type="hidden" value="{{ request($param) }}" name="{{ $param }}">
+                @endif
+            @endforeach
+            <input type="text" name="search" value="{{ request()->query('search') }}" id="search" class="w-[90%] focus:outline-none">
 
             <button class="px-[2vw] py-[0.25vw] bg-green-1 text-white">
                 <i class="fa-solid fa-magnifying-glass"></i>
@@ -10,7 +18,7 @@
         </form>
         <li class="list-none flex gap-[5vw] text-green-3 font-bold">
             <ul><a href="/">Home</a></ul>
-            <ul><a href="/catalogue">Products</a></ul>
+            <ul><a href="/products">Products</a></ul>
             <ul><a href="/tree">Green Activity</a></ul>
             <ul><a href="/carbon-calculator">Carbon calculator</a></ul>
         </li>

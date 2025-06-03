@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class ProductCategory extends Model
 {
     use HasFactory;
-    protected $fillable = ["name", "slug", "color"];
+    protected $fillable = ["name", "slug"];
 
     public function product(): HasMany {
         return $this->hasMany(Product::class, "product_category_id");

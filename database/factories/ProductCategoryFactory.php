@@ -19,8 +19,7 @@ class ProductCategoryFactory extends Factory
     {
         return [
             'name' => fake()->word(rand(1,2)),
-            'slug' => Str::slug(fake()->unique()->word(rand(1,2))),
-            'color' => fake()->unique()->colorName()
+            'slug' => Str::slug(fake()->unique()->word(rand(1,2)))
         ];
     }
 }

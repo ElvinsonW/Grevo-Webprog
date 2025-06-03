@@ -35,7 +35,7 @@ class Product extends Model
         $query->when(
             $filter["search"] ?? false,
             fn($query, $search) => 
-                $query->where('title', 'like', '%' . $search . '%')
+                $query->where('name', 'like', '%' . $search . '%')
         );
 
         $query->when(
@@ -47,13 +47,33 @@ class Product extends Model
                         $categoryQuery->where('slug', $category)
                 )
         );
+
+        $query->when(
+            $filter["min_price"] ?? false,
+            fn($query, $minPrice) =>
+                $query->whereHas(
+                    'product_variants',
+                    fn($variantQuery) =>
+                        $variantQuery->where('price', ">=", $minPrice)
+                )
+        );
+
+        $query->when(
+            $filter["max_price"] ?? false,
+            fn($query, $minPrice) =>
+                $query->whereHas(
+                    'product_variants',
+                    fn($variantQuery) => 
+                        $variantQuery->first()->where('price', '<=', $minPrice)
+                )
+        );
     }
 
     public function sluggable(): array
     {
         return [
             'slug' => [
-                'source' => 'title'
+                'source' => 'name'
             ]
         ];
     }

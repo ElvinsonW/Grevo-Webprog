@@ -2,9 +2,12 @@
 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\UserController;
 use App\Models\Cart;
+use App\Models\Product;
+use App\Models\ProductCategory;
 use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -45,3 +48,5 @@ Route::get('/checkout', function (Request $request){
     $cartIds = $request->query('carts');
     return view('checkout', ["carts" => $cartIds]);
 })->name('checkout');
+
+Route::resource('/products', ProductController::class);

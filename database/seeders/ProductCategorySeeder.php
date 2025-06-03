@@ -13,6 +13,29 @@ class ProductCategorySeeder extends Seeder
      */
     public function run(): void
     {
-        ProductCategory::factory(5)->create();
+        ProductCategory::create([
+            "name" => "Home & Living",
+            "slug" => "home-living"
+        ]);
+
+        ProductCategory::create([
+            "name" => "Cleaning Supplies",
+            "slug" => "cleaning-supplies"
+        ]);
+
+        ProductCategory::create([
+            "name" => "Health & Beauty",
+            "slug" => "health-beauty"
+        ]);
+
+        ProductCategory::create([
+            "name" => "Kitchen",
+            "slug" => "kitchen"
+        ]);
+
+        ProductCategory::create([
+            "name" => "Accessories",
+            "slug" => "accessories"
+        ]);
     }
 }
