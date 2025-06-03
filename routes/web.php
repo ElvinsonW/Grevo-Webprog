@@ -28,25 +28,22 @@ Route::get('/carbon-question', function () {
     return view('carbon-question');
 });
 
-Route::get('/edit-profile', function () {
-    return view('edit-profile');
-});
-
 Route::resource('/user', UserController::class);
 
 Route::resource('/review', ReviewController::class);
 
 Route::resource('cart', CartController::class);
 
-Route::post('/checkout', [PaymentController::class, 'checkout'])->name('checkout.payment');
-Route::get('/success', [PaymentController::class, 'success'])->name('checkout.success');
-Route::get('/cancel', [PaymentController::class, 'cancel'])->name('checkout.cancel');
-
-Route::post('/calculate-cost', [PaymentController::class, 'calculateShippingCost']);
-
-Route::get('/checkout', function (Request $request){
-    $cartIds = $request->query('carts');
-    return view('checkout', ["carts" => $cartIds]);
-})->name('checkout');
-
 Route::resource('/products', ProductController::class);
+
+Route::controller(PaymentController::class)->group(function () {
+    Route::get('/checkout', 'index')->name('checkout');
+    Route::post('/checkout', 'checkout')->name('checkout.payment');
+    Route::get('/success', 'success')->name('checkout.success');
+    Route::get('/cancel', 'cancel')->name('checkout.cancel');
+    Route::post('/calculate-cost', 'calculateShippingCost');
+});
+
+
+
+

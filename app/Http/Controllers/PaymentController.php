@@ -12,6 +12,11 @@ use Stripe\Exception\ApiErrorException;
 
 class PaymentController extends Controller
 {
+    public function index(Request $request) {
+        $cartIds = $request->query('carts');
+        return view('checkout', ["carts" => $cartIds]);
+    }
+    
     public function checkout(Request $request)
     {
         Stripe::setApiKey(env('STRIPE_SECRET_KEY'));

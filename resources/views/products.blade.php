@@ -34,10 +34,12 @@
                                 $isActive = request()->query("category") == $category->slug;
                                 $queryParams = request()->query();
                                 $queryParams["category"] = $category->slug;
+                                unset($queryParams["page"]);
                             @endphp
                             
                             
                             <div class="flex items-center gap-[1vw] {{ $isActive ? "" : "ml-[2vw]" }}">
+                                
                                 @if ($isActive)
                                     @php
                                         unset($queryParams["category"]);
@@ -45,6 +47,7 @@
                                     <i class="fa-solid fa-bag-shopping"></i>
                                     <a href="{{ url('products') . '?' . http_build_query($queryParams) }}" class="font-bold">{{ $category->name }}</a>
                                 @else
+                                
                                     <a href="{{ url('products') . '?' . http_build_query($queryParams) }}" >{{ $category->name }}</a>
                                 @endif
                             </div>
@@ -71,7 +74,7 @@
             <div>
                 <div class="flex flex-wrap gap-[1.5vw]">
                     @foreach ($products as $product)
-                        <div class="flex flex-col w-[15vw] h-[23vw] p-[1vw] bg-green-2">
+                        <a href="/adoption/{{ $product->slug }}" class="flex flex-col w-[15vw] h-[23vw] p-[1vw] bg-green-2">
                             <div class="relative w-full mb-[0.5vw]">
                                 <img src="{{ asset('images/elvinson.jpg') }}" alt="{{ $product->name }}" class="w-[13vw] h-[13vw] object-cover">
                                 <p class="absolute bottom-0 right-0 bg-orange-1 px-[1vw] py-[0.5vw] text-[1vw] text-white font-semibold">Rp. {{ number_format($product->product_variants->first()->price) }}</p>
@@ -79,7 +82,7 @@
     
                             <h3 class="text-[1.3vw] font-bold text-yellow-2 mb-[0.25vw]">{{ $product->name }}</h3>
                             <p class="text-[1vw] text-white">{{ Str::limit($product->description, 55) }}</p>
-                        </div>
+                        </a>
                     @endforeach
     
                 </div>
