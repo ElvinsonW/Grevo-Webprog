@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Organization;
 
@@ -10,7 +11,7 @@ class OrganizationController extends Controller
     //
     public function create()
     {
-        return view('Organization.addorg');
+        return view('Admin.Organization.addorg');
     }
 
     public function index(Request $request)

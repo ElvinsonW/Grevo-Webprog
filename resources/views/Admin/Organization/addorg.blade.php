@@ -13,7 +13,6 @@
 
     <h1 class="text-4xl font-bold mb-4">Add Reforestation Organization</h1>
 
-
     @if($errors->any())
       <div class="text-red-700 bg-red-100 border">
         <ul class="list-disc pl-5">
