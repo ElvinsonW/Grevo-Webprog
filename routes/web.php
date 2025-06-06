@@ -5,10 +5,12 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Admin\OrganizationController;
 use App\Models\Cart;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\Review;
+use App\Models\Organization;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -44,6 +46,12 @@ Route::controller(PaymentController::class)->group(function () {
     Route::post('/calculate-cost', 'calculateShippingCost');
 });
 
-
-
-
+// Organization
+Route::controller(OrganizationController::class)->group(function(){
+    Route::get('/addorg', 'create')->name('organization.create');
+    Route::post('/organizations', 'store')->name('organization.store');
+    Route::get('/listorg', 'index')->name('organization.listorg');
+    Route::get('/organizations/{organization_id}/edit', 'edit')->name('organization.edit');
+    Route::put('/organizations/{organization_id}', 'update')->name('organization.update');
+    Route::delete('/organizations/{organization_id}', 'destroy')->name('organization.destroy');
+});
