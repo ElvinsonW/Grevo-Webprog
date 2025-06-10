@@ -24,13 +24,13 @@ class OrganizationController extends Controller
         }
 
         $organizations = $query->paginate(10);
-        return view('Organization.listorg', compact('organizations')); // Must be passed like this
+        return view('Admin.Organization.listorg', compact('organizations')); // Must be passed like this
     }
 
     public function edit($organization_id)
     {
         $organization = Organization::findOrFail($organization_id);
-        return view('Organization.editorg', compact('organization'));
+        return view('Admin.Organization.editorg', compact('organization'));
     }
 
     public function update(Request $request, $organization_id)
