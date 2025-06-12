@@ -110,7 +110,6 @@
                             <p class="text-[0.9vw] font-bold text-orange-600">May 22, 2025</p>
                         </div>
                     </div>
-
                 
                     <div class="flex flex-col gap-[0.5vw] w-[70%]">
                         <div>

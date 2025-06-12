@@ -14,7 +14,7 @@ class ProductController extends Controller
     public function index()
     {
         $filters = ["search", "category", "min_price", "max_price"];
-        return view('products', [
+        return view('User.product.products', [
             "products" => Product::filter(request($filters))->paginate(12)->withQueryString(),
             "categories" => ProductCategory::all()
         ]);
@@ -25,7 +25,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+       
     }
 
     /**
@@ -39,9 +39,9 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $slug)
     {
-        //
+       
     }
 
     /**
