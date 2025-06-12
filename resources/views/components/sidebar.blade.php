@@ -6,13 +6,13 @@
     <title>Navbar</title>
     <!-- <script src="https://cdn.tailwindcss.com"></script> -->
 
-    
+     @vite('resources/css/app.css')
 </head>
 <body>
     <div id="sidebar" class="bg-green-200 text-green-900 h-screen w-16 fixed top-0 left-0 flex flex-col justify-between transition-all duration-300 overflow-hidden rounded-tr-md rounded-br-md">
         <div class="p-4 border-b border-green-400 flex items-center justify-center sidebar-header">
-             <img id="LogoIcon" src="{{ asset('assets/images/revo.svg')}}" alt="Logo Icon" class="h-20 w-20">
-             <img id="LogoFull" src = "{{ asset('assets/images/GrevoHD.svg')}}" alt="Logo Full" class="h-20 w-20 hidden">
+             <img id="LogoIcon" src="{{ asset('images/revo.svg')}}" alt="Logo Icon" class="h-20 w-20">
+             <img id="LogoFull" src = "{{ asset('images/GrevoHD.svg')}}" alt="Logo Full" class="h-20 w-20 hidden">
         </div>
 
     <nav class="flex-1 mt-4">
@@ -32,7 +32,7 @@
             @foreach ($navItems as $item)
                 <li class ="flex items-center px-4 space-x-4 hover:bg-green-300 cursor-pointer">
                     <a href="{{route($item['route'])}}" class="flex items-center py-2 space-x-4 justify-center">
-                        <img src ="{{ asset('assets/images/' . $item['img']) }}" alt="{{ $item['label']}}" class="h-6 min-w-6 object-contain">
+                        <img src ="{{ asset('images/' . $item['img']) }}" alt="{{ $item['label']}}" class="h-6 min-w-6 object-contain">
                         <span class="link-text hidden">{{ $item['label'] }}</span>
                     </a>
                 </li>
@@ -42,12 +42,12 @@
 
         <div class="border-t border-green-400 p-4 flex justify-between items-center">
             <div class="flex flex-row gap-4">
-                <img src ="{{ asset('assets/images/Admin.svg')}}" alt="Admin" class="h-8 w-auto">
+                <img src ="{{ asset('images/Admin.svg')}}" alt="Admin" class="h-8 w-auto">
                 <span class ="link-text hidden">Admin</span>
             </div>
             <div class="ml-auto">
-                <a href="{{ route('tree.listtree') }}" class="flex items-center gap-2">
-                    <img id="logoutIcon" src="{{ asset('assets/images/Logout.svg') }}" alt="Logout" class="hidden h-8 w-auto">
+                <a href="{{ route('organization.listorg') }}" class="flex items-center gap-2">
+                    <img id="logoutIcon" src="{{ asset('images/Logout.svg') }}" alt="Logout" class="hidden h-8 w-auto">
                     <!-- <span class="link-text hidden">Logout</span> -->
                 </a>
             </div>
@@ -72,8 +72,6 @@
                 sidebar.classList.toggle('w-64', expanded);
                 sidebar.classList.toggle('w-16', !expanded);
                 textElements.forEach(el => el.classList.toggle('hidden', !expanded));
-                // logoText.classList.toggle('hidden', !expanded);
-                // alert("AYAM");  
                 if (expanded) {
                     logoIcon.classList.add('hidden');
                     logoFull.classList.remove('hidden');
