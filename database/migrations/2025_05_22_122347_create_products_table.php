@@ -21,7 +21,7 @@ return new class extends Migration
             $table->text('process');
             $table->string('certification');
             $table->text('description');
-            $table->integer('sold');
+            $table->integer('sold')->default(0);
             $table->timestamps();
         });
     }

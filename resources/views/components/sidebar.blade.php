@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Navbar</title>
     <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+
+    
 </head>
 <body>
     <div id="sidebar" class="bg-green-200 text-green-900 h-screen w-16 fixed top-0 left-0 flex flex-col justify-between transition-all duration-300 overflow-hidden rounded-tr-md rounded-br-md">
