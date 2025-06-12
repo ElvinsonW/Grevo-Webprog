@@ -20,7 +20,7 @@ class ReviewController extends Controller
         if ($totalReview > 1000){
             $totalReview = (string)round($totalReview / 1000, 1) . 'k';
         }
-        return view('review', [
+        return view('User.review.index-review', [
             'reviews' => $reviews,
             'totalReview' => $totalReview,
             'avgRate' => round(Review::avg('rate'),1)
@@ -32,7 +32,7 @@ class ReviewController extends Controller
      */
     public function create()
     {
-        return view('create-review');
+        return view('User.review.create-review');
     }
 
     /**

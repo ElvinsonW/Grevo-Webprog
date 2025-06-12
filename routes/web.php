@@ -6,6 +6,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\OrganizationController;
+use App\Http\Controllers\CarbonCalculatorController;
 use App\Models\Cart;
 use App\Models\Product;
 use App\Models\ProductCategory;
@@ -22,14 +23,6 @@ Route::get('/about', function() {
     return view('about');
 });
 
-Route::get('/carbon-calculator', function () {
-    return view('carbon-calculator');
-});
-
-Route::get('/carbon-question', function () {
-    return view('carbon-question');
-});
-
 Route::resource('/user', UserController::class);
 
 Route::resource('/review', ReviewController::class);
@@ -44,6 +37,12 @@ Route::controller(PaymentController::class)->group(function () {
     Route::get('/success', 'success')->name('checkout.success');
     Route::get('/cancel', 'cancel')->name('checkout.cancel');
     Route::post('/calculate-cost', 'calculateShippingCost');
+});
+
+Route::controller(CarbonCalculatorController::class)->group(function () {
+    Route::get('/carbon-calculator', 'index')->name('carbon-calculator');
+    Route::get('/carbon-calculator/question', 'question')->name('carbon-calculator.question');
+    Route::get('/carbon-calculator/result', 'result')->name('carbon-calculator.result');
 });
 
 // Organization

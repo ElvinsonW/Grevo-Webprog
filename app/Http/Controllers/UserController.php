@@ -60,7 +60,7 @@ class UserController extends Controller
     public function edit(string $username)
     {
         $user = User::where('username', $username)->firstOrFail();
-        return view('edit-profile', ['user' => $user]);
+        return view('User.edit-profile.edit-profile', ['user' => $user]);
     }
 
     /**
