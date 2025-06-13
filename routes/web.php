@@ -1,5 +1,10 @@
 <?php
 
+# ivy nambahin dari sini
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\LoginController;
+# sampe sini
+
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
@@ -14,6 +19,28 @@ use App\Models\Review;
 use App\Models\Organization;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
+# nambahin login dan register ya dr sini
+Route::get('/', function () {
+    return redirect()->route('signup');
+});
+
+Route::get('/', function () {
+    return redirect()->route('signin'); 
+});
+
+// Route untuk menampilkan form Sign Up
+Route::get('/signup', [RegisterController::class, 'showRegistrationForm'])->name('signup');
+// Route untuk data form Sign Up
+Route::post('/signup', [RegisterController::class, 'register'])->name('register.submit');
+
+// --- BAGIAN BARU / PERBARUAN UNTUK SIGN IN ---
+// Route untuk menampilkan form Sign In
+Route::get('/signin', [LoginController::class, 'showLoginForm'])->name('signin');
+// Route untuk data form Sign In (nantinya)
+Route::post('/signin', [LoginController::class, 'login'])->name('login.submit');
+
+# sampe sini
 
 Route::get('/', function () {
     return view('homepage');
