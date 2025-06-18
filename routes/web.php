@@ -24,12 +24,6 @@ use App\Models\Organization; // Unused, consider removing if not directly used i
 use Illuminate\Http\Request; // Unused, consider removing if not directly used in routes
 use Illuminate\Support\Facades\Route;
 
-// --- Homepage & Default Redirects ---
-// Choose ONE default redirect for '/'
-// Option A: Redirect to signup
-// Route::get('/', function () {
-//     return redirect()->route('signup');
-// });
 
 // Option B: Redirect to signin (comment out Option A if using this)
 Route::get('/', function () {
@@ -37,7 +31,7 @@ Route::get('/', function () {
 });
 
 // nambahin buat ke katalog pohon
-Route::get('/tree-catalogue', [TreeCatalogueController::class, 'index'])->name('tree_catalogue');
+Route::get('/tree', [TreeCatalogueController::class, 'index'])->name('tree_catalogue');
 
 // Define the actual homepage if '/' is a redirect
 Route::get('/homepage', function () {

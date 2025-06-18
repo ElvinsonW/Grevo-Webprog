@@ -1,9 +1,6 @@
-{{-- resources/views/User/edit-profile/addresses.blade.php --}}
 <x-layout>
     <div class="flex mx-[5vw] my-[2vw]">
         {{-- Left Sidebar: User Profile and Navigation --}}
-    {{-- Mengubah w-[18vw] menjadi w-[16vw] jika dirasa terlalu lebar --}}
-    {{-- Menyesuaikan padding-top untuk membuat ruang di atas gambar profil --}}
         <div class="relative flex flex-col items-center w-[16vw] h-fit px-[1.5vw] pt-[2vw] pb-[3vw] bg-[var(--color-yellow-2)] rounded-[1vw]">
             <div class="flex flex-col items-center gap-[0.25vw] mb-[1.5vw]">
                 {{-- Menghilangkan mt-[-2vw] dan memastikan gambar berada di dalam aliran normal --}}
@@ -15,10 +12,10 @@
                 </p>
             </div>
 
-            {{-- Points/Gem Section --}}
+            {{-- PTS Section --}}
             <div class="flex w-full px-[1vw] py-[0.5vw] border border-[var(--color-green-3)] text-[var(--color-green-3)] rounded-full mb-[1.2vw] items-center justify-center gap-[0.5vw]">
                 <i class="fa-solid fa-star text-[0.9vw]"></i>
-                {{-- Menampilkan poin user jika ada, atau '0' Pts --}}
+                {{-- poin user--}}
                 <p class="text-[1vw] font-semibold">{{ $user ? $user->points : '0' }} Pts</p>
             </div>
 
@@ -30,12 +27,11 @@
                             <i class="fa-regular fa-user text-[1vw] w-[1.2vw] text-[var(--color-green-3)]"></i>
                             <p class="text-[1vw] font-bold text-[var(--color-green-3)]">My Account</p>
                         </div>
-                        {{-- Ikon panah untuk dropdown --}}
+                        {{-- Ikon panah dropdown --}}
                         <i class="fa-solid fa-chevron-down text-[1vw] transition-transform duration-400 rotate-180" id="dropdown-icon"></i>
                     </div>
 
                     {{-- Dropdown Links --}}
-                    {{-- Tambahkan 'hidden' jika ingin tertutup secara default saat halaman dimuat --}}
                     <div class="flex flex-col gap-[0.5vw] ml-[1.7vw] mt-[0.5vw] mb-[0.25vw]" id="profile-dropdown">
                         {{-- Link Profile (active class berdasarkan route) --}}
                         <a href="{{ route('profile') }}" class="text-[1vw] font-bold {{ Request::routeIs('profile') ? 'text-[var(--color-green-3)]' : 'text-gray-700' }}">Profile</a>
@@ -118,9 +114,9 @@
                     </div>
                 </div>
 
-                {{-- Add more address cards as needed --}}
+                {{-- kl mw nmbahin address card di bwh ini y--}}
 
-                {{-- Button for adding new address --}}
+                {{-- Button add new address --}}
                 <button class="w-full py-[0.75vw] px-[2vw] border-2 border-dashed border-gray-400 text-gray-600 rounded-[0.5vw] hover:bg-gray-50 flex items-center justify-center gap-[0.5vw] mt-[1vw]" onclick="openAddModal()">
                     <i class="fa-solid fa-plus text-[1.2vw]"></i> Add New Address
                 </button>
@@ -234,7 +230,7 @@
             // Add logic here to clear form fields if it's an "Add New" operation
             // e.g., document.getElementById('fullName').value = '';
             // Anda mungkin perlu men-reset input value untuk form "Add New"
-            // Atau buat modal terpisah untuk Add dan Edit
+            // Atau bikin modal terpisah untuk Add dan Edit
         }
 
         // Function to open the Delete Confirmation Modal
