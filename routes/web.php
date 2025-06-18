@@ -50,6 +50,10 @@ Route::get('/about', function() {
     return view('about');
 });
 
+Route::get('/product-detail', function(){
+    return view('User.product.product-detail');
+})->name('product-detail');
+
 Route::resource('/user', UserController::class);
 
 Route::resource('/review', ReviewController::class);
