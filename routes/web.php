@@ -48,11 +48,11 @@ Route::post('/signup', [RegisterController::class, 'register'])->name('register.
 
 // Route untuk menampilkan form Sign In
 Route::get('/signin', [LoginController::class, 'showLoginForm'])->name('signin');
+
 // Route untuk data form Sign In
 Route::post('/signin', [LoginController::class, 'login'])->name('login.submit');
 // Tambahkan route logout jika belum ada (penting untuk fungsionalitas Auth::logout())
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-
 
 // --- Profile Routes (Temporarily without 'auth' middleware for development) ---
 // Ketika Anda siap untuk mengaktifkan autentikasi, Anda bisa mengelompokkan ini dalam Route::middleware(['auth'])->group(function () { ... });
