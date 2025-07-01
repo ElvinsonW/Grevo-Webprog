@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void 
     {
-        $this->call([UserSeeder::class, ProductCategorySeeder::class, OrganizationSeeder::class, TreeSeeder::class]);
+        $this->call([UserSeeder::class, ProductCategorySeeder::class, OrganizationSeeder::class, TreeSeeder::class, BatchSeeder::class]);
 
         Review::factory(10)->recycle(
             User::all()

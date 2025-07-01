@@ -17,6 +17,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CarbonCalculatorController;
 use App\Http\Controllers\Admin\OrganizationController;
 use App\Http\Controllers\Admin\TreeController;
+use App\Http\Controllers\Admin\BatchController;
 use App\Models\Cart; // Unused, consider removing if not directly used in routes
 use App\Models\Product; // Unused, consider removing if not directly used in routes
 use App\Models\ProductCategory; // Unused, consider removing if not directly used in routes
@@ -109,7 +110,7 @@ Route::controller(OrganizationController::class)->group(function(){
     Route::delete('/organizations/{organization_id}', 'destroy')->name('organization.destroy');
 });
 
-//Product
+//Tree
 Route::controller(TreeController::class)->group(function(){
     Route::get('/addtree', 'create')->name('tree.create');
     Route::post('/trees', 'store')->name('tree.store');
@@ -117,4 +118,12 @@ Route::controller(TreeController::class)->group(function(){
     Route::get('/trees/{treeid}/edit', 'edit')->name('tree.edit');
     Route::put('/trees/update/{treeid}', 'update')->name('tree.update');
     Route::delete('trees/{treeid}', 'destroy')->name('tree.destroy');
+});
+
+//Batch
+Route::controller(BatchController::class)->group(function(){
+    Route::get('/uploadbatch', 'create')->name('batch.create');
+    Route::post('/batches', 'store')->name('batch.store');
+    Route::get('/listbatch', 'index')->name('batch.listbatch');
+    Route::delete('/batches/{batchid}', 'destroy')->name('batch.destroy');
 });
