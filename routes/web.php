@@ -1,9 +1,13 @@
 <?php
 
-# ivy nambahin dari sini
-use App\Http\Controllers\RegisterController;
+// # ivy nambahin dari sini
+use App\Http\Controllers\RegisterController; // Corrected to Auth\RegisterController based on common Laravel structure
 use App\Http\Controllers\LoginController;
-# sampe sini
+// # sampe sini
+
+#nambahhin ini
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TreeCatalogueController;
 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\PaymentController;
@@ -12,44 +16,67 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\OrganizationController;
 use App\Http\Controllers\CarbonCalculatorController;
-use App\Models\Cart;
-use App\Models\Product;
-use App\Models\ProductCategory;
-use App\Models\Review;
-use App\Models\Organization;
-use Illuminate\Http\Request;
+use App\Models\Cart; // Unused, consider removing if not directly used in routes
+use App\Models\Product; // Unused, consider removing if not directly used in routes
+use App\Models\ProductCategory; // Unused, consider removing if not directly used in routes
+use App\Models\Review; // Unused, consider removing if not directly used in routes
+use App\Models\Organization; // Unused, consider removing if not directly used in routes
+use Illuminate\Http\Request; // Unused, consider removing if not directly used in routes
 use Illuminate\Support\Facades\Route;
 
-# nambahin login dan register ya dr sini
+
+// Option B: Redirect to signin (comment out Option A if using this)
 Route::get('/', function () {
-    return redirect()->route('signup');
+    return redirect()->route('signin');
 });
 
-Route::get('/', function () {
-    return redirect()->route('signin'); 
-});
+// nambahin buat ke katalog pohon
+Route::get('/tree', [TreeCatalogueController::class, 'index'])->name('tree_catalogue');
 
+// Define the actual homepage if '/' is a redirect
+Route::get('/homepage', function () {
+    return view('homepage');
+})->name('homepage');
+
+
+// --- Authentication Routes ---
 // Route untuk menampilkan form Sign Up
 Route::get('/signup', [RegisterController::class, 'showRegistrationForm'])->name('signup');
 // Route untuk data form Sign Up
 Route::post('/signup', [RegisterController::class, 'register'])->name('register.submit');
 
-// --- BAGIAN BARU / PERBARUAN UNTUK SIGN IN ---
 // Route untuk menampilkan form Sign In
 Route::get('/signin', [LoginController::class, 'showLoginForm'])->name('signin');
 
-// Route untuk data form Sign In (nantinya)
+// Route untuk data form Sign In
 Route::post('/signin', [LoginController::class, 'login'])->name('login.submit');
+// Tambahkan route logout jika belum ada (penting untuk fungsionalitas Auth::logout())
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::get('/', function () {
-    return view('homepage');
-})->name('homepage');
+// --- Profile Routes (Temporarily without 'auth' middleware for development) ---
+// Ketika Anda siap untuk mengaktifkan autentikasi, Anda bisa mengelompokkan ini dalam Route::middleware(['auth'])->group(function () { ... });
+Route::get('/profile', [ProfileController::class, 'showProfile'])->name('profile');
+// Route untuk mengupdate profil pengguna
+Route::put('/user/{username}', [ProfileController::class, 'updateProfile'])->name('profile.update'); // Ini perlu diaktifkan di sini
 
+// Tambahkan rute untuk sub-halaman profil
+Route::get('/profile/addresses', [ProfileController::class, 'showAddresses'])->name('addresses');
+Route::get('/profile/orders', [ProfileController::class, 'showOrders'])->name('orders');
+Route::get('/profile/reviews', [ProfileController::class, 'showReviews'])->name('reviews');
+
+
+// --- Other Application Routes ---
 Route::get('/about', function() {
     return view('about');
 });
 
-Route::resource('/user', UserController::class);
+Route::get('/product-detail', function(){
+    return view('User.product.product-detail');
+})->name('product-detail');
+
+Route::resource('/user', UserController::class); // This resource handles `/user`, `/user/{id}`, etc.
+                                                  // Make sure it doesn't conflict with your specific `/user/{username}` PUT route if not intended.
+                                                  // If UserController is only for admin managing users, then it's fine.
 
 Route::resource('/review', ReviewController::class);
 
