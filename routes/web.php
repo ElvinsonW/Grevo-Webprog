@@ -37,10 +37,9 @@ Route::post('/signup', [RegisterController::class, 'register'])->name('register.
 // --- BAGIAN BARU / PERBARUAN UNTUK SIGN IN ---
 // Route untuk menampilkan form Sign In
 Route::get('/signin', [LoginController::class, 'showLoginForm'])->name('signin');
+
 // Route untuk data form Sign In (nantinya)
 Route::post('/signin', [LoginController::class, 'login'])->name('login.submit');
-
-# sampe sini
 
 Route::get('/', function () {
     return view('homepage');
