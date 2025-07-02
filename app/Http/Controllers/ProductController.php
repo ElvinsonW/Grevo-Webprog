@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\ProductCategory;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -66,5 +67,10 @@ class ProductController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function createSlug(string $name){
+        $slug = SlugService::createSlug(Product::class, 'slug', $name,["unique" => true]);
+        return $slug;
     }
 }

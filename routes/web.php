@@ -38,7 +38,6 @@ Route::get('/homepage', function () {
     return view('homepage');
 })->name('homepage');
 
-
 // --- Authentication Routes ---
 // Route untuk menampilkan form Sign Up
 Route::get('/signup', [RegisterController::class, 'showRegistrationForm'])->name('signup');
