@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('treename');
             $table->string('treecategory');
             $table->text('treedesc');
-            $table->string('treelife');
+            $table->integer('treelife');
             $table->decimal('treeprice', 10, 5);
             $table->string('treephoto');
             $table->unsignedBigInteger('organization_id');

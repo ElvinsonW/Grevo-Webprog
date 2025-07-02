@@ -18,19 +18,17 @@ class TreeController extends Controller
 
     public function create()
     {
-        //
         $organizations = Organization::all();
         return view('Admin.Tree.addtree', compact('organizations'));
     }
 
     public function store(Request $request)
     {
-        //
         $validated = $request->validate([
             'treename' => 'required|string|max:255',
             'treecategory' => 'required|string|max:255',
             'treedesc' => 'required|string',
-            'treelife' => 'required|string',
+            'treelife' => 'required|integer',
             'treeprice' => 'required|decimal:0,5',
             'organization_id' => 'required|exists:organizations,organization_id',
             'treephoto' => 'image|mimes:jpeg,png,jpg|max:2048'
@@ -61,7 +59,7 @@ class TreeController extends Controller
             'treename' => 'required|string|max:255',
             'treecategory' => 'required|string|max:255',
             'treedesc' => 'required|string',
-            'treelife' => 'required|string',
+            'treelife' => 'required|integer',
             'treeprice' => 'required|decimal:0,5',
             'organization_id' => 'required|exists:organizations,organization_id',
             'treephoto' => 'nullable|image|mimes:jpg,png,jpeg|max:2048'
