@@ -54,7 +54,7 @@
         </div>      
     </div>
     <button id="toggleSidebar" class="fixed top-1/2 left-16 transform -translate-y-1/2 bg-green-300 p-1 rounded z-10">
-                ▶
+        <img id="toggleIcon" src="{{ asset('images/ArrowRightAdmin.svg') }}" alt="Toggle" class="w-6 h-6">
     </button>
 
     <script>
@@ -81,7 +81,12 @@
                     logoFull.classList.add('hidden');
                     logoutIcon.classList.add('hidden');
                 }
-                toggleBtn.innerText = expanded ? '◀' : '▶';
+                    // Change arrow image
+                const toggleIcon = document.getElementById('toggleIcon');
+                toggleIcon.src = expanded 
+                    ? "{{ asset('images/ArrowLeftAdmin.svg') }}" 
+                    : "{{ asset('images/ArrowRightAdmin.svg') }}";
+
                 toggleBtn.style.left = expanded ? '16rem' : '4rem';
             });
         });
