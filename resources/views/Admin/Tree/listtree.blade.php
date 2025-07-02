@@ -71,10 +71,8 @@
         </table>
     </div>
 
-            <div class="mt-4 flex justify-between flex-row w-full">
-                <div id="pagination-links">
-                        {{ $trees->links() }}
-                </div>
+            <div class="mt-4">
+                        {{ $trees->withQueryString()->links() }}
             </div>
         </div>
 </div>

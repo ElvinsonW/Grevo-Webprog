@@ -76,8 +76,8 @@ Route::get('/product-detail', function(){
 })->name('product-detail');
 
 Route::resource('/user', UserController::class); // This resource handles `/user`, `/user/{id}`, etc.
-                                                  // Make sure it doesn't conflict with your specific `/user/{username}` PUT route if not intended.
-                                                  // If UserController is only for admin managing users, then it's fine.
+// Make sure it doesn't conflict with your specific `/user/{username}` PUT route if not intended.
+// If UserController is only for admin managing users, then it's fine.
 
 Route::resource('/review', ReviewController::class);
 
@@ -126,3 +126,11 @@ Route::controller(BatchController::class)->group(function(){
     Route::get('/listbatch', 'index')->name('batch.listbatch');
     Route::delete('/batches/{batchid}', 'destroy')->name('batch.destroy');
 });
+
+//Product (Admin)
+Route::get('/addproduct', function () {
+    return view('Admin.Product.addproduct');
+})->name('products.create');
+Route::get('/listproducts', [ProductController::class, 'show'])->name('products.list');
+Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
+Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');

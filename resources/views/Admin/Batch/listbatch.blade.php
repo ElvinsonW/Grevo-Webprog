@@ -39,10 +39,8 @@
             </tbody>
         </table>
     </div>
-            <div class="mt-4 flex justify-between flex-row w-full">
-                <div id="pagination-links">
+            <div class="mt-4">
                         {{ $batches->links() }}
-                </div>
             </div>
 </div>
 </body>

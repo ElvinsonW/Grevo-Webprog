@@ -20,12 +20,12 @@
             @php
                 $navItems = [
                     ['img' => 'Home.svg', 'label' => 'Home', 'route' => 'organization.listorg'],
-                    ['img' => 'ProductList.svg', 'label' => 'Product List', 'route' => 'organization.listorg'],
-                    ['img' => 'TreeList.svg', 'label' => 'Tree List', 'route' => 'organization.listorg'],
+                    ['img' => 'ProductList.svg', 'label' => 'Product List', 'route' => 'products.list'],
+                    ['img' => 'TreeList.svg', 'label' => 'Tree List', 'route' => 'tree.listtree'],
                     ['img' => 'OrgList.svg', 'label' => 'Organization List', 'route'=> 'organization.listorg'],
                     ['img' => 'OrderList.svg', 'label' => 'Order List', 'route' => 'organization.listorg'],
                     ['img' => 'OrderTree.svg', 'label' => 'Order Tree', 'route' => 'organization.listorg'],
-                    ['img' => 'Reforestation.svg', 'label' => 'Reforestation', 'route' => 'organization.listorg'],
+                    ['img' => 'Reforestation.svg', 'label' => 'Reforestation', 'route' => 'batch.listbatch'],
                 ];
             @endphp
 
