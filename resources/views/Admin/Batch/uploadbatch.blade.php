@@ -9,10 +9,10 @@
 <body class="p-4">
     @include('components.sidebar')
     <div class="px-20 py-4">
-    <h1 class="text-4xl font-bold mb-4">Upload Proof</h1>
+    <h1 class="text-4xl font-bold mb-4 ml-5">Upload Proof</h1>
 
     @if($errors->any())
-    <div class="text-red-700 bg-red-100 border">
+    <div class="text-red-700 bg-red-100 border ml-5">
         <ul class="list-disc pl-5">
             @foreach($errors->all() as $error)
             <li>{{$error}}</li>
@@ -22,12 +22,12 @@
     @endif
 
     @if(session('success'))
-        <div class="bg-green-100 text-green-700 p-2 border rounded mb-4">
+        <div class="bg-green-100 text-green-700 p-2 border rounded mb-4 ml-5">
             {{ session('success')}}
         </div>
     @endif
 
-    <form class="w-full" action="{{ route('batch.store') }}" method="POST" enctype="multipart/form-data">
+    <form class="w-full ml-5" action="{{ route('batch.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="w-full flex flex-row gap-4">
             <div class="w-1/2 border flex flex-col gap-3 rounded-md p-4">

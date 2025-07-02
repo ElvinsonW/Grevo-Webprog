@@ -34,23 +34,36 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $slug)
+    public function show()
     {
-       
+        $query = Product::with(['product_category', 'product_images', 'product_variants']);
+        if (request()->has('stock')) {
+            $query->whereHas('product_variants', function ($q) {
+                if (request('stock') === 'in') {
+                    $q->where('stock', '>', 0);
+                } elseif (request('stock') === 'out') {
+                    $q->where('stock', '=', 0);
+                }
+            });
+        }
+
+        $products = $query->paginate(10);
+
+        return view('Admin.Product.listproduct', compact('products'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Product $product)
     {
-        //
+        return view('Admin.Product.editproduct', compact('product'));
     }
 
     /**
@@ -64,9 +77,10 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return redirect()->route('products.list')->with('message', 'Product deleted successfully.');
     }
 
     public function createSlug(string $name){
