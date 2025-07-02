@@ -11,7 +11,7 @@ return new class extends Migration
     {
         Schema::create('batches', function (Blueprint $table) {
             $table->id('batchid');
-            $table->string('dateofactivity');
+            $table->date('dateofactivity');
             $table->integer('treesplanted');
             $table->string('batchdate');
             $table->string('batchproof');
