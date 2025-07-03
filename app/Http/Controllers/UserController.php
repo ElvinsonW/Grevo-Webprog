@@ -35,7 +35,7 @@ class UserController extends Controller
 
         User::create($validatedData);
 
-        return redirect('/login')->with('success', 'Register successfully');
+        return redirect('/login')->with('registerSuccess', 'Registration Success, Please Login!');
     }
 
     public function loginForm(){
@@ -54,7 +54,9 @@ class UserController extends Controller
             return redirect('/products');
         }
 
-        return redirect('/login')->with('loginError','The provided username and password do not match our records.');
+       return redirect('/login')
+                ->with('loginError', 'The provided username and password do not match our records.')
+                ->withInput();
     }
 
     /**

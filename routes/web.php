@@ -29,7 +29,7 @@ use Illuminate\Support\Facades\Route;
 
 // Option B: Redirect to signin (comment out Option A if using this)
 Route::get('/', function () {
-    return redirect()->route('signin');
+    return view('homepage');
 });
 
 // Define the actual homepage if '/' is a redirect
@@ -57,12 +57,25 @@ Route::get('/homepage', function () {
 // // Route untuk mengupdate profil pengguna
 // Route::put('/user/{username}', [ProfileController::class, 'updateProfile'])->name('profile.update'); // Ini perlu diaktifkan di sini
 
-Route::controller(UserController::class)->group(function (){
-    Route::get("/login","loginForm")->name("login");
-    Route::get("/register","registerForm")->name("register");
-    Route::post("/login","login")->name("login.submit");
-    Route::post("/register","register")->name("register.submit");
+// Masukin route yang hanya boleh diakses oleh admin
+Route::middleware(CheckAdminRole::class)->group(function(){
+
 });
+
+// Masukin route yang hanya boleh diakses oleh yang udah login
+Route::middleware(CheckUserRole::class)->group(function(){
+
+});
+
+Route::middleware(CheckGuest::class)->group(function(){
+    Route::controller(UserController::class)->group(function (){
+        Route::get("/login","loginForm")->name("login");
+        Route::get("/register","registerForm")->name("register");
+        Route::post("/login","login")->name("login.submit");
+        Route::post("/register","register")->name("register.submit");
+    });
+});
+
 
 // Tambahkan rute untuk sub-halaman profil
 Route::get('/profile', [ProfileController::class, 'showProfile'])->name('profile');

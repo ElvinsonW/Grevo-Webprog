@@ -14,7 +14,7 @@ class PaymentController extends Controller
 {
     public function index(Request $request) {
         $cartIds = $request->query('carts');
-        return view('checkout', ["carts" => $cartIds]);
+        return view('User.check-out.checkout', ["carts" => $cartIds]);
     }
     
     public function checkout(Request $request)

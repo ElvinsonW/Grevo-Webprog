@@ -13,7 +13,7 @@ class Product extends Model
 {
     use HasFactory;
     protected $fillable = ["name", "slug", "product_category_id", "weight", "material", "process", "certification", "description", "sold"];
-    protected $with = ["product_category","product_images", "product_variants","carts"];
+    protected $with = ["product_category","product_images", "product_variants"];
 
     public function product_category(): BelongsTo {
         return $this->belongsTo(ProductCategory::class, "product_category_id");
@@ -25,10 +25,6 @@ class Product extends Model
 
     public function product_variants(): HasMany {
         return $this->hasMany(ProductVariant::class, "product_id");
-    }
-
-    public function carts(): HasMany {
-        return $this->hasMany(Cart::class, 'product_id');
     }
 
     public function scopeFilter(Builder $query, array $filter) {
