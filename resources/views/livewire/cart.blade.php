@@ -50,13 +50,13 @@
                     <div class="flex items-center gap-[1.5vw]">
                         <button type="button" 
                                 wire:click="decrement({{ $cart->id }})" 
-                                class="w-[2.5vw] h-[2.5vw] rounded-[0.25vw] border border-green-600 text-green-600">-</button>
+                                class="w-[2.5vw] h-[2.5vw] rounded-[0.25vw] border bg-orange-1 text-white cursor-pointer">-</button>
                         
                         <span class="bold w-[1vw] text-center">{{ $cart->amount }}</span>
                         
                         <button type="button" 
                                 wire:click="increment({{ $cart->id }})" 
-                                class="w-[2.5vw] h-[2.5vw] rounded-[0.25vw] bg-green-600 text-white">+</button>
+                                class="w-[2.5vw] h-[2.5vw] rounded-[0.25vw] bg-green-2 text-white cursor-pointer">+</button>
                     </div>
 
                     <div>
@@ -66,7 +66,7 @@
                     <div>
                         <button type="button" 
                                 wire:click="delete({{ $cart->id }})" 
-                                class="w-[2.5vw] h-[2.5vw] rounded-[2vw] bg-red-300">
+                                class="w-[2.5vw] h-[2.5vw] rounded-[2vw] bg-red-300 cursor-pointer">
                             <i class="fa-solid fa-trash-can text-red-500"></i>
                         </button>
                     </div>
@@ -86,7 +86,7 @@
                     <p class="font-bold">Total ({{ count($selectedProduct) }} items selected) : <span class="text-green-2 text-[1.5vw]">Rp. {{ number_format($this->totalPrice) }}</span></p>
                     <button type="button" 
                             wire:click="checkout" 
-                            class="w-[15vw] h-[4vw] bg-green-2 rounded-[0.5vw] text-white font-bold text-[1.5vw]">
+                            class="w-[15vw] h-[4vw] bg-orange-1 rounded-[0.5vw] text-white font-bold text-[1.5vw] cursor-pointer">
                         Checkout
                     </button>
                 </div>

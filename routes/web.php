@@ -30,7 +30,7 @@ use Illuminate\Http\Request; // Unused, consider removing if not directly used i
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return redirect()->route('login');
+    return view('homepage');
 });
 
 Route::get('/tree', [TreeCatalogueController::class, 'index'])->name('tree_catalogue');
@@ -70,15 +70,14 @@ Route::middleware(CheckUserRole::class)->group(function(){
 });
 
 Route::middleware(CheckGuest::class)->group(function(){
-
+    Route::controller(UserController::class)->group(function (){
+        Route::get("/login","loginForm")->name("login");
+        Route::get("/register","registerForm")->name("register");
+        Route::post("/login","login")->name("login.submit");
+        Route::post("/register","register")->name("register.submit");
+    });
 });
 
-Route::controller(UserController::class)->group(function (){
-    Route::get("/login","loginForm")->name("login");
-    Route::get("/register","registerForm")->name("register");
-    Route::post("/login","login")->name("login.submit");
-    Route::post("/register","register")->name("register.submit");
-});
 
 // Tambahkan rute untuk sub-halaman profil
 Route::get('/profile/addresses', [ProfileController::class, 'showAddresses'])->name('addresses');

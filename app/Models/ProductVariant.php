@@ -18,6 +18,10 @@ class ProductVariant extends Model
         return $this->belongsTo(Product::class, 'product_id');
     }
 
+    public function carts(): HasMany {
+        return $this->hasMany(Cart::class, "product_variant_id");
+    }
+
     public function size(): HasOne {
         return $this->hasOne(Size::class, "product_variant_id");
     }   
