@@ -74,7 +74,7 @@
             <div>
                 <div class="flex flex-wrap gap-[1.5vw]">
                     @foreach ($products as $product)
-                        <a href="/adoption/{{ $product->slug }}" class="flex flex-col w-[15vw] h-[23vw] p-[1vw] bg-green-2">
+                        <a href="/products/{{ $product->slug }}" class="flex flex-col w-[15vw] h-[23vw] p-[1vw] bg-green-2">
                             <div class="relative w-full mb-[0.5vw]">
                                 <img src="{{ asset('images/elvinson.jpg') }}" alt="{{ $product->name }}" class="w-[13vw] h-[13vw] object-cover">
                                 <p class="absolute bottom-0 right-0 bg-orange-1 px-[1vw] py-[0.5vw] text-[1vw] text-white font-semibold">Rp. {{ number_format($product->product_variants->first()->price) }}</p>

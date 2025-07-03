@@ -26,39 +26,15 @@ use App\Models\Organization; // Unused, consider removing if not directly used i
 use Illuminate\Http\Request; // Unused, consider removing if not directly used in routes
 use Illuminate\Support\Facades\Route;
 
-
-// Option B: Redirect to signin (comment out Option A if using this)
 Route::get('/', function () {
-    return redirect()->route('signin');
+    return redirect()->route('login');
 });
 
-// nambahin buat ke katalog pohon
 Route::get('/tree', [TreeCatalogueController::class, 'index'])->name('tree_catalogue');
 
-// Define the actual homepage if '/' is a redirect
 Route::get('/homepage', function () {
     return view('homepage');
 })->name('homepage');
-
-// --- Authentication Routes ---
-// Route untuk menampilkan form Sign Up
-// Route::get('/signup', [RegisterController::class, 'showRegistrationForm'])->name('signup');
-// // Route untuk data form Sign Up
-// Route::post('/signup', [RegisterController::class, 'register'])->name('register.submit');
-
-// // Route untuk menampilkan form Sign In
-// Route::get('/signin', [LoginController::class, 'showLoginForm'])->name('signin');
-
-// // Route untuk data form Sign In
-// Route::post('/signin', [LoginController::class, 'login'])->name('login.submit');
-// // Tambahkan route logout jika belum ada (penting untuk fungsionalitas Auth::logout())
-// Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-
-// // --- Profile Routes (Temporarily without 'auth' middleware for development) ---
-// // Ketika Anda siap untuk mengaktifkan autentikasi, Anda bisa mengelompokkan ini dalam Route::middleware(['auth'])->group(function () { ... });
-// Route::get('/profile', [ProfileController::class, 'showProfile'])->name('profile');
-// // Route untuk mengupdate profil pengguna
-// Route::put('/user/{username}', [ProfileController::class, 'updateProfile'])->name('profile.update'); // Ini perlu diaktifkan di sini
 
 Route::controller(UserController::class)->group(function (){
     Route::get("/login","loginForm")->name("login");
