@@ -1,6 +1,7 @@
 <!-- NEW YA BANG GW TAMBAHIN PAGE INI -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,7 +25,8 @@
     </style>
 </head>
 {{-- Menghapus kelas 'font-inter' dari body karena font diatur via style tag dengan var() --}}
-<body class="min-h-screen flex items-center justify-center relative bg-gray-100">
+
+<body class="min-h-screen flex items-center justify-center relative bg-gray-100 py-[10vw]">
 
     {{-- Logo Grevo di kiri atas --}}
     <div class="absolute top-10 left-10 z-10">
@@ -33,7 +35,9 @@
 
     {{-- Tombol Sign In di kanan atas --}}
     <div class="absolute top-10 right-10 z-10">
-        <a href="{{ route('signin') }}" style="background-color: var(--color-green-1); color: var(--color-green-3);" class="border-none rounded-md px-6 py-2 text-sm font-semibold cursor-pointer inline-block leading-normal hover:bg-gray-400 transition-colors duration-300">SIGN IN</a>
+        <a href="{{ route('login') }}" style="background-color: var(--color-green-1); color: var(--color-green-3);"
+            class="border-none rounded-md px-6 py-2 text-sm font-semibold cursor-pointer inline-block leading-normal hover:bg-gray-400 transition-colors duration-300">SIGN
+            IN</a>
     </div>
 
     {{-- Card utama untuk form Sign Up --}}
@@ -42,73 +46,179 @@
         <p class="text-sm text-gray-600 mb-8">Quick & Simple way to your online shopping</p>
 
         {{-- Pesan sukses (misalnya dari redirect setelah register) --}}
-        @if(session('success'))
-            <div class="bg-green-100 text-green-700 border border-green-300 px-4 py-3 rounded-md mb-5 text-sm" role="alert">
+        @if (session('success'))
+            <div class="bg-green-100 text-green-700 border border-green-300 px-4 py-3 rounded-md mb-5 text-sm"
+                role="alert">
                 {{ session('success') }}
-            </div>
-        @endif
-
-        {{-- Pesan error validasi dari Laravel --}}
-        @if($errors->any())
-            <div class="bg-red-100 text-red-700 border border-red-300 px-4 py-3 rounded-md mb-5 text-sm text-left" role="alert">
-                <ul class="list-disc list-inside">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
             </div>
         @endif
 
         <form method="POST" action="{{ route('register.submit') }}">
             @csrf {{-- CSRF token buat keamanan form --}}
 
-            {{-- Field FIRST NAME --}}
+            {{-- Field NAME --}}
             <div class="mb-5 text-left">
-                <label for="first_name" class="block text-xs text-gray-700 uppercase font-semibold mb-1">FIRST NAME</label>
-                <input type="text" id="first_name" name="first_name" value="{{ old('first_name') }}" placeholder="Ivy" required autocomplete="name" autofocus
-                       class="w-full px-4 py-3 border border-gray-300 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-[var(--color-green-3)]"
-                       style="border-color: var(--color-green-3);"> {{-- Menggunakan --color-green-3 dari app.css untuk fokus --}}
+                <label for="name" class="block text-xs text-gray-700 uppercase font-semibold mb-1">NAME</label>
+                <input type="text" id="name" name="name" value="{{ old('name') }}" placeholder="Ivy"
+                    required autocomplete="name" autofocus
+                    class="w-full px-4 py-3 border border-gray-300 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-[var(--color-green-3)]"
+                    style="border-color: var(--color-green-3);"> {{-- Menggunakan --color-green-3 dari app.css untuk fokus --}}
+                @error('name')
+                    <p id="filled_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400">
+                        {{ $message }}
+                    </p>
+                @enderror
+            </div>
+
+            {{-- Field USERNAME --}}
+            <div class="mb-5 text-left">
+                <label for="username" class="block text-xs text-gray-700 uppercase font-semibold mb-1">USERNAME</label>
+                <input type="text" id="username" name="username" value="{{ old('username') }}" placeholder="Ivy"
+                    required autocomplete="name" autofocus
+                    class="w-full px-4 py-3 border border-gray-300 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-[var(--color-green-3)]"
+                    style="border-color: var(--color-green-3);"> {{-- Menggunakan --color-green-3 dari app.css untuk fokus --}}
+                @error('username')
+                    <p id="filled_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400">
+                        {{ $message }}
+                    </p>
+                @enderror
+            </div>
+
+            {{-- Field GENDER --}}
+            <div class="mb-5 text-left">
+                <label for="gender" class="block text-xs text-gray-700 uppercase font-semibold mb-1">GENDER</label>
+                <div class="relative">
+                    <select id="gender" name="gender"
+                        class="appearance-none w-full px-4 py-3 border border-gray-300 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-[var(--color-green-3)]"
+                        style="border-color: var(--color-green-3);" {{-- Menggunakan --color-green-3 dari app.css untuk fokus --}} required>
+                        <option value="" disabled selected hidden>Select a category...</option>
+                        @if (old('gender') == 'male')
+                            <option value="male" selected class="text-black">Male</option>
+                        @else
+                            <option value="male" class="text-black">Male</option>
+                        @endif
+
+                        @if (old('gender') == 'female')
+                            <option value="female" selected class="text-black">Female</option>
+                        @else
+                            <option value="female" class="text-black">Female</option>
+                        @endif
+                    </select>
+                    <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                        <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                </div>
+                @error('phone_number')
+                    <p id="filled_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400">
+                        {{ $message }}
+                    </p>
+                @enderror
             </div>
 
             {{-- Field EMAIL ADDRESS --}}
             <div class="mb-5 text-left">
-                <label for="email" class="block text-xs text-gray-700 uppercase font-semibold mb-1">EMAIL ADDRESS</label>
-                <input type="email" id="email" name="email" value="{{ old('email') }}" placeholder="ivy@stay.com" required autocomplete="email"
-                       class="w-full px-4 py-3 border border-gray-300 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-[var(--color-green-3)]"
-                       style="border-color: var(--color-green-3);">
+                <label for="email" class="block text-xs text-gray-700 uppercase font-semibold mb-1">EMAIL
+                    ADDRESS</label>
+                <input type="email" id="email" name="email" value="{{ old('email') }}"
+                    placeholder="ivy@stay.com" required autocomplete="email"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-[var(--color-green-3)]"
+                    style="border-color: var(--color-green-3);">
+                @error('email')
+                    <p id="filled_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400">
+                        {{ $message }}
+                    </p>
+                @enderror
+            </div>
+
+            {{-- Field Phone Number --}}
+            <div class="mb-5 text-left">
+                <label for="phone_number" class="block text-xs text-gray-700 uppercase font-semibold mb-1">PHONE NUMBER</label>
+                <input type="text" id="phone_number" name="phone_number" value="{{ old('phone_number') }}"
+                    placeholder="085263506419" required
+                    class="w-full px-4 py-3 border border-gray-300 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-[var(--color-green-3)]"
+                    style="border-color: var(--color-green-3);">
+                @error('phone_number')
+                    <p id="filled_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400">
+                        {{ $message }}
+                    </p>
+                @enderror
+            </div>
+
+            {{-- Field Address --}}
+            <div class="mb-5 text-left">
+                <label for="address" class="block text-xs text-gray-700 uppercase font-semibold mb-1">ADDRESS</label>
+                <input type="text" id="address" name="address" value="{{ old('address') }}"
+                    placeholder="Jalan Pakuan 3" required
+                    class="w-full px-4 py-3 border border-gray-300 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-[var(--color-green-3)]"
+                    style="border-color: var(--color-green-3);">
+                @error('address')
+                    <p id="filled_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400">
+                        {{ $message }}
+                    </p>
+                @enderror
             </div>
 
             {{-- Field PASSWORD si toggle mata-mata --}}
-            <div class="mb-5 text-left relative">
-                <label for="password" class="block text-xs text-gray-700 uppercase font-semibold mb-1">PASSWORD</label>
-                <input type="password" id="password" name="password" placeholder="********" required autocomplete="new-password"
-                       class="w-full px-4 py-3 border border-gray-300 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-[var(--color-green-3)]"
-                       style="border-color: var(--color-green-3);">
-                <span class="absolute right-4 top-1/2 -translate-y-2 cursor-pointer text-gray-400 text-lg p-1" onclick="togglePasswordVisibility('password')">
-                    <i class="fa-solid fa-eye-slash"></i>
-                </span>
+           
+            <div class="mb-5 text-left">
+                <label for="password"
+                    class="block text-xs text-gray-700 uppercase font-semibold mb-1">PASSWORD</label>
+                <div class="relative">
+                    <input type="password" id="password" name="password" placeholder="********" required
+                        autocomplete="new-password"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-[var(--color-green-3)]"
+                        style="border-color: var(--color-green-3);">
+                    <div class="absolute right-4 top-[0.6vw] cursor-pointer text-gray-400 text-lg p-1"
+                        onclick="togglePasswordVisibility('password')">
+                        <i class="fa-solid fa-eye-slash"></i>
+                    </div>
+                </div>
+                @error('password')
+                    <p id="filled_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400">
+                        {{ $message }}
+                    </p>
+                @enderror
             </div>
 
             {{-- Field CONFIRM PASSWORD ya --}}
-            <div class="mb-8 text-left relative">
-                <label for="password_confirmation" class="block text-xs text-gray-700 uppercase font-semibold mb-1">CONFIRM PASSWORD</label>
-                <input type="password" id="password_confirmation" name="password_confirmation" placeholder="********" required autocomplete="new-password"
-                       class="w-full px-4 py-3 border border-gray-300 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-[var(--color-green-3)]"
-                       style="border-color: var(--color-green-3);">
-                <span class="absolute right-4 top-1/2 -translate-y-2 cursor-pointer text-gray-400 text-lg p-1" onclick="togglePasswordVisibility('password_confirmation')">
-                    <i class="fa-solid fa-eye-slash"></i>
-                </span>
+            <div class="mb-8 text-left">
+                <label for="password_confirmation"
+                    class="block text-xs text-gray-700 uppercase font-semibold mb-1">CONFIRM PASSWORD</label>
+                <div class="relative">
+                    <input type="password" id="password_confirmation" name="password_confirmation"
+                        placeholder="********" required autocomplete="new-password"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-[var(--color-green-3)]"
+                        style="border-color: var(--color-green-3);">
+                    <span class="absolute right-4 top-[0.75vw] cursor-pointer text-gray-400 text-lg p-1"
+                        onclick="togglePasswordVisibility('password_confirmation')">
+                        <i class="fa-solid fa-eye-slash"></i>
+                    </span>
+                </div>
+                @error('password')
+                    <p id="filled_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400">
+                        {{ $message }}
+                    </p>
+                @enderror
             </div>
 
             {{-- Checkbox Terms & Privacy Policy : belum diarahin kemana nya bang --}}
             <div class="flex items-center mb-8 text-sm text-gray-700 text-left">
                 <input type="checkbox" id="terms" name="terms" {{ old('terms') ? 'checked' : '' }} required
-                       class="mr-2 min-w-4 min-h-4 cursor-pointer" style="accent-color: var(--color-green-3);"> {{-- Menggunakan --color-green-3 untuk accent-color --}}
-                <label for="terms">I agree to the <a href="#" class="no-underline hover:underline" style="color: var(--color-green-3);">terms of Service</a> and <a href="#" class="no-underline hover:underline" style="color: var(--color-green-3);">Privacy Policy</a>.</label>
+                    class="mr-2 min-w-4 min-h-4 cursor-pointer" style="accent-color: var(--color-green-3);">
+                {{-- Menggunakan --color-green-3 untuk accent-color --}}
+                <label for="terms">I agree to the <a href="#" class="no-underline hover:underline"
+                        style="color: var(--color-green-3);">terms of Service</a> and <a href="#"
+                        class="no-underline hover:underline" style="color: var(--color-green-3);">Privacy
+                        Policy</a>.</label>
             </div>
 
             {{-- Tombol CREATE AN ACCOUNT --}}
-            <button type="submit" class="w-full py-3 text-white rounded-md text-base font-semibold cursor-pointer hover:bg-green-600 transition-colors duration-300" style="background-color: var(--color-green-2);">CREATE AN ACCOUNT</button>
+            <button type="submit"
+                class="w-full py-3 text-white rounded-md text-base font-semibold cursor-pointer hover:bg-green-600 transition-colors duration-300"
+                style="background-color: var(--color-green-2);">CREATE AN ACCOUNT</button>
         </form>
     </div>
 
@@ -134,4 +244,5 @@
         }
     </script>
 </body>
+
 </html>

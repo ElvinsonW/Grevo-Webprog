@@ -8,42 +8,51 @@
 </head>
 <body class="p-4">
     @include('components.sidebar')
-    <div class="px-20 py-4">
-    <div class="flex flex-row items-center justify-between">
-        <h1 class="text-4xl">Batch List</h1>
-        <a href ="{{ route('batch.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">+ Upload Proof </a>
-    </div>
 
-    <div class="border border-blue-400 rounded-md overflow-x-auto mt-4">
-        <table class="w-full text-left">
-            <thead class="bg-gray-100">
-                <tr>
-                    <th class="px-2">Batch ID</th>
-                    <th>Organization Name</th>
-                    <th>Date of Activity</th>
-                    <th>Trees Planted</th>
-                    <th>Batch Date</th>
-                </tr>
-            </thead>
+    <div class="container mx-auto p-6">
+        <div class="flex flex-row justify-between items-center mb-4">
+            <h1 class="text-2xl font-bold">Batch List</h1>
+            <a href="{{ route('batch.create') }}" class="px-4 py-3 bg-blue-600 text-white rounded hover:bg-blue-700">
+                + Upload Proof
+            </a>
+        </div>
 
-            <tbody>
-                @foreach($batches as $batch)
-                <tr class ="border-t">
-                    <td class = "px-2 py-2">{{ $batch->batchid }}</td>
-                    <td class = "py-2">{{ $batch->organization->organization_name ?? 'N/A'}}</td>
-                    <td class = "py-2">{{ $batch->dateofactivity}}</td>
-                    <td class = "py-2">{{ $batch->treesplanted}}</td>
-                    <td class = "py-2">{{ $batch->batchdate}}</td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+        {{-- Batch Table --}}
+        <div class="bg-white rounded shadow">
+            <table class="min-w-full text-sm">
+                <thead class="bg-green-100 text-left">
+                    <tr>
+                        <th class="px-4 py-3">Batch ID</th>
+                        <th class="px-4 py-3">Organization Name</th>
+                        <th class="px-4 py-3">Date of Activity</th>
+                        <th class="px-4 py-3">Trees Planted</th>
+                        <th class="px-4 py-3">Batch Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($batches as $batch)
+                        <tr class="border-b hover:bg-gray-50">
+                            <td class="px-4 py-3">{{ $batch->batchid }}</td>
+                            <td class="px-4 py-3">{{ $batch->organization->organization_name ?? 'N/A' }}</td>
+                            <td class="px-4 py-3">{{ $batch->dateofactivity }}</td>
+                            <td class="px-4 py-3">{{ $batch->treesplanted }}</td>
+                            <td class="px-4 py-3">{{ $batch->batchdate }}</td>
+                        </tr>
+                    @endforeach
+
+                    @if ($batches->isEmpty())
+                        <tr>
+                            <td colspan="5" class="text-center px-4 py-6 text-gray-500">No batches found.</td>
+                        </tr>
+                    @endif
+                </tbody>
+            </table>
+        </div>
+
+        {{-- Pagination --}}
+        <div class="mt-4">
+            {{ $batches->links() }}
+        </div>
     </div>
-            <div class="mt-4 flex justify-between flex-row w-full">
-                <div id="pagination-links">
-                        {{ $batches->links() }}
-                </div>
-            </div>
-</div>
 </body>
 </html>

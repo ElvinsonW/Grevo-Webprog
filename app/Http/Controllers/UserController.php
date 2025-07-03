@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Storage;
 class UserController extends Controller
 {
     public function registerForm(){
-        return view('register');
+        return view('signup');
     }
 
     public function register(Request $request){
@@ -20,11 +20,14 @@ class UserController extends Controller
             'name' => ['required'],
             'username' => ['required', 'min:4', 'max:15', 'unique:users,username'],
             'email' => ['required', 'email', 'unique:users,email'],
-            'phone_number' => ['required'],
+            'phone_number' => ['required', 'unique:users,phone_number'],
             'address' => ['required'],
             'gender' => ['required'],
-            'password' => ['required','min:8','regex:/[A-Z]/','regex:/[a-z]/', 'regex:/[0-9]/'],
+            'password' => ['required','min:8','regex:/[A-Z]/','regex:/[a-z]/', 'regex:/[0-9]/', 'confirmed' ],
+            'terms' => ['accepted'],
             'role' => ['prohibited']
+        ], [
+            'password.regex' => 'Password must include at least one uppercase letter, one lowercase letter, and one number.',
         ]);
 
         $validatedData['password'] = Hash::make($validatedData['password']);
@@ -36,19 +39,19 @@ class UserController extends Controller
     }
 
     public function loginForm(){
-        return view('login');
+        return view('signin');
     }
 
     public function login(Request $request){
         $credential = $request->validate([
-            'username' => ['required'],
+            'email' => ['required', 'email'],
             'password' => ['required']
         ]);
 
         if(Auth::attempt($credential)){
             $request->session()->regenerate();
 
-            return redirect('/catalogue');
+            return redirect('/products');
         }
 
         return redirect('/login')->with('loginError','The provided username and password do not match our records.');
@@ -76,6 +79,7 @@ class UserController extends Controller
                 'phone_number' => ['required', 'regex:/^(\+62|62|0)[2-9][0-9]{8,14}$/'],
                 'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:1024']
             ];
+
             if($request->email != $user->email){
                 $rules['email'] = ['required', 'email', 'unique:users,email,'];
             } else if ($request->username != $user->username){
@@ -100,7 +104,7 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function logout(string $id)
     {
         //
     }

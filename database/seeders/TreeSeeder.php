@@ -20,7 +20,7 @@ class TreeSeeder extends Seeder
             'treename' => 'Mangrove',
             'treecategory' => 'Pine',
             'treedesc' => 'A wild tree has appeared!',
-            'treelife' => '20 Years',
+            'treelife' => 20,
             'treeprice' => 20.5,
             'treephoto' => 'treesphoto/close.png',
             'organization_id' => $org->organization_id
@@ -29,7 +29,7 @@ class TreeSeeder extends Seeder
             'treename' => 'Mangrove',
             'treecategory' => 'Pine',
             'treedesc' => 'A wild tree has appeared!',
-            'treelife' => '20 Years',
+            'treelife' => 20,
             'treeprice' => 20.5,
             'treephoto' => 'treesphoto/close.png',
             'organization_id' => $org->organization_id
@@ -38,7 +38,7 @@ class TreeSeeder extends Seeder
             'treename' => 'Mangrove',
             'treecategory' => 'Pine',
             'treedesc' => 'A wild tree has appeared!',
-            'treelife' => '20 Years',
+            'treelife' => 20,
             'treeprice' => 20.5,
             'treephoto' => 'treesphoto/close.png',
             'organization_id' => $org->organization_id
@@ -47,7 +47,7 @@ class TreeSeeder extends Seeder
             'treename' => 'Mangrove',
             'treecategory' => 'Pine',
             'treedesc' => 'A wild tree has appeared!',
-            'treelife' => '20 Years',
+            'treelife' => 20,
             'treeprice' => 20.5,
             'treephoto' => 'treesphoto/close.png',
             'organization_id' => $org->organization_id
@@ -56,7 +56,7 @@ class TreeSeeder extends Seeder
             'treename' => 'Mangrove',
             'treecategory' => 'Pine',
             'treedesc' => 'A wild tree has appeared!',
-            'treelife' => '20 Years',
+            'treelife' => 20,
             'treeprice' => 20.5,
             'treephoto' => 'treesphoto/close.png',
             'organization_id' => $org->organization_id
@@ -65,7 +65,7 @@ class TreeSeeder extends Seeder
             'treename' => 'Mangrove',
             'treecategory' => 'Pine',
             'treedesc' => 'A wild tree has appeared!',
-            'treelife' => '20 Years',
+            'treelife' => 20,
             'treeprice' => 20.5,
             'treephoto' => 'treesphoto/close.png',
             'organization_id' => $org->organization_id
@@ -74,7 +74,7 @@ class TreeSeeder extends Seeder
             'treename' => 'Mangrove',
             'treecategory' => 'Pine',
             'treedesc' => 'A wild tree has appeared!',
-            'treelife' => '20 Years',
+            'treelife' => 20,
             'treeprice' => 20.5,
             'treephoto' => 'treesphoto/close.png',
             'organization_id' => $org->organization_id
@@ -83,7 +83,7 @@ class TreeSeeder extends Seeder
             'treename' => 'Mangrove',
             'treecategory' => 'Pine',
             'treedesc' => 'A wild tree has appeared!',
-            'treelife' => '20 Years',
+            'treelife' => 20,
             'treeprice' => 20.5,
             'treephoto' => 'treesphoto/close.png',
             'organization_id' => $org->organization_id
@@ -92,7 +92,7 @@ class TreeSeeder extends Seeder
             'treename' => 'Mangrove',
             'treecategory' => 'Pine',
             'treedesc' => 'A wild tree has appeared!',
-            'treelife' => '20 Years',
+            'treelife' => 20,
             'treeprice' => 20.5,
             'treephoto' => 'treesphoto/close.png',
             'organization_id' => $org->organization_id
@@ -101,7 +101,7 @@ class TreeSeeder extends Seeder
             'treename' => 'Mangrove',
             'treecategory' => 'Pine',
             'treedesc' => 'A wild tree has appeared!',
-            'treelife' => '20 Years',
+            'treelife' => 20,
             'treeprice' => 20.5,
             'treephoto' => 'treesphoto/close.png',
             'organization_id' => $org->organization_id
@@ -110,7 +110,7 @@ class TreeSeeder extends Seeder
             'treename' => 'Mangrove',
             'treecategory' => 'Pine',
             'treedesc' => 'A wild tree has appeared!',
-            'treelife' => '20 Years',
+            'treelife' => 20,
             'treeprice' => 20.5,
             'treephoto' => 'treesphoto/close.png',
             'organization_id' => $org->organization_id
@@ -119,7 +119,7 @@ class TreeSeeder extends Seeder
             'treename' => 'Mangrove',
             'treecategory' => 'Pine',
             'treedesc' => 'A wild tree has appeared!',
-            'treelife' => '20 Years',
+            'treelife' => 20,
             'treeprice' => 20.5,
             'treephoto' => 'treesphoto/close.png',
             'organization_id' => $org->organization_id

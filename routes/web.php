@@ -42,29 +42,35 @@ Route::get('/homepage', function () {
 
 // --- Authentication Routes ---
 // Route untuk menampilkan form Sign Up
-Route::get('/signup', [RegisterController::class, 'showRegistrationForm'])->name('signup');
-// Route untuk data form Sign Up
-Route::post('/signup', [RegisterController::class, 'register'])->name('register.submit');
+// Route::get('/signup', [RegisterController::class, 'showRegistrationForm'])->name('signup');
+// // Route untuk data form Sign Up
+// Route::post('/signup', [RegisterController::class, 'register'])->name('register.submit');
 
-// Route untuk menampilkan form Sign In
-Route::get('/signin', [LoginController::class, 'showLoginForm'])->name('signin');
+// // Route untuk menampilkan form Sign In
+// Route::get('/signin', [LoginController::class, 'showLoginForm'])->name('signin');
 
-// Route untuk data form Sign In
-Route::post('/signin', [LoginController::class, 'login'])->name('login.submit');
-// Tambahkan route logout jika belum ada (penting untuk fungsionalitas Auth::logout())
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+// // Route untuk data form Sign In
+// Route::post('/signin', [LoginController::class, 'login'])->name('login.submit');
+// // Tambahkan route logout jika belum ada (penting untuk fungsionalitas Auth::logout())
+// Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-// --- Profile Routes (Temporarily without 'auth' middleware for development) ---
-// Ketika Anda siap untuk mengaktifkan autentikasi, Anda bisa mengelompokkan ini dalam Route::middleware(['auth'])->group(function () { ... });
-Route::get('/profile', [ProfileController::class, 'showProfile'])->name('profile');
-// Route untuk mengupdate profil pengguna
-Route::put('/user/{username}', [ProfileController::class, 'updateProfile'])->name('profile.update'); // Ini perlu diaktifkan di sini
+// // --- Profile Routes (Temporarily without 'auth' middleware for development) ---
+// // Ketika Anda siap untuk mengaktifkan autentikasi, Anda bisa mengelompokkan ini dalam Route::middleware(['auth'])->group(function () { ... });
+// Route::get('/profile', [ProfileController::class, 'showProfile'])->name('profile');
+// // Route untuk mengupdate profil pengguna
+// Route::put('/user/{username}', [ProfileController::class, 'updateProfile'])->name('profile.update'); // Ini perlu diaktifkan di sini
+
+Route::controller(UserController::class)->group(function (){
+    Route::get("/login","loginForm")->name("login");
+    Route::get("/register","registerForm")->name("register");
+    Route::post("/login","login")->name("login.submit");
+    Route::post("/register","register")->name("register.submit");
+});
 
 // Tambahkan rute untuk sub-halaman profil
 Route::get('/profile/addresses', [ProfileController::class, 'showAddresses'])->name('addresses');
 Route::get('/profile/orders', [ProfileController::class, 'showOrders'])->name('orders');
 Route::get('/profile/reviews', [ProfileController::class, 'showReviews'])->name('reviews');
-
 
 // --- Other Application Routes ---
 Route::get('/about', function() {
@@ -76,8 +82,8 @@ Route::get('/product-detail', function(){
 })->name('product-detail');
 
 Route::resource('/user', UserController::class); // This resource handles `/user`, `/user/{id}`, etc.
-                                                  // Make sure it doesn't conflict with your specific `/user/{username}` PUT route if not intended.
-                                                  // If UserController is only for admin managing users, then it's fine.
+// Make sure it doesn't conflict with your specific `/user/{username}` PUT route if not intended.
+// If UserController is only for admin managing users, then it's fine.
 
 Route::resource('/review', ReviewController::class);
 
@@ -109,7 +115,7 @@ Route::controller(OrganizationController::class)->group(function(){
     Route::delete('/organizations/{organization_id}', 'destroy')->name('organization.destroy');
 });
 
-//Tree
+// Tree
 Route::controller(TreeController::class)->group(function(){
     Route::get('/addtree', 'create')->name('tree.create');
     Route::post('/trees', 'store')->name('tree.store');
@@ -119,7 +125,7 @@ Route::controller(TreeController::class)->group(function(){
     Route::delete('trees/{treeid}', 'destroy')->name('tree.destroy');
 });
 
-//Batch
+// Batch
 Route::controller(BatchController::class)->group(function(){
     Route::get('/uploadbatch', 'create')->name('batch.create');
     Route::post('/batches', 'store')->name('batch.store');
@@ -129,3 +135,10 @@ Route::controller(BatchController::class)->group(function(){
 
 
 Route::get('/order', [OrderController::class, 'show'])->name('order.show');
+//Product (Admin)
+Route::get('/addproduct', function () {
+    return view('Admin.Product.addproduct');
+})->name('products.create');
+Route::get('/listproducts', [ProductController::class, 'show'])->name('products.list');
+Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
+Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
