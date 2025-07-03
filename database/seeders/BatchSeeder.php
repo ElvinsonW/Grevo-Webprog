@@ -15,84 +15,84 @@ class BatchSeeder extends Seeder
         Batch::create([
             'organization_id' => $org->organization_id,
             'batchdate' => '20 June - 30 June 2025',
-            'dateofactivity' => '30 April 2025',
+            'dateofactivity' => '2025-06-06',
             'batchproof' => 'batchproof/openmouth.png',
             'treesplanted' => 50
         ]);
         Batch::create([
             'organization_id' => $org->organization_id,
             'batchdate' => '20 June - 30 June 2025',
-            'dateofactivity' => '30 April 2025',
+            'dateofactivity' => '2025-06-06',
             'batchproof' => 'batchproof/openmouth.png',
             'treesplanted' => 50
         ]);
         Batch::create([
             'organization_id' => $org->organization_id,
             'batchdate' => '20 June - 30 June 2025',
-            'dateofactivity' => '30 April 2025',
+            'dateofactivity' => '2025-06-06',
             'batchproof' => 'batchproof/openmouth.png',
             'treesplanted' => 50
         ]);
         Batch::create([
             'organization_id' => $org->organization_id,
             'batchdate' => '20 June - 30 June 2025',
-            'dateofactivity' => '30 April 2025',
+            'dateofactivity' => '2025-06-06',
             'batchproof' => 'batchproof/openmouth.png',
             'treesplanted' => 50
         ]);
         Batch::create([
             'organization_id' => $org->organization_id,
             'batchdate' => '20 June - 30 June 2025',
-            'dateofactivity' => '30 April 2025',
+            'dateofactivity' => '2025-06-06',
             'batchproof' => 'batchproof/openmouth.png',
             'treesplanted' => 50
         ]);
         Batch::create([
             'organization_id' => $org->organization_id,
             'batchdate' => '20 June - 30 June 2025',
-            'dateofactivity' => '30 April 2025',
+            'dateofactivity' => '2025-06-06',
             'batchproof' => 'batchproof/openmouth.png',
             'treesplanted' => 50
         ]);
         Batch::create([
             'organization_id' => $org->organization_id,
             'batchdate' => '20 June - 30 June 2025',
-            'dateofactivity' => '30 April 2025',
+            'dateofactivity' => '2025-06-06',
             'batchproof' => 'batchproof/openmouth.png',
             'treesplanted' => 50
         ]);
         Batch::create([
             'organization_id' => $org->organization_id,
             'batchdate' => '20 June - 30 June 2025',
-            'dateofactivity' => '30 April 2025',
+            'dateofactivity' => '2025-06-06',
             'batchproof' => 'batchproof/openmouth.png',
             'treesplanted' => 50
         ]);
         Batch::create([
             'organization_id' => $org->organization_id,
             'batchdate' => '20 June - 30 June 2025',
-            'dateofactivity' => '30 April 2025',
+            'dateofactivity' => '2025-06-06',
             'batchproof' => 'batchproof/openmouth.png',
             'treesplanted' => 50
         ]);
         Batch::create([
             'organization_id' => $org->organization_id,
             'batchdate' => '20 June - 30 June 2025',
-            'dateofactivity' => '30 April 2025',
+            'dateofactivity' => '2025-06-06',
             'batchproof' => 'batchproof/openmouth.png',
             'treesplanted' => 50
         ]);
         Batch::create([
             'organization_id' => $org->organization_id,
             'batchdate' => '20 June - 30 June 2025',
-            'dateofactivity' => '30 April 2025',
+            'dateofactivity' => '2025-06-06',
             'batchproof' => 'batchproof/openmouth.png',
             'treesplanted' => 50
         ]);
         Batch::create([
             'organization_id' => $org->organization_id,
             'batchdate' => '20 June - 30 June 2025',
-            'dateofactivity' => '30 April 2025',
+            'dateofactivity' => '2025-06-06',
             'batchproof' => 'batchproof/openmouth.png',
             'treesplanted' => 50
         ]);

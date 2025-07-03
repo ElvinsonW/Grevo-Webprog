@@ -16,6 +16,58 @@ class TreeController extends Controller
         return view('Admin.Tree.listtree', compact('trees'));
     }
 
+    public function show(Request $request)
+    {
+        // Get all organizations (if you still need them for a filter/dropdown)
+        // 1. Fetch all organizations for the filter sidebar.
+        $organizations = Organization::all();
+
+        // 2. Start building the query for trees.
+        $query = Tree::query();
+
+        // 3. Apply Organization Filter (from URL query parameter 'organization_id')
+        $selectedOrganizationId = $request->query('organization_id');
+        $selectedOrganization = null; // To pass to the view for UI state
+        // Check if a specific organization_id is present AND is not an empty string
+        if (!empty($selectedOrganizationId) && $selectedOrganizationId !== '') {
+            // Attempt to find the organization
+            $selectedOrganization = Organization::find($selectedOrganizationId);
+
+            // --- START DEBUGGING CODE ---
+            if ($selectedOrganization) {
+                \Log::info('Found Organization in DB: ID=' . $selectedOrganization->organization_id . ', Name=' . $selectedOrganization->organization_name);
+                // After finding the organization, let's verify its primary key type if it's not default 'id'
+                \Log::info('Primary key of found Organization: ' . $selectedOrganization->getKeyName() . ' = ' . $selectedOrganization->getKey());
+            } else {
+                \Log::warning('Organization with ID "' . $selectedOrganizationId . '" not found in database.');
+            }
+            // --- END DEBUGGING CODE ---
+
+            if ($selectedOrganization) {
+                // Apply the filter using the correct foreign key column name.
+                // Assuming 'organization_id' is the foreign key in the 'trees' table
+                // and $selectedOrganization->organization_id is the primary key of the Organization model.
+                $query->where('organization_id', $selectedOrganization->organization_id);
+                \Log::info('Query WHERE clause added: organization_id = ' . $selectedOrganization->organization_id);
+            }
+        } else {
+            \Log::info('No specific organization filter applied (All Organizations selected or no ID provided).');
+        }
+
+        $trees = $query->get();
+
+        // --- START DEBUGGING CODE ---
+        \Log::info('Number of trees retrieved after filter: ' . $trees->count());
+        // --- END DEBUGGING CODE ---
+
+        return view('User.treecatalogue.tree', [
+            'tree' => $trees, // Pass only the FILTERED trees
+            'organizations' => $organizations, // Pass ALL organizations for the sidebar
+            'selectedOrganization' => $selectedOrganization, // The organization object (or null)
+            // REMOVED: 'showOnlyRedeemable' variable
+        ]);
+    }
+
     public function create()
     {
         $organizations = Organization::all();

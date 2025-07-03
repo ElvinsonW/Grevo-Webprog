@@ -32,9 +32,6 @@ Route::get('/', function () {
     return redirect()->route('signin');
 });
 
-// nambahin buat ke katalog pohon
-Route::get('/tree', [TreeCatalogueController::class, 'index'])->name('tree_catalogue');
-
 // Define the actual homepage if '/' is a redirect
 Route::get('/homepage', function () {
     return view('homepage');
@@ -71,6 +68,9 @@ Route::controller(UserController::class)->group(function (){
 Route::get('/profile/addresses', [ProfileController::class, 'showAddresses'])->name('addresses');
 Route::get('/profile/orders', [ProfileController::class, 'showOrders'])->name('orders');
 Route::get('/profile/reviews', [ProfileController::class, 'showReviews'])->name('reviews');
+
+//route untuk Tree Catalogue
+Route::get('/tree', [TreeController::class, 'show'])->name('tree.index2');
 
 // --- Other Application Routes ---
 Route::get('/about', function() {
