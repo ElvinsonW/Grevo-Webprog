@@ -8,7 +8,7 @@
             <div class="flex flex-col gap-[1vw]">
                 <label for="rate" class="text-[1.2vw] font-bold">Rate</label>
                 <input type="text" name="rate" id="rate" class="hidden" value="{{ old('rate') }}">
-                <div class="flex gap-[0.5vw]">
+                <div class="flex gap-[0.5vw] cursor-pointer">
                     <i class="fa-solid fa-star text-gray-200 text-[2vw] star" data-value="1"></i>
                     <i class="fa-solid fa-star text-gray-200 text-[2vw] star" data-value="2"></i>
                     <i class="fa-solid fa-star text-gray-200 text-[2vw] star" data-value="3"></i>
@@ -34,7 +34,7 @@
 
             <div class="flex flex-col gap-[1vw]">
                 <label for="images" class="text-[1.2vw] font-bold">Review Image</label>
-                <label for="images" class="w-fit px-[2vw] py-[0.75vw] rounded-[0.5vw] bg-green-600 text-[1.1vw] text-white font-bold mb-[0.5vw]">Add Review Image +</label>
+                <label for="images" class="cursor-pointer w-fit px-[2vw] py-[0.75vw] rounded-[0.5vw] bg-green-600 text-[1.1vw] text-white font-bold mb-[0.5vw]">Add Review Image +</label>
                 <input id="images" name="images[]" type="file" class="hidden mb-[1vw]" multiple onchange="handleImageChange(event)" value="{{ old('images[]') }}"/>
                 <div class="flex flex-wrap gap-[1vw]" id="image-container"></div>
                 @error('image')
@@ -44,57 +44,74 @@
                 @enderror
             </div>
 
-            <button class="w-fit px-[2vw] py-[0.5vw] rounded-[0.5vw] bg-green-600 text-white font-bold">
+            <button class="cursor-pointer w-fit px-[2vw] py-[0.5vw] rounded-[0.5vw] bg-green-600 text-white font-bold">
                 Submit
             </button>
         </form>
     </div>
 
     <script>
-        document.querySelectorAll(".star").forEach(star => {
-            star.addEventListener('click', function () {
-                document.querySelectorAll('.star').forEach(s => {
-                    s.classList.remove('text-yellow-400');
-                    s.classList.add('text-gray-200');
-                })
+    document.querySelectorAll(".star").forEach(star => {
+        star.addEventListener('click', function () {
+            document.querySelectorAll('.star').forEach(s => {
+                s.classList.remove('text-yellow-400');
+                s.classList.add('text-gray-200');
+            });
 
-                this.classList.add('text-yellow-400');
-                this.classList.remove('text-gray-200');
-    
-                let previousSiblings = Array.from(this.parentElement.children).filter(el => el.dataset.value < this.dataset.value)
-                previousSiblings.forEach(el => {
-                    el.classList.add('text-yellow-400');
-                    el.classList.remove('text-gray-200');
-                });
+            this.classList.add('text-yellow-400');
+            this.classList.remove('text-gray-200');
 
-                const rateInput = document.getElementById('rate');
-                rate.value = this.dataset.value;
-            })
-            
-        })
+            let previousSiblings = Array.from(this.parentElement.children).filter(el => el.dataset.value < this.dataset.value);
+            previousSiblings.forEach(el => {
+                el.classList.add('text-yellow-400');
+                el.classList.remove('text-gray-200');
+            });
 
-        function handleImageChange(e) {
-            const files = Array.from(e.target.files);
-            const imgContainer = document.getElementById('image-container');
+            document.getElementById('rate').value = this.dataset.value;
+        });
+    });
 
-            files.forEach(file => {
-                if(file && file.type.startsWith('image/')){
-                    const reader = new FileReader();
+    let selectedFiles = [];
 
-                    reader.onloadend = () => {
-                        const img = document.createElement('img');
-                        img.src = reader.result;
-                        img.alt = 'Review Image'
-                        img.classList.add('w-[10vw]','h-[10vw]', 'rounded-[1vw]', 'object-cover');
-                        
-                        imgContainer.appendChild(img);
-                    }
+    function handleImageChange(e) {
+        const files = Array.from(e.target.files);
+        const imgContainer = document.getElementById('image-container');
 
-                    reader.readAsDataURL(file);
-                } else {
-                    console.error('Invalid file type. Please upload an image.');
-                }
-            })
-        }
-    </script>
+        files.forEach(file => {
+            if (file && file.type.startsWith('image/')) {
+                selectedFiles.push(file);
+
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'relative w-[10vw] h-[10vw]';
+
+                    const img = document.createElement('img');
+                    img.src = reader.result;
+                    img.alt = 'Review Image';
+                    img.className = 'w-full h-full rounded-[1vw] object-cover';
+
+                    const deleteBtn = document.createElement('button');
+                    deleteBtn.innerText = '×';
+                    deleteBtn.className = 'cursor-pointer absolute top-[0.5vw] right-[0.5vw] bg-red-500 text-white w-[1.5vw] h-[1.5vw] rounded-full text-[1vw] flex items-center justify-center';
+                    deleteBtn.onclick = () => {
+                        wrapper.remove();
+                        selectedFiles = selectedFiles.filter(f => f !== file);
+                    };
+
+                    wrapper.appendChild(img);
+                    wrapper.appendChild(deleteBtn);
+                    imgContainer.appendChild(wrapper);
+                };
+                reader.readAsDataURL(file);
+            } else {
+                console.error('Invalid file type. Please upload an image.');
+            }
+        });
+
+        // Clear the input so the same file can be re-uploaded if needed
+        e.target.value = '';
+    }
+</script>
+
 </x-layout>
