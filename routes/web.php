@@ -65,6 +65,7 @@ Route::controller(UserController::class)->group(function (){
 });
 
 // Tambahkan rute untuk sub-halaman profil
+Route::get('/profile', [ProfileController::class, 'showProfile'])->name('profile');
 Route::get('/profile/addresses', [ProfileController::class, 'showAddresses'])->name('addresses');
 Route::get('/profile/orders', [ProfileController::class, 'showOrders'])->name('orders');
 Route::get('/profile/reviews', [ProfileController::class, 'showReviews'])->name('reviews');
