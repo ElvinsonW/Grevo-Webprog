@@ -4,7 +4,7 @@
 
         <form action="/review" method="POST" enctype="multipart/form-data" class="flex flex-col gap-[2vw]">
             @csrf
-            
+
             <div class="flex flex-col gap-[1vw]">
                 <label for="rate" class="text-[1.2vw] font-bold">Rate</label>
                 <input type="text" name="rate" id="rate" class="hidden" value="{{ old('rate') }}">
@@ -15,7 +15,7 @@
                     <i class="fa-solid fa-star text-gray-200 text-[2vw] star" data-value="4"></i>
                     <i class="fa-solid fa-star text-gray-200 text-[2vw] star" data-value="5"></i>
                 </div>
-                @error('name')
+                @error('rate')
                     <p id="filled_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400">
                         {{ $message }}
                     </p>
@@ -24,7 +24,8 @@
 
             <div class="flex flex-col gap-[1vw]">
                 <label for="description" class="text-[1.2vw] font-bold">Description</label>
-                <textarea name="description" id="desc" rows="3" class="rounded-[0.5vw] p-[1vw] focus:outline-none border text-[1.2vw]"></textarea>
+                <textarea name="description" id="desc" rows="3"
+                    class="rounded-[0.5vw] p-[1vw] focus:outline-none border text-[1.2vw]"></textarea>
                 @error('description')
                     <p id="filled_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400">
                         {{ $message }}
@@ -34,8 +35,11 @@
 
             <div class="flex flex-col gap-[1vw]">
                 <label for="images" class="text-[1.2vw] font-bold">Review Image</label>
-                <label for="images" class="cursor-pointer w-fit px-[2vw] py-[0.75vw] rounded-[0.5vw] bg-green-600 text-[1.1vw] text-white font-bold mb-[0.5vw]">Add Review Image +</label>
-                <input id="images" name="images[]" type="file" class="hidden mb-[1vw]" multiple onchange="handleImageChange(event)" value="{{ old('images[]') }}"/>
+                <label for="images"
+                    class="cursor-pointer w-fit px-[2vw] py-[0.75vw] rounded-[0.5vw] bg-green-2 text-[1.1vw] text-white font-bold mb-[0.5vw]">Add
+                    Review Image +</label>
+                <input id="images" name="images[]" type="file" class=" mb-[1vw]" multiple
+                    onchange="handleImageChange()" value="{{ old('images[]') }}" />
                 <div class="flex flex-wrap gap-[1vw]" id="image-container"></div>
                 @error('image')
                     <p id="filled_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400">
@@ -44,74 +48,80 @@
                 @enderror
             </div>
 
-            <button class="cursor-pointer w-fit px-[2vw] py-[0.5vw] rounded-[0.5vw] bg-green-600 text-white font-bold">
+            <button class="cursor-pointer w-fit px-[2vw] py-[0.5vw] rounded-[0.5vw] bg-orange-1 text-white font-bold">
                 Submit
             </button>
         </form>
     </div>
 
     <script>
-    document.querySelectorAll(".star").forEach(star => {
-        star.addEventListener('click', function () {
-            document.querySelectorAll('.star').forEach(s => {
-                s.classList.remove('text-yellow-400');
-                s.classList.add('text-gray-200');
+        document.querySelectorAll(".star").forEach(star => {
+            star.addEventListener('click', function() {
+                document.querySelectorAll('.star').forEach(s => {
+                    s.classList.remove('text-yellow-400');
+                    s.classList.add('text-gray-200');
+                });
+
+                this.classList.add('text-yellow-400');
+                this.classList.remove('text-gray-200');
+
+                let previousSiblings = Array.from(this.parentElement.children).filter(el => el.dataset
+                    .value < this.dataset.value);
+                previousSiblings.forEach(el => {
+                    el.classList.add('text-yellow-400');
+                    el.classList.remove('text-gray-200');
+                });
+
+                document.getElementById('rate').value = this.dataset.value;
             });
-
-            this.classList.add('text-yellow-400');
-            this.classList.remove('text-gray-200');
-
-            let previousSiblings = Array.from(this.parentElement.children).filter(el => el.dataset.value < this.dataset.value);
-            previousSiblings.forEach(el => {
-                el.classList.add('text-yellow-400');
-                el.classList.remove('text-gray-200');
-            });
-
-            document.getElementById('rate').value = this.dataset.value;
         });
-    });
 
-    let selectedFiles = [];
+        let selectedFiles = [];
 
-    function handleImageChange(e) {
-        const files = Array.from(e.target.files);
-        const imgContainer = document.getElementById('image-container');
+        function handleImageChange() {
+            const fileInput = document.getElementById('images');
+            const files = Array.from(fileInput.files);
+            const imgContainer = document.getElementById('image-container');
 
-        files.forEach(file => {
-            if (file && file.type.startsWith('image/')) {
-                selectedFiles.push(file);
+            files.forEach((file) => {
+                if (file && file.type.startsWith('image/')) {
+                    selectedFiles.push(file);
 
-                const reader = new FileReader();
-                reader.onloadend = () => {
-                    const wrapper = document.createElement('div');
-                    wrapper.className = 'relative w-[10vw] h-[10vw]';
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        const wrapper = document.createElement('div');
+                        wrapper.className = 'relative w-[10vw] h-[10vw]';
 
-                    const img = document.createElement('img');
-                    img.src = reader.result;
-                    img.alt = 'Review Image';
-                    img.className = 'w-full h-full rounded-[1vw] object-cover';
+                        const img = document.createElement('img');
+                        img.src = e.target.result;
+                        img.alt = 'Review Image';
+                        img.className = 'w-full h-full rounded-[1vw] object-cover';
 
-                    const deleteBtn = document.createElement('button');
-                    deleteBtn.innerText = '×';
-                    deleteBtn.className = 'cursor-pointer absolute top-[0.5vw] right-[0.5vw] bg-red-500 text-white w-[1.5vw] h-[1.5vw] rounded-full text-[1vw] flex items-center justify-center';
-                    deleteBtn.onclick = () => {
-                        wrapper.remove();
-                        selectedFiles = selectedFiles.filter(f => f !== file);
+                        const deleteBtn = document.createElement('button');
+                        deleteBtn.innerText = '×';
+                        deleteBtn.className =
+                            'cursor-pointer absolute top-[0.5vw] right-[0.5vw] bg-red-500 text-white w-[1.5vw] h-[1.5vw] rounded-full text-[1vw] flex items-center justify-center';
+                        deleteBtn.onclick = () => {
+                            const index = selectedFiles.findIndex((selectedFile) => selectedFile.name ===
+                                file.name);
+                            if (index > -1) {
+                                selectedFiles.splice(index, 1);
+                            }
+
+                            wrapper.remove();
+                        };
+
+
+                        wrapper.appendChild(img);
+                        wrapper.appendChild(deleteBtn);
+                        imgContainer.appendChild(wrapper);
                     };
-
-                    wrapper.appendChild(img);
-                    wrapper.appendChild(deleteBtn);
-                    imgContainer.appendChild(wrapper);
-                };
-                reader.readAsDataURL(file);
-            } else {
-                console.error('Invalid file type. Please upload an image.');
-            }
-        });
-
-        // Clear the input so the same file can be re-uploaded if needed
-        e.target.value = '';
-    }
-</script>
+                    reader.readAsDataURL(file);
+                } else {
+                    console.error('Invalid file type. Please upload an image.');
+                }
+            });
+        }
+    </script>
 
 </x-layout>
