@@ -87,7 +87,7 @@ Route::get('/profile/orders', [ProfileController::class, 'showOrders'])->name('o
 Route::get('/profile/reviews', [ProfileController::class, 'showReviews'])->name('reviews');
 
 //route untuk Tree Catalogue
-Route::get('/tree', [TreeController::class, 'show'])->name('tree.index2');
+Route::get('/trees', [TreeController::class, 'show'])->name('tree.index2');
 
 // --- Other Application Routes ---
 Route::get('/about', function() {
