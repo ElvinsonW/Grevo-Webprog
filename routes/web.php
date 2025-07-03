@@ -18,9 +18,6 @@ use App\Http\Controllers\CarbonCalculatorController;
 use App\Http\Controllers\Admin\OrganizationController;
 use App\Http\Controllers\Admin\TreeController;
 use App\Http\Controllers\Admin\BatchController;
-use App\Http\Middleware\CheckAdminRole;
-use App\Http\Middleware\CheckGuest;
-use App\Http\Middleware\CheckUserRole;
 use App\Models\Cart; // Unused, consider removing if not directly used in routes
 use App\Models\Product; // Unused, consider removing if not directly used in routes
 use App\Models\ProductCategory; // Unused, consider removing if not directly used in routes
@@ -29,12 +26,13 @@ use App\Models\Organization; // Unused, consider removing if not directly used i
 use Illuminate\Http\Request; // Unused, consider removing if not directly used in routes
 use Illuminate\Support\Facades\Route;
 
+
+// Option B: Redirect to signin (comment out Option A if using this)
 Route::get('/', function () {
     return view('homepage');
 });
 
-Route::get('/tree', [TreeCatalogueController::class, 'index'])->name('tree_catalogue');
-
+// Define the actual homepage if '/' is a redirect
 Route::get('/homepage', function () {
     return view('homepage');
 })->name('homepage');
@@ -83,6 +81,9 @@ Route::middleware(CheckGuest::class)->group(function(){
 Route::get('/profile/addresses', [ProfileController::class, 'showAddresses'])->name('addresses');
 Route::get('/profile/orders', [ProfileController::class, 'showOrders'])->name('orders');
 Route::get('/profile/reviews', [ProfileController::class, 'showReviews'])->name('reviews');
+
+//route untuk Tree Catalogue
+Route::get('/tree', [TreeController::class, 'show'])->name('tree.index2');
 
 // --- Other Application Routes ---
 Route::get('/about', function() {

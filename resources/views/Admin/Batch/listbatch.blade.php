@@ -36,7 +36,10 @@
                             <td class="px-4 py-3">{{ $batch->organization->organization_name ?? 'N/A' }}</td>
                             <td class="px-4 py-3">{{ $batch->dateofactivity }}</td>
                             <td class="px-4 py-3">{{ $batch->treesplanted }}</td>
-                            <td class="px-4 py-3">{{ $batch->batchdate }}</td>
+                            <td class="px-4 py-3">
+                                    {{ \Carbon\Carbon::parse($batch->startdate)->format('d F Y') }} - 
+                                    {{ \Carbon\Carbon::parse($batch->enddate)->format('d F Y') }}
+                            </td>
                         </tr>
                     @endforeach
 
