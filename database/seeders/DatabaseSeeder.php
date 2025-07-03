@@ -68,5 +68,11 @@ class DatabaseSeeder extends Seeder
                 
             }
         );
+
+        $this->call([
+            OrderSeeder::class,
+            OrderItemSeeder::class,
+            StatusHistorySeeder::class
+        ]);
     }
 }

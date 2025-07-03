@@ -42,7 +42,14 @@ class ProductController extends Controller
      */
     public function show(string $slug)
     {
-       
+        $product = Product::where('slug', $slug)->firstOrFail();
+        return view('User.product.product-detail', [
+            'product' => $product,
+            'relatedProducts' => Product::where('category_id', $product->category_id)
+                ->where('id', '!=', $product->id)
+                ->take(4)
+                ->get()
+        ]); 
     }
 
     /**

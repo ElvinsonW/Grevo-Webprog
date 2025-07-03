@@ -25,7 +25,7 @@ use App\Models\Review; // Unused, consider removing if not directly used in rout
 use App\Models\Organization; // Unused, consider removing if not directly used in routes
 use Illuminate\Http\Request; // Unused, consider removing if not directly used in routes
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\OrderController; // Import OrderController for order-related routes
 
 // Option B: Redirect to signin (comment out Option A if using this)
 Route::get('/', function () {
@@ -126,3 +126,6 @@ Route::controller(BatchController::class)->group(function(){
     Route::get('/listbatch', 'index')->name('batch.listbatch');
     Route::delete('/batches/{batchid}', 'destroy')->name('batch.destroy');
 });
+
+
+Route::get('/order', [OrderController::class, 'show'])->name('order.show');
