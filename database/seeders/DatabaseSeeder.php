@@ -72,7 +72,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             OrderSeeder::class,
             OrderItemSeeder::class,
-            StatusHistorySeeder::class
+            StatusHistorySeeder::class,
+            AddressSeeder::class
         ]);
     }
 }

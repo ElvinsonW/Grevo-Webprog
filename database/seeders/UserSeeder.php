@@ -2,11 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
+use App\Models\User; // Pastikan model User di-import
 
 class UserSeeder extends Seeder
 {
@@ -15,6 +13,8 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        // Tambahkan baris ini untuk menghapus data lama sebelum seeding
+
         User::create([
             'name' => 'Elvinson Wijaya',
             'username' => 'elvinson',
@@ -24,12 +24,9 @@ class UserSeeder extends Seeder
             'gender' => 'male',
             'image' => 'elvinson.jpg',
             'role' => 'user',
-            'password' => Hash::make('password'),
-            'remember_token' => Str::random(10),
+            'password' => bcrypt('password'), // Gunakan bcrypt untuk password
         ]);
 
-        User::factory(5)->create([
-            'image' => 'profile-image/elvinson.jpg'
-        ]);
+        $this->command->info('Users seeded successfully!');
     }
 }
