@@ -18,6 +18,9 @@ use App\Http\Controllers\CarbonCalculatorController;
 use App\Http\Controllers\Admin\OrganizationController;
 use App\Http\Controllers\Admin\TreeController;
 use App\Http\Controllers\Admin\BatchController;
+use App\Http\Middleware\CheckAdminRole;
+use App\Http\Middleware\CheckGuest;
+use App\Http\Middleware\CheckUserRole;
 use App\Models\Cart; // Unused, consider removing if not directly used in routes
 use App\Models\Product; // Unused, consider removing if not directly used in routes
 use App\Models\ProductCategory; // Unused, consider removing if not directly used in routes
