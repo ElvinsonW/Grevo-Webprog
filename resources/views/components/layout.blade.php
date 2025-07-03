@@ -22,7 +22,7 @@
         rel="stylesheet">
 </head>
 
-<body class="bg-yellow-2">
+<body class="bg-yellow-2 font-quicksand">
     <x-navbar></x-navbar>
     {{ $slot }}
 

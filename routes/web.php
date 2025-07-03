@@ -76,6 +76,7 @@ Route::middleware(CheckGuest::class)->group(function(){
         Route::get("/register","registerForm")->name("register");
         Route::post("/login","login")->name("login.submit");
         Route::post("/register","register")->name("register.submit");
+        Route::post("logout", "logout")->name("logout");
     });
 });
 
@@ -154,6 +155,6 @@ Route::controller(BatchController::class)->group(function(){
 Route::get('/addproduct', function () {
     return view('Admin.Product.addproduct');
 })->name('products.create');
-Route::get('/listproducts', [ProductController::class, 'show'])->name('products.list');
+Route::get('/listproducts', [ProductController::class, 'showlist'])->name('products.list');
 Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
 Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');

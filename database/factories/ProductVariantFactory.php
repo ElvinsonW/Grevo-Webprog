@@ -19,7 +19,7 @@ class ProductVariantFactory extends Factory
     {
         return [
             'product_id' => Product::factory(),
-            'sku' => fake()->unique()->word(),
+            'sku' => strtoupper(fake()->unique()->lexify('SKU-?????')),
             'price' => fake()->numberBetween(1,10) * 10000,
             'stock' => fake()->numberBetween(1, 100)
         ];

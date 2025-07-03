@@ -12,7 +12,7 @@
             <p></p>
         </div>
         
-        <form>
+        <form class="mb-[10vw]">
             @foreach ($cartProduct as $cart)
                 <div wire:key="cart-item-{{ $cart->id }}" class="grid py-[1vw] items-center text-[1.2vw] font-bold font-overpass text-black gap-[1vw] border-0 border-b-1"
                     style="grid-template-columns: 0.5% 3.5% 30% 15% 20% 18% 5%">

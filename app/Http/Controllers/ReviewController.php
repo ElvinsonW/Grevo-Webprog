@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use App\Models\Review;
 use App\Models\ReviewImage;
 use Illuminate\Http\Request;
@@ -26,6 +27,7 @@ class ReviewController extends Controller
             'avgRate' => round(Review::avg('rate'),1)
         ]);
     }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -82,7 +84,18 @@ class ReviewController extends Controller
      */
     public function show(string $slug)
     {
-        
+        $product = Product::where("slug", $slug)->firstOrFail();
+        $reviews = Review::where("product_id", $product->id)->get();
+        $totalReview = $reviews->count();
+                
+        if ($totalReview > 1000){
+            $totalReview = (string)round($totalReview / 1000, 1) . 'k';
+        }
+        return view('User.review.index-review', [
+            'reviews' => $reviews,
+            'totalReview' => $totalReview,
+            'avgRate' => round($reviews->avg('rate'),1)
+        ]);
     }
 
     /**

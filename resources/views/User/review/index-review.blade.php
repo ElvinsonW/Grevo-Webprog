@@ -7,7 +7,7 @@
                 <h3 class="text-[2.5vw] font-bold">
                     {{ $totalReview }}
                 </h3>
-                <p class="text-[1vw] font-bold text-gray-400">Growth in review this year</p>
+                <p class="text-[1vw] font-bold text-gray-400">Product : {{ $reviews->first()->product->name }}</p>
             </div>
 
             <div class="h-[9vw] flex flex-col justify-center border-0 border-r-2 border-r-gray-300 px-[3vw]">
@@ -32,66 +32,66 @@
                         @endfor
                     </div>
                 </div>
-                <p class="text-[1vw] font-bold text-gray-400">Growth in review this year</p>
+                <p class="text-[1vw] font-bold text-gray-400">Product : {{ $reviews->first()->product->name }}</p>
             </div>
 
             <div class="flex flex-col px-[3vw]">
                 <div class="flex items-center gap-[1vw]">
-                    <div class="flex gap-[0.25vw] items-center">
+                    <div class="flex gap-[0.25vw] items-center w-[2vw]">
                         <i class="fa-solid fa-star text-[1vw] text-yellow-400"></i>
                         <p class="font-bold text-[1.1vw]">5</p>
                     </div>
 
                     <div class="w-[15vw] h-[0.9vw] rounded-[10vw] bg-gray-300">
-                        <div class="w-[30%] h-full rounded-[10vw] bg-green-600"></div>
+                        <div class="w-[30%] h-full rounded-[10vw] bg-green-2"></div>
                     </div>
 
                     <div class="font-bold text-[1.1vw]">9k</div>
                 </div>
                 <div class="flex items-center gap-[1vw]">
-                    <div class="flex gap-[0.25vw] items-center">
+                    <div class="flex gap-[0.25vw] items-center w-[2vw]">
                         <i class="fa-solid fa-star text-[1vw] text-yellow-400"></i>
                         <p class="font-bold text-[1.1vw]">4</p>
                     </div>
 
                     <div class="w-[15vw] h-[0.9vw] rounded-[10vw] bg-gray-300">
-                        <div class="w-[60%] h-full rounded-[10vw] bg-green-600"></div>
+                        <div class="w-[60%] h-full rounded-[10vw] bg-green-2"></div>
                     </div>
 
                     <div class="font-bold text-[1.1vw]">9k</div>
                 </div>
                 <div class="flex items-center gap-[1vw]">
-                    <div class="flex gap-[0.25vw] items-center">
+                    <div class="flex gap-[0.25vw] items-center w-[2vw]">
                         <i class="fa-solid fa-star text-[1vw] text-yellow-400"></i>
-                        <p class="font-bold text-[1.1vw]">5</p>
+                        <p class="font-bold text-[1.1vw]">3</p>
                     </div>
 
                     <div class="w-[15vw] h-[0.9vw] rounded-[10vw] bg-gray-300">
-                        <div class="w-[10%] h-full rounded-[10vw] bg-green-600"></div>
+                        <div class="w-[10%] h-full rounded-[10vw] bg-green-2"></div>
                     </div>
 
                     <div class="font-bold text-[1.1vw]">9k</div>
                 </div>
                 <div class="flex items-center gap-[1vw]">
-                    <div class="flex gap-[0.25vw] items-center">
+                    <div class="flex gap-[0.25vw] items-center w-[2vw]">
                         <i class="fa-solid fa-star text-[1vw] text-yellow-400"></i>
-                        <p class="font-bold text-[1.1vw]">5</p>
+                        <p class="font-bold text-[1.1vw]">2</p>
                     </div>
 
                     <div class="w-[15vw] h-[0.9vw] rounded-[10vw] bg-gray-300">
-                        <div class="w-[10%] h-full rounded-[10vw] bg-green-600"></div>
+                        <div class="w-[10%] h-full rounded-[10vw] bg-green-2"></div>
                     </div>
 
                     <div class="font-bold text-[1.1vw]">9k</div>
                 </div>
                 <div class="flex items-center gap-[1vw]">
-                    <div class="flex gap-[0.25vw] items-center">
+                    <div class="flex gap-[0.25vw] items-center w-[2vw]">
                         <i class="fa-solid fa-star text-[1vw] text-yellow-400"></i>
-                        <p class="font-bold text-[1.1vw]">5</p>
+                        <p class="font-bold text-[1.1vw]">1</p>
                     </div>
 
                     <div class="w-[15vw] h-[0.9vw] rounded-[10vw] bg-gray-300">
-                        <div class="w-[10%] h-full rounded-[10vw] bg-green-600"></div>
+                        <div class="w-[10%] h-full rounded-[10vw] bg-green-2"></div>
                     </div>
 
                     <div class="font-bold text-[1.1vw]">9k</div>

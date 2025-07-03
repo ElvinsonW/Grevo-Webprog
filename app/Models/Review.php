@@ -11,7 +11,7 @@ class Review extends Model
 {
     use HasFactory;
 
-    protected $fillable = ["user_id", "rate", "description"];
+    protected $fillable = ["user_id", "product_id", "rate", "description"];
     protected $with = ["user"];
 
     public function user(): BelongsTo {
@@ -20,5 +20,9 @@ class Review extends Model
 
     public function review_images(): HasMany {
         return $this->hasMany(ReviewImage::class, "review_id");
+    }
+
+    public function product(): BelongsTo {
+        return $this->belongsTo(Product::class, "product_id");
     }
 }

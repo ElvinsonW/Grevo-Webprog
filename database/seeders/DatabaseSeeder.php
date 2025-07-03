@@ -21,31 +21,27 @@ class DatabaseSeeder extends Seeder
     /**
      * Seed the application's database.
      */
-    public function run(): void 
+    public function run(): void
     {
-        $this->call([UserSeeder::class, ProductCategorySeeder::class, OrganizationSeeder::class, TreeSeeder::class, BatchSeeder::class]);
-
-        Review::factory(10)->recycle(
-            User::all()
-        )->create()->each(
-            function($review){
-                ReviewImage::factory(rand(1,3))->create([
-                    'review_id' => $review->id,
-                    'source' => 'review-image/elvinson.jpg'
-                ]);
-            }
-        );
+        $this->call([
+            UserSeeder::class,
+            ProductCategorySeeder::class,
+            // ProductSeeder::class,
+            OrganizationSeeder::class,
+            TreeSeeder::class,
+            BatchSeeder::class
+        ]);
 
         Product::factory(30)->recycle(
             ProductCategory::all()
         )->create()->each(
-            function ($product){
-                ProductImage::factory(rand(1,3))->create([
+            function ($product) {
+                ProductImage::factory(rand(1, 3))->create([
                     'product_id' => $product->id,
                     'image' => 'product-image/elvinson.jpg'
                 ]);
 
-                ProductVariant::factory(rand(1,3))->create([
+                ProductVariant::factory(1)->create([
                     'product_id' => $product->id
                 ])->each(
                     function ($variant) {
@@ -65,9 +61,23 @@ class DatabaseSeeder extends Seeder
                     }
                 );
 
-                
+
+                Review::factory(10)->recycle([
+                    User::all()
+                ])->create([
+                    'product_id' => $product->id
+                ])->each(
+                    function ($review) {
+                        ReviewImage::factory(rand(1, 3))->create([
+                            'review_id' => $review->id,
+                            'source' => 'review-image/elvinson.jpg'
+                        ]);
+                    }
+                );
             }
         );
+
+
 
         $this->call([
             OrderSeeder::class,
