@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class CheckUserRole
+class CheckGuest
 {
     /**
      * Handle an incoming request.
@@ -16,8 +16,8 @@ class CheckUserRole
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(!Auth::check()){
-            return redirect('/')->with('roleError', 'Only User Can Do This Actvity');
+        if(Auth::check()){
+            return redirect("/")->with("roleError", "Only Guest can access this page!");
         }
         return $next($request);
     }
