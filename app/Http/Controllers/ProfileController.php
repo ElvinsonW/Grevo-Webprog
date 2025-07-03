@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\Models\User;
 
 class ProfileController extends Controller
 {
@@ -41,9 +42,9 @@ class ProfileController extends Controller
      */
     public function showOrders()
     {
-        $user = Auth::user();
+        $user = User::find(1);
         // Asumsi path view orders, bisa jadi User/orders/index atau User/edit-profile/orders
-        return view('User.orders.index', compact('user'));
+        return view('User.orders.history', compact('user'));
     }
 
     /**
