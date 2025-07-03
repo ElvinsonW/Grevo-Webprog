@@ -17,7 +17,8 @@ class Batch extends Model
         'organization_id',
         'dateofactivity',
         'treesplanted',
-        'batchdate',
+        'startdate',
+        'enddate',
         'batchproof'
     ];
 }

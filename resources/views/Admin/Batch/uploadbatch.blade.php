@@ -58,9 +58,16 @@
 
                     <!-- Batch Date -->
                     <div>
-                        <p>Batch Date</p>
-                        <input type="text" name="batchdate" class="border w-full rounded-md p-1" value="{{ old('batchdate') }}" required />
-                        @error('batchdate')
+                        <p>Start Date</p>
+                        <input type="date" name="startdate" class="border w-full rounded-md p-1" value="{{ old('startdate') }}" required />
+                        @error('startdate')
+                            <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    <div>
+                        <p>End Date</p>
+                        <input type="date" name="enddate" class="border w-full rounded-md p-1" value="{{ old('enddate') }}" required />
+                        @error('enddate')
                             <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                         @enderror
                     </div>
