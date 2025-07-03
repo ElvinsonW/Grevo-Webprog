@@ -43,7 +43,6 @@
                         <th class="px-4 py-3">Organization Name</th>
                         <th class="px-4 py-3">Organization ID</th>
                         <th class="px-4 py-3">Address</th>
-                        <th class="px-4 py-3">Types of Trees</th>
                         <th class="px-4 py-3">Contact Info</th>
                         <th class="px-4 py-3">Status</th>
                         <th class="px-4 py-3">Action</th>
@@ -62,7 +61,6 @@
                             </td>
                             <td class="px-4 py-3">#{{ $org->organization_id }}</td>
                             <td class="px-4 py-3">{{ $org->operational_address }}</td>
-                            <td class="px-4 py-3">{{ $org->types_of_tree_planted }}</td>
                             <td class="px-4 py-3">{{ $org->official_contact_info }}</td>
                             <td class="px-4 py-3">
                                 @if(strtolower($org->organization_status) == 'active')

@@ -42,7 +42,6 @@ class OrganizationController extends Controller
             'coverage_region'=>'required|string',
             'official_contact_info'=>'required|string',
             'organization_logo'=> 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'types_of_tree_planted' => 'required|string',
             'existing_partner_or_sponsor' =>'nullable|string',
             'organization_status' =>'required|string'
         ]);
@@ -80,7 +79,6 @@ class OrganizationController extends Controller
             'coverage_region'=>'required|string',
             'official_contact_info'=>'required|string',
             'organization_logo'=> 'required|image|mimes:jpeg,png,jpg|max:2048',
-            'types_of_tree_planted' => 'required|string',
             'existing_partner_or_sponsor' =>'nullable|string',
             'organization_status' =>'required|string'
         ]);

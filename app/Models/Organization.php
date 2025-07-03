@@ -27,7 +27,6 @@ class Organization extends Model
         'coverage_region',
         'official_contact_info',
         'organization_logo',
-        'types_of_tree_planted',
         'existing_partner_or_sponsor',
         'organization_status'
     ];
