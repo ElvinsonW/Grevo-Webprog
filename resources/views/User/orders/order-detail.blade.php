@@ -14,7 +14,7 @@
                     <!-- top  -->
                     <div class="flex items-center justify-between my-4">
                         <!-- back -->
-                        <a href="{{ url()->previous() }}" class="btn flex flex-row gap-5">
+                        <a href="javascript:history.back()" class="btn flex flex-row gap-5">
                             <i class="fa-solid fa-chevron-down text-[1vw] transition-transform duration-400 rotate-90 text-[#7B8C7F]" id="dropdown-icon"></i>
                             <h1 class="font-bold text-lg text-[#7B8C7F]">BACK</h1>
                         </a>
@@ -277,13 +277,13 @@
                     <!-- products -->
                     <div class="my-8">
                         @foreach ($order->items as $item)
-                            <a href="">
+                            <a href="{{ route('products.show', $item->variant->product->slug) }}">
                                 <div class="flex items flex-col mx-10">
                                     <div class="flex items-center flex-row mx-10">
                                         <img src="{{ asset('storage/' . $item->img) }}" alt="{{ $item->name }}" class="border w-25 h-25 rounded-xs">
                                         <div class="ml-4 flex-1">
                                             <h2 class="text-[#3E6137] font-bold text-xl">{{ $item->name }}</h2>
-                                            <p class="text-[#7B8C7F] text-sm">Variant: {{ $item->variant }}</p>
+                                            <p class="text-[#7B8C7F] text-sm">Variant: {{ $item->varname }}</p>
                                             <p class="text-[#7B8C7F] text-sm">{{ $item->quantity }}x</p>
                                         </div>
                                         <p class="text-[#7B8C7F] text-md font-bold">Rp {{ number_format($item->price*$item->quantity, 0, ',', '.') }}</p>

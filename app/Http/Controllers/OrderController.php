@@ -13,7 +13,7 @@ class OrderController extends Controller
     public function show($order_id)
     {
         $user = Auth::user();
-        $order = Order::with(['items', 'statusHistories' => fn($q) => $q->orderBy('changed_at', 'desc')])
+        $order = Order::with(['items.variant.product', 'statusHistories' => fn($q) => $q->orderBy('changed_at', 'desc')])
             ->where('order_id', $order_id)
             ->where('user_id', $user->id)
             ->firstOrFail();

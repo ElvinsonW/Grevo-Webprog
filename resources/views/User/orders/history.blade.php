@@ -105,7 +105,7 @@
                                             <img src="{{ asset('storage/' . $item->img) }}" alt="{{ $item->name }}" class="w-25 h-25 rounded-xs">
                                             <div class="ml-4 flex-1">
                                                 <h2 class="text-[#3E6137] font-bold text-lg">{{ $item->name }}</h2>
-                                                <p class="text-[#7B8C7F] text-sm">Variant: {{ $item->variant }}</p>
+                                                <p class="text-[#7B8C7F] text-sm">Variant: {{ $item->varname }}</p>
                                                 <p class="text-[#7B8C7F] text-sm">{{ $item->quantity }}x</p>
                                             </div>
                                             <p class="text-[#7B8C7F] text-md font-bold">Rp {{ number_format($item->price*$item->quantity, 0, ',', '.') }}</p>

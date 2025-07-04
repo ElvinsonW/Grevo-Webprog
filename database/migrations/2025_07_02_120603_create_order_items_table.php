@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('variant_id')->references('id')->on('product_variants')->constrained()->onDelete('cascade');
             $table->string('name');
             $table->string('img')->nullable();
-            $table->string('variant');
+            $table->string('varname');
             $table->integer('quantity');
             $table->integer('price'); // harga satuan saat order
             $table->timestamps();
