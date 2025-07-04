@@ -16,7 +16,7 @@
                 <i class="fa-solid fa-magnifying-glass"></i>
             </button>
         </form>
-        <li class="list-none flex gap-[5vw] text-green-3 font-bold">
+        <li class="list-none flex gap-[5vw] text-green-3 text-[1.2vw] font-bold mt-[0.25vw]">
             <ul><a href="/">Home</a></ul>
             <ul><a href="/products">Products</a></ul>
             <ul><a href="/tree">Green Activity</a></ul>

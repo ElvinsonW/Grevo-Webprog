@@ -99,9 +99,7 @@ Route::get('/product-detail', function(){
     return view('User.product.product-detail');
 })->name('product-detail');
 
-Route::resource('/user', UserController::class); // This resource handles `/user`, `/user/{id}`, etc.
-// Make sure it doesn't conflict with your specific `/user/{username}` PUT route if not intended.
-// If UserController is only for admin managing users, then it's fine.
+Route::resource('/user', UserController::class); 
 
 Route::resource('/review', ReviewController::class);
 

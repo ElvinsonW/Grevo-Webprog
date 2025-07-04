@@ -22,7 +22,7 @@ class UserSeeder extends Seeder
             'phone_number' => '085263506419',
             'address' => 'RTB BCA',
             'gender' => 'male',
-            'image' => 'elvinson.jpg',
+            'image' => 'profile-image/elvinson.jpg',
             'role' => 'user',
             'password' => bcrypt('password'), // Gunakan bcrypt untuk password
         ]);

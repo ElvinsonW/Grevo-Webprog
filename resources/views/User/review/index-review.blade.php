@@ -36,6 +36,13 @@
             </div>
 
             <div class="flex flex-col px-[3vw]">
+                @php
+                    $fiveStar = $reviews->where('rate', 5)->count();
+                    $fourStar = $reviews->where('rate', 4)->count();
+                    $threeStar = $reviews->where('rate', 3)->count();
+                    $twoStar = $reviews->where('rate', 2)->count();
+                    $oneStar = $reviews->where('rate', 1)->count();
+                @endphp
                 <div class="flex items-center gap-[1vw]">
                     <div class="flex gap-[0.25vw] items-center w-[2vw]">
                         <i class="fa-solid fa-star text-[1vw] text-yellow-400"></i>
@@ -43,10 +50,10 @@
                     </div>
 
                     <div class="w-[15vw] h-[0.9vw] rounded-[10vw] bg-gray-300">
-                        <div class="w-[30%] h-full rounded-[10vw] bg-green-2"></div>
+                        <div class="h-full rounded-[10vw] bg-green-2" style="width: {{ $fiveStar/$totalReview * 100 }}%;"></div>
                     </div>
 
-                    <div class="font-bold text-[1.1vw]">9k</div>
+                    <div class="font-bold text-[1.1vw]">{{ $fiveStar }}</div>
                 </div>
                 <div class="flex items-center gap-[1vw]">
                     <div class="flex gap-[0.25vw] items-center w-[2vw]">
@@ -55,10 +62,10 @@
                     </div>
 
                     <div class="w-[15vw] h-[0.9vw] rounded-[10vw] bg-gray-300">
-                        <div class="w-[60%] h-full rounded-[10vw] bg-green-2"></div>
+                        <div class="h-full rounded-[10vw] bg-green-2" style="width: {{ $fourStar/$totalReview * 100 }}%;"></div>
                     </div>
 
-                    <div class="font-bold text-[1.1vw]">9k</div>
+                    <div class="font-bold text-[1.1vw]">{{ $fourStar }}</div>
                 </div>
                 <div class="flex items-center gap-[1vw]">
                     <div class="flex gap-[0.25vw] items-center w-[2vw]">
@@ -67,10 +74,10 @@
                     </div>
 
                     <div class="w-[15vw] h-[0.9vw] rounded-[10vw] bg-gray-300">
-                        <div class="w-[10%] h-full rounded-[10vw] bg-green-2"></div>
+                        <div class="h-full rounded-[10vw] bg-green-2" style="width: {{ $threeStar/$totalReview * 100 }}%;"></div>
                     </div>
 
-                    <div class="font-bold text-[1.1vw]">9k</div>
+                    <div class="font-bold text-[1.1vw]">{{ $threeStar }}</div>
                 </div>
                 <div class="flex items-center gap-[1vw]">
                     <div class="flex gap-[0.25vw] items-center w-[2vw]">
@@ -79,10 +86,10 @@
                     </div>
 
                     <div class="w-[15vw] h-[0.9vw] rounded-[10vw] bg-gray-300">
-                        <div class="w-[10%] h-full rounded-[10vw] bg-green-2"></div>
+                        <div class="h-full rounded-[10vw] bg-green-2" style="width: {{ $twoStar/$totalReview * 100 }}%;"></div>
                     </div>
 
-                    <div class="font-bold text-[1.1vw]">9k</div>
+                    <div class="font-bold text-[1.1vw]">{{ $twoStar }}</div>
                 </div>
                 <div class="flex items-center gap-[1vw]">
                     <div class="flex gap-[0.25vw] items-center w-[2vw]">
@@ -91,10 +98,10 @@
                     </div>
 
                     <div class="w-[15vw] h-[0.9vw] rounded-[10vw] bg-gray-300">
-                        <div class="w-[10%] h-full rounded-[10vw] bg-green-2"></div>
+                        <div class="h-full rounded-[10vw] bg-green-2" style="width: {{ $oneStar/$totalReview * 100 }}%;"></div>
                     </div>
 
-                    <div class="font-bold text-[1.1vw]">9k</div>
+                    <div class="font-bold text-[1.1vw]">{{ $oneStar }}</div>
                 </div>
 
             </div>
@@ -104,10 +111,10 @@
             @foreach ($reviews as $review)
                 <div class="flex gap-[5vw] px-[2vw] py-[1.5vw] border-0  border-b-1 border-gray-300">
                     <div class="flex gap-[1vw] w-[25%]">
-                        <img src="{{ asset('images/elvinson.jpg') }}" alt="elvinson" class="w-[4vw] h-[4vw] rounded-[0.5vw] object-cover">
+                        <img src="{{ asset('storage/' . $review->user->image) }}" alt="elvinson" class="w-[4vw] h-[4vw] rounded-[0.5vw] object-cover">
                         <div class="flex flex-col">
-                            <p class="text-[1.3vw] font-bold">Nicholas Defin</p>
-                            <p class="text-[0.9vw] font-bold text-orange-600">May 22, 2025</p>
+                            <p class="text-[1.3vw] font-bold">{{ $review->user->name }}</p>
+                            <p class="text-[0.9vw] font-bold text-orange-600">{{ $review->created_at->format("F d, Y") }}</p>
                         </div>
                     </div>
                 
@@ -131,7 +138,7 @@
                                 <img 
                                     src="{{ asset('storage/' . $review_image->source) }}" 
                                     alt="Review Image" 
-                                    class="w-[3.5vw] h-[3.5vw] rounded-[0.5vw] object-cover cursor-pointer hover:brightness-75"
+                                    class="thumbnail w-[3.5vw] h-[3.5vw] rounded-[0.5vw] object-cover cursor-pointer hover:brightness-75"
                                     onclick="showImage('{{ $review->id }}', '{{ asset('storage/' . $review_image->source) }}')">
                             @endforeach
                         </div>

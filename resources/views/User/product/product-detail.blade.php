@@ -7,34 +7,36 @@
                 <!-- all gambar -->
                 <div class="flex flex-row mb-4">
                     <!-- preview gambar di samping -->
-                    <div class="flex flex-col items-center mr-6">
-                        <button class="p-[0.75vw] bg-gray-200 rounded-full mb-2">▲</button>
+                    <div class="flex flex-col justify-center items-center mr-6">
+                        <!-- Tombol atas -->
+                        <button id="prevBtn" class="w-[2.5vw] h-[2.5vw] bg-green-2 text-white rounded-full mb-2 flex items-center justify-center">
+                            <i class="fa-solid fa-chevron-up"></i>
+                        </button>
 
-                        <div class="flex flex-col gap-3">
-                            <img src="{{ asset('images/home_green1.png') }}" class="w-[7vw] h-[7vw] object-cover rounded"
-                                style="box-shadow: 0 0 12.2px 0 rgba(0,0,0,0.06);">
-                            <img src="{{ asset('images/home_green1.png') }}"
-                                class="w-[7vw] h-[7vw] object-cover rounded"
-                                style="box-shadow: 0 0 12.2px 0 rgba(0,0,0,0.06);">
-                            <img src="{{ asset('images/home_green1.png') }}"
-                                class="w-[7vw] h-[7vw] object-cover rounded"
-                                style="box-shadow: 0 0 12.2px 0 rgba(0,0,0,0.06);">
+                        <!-- Container untuk N gambar -->
+                        @php
+                            $visibleProduct = min($product->product_images->count(), 3)
+                        @endphp
+                        <div class="w-[7vw] overflow-hidden rounded relative" style="box-shadow: 0 0 12.2px 0 rgba(0,0,0,0.06); height: calc(7vw * {{ $visibleProduct }} + {{ $visibleProduct }}vw - 1vw);">
+                            <div id="carouselImages" class="flex flex-col gap-[1vw] transition-transform duration-500 ease-in-out">
+                                <img src="{{ asset('images/home_green1.png') }}" class="preview-image w-[7vw] h-[7vw] object-cover">
+                                <img src="{{ asset('images/home_green2.png') }}" class="preview-image w-[7vw] h-[7vw] object-cover">
+                                <img src="{{ asset('images/home_katalog1.png') }}" class="preview-image w-[7vw] h-[7vw] object-cover">
+                                <img src="{{ asset('images/home_katalog2.png') }}" class="preview-image w-[7vw] h-[7vw] object-cover">
+                                <img src="{{ asset('images/home_katalog2.png') }}" class="preview-image w-[7vw] h-[7vw] object-cover">
+                                <img src="{{ asset('images/home_katalog3.png') }}" class="preview-image w-[7vw] h-[7vw] object-cover">
+                            </div>
                         </div>
 
-                        <button class="p-[0.75vw] bg-gray-200 rounded-full mt-2">▼</button>
+                        <!-- Tombol bawah -->
+                        <button id="nextBtn" class="w-[2.5vw] h-[2.5vw] bg-green-2 text-white rounded-full mt-2 flex items-center justify-center">
+                            <i class="fa-solid fa-angle-down"></i>
+                        </button>
                     </div>
 
                     <!-- main gambar -->
                     <div class="flex items-center justify-center w-[35vw] h-[35vw] relative">
-                        <!-- slider indicator di atas gambar -->
-                        <div class="flex space-x-2 absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10">
-                            <span class="w-2 h-2 bg-gray-300 rounded-full"></span>
-                            <span class="w-2 h-2 bg-gray-300 rounded-full"></span>
-                            <span class="w-2 h-2 bg-gray-300 rounded-full"></span>
-                            <span class="w-2 h-2 bg-gray-300 rounded-full"></span>
-                            <span class="w-2 h-2 bg-gray-300 rounded-full"></span>
-                        </div>
-                        <img src="{{ asset('images/home_green2.png') }}" class="rounded-lg w-full h-full object-cover"
+                        <img src="{{ asset('images/home_green2.png') }}" id="product-big-image" class="rounded-lg w-full h-full object-cover"
                             style="background-size: cover; background-position: center; box-shadow: 0 0 12.2px 0 rgba(0,0,0,0.06);">
                     </div>
                 </div>
@@ -54,12 +56,12 @@
                     <!-- nama+share -->
                     <div class="flex flex-row items-center justify-between">
                         <!-- nama produk -->
-                        <h1 class="font-bold text-[#3E6137] text-[20px]">{{ $product->name }}</h1>
+                        <h1 class="font-bold text-[#3E6137] text-[1.8vw]">{{ $product->name }}</h1>
                         <!-- share button -->
                         <div class="relative">
-                            <button onclick="copyLink()" class="flex items-center gap-2">
+                            <button onclick="copyLink()" class="flex items-center gap-2 cursor-pointer">
                                 <img src="{{ asset('images/share-button.svg') }}" alt="">
-                                <span>Share</span>
+                                <span class="text-[1vw]">Share</span>
                             </button>
 
                             <p id="copyStatus"
@@ -70,10 +72,10 @@
 
                     <div class="flex flex-row items-center justify-between mb-[8px]">
                         <!-- harga produk -->
-                        <p class="text-red-600 text-lg font-bold mb-2">Rp
+                        <p class="text-red-600 text-lg font-bold mb-2 text-[1.2vw]">Rp
                             {{ number_format($product->product_variants->first()->price) }}</p>
                         <!-- stars -->
-                        <div class="flex items-center space-x-3 text-sm text-gray-600 mb-2">
+                        <div class="flex items-center space-x-3 text-[1vw] text-gray-600 mb-2">
                             <span class="font-bold text-green-2">⭐ {{ round($product->reviews_avg_rate, 1) }}</span>
                             <span style="color: #D2D2B0; font-size: 20px;">|</span>
                             <span>
@@ -90,7 +92,7 @@
 
                 <!-- color -->
                 <div class="flex items-center mb-[2vw]">
-                    <p class="w-[10vw] text-green-2" style="line-height:25px;">Color</p>
+                    <p class="w-[10vw] text-green-2 text-[1.2vw]" style="line-height:25px;">Color</p>
                     <div class="flex gap-[1vw] text-green-2">
                         @foreach ($product->product_variants->pluck('color')->unique('id') as $color)
                             @if ($color)
@@ -98,7 +100,7 @@
                                     <input type="radio" name="color" value="{{ $color->id }}"
                                         class="hidden peer" required>
                                     <span
-                                        class="px-4 py-1 border rounded cursor-pointer text-[13px] min-w-[40px] h-[25px] flex items-center justify-center
+                                        class="border rounded cursor-pointer  text-[1vw] px-[1vw] py-[0.25vw] flex items-center justify-center
                                         bg-yellow-2 peer-checked:bg-green-2 peer-checked:text-white transition">
                                         {{ $color->name }}
                                     </span>
@@ -110,7 +112,7 @@
 
                 <!-- size -->
                 <div class="flex items-center mb-[2vw]">
-                    <p class="w-[10vw] text-green-2" style="line-height:25px;">Size</p>
+                    <p class="w-[10vw] text-green-2 text-[1.2vw]" style="line-height:25px;">Size</p>
                     <div class="flex gap-[1vw] text-green-2">
                         @foreach ($product->product_variants->pluck('size')->unique('id') as $size)
                             @if ($size)
@@ -118,7 +120,7 @@
                                     <input type="radio" name="size" value="{{ $size->id }}"
                                         class="hidden peer" required>
                                     <span
-                                        class="px-4 py-1 border rounded cursor-pointer text-[13px] min-w-[40px] h-[25px] flex items-center justify-center
+                                        class="border rounded cursor-pointer text-[1vw] px-[1vw] py-[0.25vw] flex items-center justify-center
                                         bg-yellow-2 peer-checked:bg-green-2 peer-checked:text-white transition">
                                         {{ $size->name }}
                                     </span>
@@ -130,8 +132,8 @@
 
                 <!-- shipping -->
                 <div class="flex items-center mb-8 ">
-                    <p class="w-[10vw] text-green-2">Certificate</p>
-                    <p class="text-sm text-green-2">{{ $product->certification }}</p>
+                    <p class="w-[10vw] text-green-2 text-[1.2vw]">Certificate</p>
+                    <p class="text-sm text-green-2 text-[1.2vw]">{{ $product->certification }}</p>
                 </div>
 
                 <!-- stock + add to cart -->
@@ -149,7 +151,7 @@
                         </div>
                         <p class="text-sm text-gray-600 mb-2">Stock: 200</p>
                     </div>
-                    <button class="bg-orange-1 text-white font-bold w-60 py-2 rounded mt-2">ADD TO CART</button>
+                    <button class="cursor-pointer bg-orange-1 text-white font-bold w-[20vw] h-[3.5vw] rounded">ADD TO CART</button>
                 </div>
             </form>
         </div>
@@ -158,10 +160,10 @@
             <!-- product details dll -->
             <div class="mt-[2vw] w-full">
                 <!-- tab -->
-                <div class="flex justify-center border-b border-t border-[#D2D2B0] px-5 pt-5">
+                <div class="flex justify-center gap-[2vw] border-b border-t border-[#D2D2B0] px-5 pt-5">
                     <!-- Product Description Tab -->
                     <div class="flex flex-col w-fit" id="details-tab">
-                        <button class="text-green-2 font-semibold" onclick="setActiveTab('details')">
+                        <button class="text-green-2 text-[1.3vw] font-semibold" onclick="setActiveTab('details')">
                             Product Description
                         </button>
                         <hr class="mt-2 border-b-2 border-green-2 rounded-full w-full" id="details-underline">
@@ -169,7 +171,7 @@
 
                     <!-- Product Material Tab -->
                     <div class="flex flex-col w-fit ml-10" id="material-tab">
-                        <button class="text-[#7B8C7F] font-normal" onclick="setActiveTab('material')">
+                        <button class="text-[#7B8C7F] text-[1.3vw] font-normal" onclick="setActiveTab('material')">
                             Product Material
                         </button>
                         <hr class="hidden mt-2 border-b-2 border-[#3E6137] rounded-full w-full"
@@ -178,7 +180,7 @@
 
                     <!-- Process Details Tab -->
                     <div class="flex flex-col w-fit ml-10" id="process-tab">
-                        <button class="text-[#7B8C7F] font-normal" onclick="setActiveTab('process')">
+                        <button class="text-[#7B8C7F] text-[1.3vw] font-normal" onclick="setActiveTab('process')">
                             Process Details
                         </button>
                         <hr class="hidden mt-2 border-b-2 border-[#3E6137] rounded-full w-full"
@@ -187,7 +189,7 @@
 
                     <!-- Buyer Reviews Tab -->
                     <div class="flex flex-col w-fit ml-10" id="reviews-tab">
-                        <button class="text-[#7B8C7F] font-normal" onclick="setActiveTab('reviews')">
+                        <button class="text-[#7B8C7F] text-[1.3vw] font-normal" onclick="setActiveTab('reviews')">
                             Buyer Reviews
                         </button>
                         <hr class="hidden mt-2 border-b-2 border-[#3E6137] rounded-full w-full"
@@ -199,7 +201,7 @@
                     <!-- Product Description -->
                     <div id="details-content" class="flex flex-col gap-[1vw]">
                         <div>
-                            <h1 class="font-bold text-green-2 mb-[0.5vw]">Product Description</h1>
+                            <h1 class="font-bold text-green-2 text-[1.3vw] mb-[0.5vw]">Product Description</h1>
                             <p class="text-[1.2vw] text-gray-700">
                                 {{ $product->description }}
                             </p>
@@ -207,9 +209,9 @@
                     </div>
 
                     <!-- Product Material -->
-                    <div id="material-content" class="flex flex-col gap-[1vw]">
+                    <div id="material-content" class="hidden space-y-3">
                         <div>
-                            <h1 class="font-bold text-green-2 mb-[0.5vw]">Product Material</h1>
+                            <h1 class="font-bold text-green-2 text-[1.3vw] mb-[0.5vw]">Product Material</h1>
                             <p class="text-[1.2vw] text-gray-700">
                                 {{ $product->material }}
                             </p>
@@ -218,7 +220,7 @@
 
                     <!-- Process Details -->
                     <div id="process-content" class="hidden space-y-3">
-                        <h1 class="font-bold text-green-2">Process Details</h1>
+                        <h1 class="font-bold text-green-2 text-[1.3vw]">Process Details</h1>
                         <p class="text-[1.2vw] text-gray-700">
                             {{ $product->process }}
                         </p>
@@ -226,16 +228,15 @@
 
                     <!-- Buyer Reviews -->
                     <div id="reviews-content" class="hidden space-y-3">
-                        <h1 class="font-bold text-green-2">Buyer Reviews</h1>
+                        <h1 class="font-bold text-green-2 text-[1.3vw]">Buyer Reviews</h1>
                         <div class="flex flex-col">
                             @foreach ($reviews as $review)    
                                 <div class="flex gap-[5vw] py-[1.5vw] border-0  border-b-1 border-gray-300">
                                     <div class="flex gap-[1vw] w-[25%]">
-                                        <img src="{{ asset('images/elvinson.jpg') }}" alt="elvinson"
-                                            class="w-[4vw] h-[4vw] rounded-[0.5vw] object-cover">
+                                        <img src="{{ asset('storage/' . $review->user->image) }}" alt="elvinson" class="w-[4vw] h-[4vw] rounded-[0.5vw] object-cover">
                                         <div class="flex flex-col">
-                                            <p class="text-[1.3vw] font-bold">Nicholas Defin</p>
-                                            <p class="text-[0.9vw] font-bold text-orange-600">May 22, 2025</p>
+                                            <p class="text-[1.3vw] font-bold">{{ $review->user->name }}</p>
+                                            <p class="text-[0.9vw] font-bold text-orange-600">{{ $review->created_at->format("F d, Y") }}</p>
                                         </div>
                                     </div>
 
@@ -318,6 +319,39 @@
         </div>
     </div>
     <script>
+
+        const carouselImages = document.getElementById('carouselImages');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        const totalImages = carouselImages.children.length;
+        const visibleImages = 3; // jumlah gambar yang terlihat
+        let currentIndex = 0;
+
+        function updateCarousel() {
+            // Geser sebanyak tinggi gambar * current index
+            carouselImages.style.transform = `translateY(-${currentIndex * 8}vw)`;
+        }
+
+        prevBtn.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex -= 1; // geser 1 gambar ke atas
+                updateCarousel();
+            }
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentIndex < totalImages - visibleImages) {
+                currentIndex += 1; // geser 1 gambar ke bawah
+                updateCarousel();
+            }
+        });
+
+        if (totalImages <= visibleImages) {
+            prevBtn.style.display = "none";
+            nextBtn.style.display = "none";
+        }
+
         const addButton = document.querySelector("#addButton");
         const subButton = document.querySelector("#subButton");
         const amountInput = document.querySelector("#amountInput");
@@ -357,7 +391,6 @@
             const tabs = ['details', 'reviews', 'process', 'material'];
 
             tabs.forEach(id => {
-                // Tabs styling
                 const button = document.querySelector(`#${id}-tab button`);
                 const underline = document.querySelector(`#${id}-underline`);
                 if (id === tabId) {
@@ -379,5 +412,31 @@
                 }
             });
         }
+
+        function showImage(review_id, source) {
+            const allBigImage = document.querySelectorAll('.big-image');
+            
+            const selectedBigImage = document.getElementById(`${review_id}`);
+            if(selectedBigImage){
+                selectedBigImage.style.display = "block";
+                selectedBigImage.src = `${source}`;
+            }
+        }  
+
+        const previewImages = document.querySelectorAll("#carouselImages img");
+        const productBigImage = document.querySelector("#product-big-image");
+
+        previewImages.forEach(img => {
+            img.addEventListener("click", function () {
+                previewImages.forEach(i => i.classList.remove("brightness-50"));
+
+                this.classList.add("brightness-50");
+
+                if (productBigImage) {
+                    productBigImage.src = this.src;
+                }
+            });
+        });
+
     </script>
 </x-layout>

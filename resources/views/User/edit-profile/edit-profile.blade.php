@@ -157,7 +157,6 @@
         </div>
     </div>
 
-    @push('scripts')
     <script>
         const profileImage = document.getElementById('profileImage');
 
@@ -183,5 +182,4 @@
             icon.classList.toggle('rotate-180')
         });
     </script>
-    @endpush
 </x-layout>
