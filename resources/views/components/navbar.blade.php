@@ -19,7 +19,7 @@
         <li class="list-none flex gap-[5vw] text-green-3 font-bold">
             <ul><a href="/">Home</a></ul>
             <ul><a href="/products">Products</a></ul>
-            <ul><a href="/tree">Green Activity</a></ul>
+            <ul><a href="/trees">Green Activity</a></ul>
             <ul><a href="/carbon-calculator">Carbon calculator</a></ul>
         </li>
     </div>
