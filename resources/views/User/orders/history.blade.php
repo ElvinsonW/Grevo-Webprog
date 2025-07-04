@@ -68,36 +68,36 @@
                     <!-- order card -->
                     <div class="mb-5 rounded-xl" style="box-shadow: 0 0 12.2px 0 rgba(0,0,0,0.06);">
                         <!-- atas -->  
-                        <a href="{{ route('order.show', $order->order_id) }}">
-                            <div class="w-full bg-[#FCFCF5] h-fit rounded-xl px-8 py-6 flex flex-col">                        
-                                <!-- header -->
-                                <div class="flex justify-between items-center mb-5">
-                                    <div class="flex flex-col gap-1">
-                                        <p class="text-[#D1764F] text-sm font-bold">
-                                            ORDER ID: {{ $order->order_id }}
-                                        </p>
-                                        <p class="text-[#7B8C7F] text-sm font-semibold">
-                                            {{ \Carbon\Carbon::parse($order->statusHistories->last()->changed_at)->format('d M Y, g:i A') }}
-                                        </p>
-                                    </div>
-                                    <p class="font-bold text-[#D1764F] text-xl">
-                                        @php
-                                            $status = $order->statusHistories->first()->status;
-                                            $statusLabels = [
-                                                'ORDER PLACED'    => 'TO SHIP',
-                                                'ORDER SHIPPED'   => 'TO RECEIVE',
-                                                'ORDER ARRIVED'   => 'DELIVERED',
-                                                'ORDER RECEIVED'  => 'COMPLETED',
-                                                'ORDER COMPLETED' => 'COMPLETED',
-                                                'CANCELLED'       => 'CANCELLED',
-                                            ];
-                                        @endphp
-                                        <span>
-                                            {{ strtoupper($statusLabels[$status] ?? $status) }}
-                                        </span>
+                        <div class="w-full bg-[#FCFCF5] h-fit rounded-xl px-8 py-6 flex flex-col">                        
+                            <!-- header -->
+                            <div class="flex justify-between items-center mb-5">
+                                <div class="flex flex-col gap-1">
+                                    <p class="text-[#D1764F] text-sm font-bold">
+                                        ORDER ID: {{ $order->order_id }}
+                                    </p>
+                                    <p class="text-[#7B8C7F] text-sm font-semibold">
+                                        {{ \Carbon\Carbon::parse($order->statusHistories->last()->changed_at)->format('d M Y, g:i A') }}
                                     </p>
                                 </div>
+                                <p class="font-bold text-[#D1764F] text-xl">
+                                    @php
+                                    $status = $order->statusHistories->first()->status;
+                                        $statusLabels = [
+                                            'ORDER PLACED'    => 'TO SHIP',
+                                            'ORDER SHIPPED'   => 'TO RECEIVE',
+                                            'ORDER ARRIVED'   => 'DELIVERED',
+                                            'ORDER RECEIVED'  => 'COMPLETED',
+                                            'ORDER COMPLETED' => 'COMPLETED',
+                                            'CANCELLED'       => 'CANCELLED',
+                                            ];
+                                            @endphp
+                                    <span>
+                                        {{ strtoupper($statusLabels[$status] ?? $status) }}
+                                    </span>
+                                </p>
+                            </div>
                                 
+                            <a href="{{ route('order.show', $order->order_id) }}">
                                 <!-- products -->
                                 @foreach ($order->items as $item)
                                     <div class="flex items flex-col">
@@ -116,9 +116,9 @@
                                         @endif
                                     </div>
                                 @endforeach
-                            </div>
+                            </a>    
+                        </div>
                             
-                        </a>
                         
                         <!-- bawah -->
                         <div class="flex flex-row justify-between items-center px-8 w-full bg-[#FFFFF4] h-fit rounded-xl px-8 py-6 rounded-lg">
@@ -161,7 +161,8 @@
                             <div class="flex flex-row items-center gap-10 text-right">
                                 <p class="text-sm font-semibold text-[#7B8C7F]">Order total:</p>
                                 @php
-                                    $total = $order->items->sum(fn($item) => $item->price * $item->quantity);
+                                    $merchandise = $order->items->sum(fn($item) => $item->price * $item->quantity);
+                                    $total = $merchandise + $order->shipping;
                                 @endphp
 
                                 <p class="text-xl font-bold text-[#D1764F]">
