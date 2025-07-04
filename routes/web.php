@@ -29,7 +29,7 @@ use App\Http\Controllers\OrderController; // Import OrderController for order-re
 
 // Option B: Redirect to signin (comment out Option A if using this)
 Route::get('/', function () {
-    return redirect()->route('signin');
+    return view('homepage'); // Adjust this to your actual homepage view
 });
 
 // nambahin buat ke katalog pohon
@@ -52,11 +52,11 @@ Route::get('/homepage', function () {
 // // Route untuk data form Sign In
 // Route::post('/signin', [LoginController::class, 'login'])->name('login.submit');
 // // Tambahkan route logout jika belum ada (penting untuk fungsionalitas Auth::logout())
-// Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // // --- Profile Routes (Temporarily without 'auth' middleware for development) ---
 // // Ketika Anda siap untuk mengaktifkan autentikasi, Anda bisa mengelompokkan ini dalam Route::middleware(['auth'])->group(function () { ... });
-// Route::get('/profile', [ProfileController::class, 'showProfile'])->name('profile');
+Route::get('/profile', [ProfileController::class, 'showProfile'])->name('profile');
 // // Route untuk mengupdate profil pengguna
 // Route::put('/user/{username}', [ProfileController::class, 'updateProfile'])->name('profile.update'); // Ini perlu diaktifkan di sini
 
@@ -134,7 +134,7 @@ Route::controller(BatchController::class)->group(function(){
 });
 
 
-Route::get('/order', [OrderController::class, 'show'])->name('order.show');
+Route::get('/order/{order_id}', [OrderController::class, 'show'])->name('order.show');
 //Product (Admin)
 Route::get('/addproduct', function () {
     return view('Admin.Product.addproduct');

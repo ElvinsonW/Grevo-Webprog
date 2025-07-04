@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Models\User;
+use App\Models\Order;
+use App\Models\StatusHistory;
+use App\Models\OrderItem;
 
 class ProfileController extends Controller
 {
@@ -40,12 +43,41 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function showOrders()
-    {
-        $user = User::find(1);
-        // Asumsi path view orders, bisa jadi User/orders/index atau User/edit-profile/orders
-        return view('User.orders.history', compact('user'));
+    public function showOrders(Request $request)
+{
+    $user = Auth::user();
+    $keyword = $request->input('keyword');
+    $statusParam = $request->input('status', 'all');
+
+    $statusMap = [
+        'to-ship'    => ['ORDER PLACED'],
+        'to-receive' => ['ORDER SHIPPED'],
+        'delivered'  => ['ORDER ARRIVED'],
+        'completed'  => ['ORDER RECEIVED', 'ORDER COMPLETED'],
+        'cancelled'  => ['CANCELLED'],
+    ];
+
+    $orders = Order::with(['items', 'statusHistories' => fn($q) => $q->orderBy('changed_at', 'desc')])
+        ->where('user_id', $user->id)
+        ->when($keyword, function ($query) use ($keyword) {
+            $query->where(function ($q) use ($keyword) {
+                $q->where('order_id', 'like', "%$keyword%")
+                  ->orWhereHas('items', fn ($iq) => $iq->where('name', 'like', "%$keyword%"));
+            });
+        })
+        ->get(); // ambil semua dulu
+
+    // ⬇ Filter by status terakhir (statusHistories->first())
+    if ($statusParam !== 'all' && isset($statusMap[$statusParam])) {
+        $statuses = $statusMap[$statusParam];
+        $orders = $orders->filter(function ($order) use ($statuses) {
+            $latestStatus = $order->statusHistories->first()->status ?? null;
+            return in_array($latestStatus, $statuses);
+        });
     }
+
+    return view('User.orders.history', compact('user', 'orders'));
+}
 
     /**
      * Menampilkan halaman daftar ulasan pengguna.
