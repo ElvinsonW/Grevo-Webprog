@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Color;
+use App\Models\Product;
+use App\Models\ProductVariant;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -12,7 +15,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        $cart = Cart::where('user_id', 2)->get();
+        $cart = Cart::where('user_id', auth()->user()->id)->get();
         return view('User.cart.cart', ['carts' => $cart]);
     }
 
@@ -29,7 +32,27 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $color = Color::find($request->color);
+        $product = Product::find($request->product_id);
+        $product_variant_id = $color->product_variant->id;
+
+        $cart = Cart::where("product_variant_id", $product_variant_id)->firstOrFail();
+
+        if($cart){
+            $cart->amount = $request->amount;
+            $cart->total = $request->amount * $product->price;
+            $cart->save();
+        } else {
+            Cart::create([
+                "user_id" => auth()->user()->id,
+                "product_variant_id" => $product_variant_id,
+                "amount" => $request->amount,
+                "total" => $request->amount * $product->price
+            ]);
+        }
+
+
+        return redirect("/cart")->with("cartSuccess", "Product added successfully!");
     }
 
     /**

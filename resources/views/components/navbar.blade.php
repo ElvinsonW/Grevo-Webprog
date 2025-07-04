@@ -3,7 +3,7 @@
     <div class="flex flex-col items-center justify-center gap-[0.75vw]">
         <form action="" class="flex items-center gap-[0.5vw] pl-[1vw] pr-[0.5vw] w-[60vw] h-[3vw] bg-yellow-2">
             @php
-                $params = ["category"];
+                $params = ["category","max_price","min_price","min_rating"];
             @endphp
             @foreach ($params as $param)
                 @if (request($param))
@@ -27,7 +27,15 @@
         <i class="fa-solid fa-cart-shopping text-[2vw] text-green-3"></i>
     </a>
     <div class="flex items-center gap-[0.5vw]">
-        <i class="fa-solid fa-user text-[2vw] text-green-3"></i>
-        <p class="font-bold text-green-3">{{ auth()->user()->username }}</p>
+        @auth
+            <i class="fa-solid fa-user text-[2vw] text-green-3"></i>
+            <p class="font-bold text-green-3">{{ auth()->user()->username }}</p>    
+        @else
+            <button class="">
+                <a href="{{ route('login') }}" 
+                    class="bg-green-2 text-white border-none rounded-md px-6 py-2 text-sm font-semibold cursor-pointer inline-block leading-normal hover:bg-green-3 transition-colors duration-300">SIGN
+                    IN</a>
+            </button>
+        @endif
     </div>
 </header>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Tree;
 use App\Models\Organization;
+use Illuminate\Support\Facades\Log; // Pastikan ini ada
 
 class TreeController extends Controller
 {
@@ -14,6 +15,31 @@ class TreeController extends Controller
         $query = Tree::query();
         $trees = $query->paginate(10);
         return view('Admin.Tree.listtree', compact('trees'));
+    }
+
+    public function show(Request $request)
+    {
+        $selectedOrganizationId = $request->query('organization_id');
+
+        $organizations = Organization::all();
+        $query = Tree::query();
+        $selectedOrganization = null;
+
+        if (!empty($selectedOrganizationId)) {
+            $selectedOrganization = Organization::find($selectedOrganizationId);
+
+            if ($selectedOrganization) {
+                $query->where('organization_id', $selectedOrganization->organization_id);
+            }
+        }
+
+        $trees = $query->get();
+
+        return view('User.treecatalogue.tree', [
+            'trees' => $trees,
+            'organizations' => $organizations,
+            'selectedOrganization' => $selectedOrganization,
+        ]);
     }
 
     public function create()
@@ -39,14 +65,12 @@ class TreeController extends Controller
         }
 
         Tree::create($validated);
-        
+
         return redirect()->route('tree.listtree')->with('success', 'Tree Added Successfully!');
     }
 
-
     public function edit(string $treeid)
     {
-        //
         $trees = Tree::findOrFail($treeid);
         $organizations = Organization::all();
         return view('Admin.Tree.edittree', compact('trees','organizations'));
@@ -54,7 +78,6 @@ class TreeController extends Controller
 
     public function update(Request $request, string $treeid)
     {
-
         $validated = $request->validate([
             'treename' => 'required|string|max:255',
             'treecategory' => 'required|string|max:255',
@@ -68,8 +91,9 @@ class TreeController extends Controller
         $tree = Tree::findOrFail($treeid);
 
         if($request->hasFile('treephoto')){
-            $photo = $request->file('treephoto');
-            $filename = time().'_'.$photo->getClientOriginalName();
+            if ($tree->treephoto) {
+                \Storage::disk('public')->delete($tree->treephoto);
+            }
             $path = $request->file('treephoto')->store('treesphoto', 'public');
             $validated['treephoto'] = $path;
         }else{
@@ -83,6 +107,9 @@ class TreeController extends Controller
     public function destroy(string $treeid)
     {
         $tree = Tree::findOrFail($treeid);
+        if ($tree->treephoto) {
+            \Storage::disk('public')->delete($tree->treephoto);
+        }
         $tree->delete();
 
         return redirect()->route('tree.listtree')->with('success', 'Tree Deleted Successfully!');

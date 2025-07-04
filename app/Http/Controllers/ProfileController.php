@@ -34,8 +34,16 @@ class ProfileController extends Controller
     public function showAddresses()
     {
         $user = Auth::user();
+        if (!$user) {
+            // Handle case where user is not logged in, perhaps redirect to login
+            return redirect()->route('signin')->with('error', 'You must be logged in to view addresses.');
+        }
+
+        // Ambil alamat-alamat user yang sedang login
+        $addresses = $user->addresses; // Menggunakan relasi hasMany
+
         // Path view disesuaikan: resources/views/User/edit-profile/addresses.blade.php
-        return view('User.edit-profile.addresses', compact('user'));
+        return view('User.edit-profile.addresses', compact('user', 'addresses'));
     }
 
     /**

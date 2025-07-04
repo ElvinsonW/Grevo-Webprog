@@ -27,9 +27,10 @@ class BatchController extends Controller
     {
         $validated = $request->validate([
             'organization_id'=>'required|exists:organizations,organization_id',
-            'dateofactivity' => 'required|string|max:255',
+            'dateofactivity' => 'required|date',
             'treesplanted' => 'required|integer',
-            'batchdate' => 'required|string|max:255',
+            'startdate' => 'required|date',
+            'enddate' => 'required|date',
             'batchproof' => 'image|mimes:jpg,png,jpeg|max:2048'
         ]);
 

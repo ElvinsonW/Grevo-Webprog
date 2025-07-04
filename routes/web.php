@@ -18,6 +18,9 @@ use App\Http\Controllers\CarbonCalculatorController;
 use App\Http\Controllers\Admin\OrganizationController;
 use App\Http\Controllers\Admin\TreeController;
 use App\Http\Controllers\Admin\BatchController;
+use App\Http\Middleware\CheckAdminRole;
+use App\Http\Middleware\CheckGuest;
+use App\Http\Middleware\CheckUserRole;
 use App\Models\Cart; // Unused, consider removing if not directly used in routes
 use App\Models\Product; // Unused, consider removing if not directly used in routes
 use App\Models\ProductCategory; // Unused, consider removing if not directly used in routes
@@ -25,15 +28,12 @@ use App\Models\Review; // Unused, consider removing if not directly used in rout
 use App\Models\Organization; // Unused, consider removing if not directly used in routes
 use Illuminate\Http\Request; // Unused, consider removing if not directly used in routes
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\OrderController; // Import OrderController for order-related routes
+
 
 // Option B: Redirect to signin (comment out Option A if using this)
 Route::get('/', function () {
-    return view('homepage'); // Adjust this to your actual homepage view
+    return view('homepage');
 });
-
-// nambahin buat ke katalog pohon
-Route::get('/tree', [TreeCatalogueController::class, 'index'])->name('tree_catalogue');
 
 // Define the actual homepage if '/' is a redirect
 Route::get('/homepage', function () {
@@ -60,17 +60,35 @@ Route::get('/profile', [ProfileController::class, 'showProfile'])->name('profile
 // // Route untuk mengupdate profil pengguna
 // Route::put('/user/{username}', [ProfileController::class, 'updateProfile'])->name('profile.update'); // Ini perlu diaktifkan di sini
 
-Route::controller(UserController::class)->group(function (){
-    Route::get("/login","loginForm")->name("login");
-    Route::get("/register","registerForm")->name("register");
-    Route::post("/login","login")->name("login.submit");
-    Route::post("/register","register")->name("register.submit");
+// Masukin route yang hanya boleh diakses oleh admin
+Route::middleware(CheckAdminRole::class)->group(function(){
+
 });
 
+// Masukin route yang hanya boleh diakses oleh yang udah login
+Route::middleware(CheckUserRole::class)->group(function(){
+
+});
+
+Route::middleware(CheckGuest::class)->group(function(){
+    Route::controller(UserController::class)->group(function (){
+        Route::get("/login","loginForm")->name("login");
+        Route::get("/register","registerForm")->name("register");
+        Route::post("/login","login")->name("login.submit");
+        Route::post("/register","register")->name("register.submit");
+        Route::post("logout", "logout")->name("logout");
+    });
+});
+
+
 // Tambahkan rute untuk sub-halaman profil
+Route::get('/profile', [ProfileController::class, 'showProfile'])->name('profile');
 Route::get('/profile/addresses', [ProfileController::class, 'showAddresses'])->name('addresses');
 Route::get('/profile/orders', [ProfileController::class, 'showOrders'])->name('orders');
 Route::get('/profile/reviews', [ProfileController::class, 'showReviews'])->name('reviews');
+
+//route untuk Tree Catalogue
+Route::get('/trees', [TreeController::class, 'show'])->name('tree.index2');
 
 // --- Other Application Routes ---
 Route::get('/about', function() {
@@ -139,6 +157,6 @@ Route::get('/order/{order_id}', [OrderController::class, 'show'])->name('order.s
 Route::get('/addproduct', function () {
     return view('Admin.Product.addproduct');
 })->name('products.create');
-Route::get('/listproducts', [ProductController::class, 'show'])->name('products.list');
+Route::get('/listproducts', [ProductController::class, 'showlist'])->name('products.list');
 Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
 Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');

@@ -80,14 +80,6 @@
           </div>
 
           <div>
-            <p>Types of Tree Planted</p>
-            <input type="text" class="border w-full rounded-md p-1" name="types_of_tree_planted" value="{{ old('types_of_tree_planted') }}" required />
-            @error('types_of_tree_planted')
-              <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
-            @enderror
-          </div>
-
-          <div>
             <p>Existing Partner or Sponsor (Optional)</p>
             <input type="text" class="border w-full rounded-md p-1" name="existing_partner_or_sponsor" value="{{ old('existing_partner_or_sponsor') }}" />
             @error('existing_partner_or_sponsor')

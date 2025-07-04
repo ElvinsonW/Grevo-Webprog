@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -20,7 +21,8 @@ class ReviewFactory extends Factory
         return [
             'user_id' => User::factory(),
             'rate' => fake()->numberBetween(1,5),
-            'description' => fake()->paragraph()
+            'description' => fake()->paragraph(),
+            'product_id' => Product::factory()
         ];
     }
 }

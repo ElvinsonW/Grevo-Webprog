@@ -15,11 +15,13 @@
     --color-green-3: #349552;
     --color-yellow-1: #FCF43E;
     --color-yellow-2: #F7F6EB;
+    --color-yellow-3: #FCFCF5;
+    --color-yellow-4: #F6F4DD;
     --color-orange-1: #D1764F;
 
     --animate-dropdown: slideDown 0.2s ease-out;
 
-    --font-oswald: "Oswald";
+    --font-quicksand: "Quicksand";
     
     --animate-goup: slideUp 0.5s ease-out;
 
@@ -46,3 +48,4 @@
     }
     
 }
+

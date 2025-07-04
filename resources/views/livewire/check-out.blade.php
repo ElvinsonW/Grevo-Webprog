@@ -53,13 +53,13 @@
                         <div class="flex items-center gap-[1.5vw]">
                             <button type="button" 
                                     wire:click="decrement({{ $cart->id }})" 
-                                    class="w-[2.5vw] h-[2.5vw] rounded-[0.25vw] border border-green-600 text-green-600">-</button>
+                                    class="w-[2.5vw] h-[2.5vw] rounded-[0.25vw] border bg-orange-1 text-white">-</button>
                             
                             <span class="bold w-[1vw] text-center">{{ $cart->amount }}</span>
                             
                             <button type="button" 
                                     wire:click="increment({{ $cart->id }})" 
-                                    class="w-[2.5vw] h-[2.5vw] rounded-[0.25vw] bg-green-600 text-white">+</button>
+                                    class="w-[2.5vw] h-[2.5vw] rounded-[0.25vw] bg-green-2 text-white">+</button>
                         </div>
     
                         <div>
@@ -78,33 +78,42 @@
             </div>
         </div>
 
-        <div class="flex gap-[5%]">
-            <div class="flex flex-col w-[60%]">
-                <h2 class="text-[1.4vw] font-bold mb-[1.5vw]">Delivery Information</h2>
-                <div class="flex flex-col gap-[1vw]">
+        <div class="flex justify-between">
+            <div class="flex flex-col w-[62%]">
+                <h2 class="text-[1.4vw] font-bold mb-[1vw]">Delivery Information</h2>
+                <div class="flex flex-col gap-[1vw] bg-yellow-3 p-[2vw] rounded-[0.75vw]">
                     <div class="flex flex-col gap-[0.5vw]">
                         <p for="name" class="font-bold">Recipient name</p>
-                        <p>Elvinson Wijaya</p>
+                        <p class="px-[2vw] py-[0.75vw] rounded-[0.5vw] bg-green-2 text-white w-fit text-[1.1vw]">Elvinson Wijaya</p>
                     </div>
 
                     <div class="flex flex-col gap-[0.5vw]">
                         <label for="address" class="font-bold">Shipping Address</label>
-                        <select wire:model="address" id="address" class="border px-[1vw] py-[0.75vw] rounded-[0.5vw] focus:outline-none text-[1.1vw]">
-                            <option value="49630">Jalan Pakuan No. 3, Sumur Batu, Babakan Madang (Rumah Talenta BCA), KAB. BOGOR - BABAKAN MADANG, JAWA BARAT, ID 16810</option>
-                        </select>
+                        <div class="relative">
+                            <select wire:model="address" id="address" class="appearance-none w-[100%] px-[2vw] py-[0.75vw] rounded-[0.5vw] focus:outline-none text-[1.1vw] bg-green-2 text-white">
+                                <option value="49630">Jalan Pakuan No. 3, Sumur Batu, Babakan Madang (Rumah Talenta BCA), KAB. BOGOR - BABAKAN MADANG, JAWA BARAT, ID 16810</option>
+                            </select>
+
+                            <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                                <svg class="w-3 h-3 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="flex flex-col gap-[0.5vw]">
                         <p for="price" class="font-bold">Price</p>
-                        <p>Rp. {{ number_format($this->shippingCost) }}</p>
+                        <p class="px-[2vw] py-[0.75vw] rounded-[0.5vw] bg-green-2 text-white w-fit text-[1.1vw]">Rp. {{ number_format($this->shippingCost) }}</p>
                     </div>
                 </div>
             </div>
 
             <div class="flex flex-col w-[35%]">
-                <h2 class="text-[1.4vw] font-bold mb-[1.5vw]">Order Summary</h2>
+                <h2 class="text-[1.4vw] font-bold mb-[1vw]">Order Summary</h2>
 
-                <div class="flex flex-col gap-[0.5vw] mb-[1vw]">
+                <div class="flex flex-col gap-[0.5vw] mb-[1vw] bg-yellow-3 p-[2vw] rounded-[0.75vw]">
                     <div class="flex justify-between w-full font-semibold">
                         <p>Subtotal</p>
                         <p>Rp. {{ number_format($this->subTotalPrice) }}</p>
@@ -114,16 +123,16 @@
                         <p>Delivery Fee</p>
                         <p>Rp. {{ number_format($this->shippingCost) }}</p>
                     </div>
+                    <div class="border-b-2 mb-[0.75vw]"></div>
+    
+                    <div class="flex justify-between text-[1.4vw] font-bold mb-[2vw]">
+                        <p>Total</p>
+                        <p>Rp. {{ number_format($this->subTotalPrice + $this->shippingCost) }}</p>
+                    </div>
+    
+                    <button type="submit" class="w-full h-[3.5vw] bg-orange-1 text-white font-bold rounded-[0.5vw] cursor-pointer">Check Out</button>
                 </div>
 
-                <div class="border-b-2 mb-[0.75vw]"></div>
-
-                <div class="flex justify-between text-[1.4vw] font-bold mb-[2vw]">
-                    <p>Total</p>
-                    <p>Rp. {{ number_format($this->subTotalPrice + $this->shippingCost) }}</p>
-                </div>
-
-                <button type="submit" class="w-full h-[3vw] bg-green-2 text-white font-bold rounded-[0.5vw]">Check Out</button>
             </div>
         </div>
     </form>

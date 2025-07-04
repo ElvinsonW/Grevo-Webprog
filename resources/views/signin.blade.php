@@ -60,7 +60,7 @@
                 <label for="email" class="block text-xs text-gray-700 uppercase font-semibold mb-1">EMAIL
                     ADDRESS</label>
                 <input type="email" id="email" name="email" value="{{ old('email') }}"
-                    placeholder="ivy@stay.com" required autocomplete="email" autofocus
+                    placeholder="ivy@stay.com" required autofocus
                     class="w-full px-4 py-3 border border-gray-300 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-[var(--color-green-3)]"
                     style="border-color: var(--color-green-3);">
                 @error('email')
@@ -90,7 +90,7 @@
             </div>
 
             {{-- Remember Me & Forgot Password : INI MASIH GAK TAU YA KEMANA PERLU KAH, CUMA FORMALITAS AJA LAH YA --}}
-            <div class="flex justify-between items-center mb-8 text-sm">
+            {{-- <div class="flex justify-between items-center mb-8 text-sm">
                 <div class="flex items-center">
                     <input type="checkbox" name="remember" id="remember" class="mr-2 min-w-4 min-h-4 cursor-pointer"
                         style="accent-color: var(--color-green-3);">
@@ -98,7 +98,14 @@
                 </div>
                 <a href="#" class="text-gray-500 hover:underline" style="color: var(--color-green-3);">Forgot
                     Password?</a>
-            </div>
+            </div> --}}
+
+            @if (session('loginError'))
+                <div class="text-center p-4 mt-[-1vw] mb-[2vw] text-sm text-red-800 rounded-lg bg-red-50"
+                    role="alert">
+                    {{ session('loginError') }}
+                </div>
+            @endif
 
             {{-- Tombol SIGN IN --}}
             <button type="submit"

@@ -13,7 +13,8 @@ return new class extends Migration
             $table->id('batchid');
             $table->date('dateofactivity');
             $table->integer('treesplanted');
-            $table->string('batchdate');
+            $table->string('startdate');
+            $table->string('enddate');
             $table->string('batchproof');
             $table->unsignedBigInteger('organization_id');
             $table->foreign('organization_id')->references('organization_id')->on('organizations')->onDelete('cascade');

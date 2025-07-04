@@ -18,7 +18,6 @@ class OrganizationSeeder extends Seeder
             'coverage_region' => 'Asia Pacific',
             'official_contact_info' => 'contactgef@gmail.com',
             'organization_logo' => 'logos/T6s0wdBFSHJwqiuusYpdRz5E1hkkl4qbkRDh0iFJ.png',
-            'types_of_tree_planted' => 'Mangrove, Oak, Pine',
             'existing_partner_or_sponsor' => 'New',
             'organization_status' => 'Active'
         ]);
@@ -29,7 +28,7 @@ class OrganizationSeeder extends Seeder
             'coverage_region' => 'Asia Pacific',
             'official_contact_info' => 'contactgef@gmail.com',
             'organization_logo' => 'logos/T6s0wdBFSHJwqiuusYpdRz5E1hkkl4qbkRDh0iFJ.png',
-            'types_of_tree_planted' => 'Mangrove, Oak, Pine',
+
             'existing_partner_or_sponsor' => 'New',
             'organization_status' => 'Active'
         ]);
@@ -40,7 +39,7 @@ class OrganizationSeeder extends Seeder
             'coverage_region' => 'Asia Pacific',
             'official_contact_info' => 'contactgef@gmail.com',
             'organization_logo' => 'logos/T6s0wdBFSHJwqiuusYpdRz5E1hkkl4qbkRDh0iFJ.png',
-            'types_of_tree_planted' => 'Mangrove, Oak, Pine',
+
             'existing_partner_or_sponsor' => 'New',
             'organization_status' => 'Active'
         ]);
@@ -51,7 +50,7 @@ class OrganizationSeeder extends Seeder
             'coverage_region' => 'Asia Pacific',
             'official_contact_info' => 'contactgef@gmail.com',
             'organization_logo' => 'logos/T6s0wdBFSHJwqiuusYpdRz5E1hkkl4qbkRDh0iFJ.png',
-            'types_of_tree_planted' => 'Mangrove, Oak, Pine',
+
             'existing_partner_or_sponsor' => 'New',
             'organization_status' => 'Active'
         ]);
@@ -62,7 +61,7 @@ class OrganizationSeeder extends Seeder
             'coverage_region' => 'Asia Pacific',
             'official_contact_info' => 'contactgef@gmail.com',
             'organization_logo' => 'logos/T6s0wdBFSHJwqiuusYpdRz5E1hkkl4qbkRDh0iFJ.png',
-            'types_of_tree_planted' => 'Mangrove, Oak, Pine',
+
             'existing_partner_or_sponsor' => 'New',
             'organization_status' => 'Active'
         ]);
@@ -73,7 +72,7 @@ class OrganizationSeeder extends Seeder
             'coverage_region' => 'Asia Pacific',
             'official_contact_info' => 'contactgef@gmail.com',
             'organization_logo' => 'logos/T6s0wdBFSHJwqiuusYpdRz5E1hkkl4qbkRDh0iFJ.png',
-            'types_of_tree_planted' => 'Mangrove, Oak, Pine',
+
             'existing_partner_or_sponsor' => 'New',
             'organization_status' => 'Active'
         ]);
@@ -84,7 +83,7 @@ class OrganizationSeeder extends Seeder
             'coverage_region' => 'Asia Pacific',
             'official_contact_info' => 'contactgef@gmail.com',
             'organization_logo' => 'logos/T6s0wdBFSHJwqiuusYpdRz5E1hkkl4qbkRDh0iFJ.png',
-            'types_of_tree_planted' => 'Mangrove, Oak, Pine',
+
             'existing_partner_or_sponsor' => 'New',
             'organization_status' => 'Active'
         ]);
@@ -95,7 +94,7 @@ class OrganizationSeeder extends Seeder
             'coverage_region' => 'Asia Pacific',
             'official_contact_info' => 'contactgef@gmail.com',
             'organization_logo' => 'logos/T6s0wdBFSHJwqiuusYpdRz5E1hkkl4qbkRDh0iFJ.png',
-            'types_of_tree_planted' => 'Mangrove, Oak, Pine',
+
             'existing_partner_or_sponsor' => 'New',
             'organization_status' => 'Active'
         ]);
@@ -106,7 +105,7 @@ class OrganizationSeeder extends Seeder
             'coverage_region' => 'Asia Pacific',
             'official_contact_info' => 'contactgef@gmail.com',
             'organization_logo' => 'logos/T6s0wdBFSHJwqiuusYpdRz5E1hkkl4qbkRDh0iFJ.png',
-            'types_of_tree_planted' => 'Mangrove, Oak, Pine',
+
             'existing_partner_or_sponsor' => 'New',
             'organization_status' => 'Active'
         ]);
@@ -117,7 +116,7 @@ class OrganizationSeeder extends Seeder
             'coverage_region' => 'Asia Pacific',
             'official_contact_info' => 'contactgef@gmail.com',
             'organization_logo' => 'logos/T6s0wdBFSHJwqiuusYpdRz5E1hkkl4qbkRDh0iFJ.png',
-            'types_of_tree_planted' => 'Mangrove, Oak, Pine',
+
             'existing_partner_or_sponsor' => 'New',
             'organization_status' => 'Active'
         ]);
@@ -128,7 +127,7 @@ class OrganizationSeeder extends Seeder
             'coverage_region' => 'Asia Pacific',
             'official_contact_info' => 'contactgef@gmail.com',
             'organization_logo' => 'logos/T6s0wdBFSHJwqiuusYpdRz5E1hkkl4qbkRDh0iFJ.png',
-            'types_of_tree_planted' => 'Mangrove, Oak, Pine',
+
             'existing_partner_or_sponsor' => 'New',
             'organization_status' => 'Active'
         ]);
@@ -139,7 +138,7 @@ class OrganizationSeeder extends Seeder
             'coverage_region' => 'Asia Pacific',
             'official_contact_info' => 'contactgef@gmail.com',
             'organization_logo' => 'logos/T6s0wdBFSHJwqiuusYpdRz5E1hkkl4qbkRDh0iFJ.png',
-            'types_of_tree_planted' => 'Mangrove, Oak, Pine',
+
             'existing_partner_or_sponsor' => 'New',
             'organization_status' => 'Active'
         ]);
@@ -150,7 +149,7 @@ class OrganizationSeeder extends Seeder
             'coverage_region' => 'Asia Pacific',
             'official_contact_info' => 'contactgef@gmail.com',
             'organization_logo' => 'logos/T6s0wdBFSHJwqiuusYpdRz5E1hkkl4qbkRDh0iFJ.png',
-            'types_of_tree_planted' => 'Mangrove, Oak, Pine',
+
             'existing_partner_or_sponsor' => 'New',
             'organization_status' => 'Active'
         ]);
@@ -161,7 +160,7 @@ class OrganizationSeeder extends Seeder
             'coverage_region' => 'Asia Pacific',
             'official_contact_info' => 'contactgef@gmail.com',
             'organization_logo' => 'logos/T6s0wdBFSHJwqiuusYpdRz5E1hkkl4qbkRDh0iFJ.png',
-            'types_of_tree_planted' => 'Mangrove, Oak, Pine',
+
             'existing_partner_or_sponsor' => 'New',
             'organization_status' => 'Active'
         ]);

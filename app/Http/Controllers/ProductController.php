@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\Review;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
 
@@ -16,7 +17,7 @@ class ProductController extends Controller
     {
         $filters = ["search", "category", "min_price", "max_price"];
         return view('User.product.products', [
-            "products" => Product::filter(request($filters))->paginate(12)->withQueryString(),
+            "products" => Product::withAvg('reviews', 'rate')->filter(request($filters))->paginate(12)->withQueryString(),
             "categories" => ProductCategory::all()
         ]);
     }
@@ -24,23 +25,34 @@ class ProductController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-       
-    }
+    public function create() {}
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request) {}
+
+    public function show(string $slug)
     {
-        
+        $product = Product::withAvg("reviews", "rate")->where("slug", $slug)->firstOrFail();
+        $similarProduct = Product::where('product_category_id', $product->product_category_id)
+            ->where('id', '!=', $product->id)
+            ->withAvg('reviews', 'rate')
+            ->inRandomOrder()
+            ->take(5)
+            ->get();
+        $reviews = Review::where("product_id",$product->id)->latest()->take(3)->get();
+        return view("User.product.product-detail", [
+            "product" => $product, 
+            "similarProducts" => $similarProduct,
+            "reviews" => $reviews
+        ]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show()
+    public function showlist()
     {
         $query = Product::with(['product_category', 'product_images', 'product_variants']);
         if (request()->has('stock')) {
@@ -83,8 +95,9 @@ class ProductController extends Controller
         return redirect()->route('products.list')->with('message', 'Product deleted successfully.');
     }
 
-    public function createSlug(string $name){
-        $slug = SlugService::createSlug(Product::class, 'slug', $name,["unique" => true]);
+    public function createSlug(string $name)
+    {
+        $slug = SlugService::createSlug(Product::class, 'slug', $name, ["unique" => true]);
         return $slug;
     }
 }

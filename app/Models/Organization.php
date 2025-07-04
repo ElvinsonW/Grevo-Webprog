@@ -8,12 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Organization extends Model
 {
     protected $primaryKey = 'organization_id';  
-    public $incrementing = true;
-    protected $keyType = 'int';
+    // public $incrementing = true;
+    // protected $keyType = 'int';
 
     public function trees()
     {
-        return $this->hasMany(Tree::class);
+        return $this->hasMany(Tree::class, 'organization_id', 'organization_id');
     }
 
     public function batches()
@@ -27,7 +27,6 @@ class Organization extends Model
         'coverage_region',
         'official_contact_info',
         'organization_logo',
-        'types_of_tree_planted',
         'existing_partner_or_sponsor',
         'organization_status'
     ];
