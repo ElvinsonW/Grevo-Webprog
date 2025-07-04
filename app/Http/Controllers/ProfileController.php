@@ -9,6 +9,8 @@ use App\Models\User;
 use App\Models\Order;
 use App\Models\StatusHistory;
 use App\Models\OrderItem;
+use App\Models\Address; // Pastikan ini di-import jika Anda menggunakan model Address
+
 
 class ProfileController extends Controller
 {
@@ -19,30 +21,24 @@ class ProfileController extends Controller
      */
     public function showProfile()
     {
-        // Get the authenticated user. If not logged in, $user will be null.
         $user = Auth::user();
-        // You might consider passing a dummy user object for testing if $user is null,
-        // but it's better to handle null directly in the Blade if no auth middleware is used.
         return view('User.edit-profile.edit-profile', compact('user'));
     }
 
     /**
      * Menampilkan halaman daftar alamat pengguna.
      *
-     * @return \Illuminate\View\View
+     * @return \Illuminate\View\View|\Illuminate\Http\RedirectResponse
      */
     public function showAddresses()
     {
         $user = Auth::user();
         if (!$user) {
-            // Handle case where user is not logged in, perhaps redirect to login
-            return redirect()->route('signin')->with('error', 'You must be logged in to view addresses.');
+            return redirect()->route('login')->with('error', 'Anda harus login untuk melihat alamat.');
         }
 
-        // Ambil alamat-alamat user yang sedang login
         $addresses = $user->addresses; // Menggunakan relasi hasMany
 
-        // Path view disesuaikan: resources/views/User/edit-profile/addresses.blade.php
         return view('User.edit-profile.addresses', compact('user', 'addresses'));
     }
 
@@ -52,40 +48,39 @@ class ProfileController extends Controller
      * @return \Illuminate\View\View
      */
     public function showOrders(Request $request)
-{
-    $user = Auth::user();
-    $keyword = $request->input('keyword');
-    $statusParam = $request->input('status', 'all');
+    {
+        $user = Auth::user();
+        $keyword = $request->input('keyword');
+        $statusParam = $request->input('status', 'all');
 
-    $statusMap = [
-        'to-ship'    => ['ORDER PLACED'],
-        'to-receive' => ['ORDER SHIPPED'],
-        'delivered'  => ['ORDER ARRIVED'],
-        'completed'  => ['ORDER RECEIVED', 'ORDER COMPLETED'],
-        'cancelled'  => ['CANCELLED'],
-    ];
+        $statusMap = [
+            'to-ship'    => ['ORDER PLACED'],
+            'to-receive' => ['ORDER SHIPPED'],
+            'delivered'  => ['ORDER ARRIVED'],
+            'completed'  => ['ORDER RECEIVED', 'ORDER COMPLETED'],
+            'cancelled'  => ['CANCELLED'],
+        ];
 
-    $orders = Order::with(['items', 'statusHistories' => fn($q) => $q->orderBy('changed_at', 'desc')])
-        ->where('user_id', $user->id)
-        ->when($keyword, function ($query) use ($keyword) {
-            $query->where(function ($q) use ($keyword) {
-                $q->where('order_id', 'like', "%$keyword%")
-                  ->orWhereHas('items', fn ($iq) => $iq->where('name', 'like', "%$keyword%"));
+        $orders = Order::with(['items', 'statusHistories' => fn($q) => $q->orderBy('changed_at', 'desc')])
+            ->where('user_id', $user->id)
+            ->when($keyword, function ($query) use ($keyword) {
+                $query->where(function ($q) use ($keyword) {
+                    $q->where('order_id', 'like', "%$keyword%")
+                      ->orWhereHas('items', fn ($iq) => $iq->where('name', 'like', "%$keyword%"));
+                });
+            })
+            ->get();
+
+        if ($statusParam !== 'all' && isset($statusMap[$statusParam])) {
+            $statuses = $statusMap[$statusParam];
+            $orders = $orders->filter(function ($order) use ($statuses) {
+                $latestStatus = $order->statusHistories->first()->status ?? null;
+                return in_array($latestStatus, $statuses);
             });
-        })
-        ->get(); // ambil semua dulu
+        }
 
-    // ⬇ Filter by status terakhir (statusHistories->first())
-    if ($statusParam !== 'all' && isset($statusMap[$statusParam])) {
-        $statuses = $statusMap[$statusParam];
-        $orders = $orders->filter(function ($order) use ($statuses) {
-            $latestStatus = $order->statusHistories->first()->status ?? null;
-            return in_array($latestStatus, $statuses);
-        });
+        return view('User.orders.history', compact('user', 'orders'));
     }
-
-    return view('User.orders.history', compact('user', 'orders'));
-}
 
     /**
      * Menampilkan halaman daftar ulasan pengguna.
@@ -95,7 +90,6 @@ class ProfileController extends Controller
     public function showReviews()
     {
         $user = Auth::user();
-        // Asumsi path view reviews, bisa jadi User/reviews/index atau User/edit-profile/reviews
         return view('User.reviews.index', compact('user'));
     }
 
@@ -108,12 +102,8 @@ class ProfileController extends Controller
      */
     public function updateProfile(Request $request, $username)
     {
-        // This method *requires* a logged-in user.
-        // If you've disabled 'auth' middleware, this method will fail if no user is logged in.
-        // For temporary testing without auth, you might need to mock a user or just avoid calling this method.
         if (!Auth::check()) {
-            // Redirect to login or show an error if not authenticated
-            return redirect()->route('signin')->with('error', 'You must be logged in to update your profile.');
+            return redirect()->route('login')->with('error', 'Anda harus login untuk mengupdate profil.');
         }
 
         $user = Auth::user();
@@ -129,7 +119,7 @@ class ProfileController extends Controller
             'phone_number' => 'nullable|string|max:20',
             'address' => 'nullable|string|max:255',
             'gender' => 'nullable|in:male,female',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:1024', // Max 1MB
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:1024',
         ]);
 
         if ($request->hasFile('image')) {
@@ -148,6 +138,6 @@ class ProfileController extends Controller
         $user->gender = $request->gender;
         $user->save();
 
-        return redirect()->back()->with('success', 'Profile updated successfully!');
+        return redirect()->back()->with('success', 'Profil berhasil diperbarui!');
     }
 }
