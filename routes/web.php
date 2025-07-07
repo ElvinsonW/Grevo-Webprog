@@ -20,6 +20,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AddressController;
 
 // --- Import Middleware yang Diperlukan ---
 use App\Http\Middleware\CheckAdminRole;
@@ -81,6 +82,21 @@ Route::middleware(CheckUserRole::class)->group(function(){
 
     // Rute Alamat (Hanya Show)
     Route::get('/profile/addresses', [ProfileController::class, 'showAddresses'])->name('addresses'); // <-- Hanya rute ini yang tersisa
+
+// TAMBAHKAN RUTE ALAMAT LAINNYA DI SINI
+    // Rute untuk menampilkan form tambah alamat baru (opsional)
+    Route::get('/addresses/create', [AddressController::class, 'create'])->name('addresses.create');
+    // Rute untuk menyimpan alamat baru (opsional)
+    Route::post('/addresses', [AddressController::class, 'store'])->name('addresses.store');
+
+    // Rute untuk mengedit alamat
+    Route::get('/addresses/{address}/edit', [AddressController::class, 'edit'])->name('addresses.edit');
+    // Rute untuk memperbarui alamat
+    Route::put('/addresses/{address}', [AddressController::class, 'update'])->name('addresses.update');
+    // Rute untuk menghapus alamat
+    Route::delete('/addresses/{address}', [AddressController::class, 'destroy'])->name('addresses.destroy');
+    // Rute untuk mengatur alamat sebagai default
+    Route::patch('/addresses/{address}/set-default', [AddressController::class, 'setDefault'])->name('addresses.setDefault');
 
     // Rute Pesanan & Ulasan
     Route::get('/profile/orders', [ProfileController::class, 'showOrders'])->name('orders');

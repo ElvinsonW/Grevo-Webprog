@@ -1,7 +1,5 @@
 <?php
 
-// app/Models/Address.php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -18,12 +16,19 @@ class Address extends Model
         'street_address',
         'city',
         'province',
-        'postal_code',
-        'other_details',
+        'urban_village',
+        'subdistrict',
         'label',
         'is_default',
     ];
 
+    protected $casts = [
+        'is_default' => 'boolean',
+    ];
+
+    /**
+     * Get the user that owns the address.
+     */
     public function user()
     {
         return $this->belongsTo(User::class);

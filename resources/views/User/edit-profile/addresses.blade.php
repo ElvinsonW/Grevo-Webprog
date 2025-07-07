@@ -22,7 +22,17 @@
                     <div class="flex-grow">
                         <p class="text-[1.2vw] font-semibold text-gray-800">{{ $address->recipient_name }} <span class="ml-[0.5vw] text-gray-600">{{ $address->phone_number }}</span></p>
                         <p class="text-[0.9vw] text-gray-700 mt-[0.25vw]">{{ $address->street_address }}</p>
-                        <p class="text-[0.9vw] text-gray-500">{{ $address->province }}, {{ $address->city }}, {{ $address->district }}, {{ $address->postal_code }}</p>
+                        <p class="text-[0.9vw] text-gray-500">
+                            {{-- Menggabungkan bagian alamat dengan hati-hati untuk menghindari koma ganda --}}
+                            {{ implode(', ', array_filter([
+                                $address->urban_village,
+                                $address->subdistrict,
+                                $address->city,
+                                $address->province
+                            ])) }}
+                            {{-- Anda mungkin perlu menambahkan postal_code jika ada di database --}}
+                            {{-- @if ($address->postal_code), {{ $address->postal_code }}@endif --}}
+                        </p>
 
                         <div class="flex items-center gap-[0.5vw] mt-[0.5vw]">
                             @if ($address->is_default)
@@ -32,6 +42,23 @@
                                 <span class="px-[1vw] py-[0.25vw] text-[0.8vw] font-semibold rounded-full bg-gray-200 text-gray-700">{{ $address->label }}</span>
                             @endif
                         </div>
+                    </div>
+
+                    {{-- Action Buttons --}}
+                    <div class="flex flex-col lg:flex-row items-end lg:items-center gap-[0.5vw] mt-[1vw] lg:mt-0 lg:ml-[2vw]">
+                        <a href="{{ route('addresses.edit', $address) }}" class="text-[0.9vw] text-gray-500 hover:text-blue-600">Edit</a>
+                        <form action="{{ route('addresses.destroy', $address) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this address?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="text-[0.9vw] text-gray-500 hover:text-red-600">Delete</button>
+                        </form>
+                        @if (!$address->is_default)
+                            <form action="{{ route('addresses.setDefault', $address) }}" method="POST">
+                                @csrf
+                                @method('PATCH') {{-- Atau PUT jika Anda lebih suka --}}
+                                <button type="submit" class="px-[1.2vw] py-[0.5vw] text-[0.9vw] rounded-[0.3vw] border border-gray-300 text-gray-600 hover:bg-gray-100">Set as Default</button>
+                            </form>
+                        @endif
                     </div>
                 </div>
                 @empty
@@ -44,8 +71,6 @@
     @push('scripts')
     <script>
         // JavaScript for sidebar dropdown
-        // Pindahkan script ini ke dalam komponen profilebar jika hanya terkait dengan sidebar
-        // Jika script ini perlu tetap di addresses.blade.php karena alasan lain, biarkan saja.
         const toggle = document.getElementById('profile-menu');
         const menu = document.getElementById('profile-dropdown');
         const icon = document.getElementById('dropdown-icon')

@@ -29,7 +29,11 @@ class DatabaseSeeder extends Seeder
             // ProductSeeder::class,
             OrganizationSeeder::class,
             TreeSeeder::class,
-            BatchSeeder::class
+            BatchSeeder::class,
+            AddressSeeder::class,
+            OrderSeeder::class,
+            // OrderItemSeeder::class,
+            StatusHistorySeeder::class,
         ]);
 
         Product::factory(30)->recycle(
@@ -76,14 +80,5 @@ class DatabaseSeeder extends Seeder
                 );
             }
         );
-
-
-
-        $this->call([
-            OrderSeeder::class,
-            OrderItemSeeder::class,
-            StatusHistorySeeder::class,
-            AddressSeeder::class
-        ]);
     }
 }
