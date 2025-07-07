@@ -220,4 +220,5 @@ class AddressesController extends Controller
 
         return redirect()->route('addresses')->with('success', 'Address set as default.');
     }
+    
 }
