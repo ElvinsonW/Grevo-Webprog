@@ -20,7 +20,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\AddressController;
+use App\Http\Controllers\AddressesController;
 
 // --- Import Middleware yang Diperlukan ---
 use App\Http\Middleware\CheckAdminRole;
@@ -85,18 +85,21 @@ Route::middleware(CheckUserRole::class)->group(function(){
 
 // TAMBAHKAN RUTE ALAMAT LAINNYA DI SINI
     // Rute untuk menampilkan form tambah alamat baru (opsional)
-    Route::get('/addresses/create', [AddressController::class, 'create'])->name('addresses.create');
+    Route::get('/addresses/create', [AddressesController::class, 'create'])->name('addresses.create');
     // Rute untuk menyimpan alamat baru (opsional)
-    Route::post('/addresses', [AddressController::class, 'store'])->name('addresses.store');
+    Route::post('/addresses', [AddressesController::class, 'store'])->name('addresses.store');
 
+    // Rute Alamat (Bagian yang diubah/ditambahkan)
+    Route::get('/profile/addresses', [AddressesController::class, 'index'])->name('addresses'); // Menampilkan daftar alamat
+    Route::post('/addresses', [AddressesController::class, 'store'])->name('addresses.store'); // Untuk menyimpan alamat baru (jika ada form create)
+    Route::get('/addresses/create', [AddressesController::class, 'create'])->name('addresses.create'); // Untuk form tambah alamat baru
+
+    // Rute untuk fungsionalitas modal edit
     // Rute untuk mengedit alamat
-    Route::get('/addresses/{address}/edit', [AddressController::class, 'edit'])->name('addresses.edit');
-    // Rute untuk memperbarui alamat
-    Route::put('/addresses/{address}', [AddressController::class, 'update'])->name('addresses.update');
-    // Rute untuk menghapus alamat
-    Route::delete('/addresses/{address}', [AddressController::class, 'destroy'])->name('addresses.destroy');
-    // Rute untuk mengatur alamat sebagai default
-    Route::patch('/addresses/{address}/set-default', [AddressController::class, 'setDefault'])->name('addresses.setDefault');
+    Route::get('/addresses/{address}/edit', [AddressesController::class, 'edit'])->name('addresses.edit');
+    Route::put('/addresses/{address}', [AddressesController::class, 'update'])->name('addresses.update'); // Update alamat
+    Route::delete('/addresses/{address}', [AddressesController::class, 'destroy'])->name('addresses.destroy'); // Hapus alamat
+    Route::patch('/addresses/{address}/set-default', [AddressesController::class, 'setDefault'])->name('addresses.setDefault'); // Set default
 
     // Rute Pesanan & Ulasan
     Route::get('/profile/orders', [ProfileController::class, 'showOrders'])->name('orders');

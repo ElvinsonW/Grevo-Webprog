@@ -2,88 +2,128 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Address;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth; // Pastikan ini ada untuk Auth::user()
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class AddressesController extends Controller
 {
     public function index()
     {
-        // Data user dummy atau user yang sedang login
         $user = Auth::user();
-        if (!$user) {
-            // Jika tidak ada user login, berikan data user dummy
-            $user = (object)[
-                'username' => 'Dummy User', // Nama dummy
-                'image' => null, // Atau 'images/skz.jpg' jika ingin ada gambar default
-                'points' => 1234
-            ];
-        }
+        $addresses = $user->addresses()->orderByDesc('is_default')->get();
 
-        // Data alamat dummy
-        $addresses = [
-            (object)[
-                'id' => 1,
-                'recipient_name' => 'Cecilia Supardi',
-                'phone_number' => '(+62) 891 2173 8472',
-                'street_address' => 'Jl. Pakuan no. 3, Daan Mogot Raya',
-                'province' => 'DKI Jakarta',
-                'city' => 'KOTA JAKARTA PUSAT',
-                'district' => 'GAMBIR',
-                'postal_code' => '10101',
-                'other_details' => 'Tolong titipkan di resepsionis.',
-                'label' => 'Home',
-                'is_default' => true,
-            ],
-            (object)[
-                'id' => 2,
-                'recipient_name' => 'Nama Penerima Lain',
-                'phone_number' => '(+62) 812 3456 7890',
-                'street_address' => 'Jl. Contoh Alamat No. 123',
-                'province' => 'PROVINSI CONTOH',
-                'city' => 'KABUPATEN CONTOH',
-                'district' => 'KECAMATAN CONTOH',
-                'postal_code' => '12345',
-                'other_details' => null,
-                'label' => 'Work',
-                'is_default' => false,
-            ],
-            (object)[
-                'id' => 3,
-                'recipient_name' => 'John Doe',
-                'phone_number' => '(+62) 876 5432 1098',
-                'street_address' => 'Apartemen Sukajadi Blok C No. 5',
-                'province' => 'Jawa Barat',
-                'city' => 'Bandung',
-                'district' => 'Cihampelas',
-                'postal_code' => '40123',
-                'other_details' => 'Unit 10B, dekat lift.',
-                'label' => 'Other',
-                'is_default' => false,
-            ],
-        ];
-
-        return view('edit-profile.addresses', compact('user', 'addresses'));
+        return view('User.edit-profile.addresses', compact('user', 'addresses'));
     }
 
-    // Metode dummy untuk operasi CRUD (tanpa implementasi database)
+    public function create()
+    {
+        // Jika Anda ingin form "tambah alamat" dalam modal juga,
+        // Anda mungkin tidak perlu metode ini mengembalikan view,
+        // melainkan hanya ada tombol di halaman utama yang memicu modal kosong.
+        // return view('addresses.create');
+    }
+
     public function store(Request $request)
     {
-        return redirect()->back()->with('success', 'Address added (dummy)!');
+        $validatedData = $request->validate([
+            'recipient_name' => 'required|string|max:255',
+            'phone_number' => 'required|string|max:20',
+            'street_address' => 'required|string|max:500',
+            'city' => 'required|string|max:255',
+            'province' => 'required|string|max:255',
+            'urban_village' => 'nullable|string|max:255',
+            'subdistrict' => 'nullable|string|max:255',
+            'label' => 'nullable|string|max:255',
+            'is_default' => 'boolean',
+        ]);
+
+        $validatedData['user_id'] = Auth::id();
+
+        if (isset($validatedData['is_default']) && $validatedData['is_default']) {
+            Auth::user()->addresses()->update(['is_default' => false]);
+        } else {
+            if (Auth::user()->addresses()->doesntExist()) {
+                $validatedData['is_default'] = true;
+            }
+        }
+
+        Address::create($validatedData);
+
+        return redirect()->route('addresses')->with('success', 'Address added successfully.');
     }
 
-    public function update(Request $request, $id)
+    public function edit(Address $address)
     {
-        return redirect()->back()->with('success', "Address $id updated (dummy)! ");
+        // Dalam kasus modal, metode ini tidak mengembalikan view.
+        // Data diambil oleh JS di client-side dari data-attributes.
+        // Jika perlu data tambahan, Anda bisa mengembalikan JSON:
+        // return response()->json($address);
+        if (Auth::id() !== $address->user_id) {
+            abort(403, 'Unauthorized action.');
+        }
     }
 
-    public function destroy($id)
+    public function update(Request $request, Address $address)
     {
-        return redirect()->back()->with('success', "Address $id deleted (dummy)! ");
+        if (Auth::id() !== $address->user_id) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $validatedData = $request->validate([
+            'recipient_name' => 'required|string|max:255',
+            'phone_number' => 'required|string|max:20',
+            'street_address' => 'required|string|max:500',
+            'city' => 'required|string|max:255',
+            'province' => 'required|string|max:255',
+            'urban_village' => 'nullable|string|max:255',
+            'subdistrict' => 'nullable|string|max:255',
+            'label' => 'nullable|string|max:255',
+            'is_default' => 'boolean',
+        ]);
+
+        $isDefaultRequested = $request->has('is_default');
+
+        if ($isDefaultRequested) {
+            Auth::user()->addresses()->where('id', '!=', $address->id)->update(['is_default' => false]);
+            $validatedData['is_default'] = true;
+        } else {
+            $validatedData['is_default'] = false;
+        }
+
+        $address->update($validatedData);
+
+        return redirect()->route('addresses')->with('success', 'Address updated successfully.');
     }
 
-    public function setDefault($id)
+    public function destroy(Address $address)
     {
-        return redirect()->back()->with('success', "Address $id set as default (dummy)! ");
+        if (Auth::id() !== $address->user_id) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        if ($address->is_default) {
+            $newDefault = Auth::user()->addresses()->where('id', '!=', $address->id)->first();
+            if ($newDefault) {
+                $newDefault->update(['is_default' => true]);
+            }
+        }
+
+        $address->delete();
+
+        return redirect()->route('addresses')->with('success', 'Address deleted successfully.');
+    }
+
+    public function setDefault(Address $address)
+    {
+        if (Auth::id() !== $address->user_id) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        Auth::user()->addresses()->update(['is_default' => false]);
+        $address->update(['is_default' => true]);
+
+        return redirect()->route('addresses')->with('success', 'Address set as default.');
     }
 }
