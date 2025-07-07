@@ -168,7 +168,7 @@
                 reader.onloadend = () => {
                     profileImage.src = reader.result;
                 }
-                reader.readAsDataURL(file);
+                reader.readAsDataURL(file);ph
             }
         }
 

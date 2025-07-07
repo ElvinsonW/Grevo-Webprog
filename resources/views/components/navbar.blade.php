@@ -1,7 +1,9 @@
 <header class="flex items-center justify-around w-full h-[8vw] px-[5vw] bg-green-1">
-    <img src="{{ asset('images/logo.png') }}" alt="logo" class="w-[10vw]">
+    <a href="/">
+        <img src="{{ asset('images/logo.png') }}" alt="logo" class="w-[10vw]">
+    </a>
     <div class="flex flex-col items-center justify-center gap-[0.75vw]">
-        <form action="" class="flex items-center gap-[0.5vw] pl-[1vw] pr-[0.5vw] w-[60vw] h-[3vw] bg-yellow-2">
+        <form action="/products" method="GET"  class="flex items-center gap-[0.5vw] pl-[1vw] pr-[0.5vw] w-[60vw] h-[3vw] bg-yellow-2">
             @php
                 $params = ["category","max_price","min_price","min_rating"];
             @endphp
@@ -12,7 +14,7 @@
             @endforeach
             <input type="text" name="search" value="{{ request()->query('search') }}" id="search" class="w-[90%] focus:outline-none">
 
-            <button class="px-[2vw] py-[0.25vw] bg-green-1 text-white">
+            <button class="cursor-pointer px-[2vw] py-[0.25vw] bg-green-1 text-white">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </button>
         </form>
@@ -23,6 +25,7 @@
             <ul><a href="/carbon-calculator">Carbon calculator</a></ul>
         </li>
     </div>
+
     <a href="/cart">
         <i class="fa-solid fa-cart-shopping text-[2vw] text-green-3"></i>
     </a>

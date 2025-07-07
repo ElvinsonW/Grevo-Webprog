@@ -26,56 +26,84 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
             ProductCategorySeeder::class,
-            // ProductSeeder::class,
+            ProductSeeder::class,
             OrganizationSeeder::class,
             TreeSeeder::class,
             BatchSeeder::class
         ]);
 
-        Product::factory(30)->recycle(
-            ProductCategory::all()
-        )->create()->each(
-            function ($product) {
-                ProductImage::factory(rand(1, 3))->create([
-                    'product_id' => $product->id,
-                    'image' => 'product-image/elvinson.jpg'
-                ]);
+        $variants = ProductVariant::all();
 
-                ProductVariant::factory(1)->create([
-                    'product_id' => $product->id
-                ])->each(
-                    function ($variant) {
-                        Size::factory()->create([
-                            'product_variant_id' => $variant->id
-                        ]);
+        foreach ($variants as $variant) {
+            Cart::factory()->recycle(
+                User::all()
+            )->create([
+                'product_variant_id' => $variant->id
+            ]);
+        }
 
-                        Color::factory()->create([
-                            'product_variant_id' => $variant->id
-                        ]);
+        $products = Product::all();
 
-                        Cart::factory()->recycle(
-                            User::all()
-                        )->create([
-                            'product_variant_id' => $variant->id
-                        ]);
-                    }
-                );
+        foreach ($products as $product) {
+            Review::factory(rand(10, 30))->recycle([
+                User::all()
+            ])->create([
+                'product_id' => $product->id,
+                'rate' => rand(3,5)
+            ])->each(
+                function ($review) {
+                    ReviewImage::factory(rand(1, 3))->create([
+                        'review_id' => $review->id,
+                        'source' => 'review-image/elvinson.jpg'
+                    ]);
+                }
+            );
+        }
+
+        // Product::factory(30)->recycle(
+        //     ProductCategory::all()
+        // )->create()->each(
+        //     function ($product) {
+        //         ProductImage::factory(rand(1, 3))->create([
+        //             'product_id' => $product->id,
+        //             'image' => 'product-image/elvinson.jpg'
+        //         ]);
+
+        //         ProductVariant::factory(1)->create([
+        //             'product_id' => $product->id
+        //         ])->each(
+        //             function ($variant) {
+        //                 Size::factory()->create([
+        //                     'product_variant_id' => $variant->id
+        //                 ]);
+
+        //                 Color::factory()->create([
+        //                     'product_variant_id' => $variant->id
+        //                 ]);
+
+        //                 Cart::factory()->recycle(
+        //                     User::all()
+        //                 )->create([
+        //                     'product_variant_id' => $variant->id
+        //                 ]);
+        //             }
+        //         );
 
 
-                Review::factory(10)->recycle([
-                    User::all()
-                ])->create([
-                    'product_id' => $product->id
-                ])->each(
-                    function ($review) {
-                        ReviewImage::factory(rand(1, 3))->create([
-                            'review_id' => $review->id,
-                            'source' => 'review-image/elvinson.jpg'
-                        ]);
-                    }
-                );
-            }
-        );
+        //         Review::factory(10)->recycle([
+        //             User::all()
+        //         ])->create([
+        //             'product_id' => $product->id
+        //         ])->each(
+        //             function ($review) {
+        //                 ReviewImage::factory(rand(1, 3))->create([
+        //                     'review_id' => $review->id,
+        //                     'source' => 'review-image/elvinson.jpg'
+        //                 ]);
+        //             }
+        //         );
+        //     }
+        // );
 
 
 
