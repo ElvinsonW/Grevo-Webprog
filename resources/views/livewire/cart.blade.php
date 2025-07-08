@@ -32,7 +32,7 @@
                              alt="{{ $cart->product_variant->product->name }}" 
                              class="w-[6vw] h-[6vw] object-cover rounded-[0.5vw]">
                         <div class="flex flex-col justify-center">
-                            <h2 class="text-[1.5vw] mb-[0.3vw]">{{ $cart->product_variant->product->name }}</h2>
+                            <h2 class="text-[1.3vw] mb-[0.3vw]">{{ $cart->product_variant->product->name }}</h2>
                             @if ($cart->product_variant->color)
                                 <p class="text-[0.8vw] mb-[0.2vw]">Color : {{ $cart->product_variant->color->name }}</p>
                             @endif
