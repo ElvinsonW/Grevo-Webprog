@@ -16,14 +16,7 @@ class AddressSeeder extends Seeder
     {
         // Pastikan ada setidaknya satu user untuk dihubungkan dengan alamat
         // Jika belum ada user, Anda bisa membuat satu di sini atau melalui UserSeeder.
-        $user = User::first(); // Ambil user pertama, atau buat jika tidak ada
-        if (!$user) {
-            $user = User::factory()->create([
-                'name' => 'John Doe',
-                'email' => 'john.doe@example.com',
-                'password' => bcrypt('password'),
-            ]);
-        }
+        $user = User::find(2);
 
         Address::create([
             'user_id' => $user->id,

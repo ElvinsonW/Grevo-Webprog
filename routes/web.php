@@ -50,14 +50,9 @@ Route::get('/about', function() {
     return view('about');
 })->name('about');
 
-Route::get('/product-detail', function(){
-    return view('User.product.product-detail');
-})->name('product-detail');
-
 Route::get('/trees', [TreeController::class, 'show'])->name('treecatalogue.tree');
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
-
 
 // --- 2. Guest-only Routes (Hanya dapat diakses jika pengguna BELUM login) ---
 Route::middleware(CheckGuest::class)->group(function(){
@@ -76,8 +71,8 @@ Route::middleware(CheckUserRole::class)->group(function(){
     Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
     // Rute Profil Pengguna & Sub-halaman (Semua ditangani oleh ProfileController)
-    Route::get('/profile', [ProfileController::class, 'showProfile'])->name('profile');
-    Route::put('/user/{username}', [ProfileController::class, 'updateProfile'])->name('profile.update');
+    Route::get('/profile', [UserController::class, 'edit'])->name('profile');
+    Route::put('/user/{username}', [UserController::class, 'update'])->name('profile.update');
 
     // Rute Alamat (Bagian yang diubah/ditambahkan)
     Route::get('/profile/addresses', [AddressesController::class, 'index'])->name('addresses'); // Menampilkan daftar alamat
@@ -93,7 +88,7 @@ Route::middleware(CheckUserRole::class)->group(function(){
 
     // Rute Pesanan & Ulasan
     Route::get('/profile/orders', [ProfileController::class, 'showOrders'])->name('orders');
-    Route::get('/profile/reviews', [ProfileController::class, 'showReviews'])->name('reviews');
+    Route::get('/profile/reviews', [ProfileController::class, 'showReviews'])->name('profile.reviews');
 
     // Rute Keranjang Belanja
     Route::resource('cart', CartController::class)->except(['create', 'edit']);

@@ -29,10 +29,12 @@
     <a href="/cart">
         <i class="fa-solid fa-cart-shopping text-[2vw] text-green-3"></i>
     </a>
-    <div class="flex items-center gap-[0.5vw]">
+    <div class="">
         @auth
-            <i class="fa-solid fa-user text-[2vw] text-green-3"></i>
-            <p class="font-bold text-green-3">{{ auth()->user()->username }}</p>    
+            <a href="/profile" class="flex items-center gap-[0.5vw]">
+                <i class="fa-solid fa-user text-[2vw] text-green-3"></i>
+                <p class="font-bold text-green-3">{{ auth()->user()->username }}</p>    
+            </a>
         @else
             <button class="">
                 <a href="{{ route('login') }}" 

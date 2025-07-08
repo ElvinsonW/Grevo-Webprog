@@ -10,7 +10,7 @@ use App\Models\Order;
 use App\Models\StatusHistory;
 use App\Models\OrderItem;
 use App\Models\Address; // Pastikan ini di-import jika Anda menggunakan model Address
-
+use App\Models\Review;
 
 class ProfileController extends Controller
 {
@@ -90,54 +90,9 @@ class ProfileController extends Controller
     public function showReviews()
     {
         $user = Auth::user();
-        return view('User.reviews.index', compact('user'));
-    }
-
-    /**
-     * Mengupdate profil pengguna.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  string  $username
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function updateProfile(Request $request, $username)
-    {
-        if (!Auth::check()) {
-            return redirect()->route('login')->with('error', 'Anda harus login untuk mengupdate profil.');
-        }
-
-        $user = Auth::user();
-
-        if ($user->username !== $username) {
-            abort(403, 'Unauthorized action.');
-        }
-
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'username' => 'required|string|max:255|unique:users,username,' . $user->id,
-            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
-            'phone_number' => 'nullable|string|max:20',
-            'address' => 'nullable|string|max:255',
-            'gender' => 'nullable|in:male,female',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:1024',
+        return view('User.edit-profile.user-review', [
+            "user" => $user,
+            "reviews" => Review::where("user_id", $user->id)->paginate(10)
         ]);
-
-        if ($request->hasFile('image')) {
-            if ($user->image) {
-                Storage::disk('public')->delete($user->image);
-            }
-            $imagePath = $request->file('image')->store('profile_images', 'public');
-            $user->image = $imagePath;
-        }
-
-        $user->name = $request->name;
-        $user->username = $request->username;
-        $user->email = $request->email;
-        $user->phone_number = $request->phone_number;
-        $user->address = $request->address;
-        $user->gender = $request->gender;
-        $user->save();
-
-        return redirect()->back()->with('success', 'Profil berhasil diperbarui!');
     }
 }

@@ -62,9 +62,10 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $username)
+    public function edit()
     {
-        $user = User::where('username', $username)->firstOrFail();
+
+        $user = Auth::user();
         return view('User.edit-profile.edit-profile', ['user' => $user]);
     }
 
@@ -98,9 +99,9 @@ class UserController extends Controller
             }
 
             $user->update(Arr::except($validatedData, ['role']));
-            return redirect('/')->with('updateSuccess', 'Profile updated successfully');
+            return redirect('/profile')->with('updateSuccess', 'Profile updated successfully');
         }
-        return redirect('/')->with('updateError', 'There is no user with this username');
+        return redirect('/profile')->with('updateError', 'There is no user with this username');
     }
 
     /**

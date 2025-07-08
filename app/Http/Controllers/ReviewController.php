@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\ProductVariant;
 use App\Models\Review;
 use App\Models\ReviewImage;
 use Illuminate\Http\Request;
@@ -34,7 +35,8 @@ class ReviewController extends Controller
      */
     public function create()
     {
-        return view('User.review.create-review');
+        $product_variants = ProductVariant::take(5)->get();
+        return view('User.review.create-review', ["product_variants" => $product_variants]);
     }
 
     /**
