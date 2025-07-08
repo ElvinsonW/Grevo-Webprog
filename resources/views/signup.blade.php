@@ -27,7 +27,7 @@
 {{-- Menghapus kelas 'font-inter' dari body karena font diatur via style tag dengan var() --}}
 
 <body class="min-h-screen flex items-center justify-center relative bg-gray-100 py-[10vw]">
-
+    
     {{-- Logo Grevo di kiri atas --}}
     <div class="absolute top-10 left-10 z-10">
         <img src="{{ asset('images/GrevoHD.svg') }}" alt="Grevo Logo" class="h-15">

@@ -51,10 +51,6 @@ Route::get('/about', function() {
     return view('about');
 })->name('about');
 
-Route::get('/product-detail', function(){
-    return view('User.product.product-detail');
-})->name('product-detail');
-
 // Menggunakan TreeCatalogueController untuk katalog publik
 Route::get('/trees', [TreeCatalogueController::class, 'index'])->name('treecatalogue.index'); // Asumsi TreeCatalogueController memiliki method index
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
@@ -80,9 +76,6 @@ Route::middleware(CheckUserRole::class)->group(function(){
     // Rute Profil Pengguna & Sub-halaman (Semua ditangani oleh ProfileController)
     Route::get('/profile', [ProfileController::class, 'showProfile'])->name('profile');
     Route::put('/user/{username}', [ProfileController::class, 'updateProfile'])->name('profile.update');
-
-    // Rute Alamat (Hanya Show) - INI DIKEMBALIKAN SESUAI PERMINTAAN
-    Route::get('/profile/addresses', [ProfileController::class, 'showAddresses'])->name('addresses'); // <-- Ini tetap ada
 
     // TAMBAHKAN RUTE ALAMAT LAINNYA DI SINI - MENGGUNAKAN RESOURCE
     // Menggunakan Route::resource untuk operasi CRUD alamat standar.
