@@ -5,7 +5,6 @@ use App\Http\Controllers\RegisterController; // Corrected to Auth\RegisterContro
 use App\Http\Controllers\LoginController;
 // # sampe sini
 
-#nambahhin ini
 
 // --- Import Controllers yang Diperlukan ---
 use App\Http\Controllers\Admin\BatchController;
@@ -30,17 +29,6 @@ use App\Http\Middleware\CheckUserRole;
 use Illuminate\Support\Facades\Route;
 
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
 // --- 1. Homepage & General Public Routes (Tidak memerlukan autentikasi) ---
 Route::get('/', function () {
     return view('homepage');
@@ -51,8 +39,13 @@ Route::get('/about', function() {
 })->name('about');
 
 Route::get('/trees', [TreeController::class, 'show'])->name('treecatalogue.tree');
+// nambahin rute untuk melihat detail pohon
+Route::get('/trees/{treeName}', [TreeController::class, 'see'])->name('treecatalogue.tree-detail');
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
+
+// organisasi
+Route::get('/organization/{organizationName}', [OrganizationController::class, 'show'])->name('treecatalogue.organization-detail');
 
 // --- 2. Guest-only Routes (Hanya dapat diakses jika pengguna BELUM login) ---
 Route::middleware(CheckGuest::class)->group(function(){
@@ -73,6 +66,15 @@ Route::middleware(CheckUserRole::class)->group(function(){
     // Rute Profil Pengguna & Sub-halaman (Semua ditangani oleh ProfileController)
     Route::get('/profile', [UserController::class, 'edit'])->name('profile');
     Route::put('/user/{username}', [UserController::class, 'update'])->name('profile.update');
+
+    // Rute Alamat (Hanya Show)
+    Route::get('/profile/addresses', [ProfileController::class, 'showAddresses'])->name('addresses'); // <-- Hanya rute ini yang tersisa
+
+// TAMBAHKAN RUTE ALAMAT LAINNYA DI SINI
+    // Rute untuk menampilkan form tambah alamat baru (opsional)
+    Route::get('/addresses/create', [AddressesController::class, 'create'])->name('addresses.create');
+    // Rute untuk menyimpan alamat baru (opsional)
+    Route::post('/addresses', [AddressesController::class, 'store'])->name('addresses.store');
 
     // Rute Alamat (Bagian yang diubah/ditambahkan)
     Route::get('/profile/addresses', [AddressesController::class, 'index'])->name('addresses'); // Menampilkan daftar alamat

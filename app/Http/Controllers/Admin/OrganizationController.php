@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Tree;
 use App\Models\Organization;
 
 class OrganizationController extends Controller
@@ -12,6 +13,14 @@ class OrganizationController extends Controller
     public function create()
     {
         return view('Admin.Organization.addorg');
+    }
+
+    // aku nambahin fungsi ini buat nampilin di detail organisasi nanti
+    public function show($organizationName)
+    {
+        $organization = Organization::where('organization_name', $organizationName)->firstOrFail();
+        $treesFromOrganization = Tree::where('organization_id', $organization->id)->get();
+        return view('User.treecatalogue.organization-detail', compact('organization', 'treesFromOrganization' /* , 'batchesFromOrganization' */));
     }
 
     public function index(Request $request)
