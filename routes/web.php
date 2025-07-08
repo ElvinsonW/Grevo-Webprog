@@ -48,6 +48,8 @@ Route::get('/trees/{treeName}', [TreeController::class, 'see'])->name('treecatal
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
 
+// organisasi
+Route::get('/organization/{organizationName}', [OrganizationController::class, 'show'])->name('treecatalogue.organization-detail');
 
 // --- 2. Guest-only Routes (Hanya dapat diakses jika pengguna BELUM login) ---
 Route::middleware(CheckGuest::class)->group(function(){

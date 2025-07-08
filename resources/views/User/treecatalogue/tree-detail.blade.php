@@ -1,3 +1,5 @@
+{{-- resources/views/User/tree/tree-detail.blade.php --}}
+
 <x-layout>
     <div class="p-[4vw]">
         <div class="flex flex-wrap lg:flex-nowrap gap-10 pl-[3vw] pr-[3vw] mb-[3vw]">
@@ -165,6 +167,13 @@
                                 No organization details available for this tree.
                             @endif
                         </p>
+                        {{-- ADD THIS "SEE DETAILS" BUTTON --}}
+                        @if ($tree->organization)
+                            <a href="{{ route('treecatalogue.organization-detail', ['organizationName' => $tree->organization->organization_name]) }}"
+                               class="inline-block bg-orange-1 text-white font-bold px-4 py-2 rounded mt-4 hover:bg-orange-2 transition-colors duration-200">
+                                See Details
+                            </a>
+                        @endif
                     </div>
 
                     {{-- Removed Buyer Reviews Content --}}
