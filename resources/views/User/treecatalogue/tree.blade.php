@@ -47,7 +47,7 @@
             <div>
                 <div class="flex flex-wrap gap-[1.5vw]" id="products-grid">
                     @forelse ($trees as $product)
-                        <a href="/adoption/{{ $product->treename }}"
+                        <a href="/trees/{{ $product->treename }}"
                            class="flex flex-col gap-3 p-3 pb-4 bg-green-2 w-[196px] h-[280px] flex-shrink-0 product-card"
                            style="box-shadow: 0px 4px 4px 2px rgba(0,0,0,0.25);">
                             <div class="relative w-full">

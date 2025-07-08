@@ -41,6 +41,25 @@ class TreeController extends Controller
             'selectedOrganization' => $selectedOrganization,
         ]);
     }
+    
+    public function see($treeName)
+    {
+        $tree = Tree::where('treename', $treeName)->firstOrFail();
+        $similarTrees = Tree::where('treecategory', $tree->treecategory)
+                            ->where('treeid', '!=', $tree->treeid)
+                            ->inRandomOrder()
+                            ->limit(4)
+                            ->get();
+
+        // Example: Dummy data for demonstration.
+        $treeBatches = collect([
+            (object)['batch_name' => 'BATCH 30', 'description' => 'Tanggal + desc singkat apa gitu ya ges ya lalalall', 'planting_date' => now()->subDays(10)],
+            (object)['batch_name' => 'BATCH 29', 'description' => 'Tanggal + desc singkat apa gitu ya ges ya lalalall', 'planting_date' => now()->subMonths(1)],
+            (object)['batch_name' => 'BATCH 28', 'description' => 'Tanggal + desc singkat apa gitu ya ges ya lalalall', 'planting_date' => now()->subMonths(2)],
+        ]);
+
+        return view('User.treecatalogue.tree-detail', compact('tree', 'similarTrees', 'treeBatches'));
+    }
 
     public function create()
     {

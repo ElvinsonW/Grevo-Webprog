@@ -43,6 +43,8 @@ Route::get('/product-detail', function(){
 })->name('product-detail');
 
 Route::get('/trees', [TreeController::class, 'show'])->name('treecatalogue.tree');
+// nambahin rute untuk melihat detail pohon
+Route::get('/trees/{treeName}', [TreeController::class, 'see'])->name('treecatalogue.tree-detail');
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
 
@@ -66,6 +68,15 @@ Route::middleware(CheckUserRole::class)->group(function(){
     // Rute Profil Pengguna & Sub-halaman (Semua ditangani oleh ProfileController)
     Route::get('/profile', [ProfileController::class, 'showProfile'])->name('profile');
     Route::put('/user/{username}', [ProfileController::class, 'updateProfile'])->name('profile.update');
+
+    // Rute Alamat (Hanya Show)
+    Route::get('/profile/addresses', [ProfileController::class, 'showAddresses'])->name('addresses'); // <-- Hanya rute ini yang tersisa
+
+// TAMBAHKAN RUTE ALAMAT LAINNYA DI SINI
+    // Rute untuk menampilkan form tambah alamat baru (opsional)
+    Route::get('/addresses/create', [AddressesController::class, 'create'])->name('addresses.create');
+    // Rute untuk menyimpan alamat baru (opsional)
+    Route::post('/addresses', [AddressesController::class, 'store'])->name('addresses.store');
 
     // Rute Alamat (Bagian yang diubah/ditambahkan)
     Route::get('/profile/addresses', [AddressesController::class, 'index'])->name('addresses'); // Menampilkan daftar alamat
