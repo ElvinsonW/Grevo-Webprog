@@ -64,3 +64,4 @@ class RegisterController extends Controller
         return redirect()->route('signin')->with('success', 'Akun berhasil dibuat! Silakan masuk.');
     }
 }
+

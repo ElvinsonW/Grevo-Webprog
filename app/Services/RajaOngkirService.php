@@ -36,6 +36,7 @@ class RajaOngkirService{
             ]);
 
             $responseBody = json_decode($response->getBody()->getContents(), true);
+            return $responseBody['data'][0] ?? [];
         } catch (\Exception $e) {
             return response()->json([
                 'error' => $e->getMessage(),

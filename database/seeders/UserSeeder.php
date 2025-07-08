@@ -16,17 +16,30 @@ class UserSeeder extends Seeder
         // Tambahkan baris ini untuk menghapus data lama sebelum seeding
 
         User::create([
+            'name' => 'Admin',
+            'username' => 'admin',
+            'email' => 'admin@gmail.com',
+            'phone_number' => '085263508932',
+            'address' => 'Jalan Pakuan no 3',
+            'gender' => 'male',
+            'image' => 'profile-image/elvinson.jpg',
+            'role' => 'admin',
+            'password' => bcrypt('password'), 
+        ]);
+
+        User::create([
             'name' => 'Elvinson Wijaya',
             'username' => 'elvinson',
             'email' => 'elvinso@gmail.com',
             'phone_number' => '085263506419',
             'address' => 'RTB BCA',
             'gender' => 'male',
-            'image' => 'elvinson.jpg',
+            'image' => 'profile-image/elvinson.jpg',
             'role' => 'user',
-            'password' => bcrypt('password'), // Gunakan bcrypt untuk password
+            'password' => bcrypt('password'), 
         ]);
+        
+        User::factory(5)->create();
 
-        $this->command->info('Users seeded successfully!');
     }
 }

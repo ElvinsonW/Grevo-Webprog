@@ -36,9 +36,11 @@
                     <img src="{{ asset('images/home_katalog3.png') }}" alt="Katalog" class="w-[25vw] h-[25vw] rounded-[1vw] object-cover">
                 </div>
 
-                <button class="font-bold px-[3vw] py-[0.5vw] text-[1.5vw] text-yellow-1 border border-yellow-1 hover:border-0 hover:bg-yellow-1 hover:text-green-2">
-                    See More
-                    <i class="fa-solid fa-arrow-right"></i>
+                <button class="cursor-pointer font-bold px-[3vw] py-[0.5vw] text-[1.5vw] text-yellow-1 border border-yellow-1 hover:border-0 hover:bg-yellow-1 hover:text-green-2">
+                    <a href="/products">
+                        See More
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
                 </button>
             </div>
 
@@ -71,9 +73,11 @@
             <div class="flex flex-col w-[35vw] gap-[2vw]">
                 <h1 class="text-[4vw] leading-tight font-bold text-green-2">BEST SELLER PRODUCT</h1>
                 <p class="text-green-2">Don't miss out! Discover our most sought-after, eco-friendly best seller collection right now on the GREVO marketplace. From daily essentials to sustainable lifestyle items, everything you need is here.</p>
-                <button class="w-fit font-bold px-[3vw] py-[0.5vw] text-[1.5vw] text-orange-1 border border-orange-1 hover:border-0 hover:bg-orange-1 hover:text-white mt-[1vw]">
-                    See More
-                    <i class="fa-solid fa-arrow-right"></i>
+                <button class="cursor-pointer w-fit font-bold px-[3vw] py-[0.5vw] text-[1.5vw] text-orange-1 border border-orange-1 hover:border-0 hover:bg-orange-1 hover:text-white mt-[1vw]">
+                    <a href="/products">
+                        See More
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
                 </button>
             </div>
  
@@ -116,8 +120,10 @@
                         One Click, One Tree Planted! <br>
                         At Grevo, every purchase you make doesn't just mean getting the best eco-friendly products, but also participating in our #GrevoReforestation mission! We believe nature is our greatest asset. Therefore, a portion of your purchase will be allocated to reforestation efforts, replanting life in areas that need it most.</p>
                     <button class="font-bold w-fit px-[3vw] py-[0.5vw] text-[1.5vw] text-yellow-1 border border-yellow-1 hover:border-0 hover:bg-yellow-1 hover:text-green-2">
-                        See More
-                        <i class="fa-solid fa-arrow-right"></i>
+                        <a href="/trees">
+                            See More
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
                     </button>
                 </div>
                 <div >

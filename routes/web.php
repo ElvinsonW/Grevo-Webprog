@@ -6,155 +6,162 @@ use App\Http\Controllers\LoginController;
 // # sampe sini
 
 #nambahhin ini
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\TreeCatalogueController;
 
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ReviewController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\CarbonCalculatorController;
+// --- Import Controllers yang Diperlukan ---
+use App\Http\Controllers\Admin\BatchController;
 use App\Http\Controllers\Admin\OrganizationController;
 use App\Http\Controllers\Admin\TreeController;
-use App\Http\Controllers\Admin\BatchController;
+use App\Http\Controllers\CarbonCalculatorController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AddressesController;
+
+// --- Import Middleware yang Diperlukan ---
 use App\Http\Middleware\CheckAdminRole;
 use App\Http\Middleware\CheckGuest;
 use App\Http\Middleware\CheckUserRole;
-use App\Models\Cart; // Unused, consider removing if not directly used in routes
-use App\Models\Product; // Unused, consider removing if not directly used in routes
-use App\Models\ProductCategory; // Unused, consider removing if not directly used in routes
-use App\Models\Review; // Unused, consider removing if not directly used in routes
-use App\Models\Organization; // Unused, consider removing if not directly used in routes
-use Illuminate\Http\Request; // Unused, consider removing if not directly used in routes
+
+// --- Import Facades ---
 use Illuminate\Support\Facades\Route;
 
 
-// Option B: Redirect to signin (comment out Option A if using this)
-Route::get('/', function () {
-    return view('homepage');
-});
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
 
-// Define the actual homepage if '/' is a redirect
-Route::get('/homepage', function () {
+// --- 1. Homepage & General Public Routes (Tidak memerlukan autentikasi) ---
+Route::get('/', function () {
     return view('homepage');
 })->name('homepage');
 
-// --- Authentication Routes ---
-// Route untuk menampilkan form Sign Up
-// Route::get('/signup', [RegisterController::class, 'showRegistrationForm'])->name('signup');
-// // Route untuk data form Sign Up
-// Route::post('/signup', [RegisterController::class, 'register'])->name('register.submit');
+Route::get('/about', function() {
+    return view('about');
+})->name('about');
 
-// // Route untuk menampilkan form Sign In
-// Route::get('/signin', [LoginController::class, 'showLoginForm'])->name('signin');
+Route::get('/product-detail', function(){
+    return view('User.product.product-detail');
+})->name('product-detail');
 
-// // Route untuk data form Sign In
-// Route::post('/signin', [LoginController::class, 'login'])->name('login.submit');
-// // Tambahkan route logout jika belum ada (penting untuk fungsionalitas Auth::logout())
-// Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('/trees', [TreeController::class, 'show'])->name('treecatalogue.tree');
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
 
-// // --- Profile Routes (Temporarily without 'auth' middleware for development) ---
-// // Ketika Anda siap untuk mengaktifkan autentikasi, Anda bisa mengelompokkan ini dalam Route::middleware(['auth'])->group(function () { ... });
-// Route::get('/profile', [ProfileController::class, 'showProfile'])->name('profile');
-// // Route untuk mengupdate profil pengguna
-// Route::put('/user/{username}', [ProfileController::class, 'updateProfile'])->name('profile.update'); // Ini perlu diaktifkan di sini
 
-// Masukin route yang hanya boleh diakses oleh admin
-Route::middleware(CheckAdminRole::class)->group(function(){
-
-});
-
-// Masukin route yang hanya boleh diakses oleh yang udah login
-Route::middleware(CheckUserRole::class)->group(function(){
-
-});
-
+// --- 2. Guest-only Routes (Hanya dapat diakses jika pengguna BELUM login) ---
 Route::middleware(CheckGuest::class)->group(function(){
     Route::controller(UserController::class)->group(function (){
         Route::get("/login","loginForm")->name("login");
         Route::get("/register","registerForm")->name("register");
         Route::post("/login","login")->name("login.submit");
         Route::post("/register","register")->name("register.submit");
-        Route::post("logout", "logout")->name("logout");
     });
 });
 
 
-// Tambahkan rute untuk sub-halaman profil
-Route::get('/profile', [ProfileController::class, 'showProfile'])->name('profile');
-Route::get('/profile/addresses', [ProfileController::class, 'showAddresses'])->name('addresses');
-Route::get('/profile/orders', [ProfileController::class, 'showOrders'])->name('orders');
-Route::get('/profile/reviews', [ProfileController::class, 'showReviews'])->name('reviews');
+// --- 3. Authenticated User Routes (Hanya dapat diakses jika pengguna SUDAH login, biasanya peran 'user') ---
+Route::middleware(CheckUserRole::class)->group(function(){
+    // Rute Logout
+    Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
-//route untuk Tree Catalogue
-Route::get('/trees', [TreeController::class, 'show'])->name('tree.index2');
+    // Rute Profil Pengguna & Sub-halaman (Semua ditangani oleh ProfileController)
+    Route::get('/profile', [ProfileController::class, 'showProfile'])->name('profile');
+    Route::put('/user/{username}', [ProfileController::class, 'updateProfile'])->name('profile.update');
 
-// --- Other Application Routes ---
-Route::get('/about', function() {
-    return view('about');
+    // Rute Alamat (Bagian yang diubah/ditambahkan)
+    Route::get('/profile/addresses', [AddressesController::class, 'index'])->name('addresses'); // Menampilkan daftar alamat
+    Route::post('/addresses', [AddressesController::class, 'store'])->name('addresses.store'); // Untuk menyimpan alamat baru (jika ada form create)
+    Route::get('/addresses/create', [AddressesController::class, 'create'])->name('addresses.create'); // Untuk form tambah alamat baru
+
+    // Rute untuk fungsionalitas modal edit
+    // Rute untuk mengedit alamat
+    Route::get('/addresses/{address}/edit', [AddressesController::class, 'edit'])->name('addresses.edit');
+    Route::put('/addresses/{address}', [AddressesController::class, 'update'])->name('addresses.update'); // Update alamat
+    Route::delete('/addresses/{address}', [AddressesController::class, 'destroy'])->name('addresses.destroy'); // Hapus alamat
+    Route::patch('/addresses/{address}/set-default', [AddressesController::class, 'setDefault'])->name('addresses.setDefault'); // Set default
+
+    // Rute Pesanan & Ulasan
+    Route::get('/profile/orders', [ProfileController::class, 'showOrders'])->name('orders');
+    Route::get('/profile/reviews', [ProfileController::class, 'showReviews'])->name('reviews');
+
+    // Rute Keranjang Belanja
+    Route::resource('cart', CartController::class)->except(['create', 'edit']);
+
+    // Rute Proses Pembayaran
+    Route::controller(PaymentController::class)->group(function () {
+        Route::get('/checkout', 'index')->name('checkout');
+        Route::post('/checkout', 'checkout')->name('checkout.payment');
+        Route::get('/success', 'success')->name('checkout.success');
+        Route::get('/cancel', 'cancel')->name('checkout.cancel');
+        Route::post('/calculate-cost', 'calculateShippingCost')->name('calculate.shipping');
+    });
+
+    // Rute Kalkulator Karbon
+    Route::controller(CarbonCalculatorController::class)->group(function () {
+        Route::get('/carbon-calculator', 'index')->name('carbon-calculator');
+        Route::get('/carbon-calculator/question', 'question')->name('carbon-calculator.question');
+        Route::get('/carbon-calculator/result', 'result')->name('carbon-calculator.result');
+    });
+
+    // Rute Ulasan Produk
+    Route::resource('/review', ReviewController::class)->except(['index', 'show']);
+
+    // Rute Detail Pesanan Spesifik
+    Route::get('/order/{order_id}', [OrderController::class, 'show'])->name('order.show');
 });
 
-Route::get('/product-detail', function(){
-    return view('User.product.product-detail');
-})->name('product-detail');
+// --- 4. Admin Routes (Hanya dapat diakses oleh pengguna dengan peran 'admin') ---
+Route::middleware(CheckAdminRole::class)->prefix('admin')->group(function(){
 
-Route::resource('/user', UserController::class); // This resource handles `/user`, `/user/{id}`, etc.
-// Make sure it doesn't conflict with your specific `/user/{username}` PUT route if not intended.
-// If UserController is only for admin managing users, then it's fine.
+    // Manajemen Organisasi (Admin)
+    Route::controller(OrganizationController::class)->group(function(){
+        Route::get('/organizations/create', 'create')->name('admin.organizations.create');
+        Route::post('/organizations', 'store')->name('admin.organizations.store');
+        Route::get('/organizations', 'index')->name('admin.organizations.index');
+        Route::get('/organizations/{organization_id}/edit', 'edit')->name('admin.organizations.edit');
+        Route::put('/organizations/{organization_id}', 'update')->name('admin.organizations.update');
+        Route::delete('/organizations/{organization_id}', 'destroy')->name('admin.organizations.destroy');
+    });
 
-Route::resource('/review', ReviewController::class);
+    // Manajemen Pohon (Admin)
+    Route::controller(TreeController::class)->group(function(){
+        Route::get('/trees/create', 'create')->name('admin.trees.create');
+        Route::post('/trees', 'store')->name('admin.trees.store');
+        Route::get('/trees', 'index')->name('admin.trees.index');
+        Route::get('/trees/{treeid}/edit', 'edit')->name('admin.trees.edit');
+        Route::put('/trees/{treeid}', 'update')->name('admin.trees.update');
+        Route::delete('/trees/{treeid}', 'destroy')->name('admin.trees.destroy');
+    });
 
-Route::resource('cart', CartController::class);
+    // Manajemen Batch (Admin)
+    Route::controller(BatchController::class)->group(function(){
+        Route::get('/batches/upload', 'create')->name('admin.batches.create');
+        Route::post('/batches', 'store')->name('admin.batches.store');
+        Route::get('/batches', 'index')->name('admin.batches.index');
+        Route::delete('/batches/{batchid}', 'destroy')->name('admin.batches.destroy');
+    });
 
-Route::resource('/products', ProductController::class);
+    // Manajemen Produk (Admin)
+    Route::controller(ProductController::class)->group(function(){
+        Route::get('/products/create', 'create')->name('admin.products.create');
+        Route::post('/products', 'store')->name('admin.products.store');
+        Route::get('/products/list', 'showlist')->name('admin.products.list');
+        Route::get('/products/{product}/edit', 'edit')->name('admin.products.edit');
+        Route::put('/products/{product}', 'update')->name('admin.products.update');
+        Route::delete('/products/{product}', 'destroy')->name('admin.products.destroy');
+    });
 
-Route::controller(PaymentController::class)->group(function () {
-    Route::get('/checkout', 'index')->name('checkout');
-    Route::post('/checkout', 'checkout')->name('checkout.payment');
-    Route::get('/success', 'success')->name('checkout.success');
-    Route::get('/cancel', 'cancel')->name('checkout.cancel');
-    Route::post('/calculate-cost', 'calculateShippingCost');
+    // Manajemen Pengguna (Admin)
+    Route::resource('users', UserController::class)->except(['create', 'store']);
 });
-
-Route::controller(CarbonCalculatorController::class)->group(function () {
-    Route::get('/carbon-calculator', 'index')->name('carbon-calculator');
-    Route::get('/carbon-calculator/question', 'question')->name('carbon-calculator.question');
-    Route::get('/carbon-calculator/result', 'result')->name('carbon-calculator.result');
-});
-
-// Organization
-Route::controller(OrganizationController::class)->group(function(){
-    Route::get('/addorg', 'create')->name('organization.create');
-    Route::post('/organizations', 'store')->name('organization.store');
-    Route::get('/listorg', 'index')->name('organization.listorg');
-    Route::get('/organizations/{organization_id}/edit', 'edit')->name('organization.edit');
-    Route::put('/organizations/{organization_id}', 'update')->name('organization.update');
-    Route::delete('/organizations/{organization_id}', 'destroy')->name('organization.destroy');
-});
-
-// Tree
-Route::controller(TreeController::class)->group(function(){
-    Route::get('/addtree', 'create')->name('tree.create');
-    Route::post('/trees', 'store')->name('tree.store');
-    Route::get('/listtree', 'index')->name('tree.listtree');
-    Route::get('/trees/{treeid}/edit', 'edit')->name('tree.edit');
-    Route::put('/trees/update/{treeid}', 'update')->name('tree.update');
-    Route::delete('trees/{treeid}', 'destroy')->name('tree.destroy');
-});
-
-// Batch
-Route::controller(BatchController::class)->group(function(){
-    Route::get('/uploadbatch', 'create')->name('batch.create');
-    Route::post('/batches', 'store')->name('batch.store');
-    Route::get('/listbatch', 'index')->name('batch.listbatch');
-    Route::delete('/batches/{batchid}', 'destroy')->name('batch.destroy');
-});
-
-//Product (Admin)
-Route::get('/addproduct', function () {
-    return view('Admin.Product.addproduct');
-})->name('products.create');
-Route::get('/listproducts', [ProductController::class, 'showlist'])->name('products.list');
-Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
-Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');

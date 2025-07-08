@@ -157,7 +157,6 @@
         </div>
     </div>
 
-    @push('scripts')
     <script>
         const profileImage = document.getElementById('profileImage');
 
@@ -169,7 +168,7 @@
                 reader.onloadend = () => {
                     profileImage.src = reader.result;
                 }
-                reader.readAsDataURL(file);
+                reader.readAsDataURL(file);ph
             }
         }
 
@@ -183,5 +182,4 @@
             icon.classList.toggle('rotate-180')
         });
     </script>
-    @endpush
 </x-layout>
