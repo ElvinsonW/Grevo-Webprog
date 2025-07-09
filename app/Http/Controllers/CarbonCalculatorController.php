@@ -14,7 +14,8 @@ class CarbonCalculatorController extends Controller
         return view('User.carbon-calculator.carbon-question');
     }
 
-    public function result(){
-        return view('User.carbon-calculator.carbon-result');
+    public function result(Request $request){
+        $carbon = $request->carbon;
+        return view('User.carbon-calculator.carbon-result', ["carbon" => $carbon]);
     }
 }
