@@ -6,6 +6,7 @@ use App\Models\Cart;
 use App\Models\Color;
 use App\Models\Product;
 use App\Models\ProductVariant;
+use App\Models\Size;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -32,18 +33,22 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
-        $color = Color::find($request->color);
+        if($request->color){
+            $color = Color::find($request->color);
+        } else if($request->size){
+            $size = Size::find($request->size);
+        }
         $product = Product::find($request->product_id);
-        $product_variant_id = $color->product_variant->id;
-
-        $cart = Cart::where("product_variant_id", $product_variant_id)->firstOrFail();
+        $product_variant_id = $color->product_variant->id ?? $size->product_variant->id ??  $product->product_variants->first()->id;
+        
+        $cart = Cart::where("product_variant_id", $product_variant_id)->where('user_id', auth()->user()->id)->first();
 
         if($cart){
             $cart->amount = $request->amount;
             $cart->total = $request->amount * $product->price;
             $cart->save();
         } else {
-            Cart::create([
+            $cart1 = Cart::create([
                 "user_id" => auth()->user()->id,
                 "product_variant_id" => $product_variant_id,
                 "amount" => $request->amount,
@@ -52,7 +57,7 @@ class CartController extends Controller
         }
 
 
-        return redirect("/cart")->with("cartSuccess", "Product added successfully!");
+        return redirect('/cart')->with("cartSuccess", "Product added successfully!");
     }
 
     /**

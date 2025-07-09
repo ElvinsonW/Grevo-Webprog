@@ -13,7 +13,7 @@ class Product extends Model
 {
     use HasFactory;
     protected $fillable = ["name", "slug", "product_category_id", "weight", "material", "process", "certification", "description", "sold"];
-    protected $with = ["product_category", "product_images", "product_variants"];
+    protected $with = ["product_category", "product_images", "product_variants", "reviews"];
 
     public function product_category(): BelongsTo
     {
@@ -76,7 +76,8 @@ class Product extends Model
         $query->when(
             $filter["min_rating"] ?? false,
             fn($query, $minRating) =>
-            $query->withAvg('reviews', 'rate')
+            $query->select('*')
+                ->withAvg('reviews', 'rate')
                 ->having('reviews_avg_rate', '>=', $minRating)
         );
     }

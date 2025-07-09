@@ -15,7 +15,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $filters = ["search", "category", "min_price", "max_price"];
+        $filters = ["search", "category", "min_price", "max_price", "min_rating"];
         return view('User.product.products', [
             "products" => Product::withAvg('reviews', 'rate')->filter(request($filters))->paginate(12)->withQueryString(),
             "categories" => ProductCategory::all()

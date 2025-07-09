@@ -25,7 +25,7 @@ class Cart extends Component
 
     public function refreshCart()
     {
-        $this->cartProduct = CartModel::where('user_id', 1)
+        $this->cartProduct = CartModel::where('user_id', auth()->user()->id)
             ->with('product_variant.product.product_images', 'product_variant.color', 'product_variant.size')
             ->get();
     }

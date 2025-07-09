@@ -22,20 +22,12 @@
                             style="box-shadow: 0 0 12.2px 0 rgba(0,0,0,0.06); height: calc(7vw * {{ $visibleProduct }} + {{ $visibleProduct }}vw - 1vw);">
                             <div id="carouselImages"
                                 class="flex flex-col gap-[1vw] transition-transform duration-500 ease-in-out">
-                                <div class="cursor-pointer w-[7vw] h-[7vw] overflow-hidden">
-                                    <img src="{{ asset('images/home_green1.png') }}"
-                                        class="preview-image w-full h-full object-cover transition-transform duration-500 hover:scale-150">
-                                </div>
-                                <img src="{{ asset('images/home_green2.png') }}"
-                                    class="preview-image w-[7vw] h-[7vw] object-cover">
-                                <img src="{{ asset('images/home_katalog1.png') }}"
-                                    class="preview-image w-[7vw] h-[7vw] object-cover">
-                                <img src="{{ asset('images/home_katalog2.png') }}"
-                                    class="preview-image w-[7vw] h-[7vw] object-cover">
-                                <img src="{{ asset('images/home_katalog2.png') }}"
-                                    class="preview-image w-[7vw] h-[7vw] object-cover">
-                                <img src="{{ asset('images/home_katalog3.png') }}"
-                                    class="preview-image w-[7vw] h-[7vw] object-cover">
+                                @foreach ($product->product_images as $image) 
+                                    <div class="cursor-pointer w-[7vw] h-[7vw] overflow-hidden">
+                                        <img src="{{ asset('storage/' . $image->image) }}"
+                                            class="preview-image w-full h-full object-cover transition-transform duration-500 hover:scale-150">
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
 
@@ -48,7 +40,7 @@
 
                     <!-- main gambar -->
                     <div class="flex items-center justify-center w-[35vw] h-[35vw] relative">
-                        <img src="{{ asset('images/home_green2.png') }}" id="product-big-image"
+                        <img src="{{ asset('storage/' . $product->product_images->first()->image) }}" id="product-big-image"
                             class="rounded-lg w-full h-full object-cover"
                             style="background-size: cover; background-position: center; box-shadow: 0 0 12.2px 0 rgba(0,0,0,0.06);">
                     </div>
@@ -72,7 +64,7 @@
                         <h1 class="font-bold text-[#3E6137] text-[1.8vw]">{{ $product->name }}</h1>
                         <!-- share button -->
                         <div class="relative">
-                            <button onclick="copyLink()" class="flex items-center gap-2 cursor-pointer">
+                            <button type="button" onclick="copyLink()" class="flex items-center gap-2 cursor-pointer">
                                 <img src="{{ asset('images/share-button.svg') }}" alt="">
                                 <span class="text-[1vw]">Share</span>
                             </button>

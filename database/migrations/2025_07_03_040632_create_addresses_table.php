@@ -19,10 +19,12 @@ return new class extends Migration
             $table->text('street_address'); // Menggunakan text untuk alamat yang mungkin panjang
             $table->string('city');
             $table->string('province');
-            $table->string('urban_village')->nullable(); // Kelurahan/Desa, bisa null jika tidak selalu ada
-            $table->string('subdistrict')->nullable(); // Kecamatan, bisa null jika tidak selalu ada
+            $table->string('urban_village');
+            $table->string('subdistrict');
+            $table->integer('postal_code')->unique();
             $table->string('label')->nullable(); // e.g., 'Home', 'Office', 'Toko'
             $table->boolean('is_default')->default(false); // Default value false
+            $table->integer('rajaOngkirId');
             $table->timestamps(); // created_at and updated_at
         });
     }

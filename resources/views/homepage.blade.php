@@ -18,7 +18,6 @@
                 </svg>
             </button>
         </div>
-
     @endif
     <div class="flex flex-col w-full overflow-hidden">
         <img src="{{ asset('images/home1.jpg') }}" alt="home1" class="w-full object-cover mb-[2vw]">
@@ -134,4 +133,15 @@
 
         </div>
     </div>
+
+    <script>
+        const closeButtons = document.querySelectorAll('.close-button');
+
+        closeButtons.forEach((button) => {
+            button.addEventListener('click', function() {
+                const alert = button.closest('.alert')
+                alert.style.display = "none";
+            });
+        });
+    </script>
 </x-layout>

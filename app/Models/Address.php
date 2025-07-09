@@ -18,8 +18,10 @@ class Address extends Model
         'province',
         'urban_village',
         'subdistrict',
+        'postal_code',
         'label',
         'is_default',
+        'rajaOngkirId'
     ];
 
     protected $casts = [

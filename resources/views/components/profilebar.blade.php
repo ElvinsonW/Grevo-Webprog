@@ -1,13 +1,13 @@
 {{-- resources/views/components/profilebar.blade.php --}}
 
-@props(['user']) {{-- Deklarasikan $user sebagai prop --}}
+@props(['user']) 
 
 <div
     class="relative flex flex-col items-center w-[16vw] shrink-0 overflow-hidden h-fit px-[1.5vw] pt-[2vw] pb-[3vw] bg-[#BEE0C7] rounded-[1vw]">
     <div class="flex flex-col items-center gap-[0.25vw] mb-[1.5vw]">
         {{-- Menghilangkan mt-[-2vw] dan memastikan gambar berada di dalam aliran normal --}}
         {{-- Jika ingin gambar sedikit 'keluar' tapi tetap di dalam area, bisa pakai mt-[-1vw] atau posisi relatif --}}
-        <img src="{{ $user && $user->image ? asset('storage/' . $user->image) : asset('images/skz.jpg') }}" alt="profile"
+        <img src="{{ asset('storage/' . $user->image) }}" alt="profile"
             class="w-[5vw] h-[5vw] rounded-full object-cover">
         {{-- Menampilkan username user jika ada, atau 'Guest User' --}}
         <p class="text-[1.1vw] font-bold">

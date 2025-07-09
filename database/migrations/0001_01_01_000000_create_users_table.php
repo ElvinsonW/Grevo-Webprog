@@ -21,6 +21,7 @@ return new class extends Migration
             $table->enum('gender', ['male', 'female']);
             $table->string('image')->nullable();
             $table->enum('role',['user','admin'])->default('user');
+            $table->integer('points')->default(0);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

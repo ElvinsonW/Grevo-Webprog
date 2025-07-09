@@ -3,10 +3,11 @@
 namespace App\Services;
 
 use App\Models\City;
-use App\Models\Province;
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\RequestException;
+use App\Models\Province;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Http;
+use GuzzleHttp\Exception\RequestException;
 
 class RajaOngkirService{
     protected $client;
@@ -36,7 +37,18 @@ class RajaOngkirService{
             ]);
 
             $responseBody = json_decode($response->getBody()->getContents(), true);
-            return $responseBody['data'][0] ?? [];
+            $data = $responseBody['data'] ?? [];
+
+            $filtered = array_filter($data, function ($item) use ($search) {
+                return trim(Str::lower($item['label'])) === trim(Str::lower($search));
+            });
+
+            if($filtered){
+                $filtered = array_values($filtered);
+                $selected = $filtered[0];
+            }
+
+            return $selected ?? $data[0];
         } catch (\Exception $e) {
             return response()->json([
                 'error' => $e->getMessage(),

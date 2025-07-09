@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Address;
+use App\Services\RajaOngkirService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -56,31 +57,26 @@ class AddressesController extends Controller
             'province' => 'required|string|max:255',
             'urban_village' => 'nullable|string|max:255',
             'subdistrict' => 'nullable|string|max:255',
-            'label' => 'nullable|string|max:255',
-            'is_default' => 'nullable|boolean', // 'nullable' because checkbox might not be present if unchecked
+            'postal_code' => 'string|min:5|max:5',
+            'label' => 'nullable|string|max:255'
         ]);
 
         $validatedData['user_id'] = Auth::id();
 
-        // Handle the 'is_default' logic
-        $userHasAddresses = Auth::user()->addresses()->exists();
+        $full_address = collect([
+            $validatedData['urban_village'],
+            $validatedData['subdistrict'],
+            $validatedData['city'],
+            $validatedData['province'],
+            $validatedData['postal_code']
+        ])->filter()->implode(', ');
 
-        // If 'is_default' checkbox was checked, or if it's the first address and no other default exists
-        if (isset($validatedData['is_default']) && $validatedData['is_default'] == true) {
-            // Unset all other default addresses for this user
-            Auth::user()->addresses()->update(['is_default' => false]);
-            $validatedData['is_default'] = true;
-        } elseif (!$userHasAddresses) {
-            // If it's the very first address, make it default by default (even if checkbox wasn't checked)
-            $validatedData['is_default'] = true;
-        } else {
-            // If there are existing addresses and 'is_default' was not checked or sent as false
-            $validatedData['is_default'] = false;
-        }
+        $rajaOngkirId = $this->searchRajaOngkirId($full_address);
+
+        $validatedData['rajaOngkirId'] = $rajaOngkirId['id'] ?? 1;
 
         Address::create($validatedData);
 
-        // Remove the flash flag if successful, so modal doesn't pop up on next load
         $request->session()->forget('show_add_modal');
 
         return redirect()->route('addresses')->with('success', 'Address added successfully.');
@@ -131,36 +127,23 @@ class AddressesController extends Controller
             'street_address' => 'required|string|max:500',
             'city' => 'required|string|max:255',
             'province' => 'required|string|max:255',
-            'urban_village' => 'nullable|string|max:255',
-            'subdistrict' => 'nullable|string|max:255',
+            'urban_village' => 'string|max:255',
+            'subdistrict' => 'string|max:255',
+            'postal_code' => 'string|min:5|max:5',
             'label' => 'nullable|string|max:255',
-            'is_default' => 'nullable|boolean',
         ]);
 
-        $isDefaultRequested = $request->has('is_default'); // Check if checkbox was even present in request
+        $full_address = collect([
+            $validatedData['urban_village'],
+            $validatedData['subdistrict'],
+            $validatedData['city'],
+            $validatedData['province'],
+            $validatedData['postal_code']
+        ])->filter()->implode(', ');
 
-        if ($isDefaultRequested && $request->boolean('is_default')) {
-            // If 'is_default' was checked and sent as true (1)
-            // Unset all other default addresses for this user, except the current one if it was already default
-            Auth::user()->addresses()->where('id', '!=', $address->id)->update(['is_default' => false]);
-            $validatedData['is_default'] = true;
-        } else {
-            // If 'is_default' was unchecked (0) or not present in request (meaning it was unchecked)
-            $validatedData['is_default'] = false;
+        $rajaOngkirId = $this->searchRajaOngkirId($full_address);
 
-            // If the address being updated *was* the default, and now it's being unset,
-            // we must ensure another address becomes default if one exists.
-            if ($address->is_default) {
-                // Find the first *other* address and set it as default
-                $newDefault = Auth::user()->addresses()
-                                ->where('id', '!=', $address->id)
-                                ->orderBy('id') // Order by ID to ensure consistent selection
-                                ->first();
-                if ($newDefault) {
-                    $newDefault->update(['is_default' => true]);
-                }
-            }
-        }
+        $validatedData['rajaOngkirId'] = $rajaOngkirId['id'] ?? 1;
 
         $address->update($validatedData);
 
@@ -221,4 +204,8 @@ class AddressesController extends Controller
         return redirect()->route('addresses')->with('success', 'Address set as default.');
     }
     
+    public function searchRajaOngkirId(string $search){
+        $rajaOngkir = new RajaOngkirService();
+        return $rajaOngkir->searchDestination($search);
+    }
 }

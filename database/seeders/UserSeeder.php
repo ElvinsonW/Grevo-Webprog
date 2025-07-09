@@ -22,7 +22,7 @@ class UserSeeder extends Seeder
             'phone_number' => '085263508932',
             'address' => 'Jalan Pakuan no 3',
             'gender' => 'male',
-            'image' => 'profile-image/elvinson.jpg',
+            'image' => 'profile-image/elvinson.png',
             'role' => 'admin',
             'password' => bcrypt('password'), 
         ]);
@@ -34,9 +34,10 @@ class UserSeeder extends Seeder
             'phone_number' => '085263506419',
             'address' => 'RTB BCA',
             'gender' => 'male',
-            'image' => 'profile-image/elvinson.jpg',
+            'image' => 'profile-image/elvinson.png',
             'role' => 'user',
             'password' => bcrypt('password'), 
+            'points' => 200
         ]);
         
         User::factory(5)->create();

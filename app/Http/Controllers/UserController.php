@@ -51,7 +51,7 @@ class UserController extends Controller
         if(Auth::attempt($credential)){
             $request->session()->regenerate();
 
-            return redirect('/products');
+            return redirect('/products')->with('loginSuccess', 'Login successfully!');
         }
 
        return redirect('/login')
@@ -115,6 +115,6 @@ class UserController extends Controller
     
         $request->session()->regenerateToken();
     
-        return redirect('/login');
+        return redirect('/login')->with("logoutSuccess", "Logout Successfully!");
     }
 }

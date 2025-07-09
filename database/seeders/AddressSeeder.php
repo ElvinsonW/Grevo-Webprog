@@ -27,8 +27,10 @@ class AddressSeeder extends Seeder
             'province' => 'DKI Jakarta',
             'urban_village' => 'Kebon Jeruk',
             'subdistrict' => 'Kebon Jeruk',
+            'postal_code' => 11530,
             'label' => 'Home',
             'is_default' => true,
+            'rajaOngkirId' => 17486
         ]);
 
         Address::create([
@@ -38,10 +40,12 @@ class AddressSeeder extends Seeder
             'street_address' => 'Perkantoran Taman Aries Blok A No. 1',
             'city' => 'Jakarta Barat',
             'province' => 'DKI Jakarta',
-            'urban_village' => 'Kembangan',
+            'urban_village' => 'Kembangan Selatan',
             'subdistrict' => 'Kembangan',
+            'postal_code' => 11610,
             'label' => 'Office',
             'is_default' => false,
+            'rajaOngkirId' => 17493
         ]);
 
         Address::create([
@@ -51,10 +55,12 @@ class AddressSeeder extends Seeder
             'street_address' => 'Ruko XYZ No. 5',
             'city' => 'Bandung',
             'province' => 'Jawa Barat',
-            'urban_village' => null, // Contoh tanpa urban_village
+            'urban_village' => 'Cipedes', 
             'subdistrict' => 'Sukajadi',
+            'postal_code' => 40162,
             'label' => 'Toko',
             'is_default' => false,
+            'rajaOngkirId' => 4943
         ]);
 
         // Anda bisa menambahkan lebih banyak data di sini

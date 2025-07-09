@@ -1,7 +1,7 @@
 <div class="p-6">
     @if ($step === 1)
         <!-- Step 1: Basic Info -->
-        <h1 class="text-2xl font-bold mb-[1vw] ml-25">Edit Product - Basic Information</h1>
+        <h1 class="text-2xl font-bold mb-1 ml-25">Edit Product - Basic Information</h1>
         <div class="flex flex-row gap-8 w-[91%] justify-content-center p-6 ml-20">
             <!-- Left Column -->
             <div class="space-y-4 w-1/2 border border-green-200 p-6 rounded-md">

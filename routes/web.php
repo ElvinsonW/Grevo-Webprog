@@ -5,7 +5,6 @@ use App\Http\Controllers\RegisterController; // Corrected to Auth\RegisterContro
 use App\Http\Controllers\LoginController;
 // # sampe sini
 
-
 // --- Import Controllers yang Diperlukan ---
 use App\Http\Controllers\Admin\BatchController;
 use App\Http\Controllers\Admin\OrganizationController;
