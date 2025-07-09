@@ -9,7 +9,7 @@
      @vite('resources/css/app.css')
 </head>
 <body>
-    <div id="sidebar" class="bg-green-200 text-green-900 h-screen w-16 fixed top-0 left-0 flex flex-col justify-between transition-all duration-300 overflow-hidden rounded-tr-md rounded-br-md">
+    <div id="sidebar" class="bg-green-200 text-green-900 h-screen w-16 fixed top-0 left-0 flex flex-col justify-between transition-all duration-300 overflow-hidden rounded-tr-md rounded-br-md z-100">
         <div class="p-4 border-b border-green-400 flex items-center justify-center sidebar-header">
              <img id="LogoIcon" src="{{ asset('images/revo.svg')}}" alt="Logo Icon" class="h-20 w-20">
              <img id="LogoFull" src = "{{ asset('images/GrevoHD.svg')}}" alt="Logo Full" class="h-20 w-20 hidden">

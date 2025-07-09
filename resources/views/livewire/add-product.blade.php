@@ -1,18 +1,18 @@
-<div class="p-6 ml-15">
+<div class="p-6 ml-[5vw]">
     @if ($step === 1)
         <!-- Step 1: Basic Info -->
-        <h1 class="text-2xl font-bold mb-1 ml-10">Basic Information</h1>
+        <h1 class="text-4xl font-bold ml-[2vw]">Basic Information</h1>
         <div class="flex flex-row gap-4 w-full p-8">
             <!-- Left Column -->
-            <div class="space-y-4 w-1/2 border border-green-200 p-6 rounded-md">
+            <div class="space-y-4 w-1/2 border border-green-2 p-6 rounded-md">
                 <div>
                     <label class="block text-sm font-medium">Product Name</label>
-                    <input type="text" wire:model="name" class="w-full border rounded px-3 py-2" />
+                    <input type="text" wire:model="name" class="w-full border border-green-2 rounded px-3 py-2" />
                     @error('name') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                 </div>
                 <div>
                     <label class="block text-sm font-medium">Category</label>
-                    <select wire:model="category" class="w-full border rounded px-3 py-2">
+                    <select wire:model="category" class="w-full border border-green-2 rounded px-3 py-2 bg-yellow-2">
                         <option value="">Select Category</option>
                         @foreach ($categories as $cat)
                             <option value="{{ $cat->id }}">{{ $cat->name }}</option>
@@ -22,31 +22,31 @@
                 </div>
                 <div>
                     <label class="block text-sm font-medium">Description</label>
-                    <textarea wire:model="description" class="w-full border rounded px-3 py-2"></textarea>
+                    <textarea wire:model="description" class="w-full border border-green-2 rounded px-3 py-2"></textarea>
                     @error('description') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                 </div>
                 <div>
                     <label class="block text-sm font-medium">Material</label>
-                    <input type="text" wire:model="material" class="w-full border rounded px-3 py-2" />
+                    <input type="text" wire:model="material" class="w-full border border-green-2 rounded px-3 py-2" />
                     @error('material') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                 </div>
                 <div>
                     <label class="block text-sm font-medium">Weight (grams)</label>
-                    <input type="number" wire:model="weight" class="w-full border rounded px-3 py-2" />
+                    <input type="number" wire:model="weight" class="w-full border border-green-2 rounded px-3 py-2" />
                     @error('weight') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                 </div>
             </div>
 
             <!-- Right Column -->
-            <div class="space-y-4 w-1/2 border border-green-200 p-6 rounded-md">
+            <div class="space-y-4 w-1/2 border border-green-2 p-6 rounded-md">
                 <div>
                     <label class="block text-sm font-medium">Certificate</label>
-                    <input type="text" wire:model="certificate" class="w-full border rounded px-3 py-2" />
+                    <input type="text" wire:model="certificate" class="w-full border border-green-2 rounded px-3 py-2" />
                     @error('certificate') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                 </div>
                 <div>
                     <label class="block text-sm font-medium">Process</label>
-                    <input type="text" wire:model="process" class="w-full border rounded px-3 py-2" />
+                    <input type="text" wire:model="process" class="w-full border border-green-2 rounded px-3 py-2" />
                     @error('process') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                 </div>
 
@@ -55,7 +55,23 @@
                     <label class="block text-sm font-medium">
                         Product Images ({{ count($images) }}/8)
                     </label>
-                    <input type="file" wire:model="imagesUpload" multiple class="mt-1" />
+                <div class="relative mt-2">
+                    <input 
+                        id="imagesUpload" 
+                        type="file" 
+                        wire:model="imagesUpload" 
+                        multiple 
+                        class="hidden" 
+                        accept="image/*"
+                        required
+                    />
+
+                    <label 
+                        for="imagesUpload"
+                        class="cursor-pointer inline-block px-4 py-2 bg-green-2 text-white rounded-md hover:bg-green-3 transition-all font-medium">
+                        Upload Images
+                    </label>
+                </div>
                     @error('images.*') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
 
                     <div class="grid grid-cols-4 gap-4 mt-2">
@@ -78,8 +94,8 @@
         </div>
 @elseif ($step === 2)
     <!-- Step 2: Sales Information -->
-    <div>
-        <h1 class="text-2xl font-bold mb-4">Sales Information</h1>
+    <div class="container ml-[2vw]">
+        <h1 class="text-4xl font-bold mb-4">Sales Information</h1>
 
         <div class="border border-green-300 rounded-md p-4 space-y-4 bg-green-50">
 
@@ -92,7 +108,7 @@
                         class="border border-gray-400 rounded px-2 py-1 w-1/2"
                         placeholder="Add size (press Enter)" />
                     <button wire:click="addSize" type="button"
-                        class="bg-black text-white px-3 py-1 rounded">+</button>
+                        class="bg-black text-white px-3 py-1 rounded hover:bg-gray-600">+</button>
                 </div>
 
                 <div class="flex flex-wrap gap-2 p-2 border rounded">
@@ -115,7 +131,7 @@
                         class="border border-gray-400 rounded px-2 py-1 w-1/2"
                         placeholder="Add color (press Enter)" />
                     <button wire:click="addColor" type="button"
-                        class="bg-black text-white px-3 py-1 rounded">+</button>
+                        class="bg-black text-white px-3 py-1 rounded hover:bg-gray-600">+</button>
                 </div>
 
                 <div class="flex flex-wrap gap-2 p-2 border rounded">
@@ -133,8 +149,8 @@
     </div>
     @elseif ($step === 3)
         <!-- Step 3: Variant Data -->
-<div class="space-y-4">
-    <h1 class="text-2xl font-bold mb-4">Sales Information</h1>
+<div class="space-y-4 container ml-[2vw]">
+    <h1 class="text-4xl font-bold mb-4">Sales Information</h1>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         @foreach ($variantData as $key => $data)
@@ -171,22 +187,22 @@
     @endif
 
     <!-- Step Navigation -->
-    <div class="flex justify-between pt-6 ml-8">
+    <div class="flex justify-between pt-3 ml-[2vw]">
         @if ($step > 1)
             <button type="button" wire:click="previousStep"
-                class="bg-gray-300 hover:bg-gray-400 text-black font-semibold py-2 px-4 rounded">
+                class="bg-green-2 hover:bg-green-3 text-white font-semibold py-2 px-4 rounded mr-[2vw]">
                 Back
             </button>
         @endif
 
         @if ($step < 3)
             <button type="button" wire:click="nextStep"
-                class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded">
+                class="bg-green-2 hover:bg-green-3 text-white font-semibold py-2 px-4 rounded mr-[2vw]">
                 Next
             </button>
         @else
             <button type="button" wire:click="store"
-                class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded">
+                class="bg-green-2 hover:bg-green-3 text-white font-semibold py-2 px-4 rounded mr-[2vw]">
                 Upload Product
             </button>
         @endif

@@ -6,12 +6,12 @@
     <title>Organization List</title>
     @vite('resources/css/app.css')
 </head>
-<body class="p-4">
+<body class="p-4 bg-yellow-2">
     @include('components.sidebar')
 
-    <div class="container mx-auto p-6">
+    <div class="w-[93vw] ml-[5vw] p-6">
         <div class="flex flex-row justify-between items-center mb-4">
-            <h1 class="text-2xl font-bold">Organization List</h1>
+            <h1 class="text-4xl font-bold">Organization List</h1>
         </div>
 
         <div class="flex flex-row justify-between">
@@ -29,7 +29,7 @@
                 </a>
             </div>
             <div class="mb-4">
-                <a href="{{ route('admin.organizations.create') }}" class="px-2 py-3 bg-blue-600 text-white rounded hover:bg-blue-700">
+                <a href="{{ route('admin.organizations.create') }}" class="px-2 py-3 bg-green-2 text-white rounded hover:bg-green-3 font-medium">
                     + Add New Organization
                 </a>
             </div>
@@ -48,7 +48,7 @@
                         <th class="px-4 py-3">Action</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="bg-yellow-2">
                     @foreach ($organizations as $org)
                         <tr class="border-b hover:bg-gray-50">
                             <td class="px-4 py-3 flex items-center gap-2">

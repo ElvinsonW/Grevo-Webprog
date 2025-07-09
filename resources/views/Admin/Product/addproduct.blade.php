@@ -6,9 +6,9 @@
     <title>Add Product</title>
     @vite('resources/css/app.css')
 </head>
-<body class="p-4">
+<body class="p-4 bg-yellow-2">
     @include('components.sidebar')
-@livewire('add-product')
-@livewireScripts
+    @livewire('add-product')
+    @livewireScripts
 </body>
 </html>

@@ -6,7 +6,7 @@
     <title>Edit Product</title>
     @vite('resources/css/app.css')
 </head>
-<body class="p-4">
+<body class="p-4 bg-yellow-2">
     @include('components.sidebar')
 	<livewire:edit-product :productId="$product->id" />
 	@livewireScripts

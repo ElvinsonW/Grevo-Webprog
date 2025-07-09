@@ -6,13 +6,13 @@
     <title>Batch List</title>
     @vite('resources/css/app.css')
 </head>
-<body class="p-4">
+<body class="p-4 bg-yellow-2">
     @include('components.sidebar')
 
-    <div class="container mx-auto p-6">
+    <div class="w-[90vw] ml-[5vw] mt-5 p-6">
         <div class="flex flex-row justify-between items-center mb-4">
-            <h1 class="text-2xl font-bold">Batch List</h1>
-            <a href="{{ route('admin.batches.create') }}" class="px-4 py-3 bg-blue-600 text-white rounded hover:bg-blue-700">
+            <h1 class="text-4xl font-bold">Batch List</h1>
+            <a href="{{ route('admin.batches.create') }}" class="px-4 py-3 bg-green-2 text-white rounded hover:bg-green-3 font-medium">
                 + Upload Proof
             </a>
         </div>
@@ -29,7 +29,7 @@
                         <th class="px-4 py-3">Batch Date</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="bg-yellow-2">
                     @foreach($batches as $batch)
                         <tr class="border-b hover:bg-gray-50">
                             <td class="px-4 py-3">{{ $batch->batchid }}</td>

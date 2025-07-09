@@ -6,22 +6,22 @@
     <title>Product List</title>
     @vite('resources/css/app.css')
 </head>
-<body class="p-4">
+<body class="p-4 bg-yellow-2">
     @include('components.sidebar')
 
-<div class="container mx-auto p-6">
-    <h1 class="text-2xl font-bold mb-4">Product List</h1>
-    <div class="flex flex-row justify-between mb-4">
+<div class="w-[93vw] p-6">
+    <h1 class="text-4xl font-bold mb-4 ml-[5vw]">Product List</h1>
+    <div class="flex flex-row justify-between mb-4 ml-[5vw]">
         {{-- Filter --}}
         <form method="GET" class="mb-4 flex gap-4 items-center">
             <label class="font-semibold">Filter Stock:</label>
-            <select name="stock" onchange="this.form.submit()" class="border px-3 py-1 rounded">
+            <select name="stock" onchange="this.form.submit()" class="border px-3 py-1 rounded bg-yellow-2">
                 <option value="">All</option>
                 <option value="in" {{ request('stock') === 'in' ? 'selected' : '' }}>In Stock</option>
                 <option value="out" {{ request('stock') === 'out' ? 'selected' : '' }}>Out of Stock</option>
             </select>
         </form>
-        <a href="{{ route('admin.products.create') }}" class="px-4 py-3 bg-blue-600 text-white rounded hover:bg-blue-700">
+        <a href="{{ route('admin.products.create') }}" class="px-4 py-3 bg-green-2 text-white rounded hover:bg-green-3 font-medium">
             + Add New Product
         </a>
     </div>
@@ -29,7 +29,7 @@
 
 
     {{-- Products Table --}}
-    <div class="bg-white rounded shadow">
+    <div class="bg-white rounded shadow ml-[5vw]">
         <table class="min-w-full text-sm">
             <thead class="bg-green-100 text-left">
                 <tr>
@@ -41,7 +41,7 @@
                     <th class="px-4 py-3">Actions</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="bg-yellow-2">
                 @foreach ($products as $product)
                     @php
                         $stock = $product->product_variants->sum('stock');
@@ -86,7 +86,7 @@
     </div>
 
     {{-- Pagination --}}
-    <div class="mt-4">
+    <div class="mt-4 ml-[5vw]">
         {{ $products->withQueryString()->links() }}
     </div>
 </div>

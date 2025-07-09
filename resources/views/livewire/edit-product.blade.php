@@ -1,10 +1,10 @@
 <div class="p-6">
     @if ($step === 1)
         <!-- Step 1: Basic Info -->
-        <h1 class="text-2xl font-bold mb-1 ml-25">Edit Product - Basic Information</h1>
+        <h1 class="text-4xl font-bold mb-1 ml-25">Edit Product - Basic Information</h1>
         <div class="flex flex-row gap-8 w-[91%] justify-content-center p-6 ml-20">
             <!-- Left Column -->
-            <div class="space-y-4 w-1/2 border border-green-200 p-6 rounded-md">
+            <div class="space-y-4 w-1/2 border border-green-2 p-6 rounded-md">
                 <div>
                     <label class="block text-sm font-medium">Product Name</label>
                     <input type="text" wire:model="name" class="w-full border rounded px-3 py-2" />
@@ -38,7 +38,7 @@
             </div>
 
             <!-- Right Column -->
-            <div class="space-y-4 w-1/2 border border-green-200 p-6 rounded-md">
+            <div class="space-y-4 w-1/2 border border-green-2 p-6 rounded-md">
                 <div>
                     <label class="block text-sm font-medium">Certificate</label>
                     <input type="text" wire:model="certificate" class="w-full border rounded px-3 py-2" />
@@ -51,7 +51,23 @@
                 </div>
                 <div>
                     <label class="block text-sm font-medium">Product Images ({{ count($images) }}/8)</label>
-                    <input type="file" wire:model="imagesUpload" multiple class="mt-1" />
+                    <div class="relative mt-2">
+                    <input 
+                        id="imagesUpload" 
+                        type="file" 
+                        wire:model="imagesUpload" 
+                        multiple 
+                        class="hidden" 
+                        accept="image/*"
+                    />
+
+                    <label 
+                        for="imagesUpload"
+                        class="cursor-pointer inline-block px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-all font-medium">
+                        Upload Images
+                    </label>
+                </div>
+
                     @error('imagesUpload.*') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
 
                     <div class="grid grid-cols-4 gap-4 mt-2">
@@ -78,8 +94,8 @@
         </div>
     @elseif ($step === 2)
         <!-- Step 2: Sizes and Colors -->
-        <div>
-            <h1 class="text-2xl font-bold mb-4">Edit Variants - Sizes & Colors</h1>
+        <div class="container ml-[7vw]">
+            <h1 class="text-4xl font-bold mb-4">Edit Variants - Sizes & Colors</h1>
             <div class="border border-green-300 rounded-md p-4 space-y-4 bg-green-50">
                 <div>
                     <label class="block font-semibold">Size</label>
@@ -88,7 +104,7 @@
                             class="border border-gray-400 rounded px-2 py-1 w-1/2"
                             placeholder="Add size (press Enter)" />
                         <button wire:click="addSize" type="button"
-                            class="bg-black text-white px-3 py-1 rounded">+</button>
+                            class="bg-black text-white px-3 py-1 rounded hover:bg-gray-600">+</button>
                     </div>
                     <div class="flex flex-wrap gap-2 p-2 border rounded">
                         @foreach ($sizes as $index => $size)
@@ -108,7 +124,7 @@
                             class="border border-gray-400 rounded px-2 py-1 w-1/2"
                             placeholder="Add color (press Enter)" />
                         <button wire:click="addColor" type="button"
-                            class="bg-black text-white px-3 py-1 rounded">+</button>
+                            class="bg-black text-white px-3 py-1 rounded hover:bg-gray-600">+</button>
                     </div>
                     <div class="flex flex-wrap gap-2 p-2 border rounded">
                         @foreach ($colors as $index => $color)
@@ -124,8 +140,8 @@
         </div>
     @elseif ($step === 3)
         <!-- Step 3: Variant Data -->
-        <div class="space-y-4">
-            <h1 class="text-2xl font-bold mb-4">Sales Information</h1>
+        <div class="space-y-4 container ml-[7vw]">
+            <h1 class="text-4xl font-bold mb-4">Sales Information</h1>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 @foreach ($variantData as $key => $data)
@@ -162,22 +178,22 @@
     @endif
 
     <!-- Step Navigation -->
-    <div class="flex justify-between pt-6 ml-26">
+    <div class="flex justify-between pt-6 ml-[5vw]">
         @if ($step > 1)
             <button type="button" wire:click="previousStep"
-                class="bg-gray-300 hover:bg-gray-400 text-black font-semibold py-2 px-4 rounded">
+                class="bg-green-2 hover:bg-green-3 text-white font-semibold py-2 px-4 rounded ml-[2vw]">
                 Back
             </button>
         @endif
 
         @if ($step < 3)
             <button type="button" wire:click="nextStep"
-                class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded">
+                class="bg-green-2 hover:bg-green-3 text-white font-semibold py-2 px-4 rounded ml-[2vw] mr-[2vw]">
                 Next
             </button>
         @else
             <button type="button" wire:click="updateProduct"
-                class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded">
+                class="bg-green-2 hover:bg-green-3 text-white font-semibold py-2 px-4 rounded mr-[1vw]">
                 Update Product
             </button>
         @endif

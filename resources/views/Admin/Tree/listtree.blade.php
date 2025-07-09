@@ -6,18 +6,18 @@
     <title>Tree List</title>
     @vite('resources/css/app.css')
 </head>
-<body class="p-4">
+<body class="p-4 bg-yellow-2">
     @include('components.sidebar')
 
-    <div class="container mx-auto p-6">
-        <div class="flex flex-row justify-between items-center mb-4">
-            <h1 class="text-2xl font-bold">Tree List</h1>
-            <a href="{{ route('admin.trees.create') }}" class="px-4 py-3 bg-blue-600 text-white rounded hover:bg-blue-700">
+    <div class="w-[93vw] p-4 ml-5 mt-5">
+        <div class="flex flex-row justify-between items-center mb-4 ml-[5vw]">
+            <h1 class="text-4xl font-bold">Tree List</h1>
+            <a href="{{ route('admin.trees.create') }}" class="px-4 py-3 bg-green-2 text-white rounded hover:bg-green-3 font-medium">
                 + Add New Tree
             </a>
         </div>
 
-        <div class="bg-white rounded shadow">
+        <div class="bg-white rounded shadow ml-[5vw]">
             <table class="min-w-full text-sm">
                 <thead class="bg-green-100 text-left">
                     <tr>
@@ -30,7 +30,7 @@
                         <th class="px-4 py-3">Actions</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class ="bg-yellow-2">
                     @foreach ($trees as $tree)
                         <tr class="border-b hover:bg-gray-50">
                             <td class="px-4 py-3 flex items-center gap-2">
@@ -72,7 +72,7 @@
         </div>
 
         {{-- Pagination --}}
-        <div class="mt-4">
+        <div class="mt-4 ml-[5vw] z-1">
             {{ $trees->withQueryString()->links() }}
         </div>
     </div>
