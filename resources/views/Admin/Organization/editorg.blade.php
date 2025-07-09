@@ -18,7 +18,7 @@
       </div>
     @endif
 
-    <form class="w-full" action="{{ route('organization.update', $organization->organization_id) }}" method="POST" enctype="multipart/form-data">
+    <form class="w-full" action="{{ route('admin.organizations.update', $organization->organization_id) }}" method="POST" enctype="multipart/form-data">
       @csrf
       @method('PUT')
 

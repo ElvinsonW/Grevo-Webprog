@@ -18,7 +18,7 @@
             </div>
         @endif
 
-        <form class="w-full" action="{{ route('tree.update', $trees->treeid) }}" method="POST" enctype="multipart/form-data">
+        <form class="w-full" action="{{ route('admin.trees.update', $trees->treeid) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 

@@ -18,7 +18,7 @@
       </div>
     @endif
 
-    <form class="w-full" action="{{route('organization.store')}}" method="POST" enctype="multipart/form-data">
+    <form class="w-full" action="{{route('admin.organizations.store')}}" method="POST" enctype="multipart/form-data">
       @csrf
       <div class="w-full flex flex-row gap-4">
         <!-- LEFT COLUMN -->

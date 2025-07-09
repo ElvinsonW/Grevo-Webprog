@@ -134,7 +134,7 @@ Route::middleware(CheckAdminRole::class)->prefix('admin')->group(function(){
     Route::controller(TreeController::class)->group(function(){
         Route::get('/trees/create', 'create')->name('admin.trees.create');
         Route::post('/trees', 'store')->name('admin.trees.store');
-        Route::get('/trees', 'index')->name('admin.trees.index');
+        Route::get('/trees', 'index')->name('admin.trees.listtree');
         Route::get('/trees/{treeid}/edit', 'edit')->name('admin.trees.edit');
         Route::put('/trees/{treeid}', 'update')->name('admin.trees.update');
         Route::delete('/trees/{treeid}', 'destroy')->name('admin.trees.destroy');
@@ -144,7 +144,7 @@ Route::middleware(CheckAdminRole::class)->prefix('admin')->group(function(){
     Route::controller(BatchController::class)->group(function(){
         Route::get('/batches/upload', 'create')->name('admin.batches.create');
         Route::post('/batches', 'store')->name('admin.batches.store');
-        Route::get('/batches', 'index')->name('admin.batches.index');
+        Route::get('/batches', 'index')->name('admin.batches.listbatch');
         Route::delete('/batches/{batchid}', 'destroy')->name('admin.batches.destroy');
     });
 

@@ -188,7 +188,7 @@ class AddProduct extends Component
         });
 
         session()->flash('message', 'Product added successfully!');
-        return redirect()->route('products.list');
+        return redirect()->route('admin.products.list');
     }
 
     public function render()
