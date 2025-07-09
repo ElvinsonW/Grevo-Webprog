@@ -1,11 +1,11 @@
 <h3 class="text-[1.4vw] font-bold text-center mb-[2vw]">
-    How often do you use a dishwasher or washing machine in a week?
+    Seberapa sering Anda menggunakan mesin pencuci piring atau mesin cuci dalam seminggu?
 </h3>
 <div class="flex flex-col gap-[1.5vw] mb-[3vw]">
     @foreach ([
-        'More than 9 times' => 3,
-        '4 to 9 times' => 2,
-        '1 to 3 times' => 1,
+        'Lebih dari 9 kali' => 3,
+        '4 sampai 9 kali' => 2,
+        '1 sampai 3 kali' => 1,
     ] as $label => $value)
         <div class="relative">
             <input id="op{{ $value }}" type="radio" name="household" wire:model="answer.{{ $step - 1 }}"

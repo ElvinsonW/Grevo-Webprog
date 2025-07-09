@@ -88,7 +88,7 @@
                             </span>
                             <span style="color: #D2D2B0; font-size: 20px;">|</span>
                             <span>
-                                <span class="font-bold text-green2">{{ $product->sold }}</span> Sold
+                                <span class="font-bold text-green2">{{ $product->sold }}</span> terjual
                             </span>
                         </div>
                     </div>
@@ -97,9 +97,9 @@
                 <!-- color -->
                 @if ($product->product_variants->first()->color)
                     <div class="flex items-start mb-[2vw]">
-                        <p class="w-[10vw] text-green-2 text-[1.2vw]" style="line-height:25px;">Color</p>
+                        <p class="w-[10vw] text-green-2 text-[1.2vw]" style="line-height:25px;">Warna</p>
                         <div class="flex flex-wrap gap-[1vw] text-green-2 w-[28vw]">
-                            @foreach ($product->product_variants->pluck('color')->unique('id') as $color)
+                            @foreach ($colors as $color)
                                 <label class="items-center">
                                     <input type="radio" name="color" value="{{ $color->id }}"
                                         class="hidden peer" required>
@@ -117,9 +117,9 @@
                 <!-- size -->
                 @if ($product->product_variants->first()->size)
                     <div class="flex items-center mb-[2vw]">
-                        <p class="w-[10vw] text-green-2 text-[1.2vw]" style="line-height:25px;">Size</p>
+                        <p class="w-[10vw] text-green-2 text-[1.2vw]" style="line-height:25px;">Ukuran</p>
                         <div class="flex gap-[1vw] text-green-2">
-                            @foreach ($product->product_variants->pluck('size')->unique('id') as $size)
+                            @foreach ($sizes as $size)
                                 <label class="items-center">
                                     <input type="radio" name="size" value="{{ $size->id }}"
                                         class="hidden peer" required>
@@ -136,7 +136,7 @@
 
                 <!-- shipping -->
                 <div class="flex items-center mb-8 ">
-                    <p class="w-[10vw] text-green-2 text-[1.2vw]">Certificate</p>
+                    <p class="w-[10vw] text-green-2 text-[1.2vw]">Sertifikasi</p>
                     <p class="text-sm text-green-2 text-[1.2vw]">{{ $product->certification }}</p>
                 </div>
 
@@ -155,8 +155,7 @@
                         </div>
                         <p class="text-sm text-gray-600 mb-2">Stock: 200</p>
                     </div>
-                    <button class="cursor-pointer bg-orange-1 text-white font-bold w-[20vw] h-[3.5vw] rounded">ADD TO
-                        CART</button>
+                    <button class="cursor-pointer bg-orange-1 text-white font-bold w-[20vw] h-[3.5vw] rounded">Tambah ke Keranjang</button>
                 </div>
             </form>
         </div>
@@ -170,7 +169,7 @@
                     <div class="flex flex-col w-fit" id="details-tab">
                         <button class="cursor-pointer text-green-2 text-[1.3vw] font-semibold"
                             onclick="setActiveTab('details')">
-                            Product Description
+                            Deskripsi Produk
                         </button>
                         <hr class="mt-2 border-b-2 border-green-2 rounded-full w-full" id="details-underline">
                     </div>
@@ -179,7 +178,7 @@
                     <div class="flex flex-col w-fit ml-10" id="material-tab">
                         <button class="cursor-pointer text-[#7B8C7F] text-[1.3vw] font-normal"
                             onclick="setActiveTab('material')">
-                            Product Material
+                            Material Produk
                         </button>
                         <hr class="hidden mt-2 border-b-2 border-[#3E6137] rounded-full w-full"
                             id="material-underline">
@@ -189,7 +188,7 @@
                     <div class="flex flex-col w-fit ml-10" id="process-tab">
                         <button class="cursor-pointer text-[#7B8C7F] text-[1.3vw] font-normal"
                             onclick="setActiveTab('process')">
-                            Process Details
+                            Detail Proses
                         </button>
                         <hr class="hidden mt-2 border-b-2 border-[#3E6137] rounded-full w-full"
                             id="process-underline">
@@ -199,7 +198,7 @@
                     <div class="flex flex-col w-fit ml-10" id="reviews-tab">
                         <button class="cursor-pointer text-[#7B8C7F] text-[1.3vw] font-normal"
                             onclick="setActiveTab('reviews')">
-                            Buyer Reviews
+                            Ulasan Pembeli
                         </button>
                         <hr class="hidden mt-2 border-b-2 border-[#3E6137] rounded-full w-full"
                             id="reviews-underline">
@@ -210,7 +209,7 @@
                     <!-- Product Description -->
                     <div id="details-content" class="flex flex-col gap-[1vw]">
                         <div>
-                            <h1 class="font-bold text-green-2 text-[1.3vw] mb-[0.5vw]">Product Description</h1>
+                            <h1 class="font-bold text-green-2 text-[1.3vw] mb-[0.5vw]">Deskripsi Produk</h1>
                             <p class="text-[1.2vw] text-gray-700">
                                 {{ $product->description }}
                             </p>
@@ -220,7 +219,7 @@
                     <!-- Product Material -->
                     <div id="material-content" class="hidden space-y-3">
                         <div>
-                            <h1 class="font-bold text-green-2 text-[1.3vw] mb-[0.5vw]">Product Material</h1>
+                            <h1 class="font-bold text-green-2 text-[1.3vw] mb-[0.5vw]">Material Produk</h1>
                             <p class="text-[1.2vw] text-gray-700">
                                 {{ $product->material }}
                             </p>
@@ -229,7 +228,7 @@
 
                     <!-- Process Details -->
                     <div id="process-content" class="hidden space-y-3">
-                        <h1 class="font-bold text-green-2 text-[1.3vw]">Process Details</h1>
+                        <h1 class="font-bold text-green-2 text-[1.3vw]">Detail Proses</h1>
                         <p class="text-[1.2vw] text-gray-700">
                             {{ $product->process }}
                         </p>
@@ -237,7 +236,7 @@
 
                     <!-- Buyer Reviews -->
                     <div id="reviews-content" class="hidden space-y-3">
-                        <h1 class="font-bold text-green-2 text-[1.3vw]">Buyer Reviews</h1>
+                        <h1 class="font-bold text-green-2 text-[1.3vw]">Ulasan Pembeli</h1>
                         <div class="flex flex-col">
                             @foreach ($reviews as $review)
                                 <div class="flex gap-[5vw] py-[1.5vw] border-0  border-b-1 border-gray-300">
@@ -296,7 +295,7 @@
             <!-- text -->
             <span class="flex items-center justify-center space-x-[16px] mb-10">
                 <h3 class="text-[20px] font-bold text-[#3E6137]">EXPLORE</h3>
-                <h1 class="text-[30px] font-bold text-[#D1764F]">RELATED PRODUCTS</h1>
+                <h1 class="text-[30px] font-bold text-[#D1764F]">PRODUK TERKAIT</h1>
             </span>
 
             <!-- item list -->

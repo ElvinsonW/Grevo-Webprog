@@ -1,13 +1,13 @@
 <h3 class="text-[1.4vw] font-bold text-center mb-[2vw]">
-    How much waste you produce in a week??
+    Berapa banyak sampah yang Anda hasilkan dalam seminggu?
 </h3>
 <div class="flex flex-col gap-[1.5vw] mb-[3vw]">
     @foreach ([
-        'More than 3 dusbins' => 50,
-        '3 dusbins' => 40,
-        '2 dusbins' => 30,
-        '1 dusbins' => 20,
-        'Half or less' => 5,
+        'Lebih dari 3 tempat sampah' => 50,
+        '3 tempat sampah' => 40,
+        '2 tempat sampah' => 30,
+        '1 tempat sampah' => 20,
+        'Setengah atau kurang' => 5,
     ] as $label => $value)
         <div class="relative">
             <input id="op{{ $value }}" type="radio" name="household" wire:model="answer.{{ $step - 1 }}"

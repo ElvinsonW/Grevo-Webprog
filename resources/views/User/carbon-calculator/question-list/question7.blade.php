@@ -1,13 +1,13 @@
 <h3 class="text-[1.4vw] font-bold text-center mb-[2vw]">
-    How many household purchases you make each year?
+    Berapa banyak pembelian rumah tangga yang Anda lakukan setiap tahun?
 </h3>
 <div class="flex flex-col gap-[1.5vw] mb-[3vw]">
     @foreach ([
-        'More than 7 goods' => 10,
-        '5 to 7 goods' => 8,
-        '3 to 5 goods' => 6,
-        'Less than 3 goods' => 4,
-        "Don't buy any goods or only buy used goods" => 2,
+        'Lebih dari 7 barang' => 10,
+        '5 sampai 7 barang' => 8,
+        '3 sampai 5 barang' => 6,
+        'Kurang dari 3 barang' => 4,
+        "Tidak membeli barang baru atau hanya membeli barnag bekas" => 2,
     ] as $label => $value)
         <div class="relative">
             <input id="op{{ $value }}" type="radio" name="household" wire:model="answer.{{ $step - 1 }}"

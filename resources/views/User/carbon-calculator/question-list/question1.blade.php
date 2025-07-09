@@ -1,15 +1,15 @@
 <h3 class="text-[1.4vw] font-bold text-center mb-[2vw]">
-    How many people live in your household with you
+    Berapa banyak orang yang tinggal bersama mu di rumah?
 </h3>
 <div class="flex flex-col gap-[1.5vw] mb-[3vw]">
     @foreach ([
-        'I live alone' => 14,
-        '1 person' => 12,
-        '2 people' => 10,
-        '3 people' => 8,
-        '4 people' => 6,
-        '5 people' => 5,
-        'More than 5 people' => 2
+        'Saya tinggal sendiri' => 14,
+        '1 orang' => 12,
+        '2 orang' => 10,
+        '3 orang' => 8,
+        '4 orang' => 6,
+        '5 orang' => 5,
+        'Lebih dari 5 orang' => 2
     ] as $label => $value)
         <div class="relative">
             <input 

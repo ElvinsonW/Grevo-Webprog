@@ -111,7 +111,7 @@ Route::middleware(CheckUserRole::class)->group(function(){
     });
 
     // Rute Ulasan Produk
-    Route::resource('/review', ReviewController::class)->except(['index', 'show']);
+    Route::resource('/review', ReviewController::class);
 
     // Rute Detail Pesanan Spesifik
     Route::get('/order/{order_id}', [OrderController::class, 'show'])->name('order.show');
@@ -157,7 +157,4 @@ Route::middleware(CheckAdminRole::class)->prefix('admin')->group(function(){
         Route::put('/products/{product}', 'update')->name('admin.products.update');
         Route::delete('/products/{product}', 'destroy')->name('admin.products.destroy');
     });
-
-    // Manajemen Pengguna (Admin)
-    Route::resource('users', UserController::class)->except(['create', 'store']);
 });

@@ -1,12 +1,12 @@
 <h3 class="text-[1.4vw] font-bold text-center mb-[2vw]">
-    What type of air travel have you done in the past year?
+    Jenis perjalanan udara apa yang telah Anda lakukan dalam setahun terakhir?
 </h3>
 <div class="flex flex-col gap-[1.5vw] mb-[3vw]">
     @foreach ([
-        'Only short-distance flights (within the same island or region)' => 2,
-        'Medium-distance flights (to other islands or neighboring countries)' => 6,
-        'Long-distance flights (to other continents)' => 20,
-        'I did not travel by air' => 0,
+        'Hanya penerbangan jarak pendek (dalam pulau atau wilayah yang sama)' => 2,
+        'Penerbangan jarak menengah (ke pulau lain atau negara tetangga)' => 6,
+        'Penerbangan jarak jauh (ke benua lain)' => 20,
+        'Saya tidak melakukan perjalanan udara' => 0,
     ] as $label => $value)
         <div class="relative">
             <input id="op{{ $value }}" type="radio" name="household" wire:model="answer.{{ $step - 1 }}"

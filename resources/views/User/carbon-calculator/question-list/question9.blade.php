@@ -1,10 +1,10 @@
 <h3 class="text-[1.4vw] font-bold text-center mb-[2vw]">
-    Do you recycle your waste?
+    Apakah Anda mendaur ulang sampah?
 </h3>
 <div class="flex flex-col gap-[1.5vw] mb-[3vw]">
     @foreach ([
-        'Yes' => 0,
-        'No' => 24,
+        'Ya' => 0,
+        'Tidak' => 24,
     ] as $label => $value)
         <div class="relative">
             <input id="op{{ $value }}" type="radio" name="household" wire:change="$refresh" wire:model="answer.{{ $step - 1 }}"

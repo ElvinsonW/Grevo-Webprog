@@ -40,7 +40,9 @@ class UserSeeder extends Seeder
             'points' => 200
         ]);
         
-        User::factory(5)->create();
+        User::factory(5)->create([
+            'image' => 'profile-image/elvinson.png',
+        ]);
 
     }
 }

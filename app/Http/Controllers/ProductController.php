@@ -42,10 +42,27 @@ class ProductController extends Controller
             ->take(5)
             ->get();
         $reviews = Review::where("product_id",$product->id)->latest()->take(3)->get();
+        $colors = $product->product_variants
+            ->map(function ($variant) {
+                return $variant->color;
+            })
+            ->filter()
+            ->unique('name')
+            ->values();
+
+        $sizes = $product->product_variants
+            ->map(function ($variant) {
+                return $variant->size;
+            })
+            ->filter()
+            ->unique('name')
+            ->values();
         return view("User.product.product-detail", [
             "product" => $product, 
             "similarProducts" => $similarProduct,
-            "reviews" => $reviews
+            "reviews" => $reviews,
+            "colors" => $colors,
+            "sizes" => $sizes
         ]);
     }
 

@@ -98,15 +98,15 @@
                             @endforeach
                             <div class="flex items-center gap-[0.5vw]">
                                 <i class="fa-solid fa-money-bill text-green-3 text-[1.5vw]"></i>
-                                <h3 class="text-[1.3vw] font-bold">PRICE</h3>
+                                <h3 class="text-[1.3vw] font-bold">HARGA</h3>
                             </div>
 
                             <input type="number" name="min_price" value="{{ request('min_price') }}"
                                 class="px-[1vw] py-[0.5vw] rounded-[0.5vw] border border-green-2 focus:outline-none"
-                                placeholder="Minimum Price">
+                                placeholder="Minimum Harga">
                             <input type="number" name="max_price" value="{{ request('max_price') }}"
                                 class="px-[1vw] py-[0.5vw] rounded-[0.5vw] border border-green-2 focus:outline-none"
-                                placeholder="Maximum Price">
+                                placeholder="Maximum Harga">
 
                             <div class="flex items-center gap-[0.5vw]">
                                 <i class="fa-solid fa-star text-yellow-400 text-[1.3vw]"></i>

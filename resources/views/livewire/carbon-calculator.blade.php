@@ -3,7 +3,7 @@
 
     <div class="flex flex-col justify-center items-center mb-[3vw]">
         <div class="flex flex-col w-fit gap-[0.5vw]">
-            <h3 class="text-[1.4vw] font-bold">Question {{ $step }} of 12</h3>
+            <h3 class="text-[1.4vw] font-bold">Pertanyaan {{ $step }} dari 12</h3>
             <div class="w-[70vw] h-[1vw] rounded-[10vw] bg-gray-200">
                 <div class=" h-full rounded-[10vw] bg-green-2" style="width: {{ $this->progress }}%;"></div>
             </div>
@@ -38,8 +38,8 @@
                 @includeif("User.carbon-calculator.question-list.question12")
             @endif
 
-            <div class="flex justify-center">
-                <p class="text-red-">{{ $this->error }}</p>
+            <div class="flex justify-center mb-[1.5vw]">
+                <p class="text-red-600 text-[1.3vw] font-bold">{{ $this->error }}</p>
             </div>
 
             <div class="flex justify-between">

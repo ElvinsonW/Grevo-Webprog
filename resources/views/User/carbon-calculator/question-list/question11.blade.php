@@ -1,14 +1,14 @@
 <h3 class="text-[1.4vw] font-bold text-center mb-[2vw]">
-    How far do you travel using a public transportation each year?
+    Seberapa jauh Anda bepergian menggunakan transportasi umum setiap tahun
 </h3>
 <div class="flex flex-col gap-[1.5vw] mb-[3vw]">
     @foreach ([
         'Lebih dari 90 km' => 12,
-        '65 km to 90 km' => 10,
-        '40 km to 65 km' => 6,
-        '4 km to 40 km' => 4,
+        '65 km sampai 90 km' => 10,
+        '40 km sampai 65 km' => 6,
+        '4 km sampai 40 km' => 4,
         'Kurang dari 4 km' => 2,
-        "I don't use any public transportation" => 2,
+        "Saya tidak menggunakan transportasi publik" => 2,
     ] as $label => $value)
         <div class="relative">
             <input id="op{{ $value }}" type="radio" name="household" wire:model="answer.{{ $step - 1 }}"

@@ -53,7 +53,6 @@ class DatabaseSeeder extends Seeder
                 User::all()
             ])->create([
                 'product_id' => $product->id,
-                'rate' => rand(3,5)
             ])->each(
                 function ($review) {
                     ReviewImage::factory(rand(1, 3))->create([

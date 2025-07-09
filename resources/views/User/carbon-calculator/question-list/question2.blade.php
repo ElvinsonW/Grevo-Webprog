@@ -1,11 +1,11 @@
 <h3 class="text-[1.4vw] font-bold text-center mb-[2vw]">
-    What is the size of your house?
+    Bagaimana ukuran rumah mu?
 </h3>
 <div class="flex flex-col gap-[1.5vw] mb-[3vw]">
     @foreach ([
-        'Big' => 10,
+        'Besar' => 10,
         'Medium' => 7,
-        'Small' => 4,
+        'Kecil' => 4,
         'Apartment' => 2,
     ] as $label => $value)
         <div class="relative">

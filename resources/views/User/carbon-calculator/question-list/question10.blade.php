@@ -1,13 +1,13 @@
 <h3 class="text-[1.4vw] font-bold text-center mb-[2vw]">
-    How far do you travel using a personal vehicle each year??
+    Seberapa jauh Anda bepergian menggunakan kendaraan pribadi setiap tahun?
 </h3>
 <div class="flex flex-col gap-[1.5vw] mb-[3vw]">
     @foreach ([
-        'More than 65 km' => 12,
-        '40 km to 65 km' => 10,
-        '4 km to 40 km' => 6,
+        'Lebih dari 65 km' => 12,
+        '40 km sampai 65 km' => 10,
+        '4 km sampai 40 km' => 6,
         'Kurang dari 4 km' => 4,
-        "I don't own or use a personal vehicle" => 0,
+        "Saya tidak punya atau menggunakan kendaraan pribadi" => 0,
     ] as $label => $value)
         <div class="relative">
             <input id="op{{ $value }}" type="radio" name="household" wire:model="answer.{{ $step - 1 }}"

@@ -1,11 +1,11 @@
 <h3 class="text-[1.4vw] font-bold text-center mb-[2vw]">
-    What type of food do you mostly consume?
+    Apa jenis makanan yang biasa Anda makan?
 </h3>
 <div class="flex flex-col gap-[1.5vw] mb-[3vw]">
     @foreach ([
-        'Mostly packaged food (e.g., frozen pizza, cereal, potato chips)' => 12,
-        'Mix of packaged and fresh food' => 6,
-        'Only fresh, local, or wild food' => 2,
+        'Sebagian besar makanan kemasan (misalnya, pizza beku, sereal, keripik kentang)' => 12,
+        'Campuran makanan kemasan dan segar' => 6,
+        'Hanya makanan segar, lokal, atau hasil buruan' => 2,
     ] as $label => $value)
         <div class="relative">
             <input id="op{{ $value }}" type="radio" name="household" wire:model="answer.{{ $step - 1 }}"

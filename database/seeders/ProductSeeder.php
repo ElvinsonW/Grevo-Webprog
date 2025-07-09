@@ -21,7 +21,7 @@ class ProductSeeder extends Seeder
         $product = Product::create([
             "name" => "Deodoran Batu Tawas", 
             "slug" => "deodoran-batu-tawas", 
-            "product_category_id" => 1, 
+            "product_category_id" => 3, 
             "weight" => 180, 
             "material" => "Kalium aluminium sulfat alami (mineral bumi)", 
             "process" => "Batu tawas berasal dari tambang mineral alami. Setelah ditambang, mineral diproses melalui metode pemurnian fisik seperti pencucian dan pemotongan tanpa menggunakan bahan kimia tambahan. Batu tawas kemudian dikeringkan secara alami untuk mempertahankan kualitasnya. Produk ini dikemas dengan kertas daur ulang atau tanpa kemasan sama sekali untuk mengurangi limbah.", 
@@ -69,7 +69,7 @@ class ProductSeeder extends Seeder
         $product = Product::create([
             "name" => "Sikat Gigi", 
             "slug" => "sikat-gigi", 
-            "product_category_id" => 1, 
+            "product_category_id" => 3, 
             "weight" => 20, 
             "material" => "Gagang yang biodegradable, bulu sikat nilon bebas BPA atau bulu sikat dari arang bambu", 
             "process" => "Gagang sikat gigi dibuat dari bahan biodegradable seperti bambu, yang dipotong dan dihaluskan secara manual. Bulu sikat terbuat dari nilon bebas BPA atau arang bambu yang aman bagi kesehatan. Semua komponen dirakit dengan presisi dan dikemas dalam kotak kertas daur ulang untuk menghindari limbah plastik.", 
@@ -93,7 +93,7 @@ class ProductSeeder extends Seeder
         $product = Product::create([
             "name" => "Pasta Gigi", 
             "slug" => "pasta-gigi", 
-            "product_category_id" => 1, 
+            "product_category_id" => 3, 
             "weight" => 250, 
             "material" => "Kalsium karbonat, xylitol, baking soda, sodium cocoyl isethionate, mint alami, dll", 
             "process" => "Bahan utama seperti kalsium karbonat dan xylitol dicampur dengan baking soda dan minyak mint alami. Proses ini dilakukan tanpa bahan kimia sintetis atau pewarna. Pasta gigi kemudian dikemas dalam tube ramah lingkungan yang terbuat dari material yang dapat terurai atau didaur ulang.", 
@@ -147,7 +147,7 @@ class ProductSeeder extends Seeder
         $product = Product::create([
             "name" => "ToteBag Kanvas", 
             "slug" => "totebag-kanvas", 
-            "product_category_id" => 1, 
+            "product_category_id" => 5, 
             "weight" => 400, 
             "material" => "100% kanvas katun organik bersertifikat", 
             "process" => "Penanaman kapas organik, penenunan kanvas, pemotongan, penjahitan, dan finishing. Dicetak dengan tinta ramah lingkungan", 
@@ -236,7 +236,7 @@ class ProductSeeder extends Seeder
         $product = Product::create([
             "name" => "Sabun Mandi Batang", 
             "slug" => "sabun-mandi-batang", 
-            "product_category_id" => 1, 
+            "product_category_id" => 3, 
             "weight" => 120, 
             "material" => "Minyak kelapa, minyak sawit, soda api (NaOH), gliserin, pewangi, pewarna, ekstrak alami", 
             "process" => "Proses pembuatan sabun batang dimulai dengan mencampur minyak alami seperti kelapa atau zaitun dengan soda api untuk memicu reaksi saponifikasi. Pewarna dan pewangi dari ekstrak tumbuhan ditambahkan sebelum campuran dituangkan ke dalam cetakan. Sabun ini kemudian dibiarkan mengeras secara alami sebelum dipotong dan dikemas", 
@@ -260,7 +260,7 @@ class ProductSeeder extends Seeder
         $product = Product::create([
             "name" => "Sisir Rambut Kayu", 
             "slug" => "sisir-rambut-kayu", 
-            "product_category_id" => 1, 
+            "product_category_id" => 3, 
             "weight" => 40, 
             "material" => "Kayu cendana", 
             "process" => "Kayu alami dipilih dengan cermat untuk memastikan kualitas terbaik. Kayu dipotong sesuai ukuran dan dihaluskan untuk menciptakan permukaan yang lembut. Setelah itu, sisir dirakit tanpa bahan tambahan seperti lem kimia dan diberi lapisan minyak alami untuk meningkatkan daya tahan.", 
@@ -373,7 +373,7 @@ class ProductSeeder extends Seeder
         $product = Product::create([
             "name" => "Sedotan Stainless Steel Set", 
             "slug" => "sedotan-stainless-steel-set", 
-            "product_category_id" => 1, 
+            "product_category_id" => 4, 
             "weight" => 100, 
             "material" => "Stainless steel food grade (SUS 304).", 
             "process" => "Stainless steel food-grade diproses melalui metode pemotongan presisi tinggi untuk membentuk sedotan. Setiap sedotan dipoles hingga halus dan disterilkan sebelum dikemas dalam pouch kain untuk memudahkan penggunaan ulang", 
@@ -397,7 +397,7 @@ class ProductSeeder extends Seeder
         $product = Product::create([
             "name" => "Spons Mandi Loofah Alami", 
             "slug" => "spons-mandi-loofah-alami", 
-            "product_category_id" => 1, 
+            "product_category_id" => 2, 
             "weight" => 40, 
             "material" => "Tanaman loofah kering", 
             "process" => "Tanaman loofah dipanen dan dikeringkan secara alami di bawah sinar matahari. Setelah kering, loofah dipotong menjadi ukuran yang sesuai untuk penggunaan mandi. Spons ini dikemas tanpa bahan tambahan untuk memastikan sepenuhnya biodegradable", 
@@ -421,7 +421,7 @@ class ProductSeeder extends Seeder
         $product = Product::create([
             "name" => "Kain Lap Dapur Bahan Bambu ", 
             "slug" => "kain-lap-dapur-bahan-bambu", 
-            "product_category_id" => 1, 
+            "product_category_id" => 2, 
             "weight" => 50, 
             "material" => "Serat bambu", 
             "process" => "Serat bambu diproses dengan metode mekanis untuk menjaga keaslian bahan. Kain ini ditenun menjadi lap yang ringan dan cepat kering. Proses ini tidak melibatkan bahan kimia agresif, menjadikan produk ini aman untuk lingkungan.", 
@@ -499,7 +499,7 @@ class ProductSeeder extends Seeder
         $product = Product::create([
             "name" => "Pengharum Ruangan Semprot Bahan Alami", 
             "slug" => "pengharum-ruangan-semprot-bahan-alami", 
-            "product_category_id" => 1, 
+            "product_category_id" => 5, 
             "weight" => 200, 
             "material" => "Air suling, alkohol biji-bijian, minyak esensial alami", 
             "process" => "Minyak esensial murni dicampur dengan air suling dan alkohol biji-bijian untuk menciptakan campuran pengharum yang alami. Campuran ini dikemas dalam botol kaca, menghindari penggunaan plastik sekali pakai dan menjamin keberlanjutan", 
@@ -530,7 +530,7 @@ class ProductSeeder extends Seeder
         $product = Product::create([
             "name" => "Sumpit Bambu", 
             "slug" => "sumpit-bambu", 
-            "product_category_id" => 1, 
+            "product_category_id" => 4, 
             "weight" => 30, 
             "material" => "bambu alami", 
             "process" => "Batang bambu dipotong dan dihaluskan menggunakan alat manual. Setelah selesai, sumpit dicuci, dikeringkan, dan dibiarkan tanpa lapisan pelindung sintetis untuk memastikan produk ini sepenuhnya biodegradable", 
@@ -554,7 +554,7 @@ class ProductSeeder extends Seeder
         $product = Product::create([
             "name" => "Pembungkus Makanan Beeswax (Beeswax Wrap)", 
             "slug" => "pembungkus-makanan-beeswax-beeswax-wrap", 
-            "product_category_id" => 1, 
+            "product_category_id" => 4, 
             "weight" => 200, 
             "material" => "Kain katun organik, beeswax (lilin lebah), resin pohon, minyak jojoba", 
             "process" => "Kain katun organik dipotong sesuai ukuran dan dilapisi dengan campuran beeswax, resin pohon, dan minyak alami. Campuran ini dilelehkan ke kain dengan pemanasan lembut. Produk akhir memiliki daya tahan dan dapat digunakan kembali, menggantikan plastik wrap", 

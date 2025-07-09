@@ -20,6 +20,6 @@
             <p class="text-white font-bold text-[1vw]">{{ $avgRating }}</p>
         </div>
         <div class="border-l-2 border-l-yellow-2 h-[80%]"></div>
-        <p class="text-yellow-4 font-bold text-[1vw]"> {{ $product->sold }} Sold</p>
+        <p class="text-yellow-4 font-bold text-[1vw]"> {{ $product->sold }} Terjual</p>
     </div>
 </a>
