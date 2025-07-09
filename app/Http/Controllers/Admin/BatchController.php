@@ -39,7 +39,7 @@ class BatchController extends Controller
         }
 
         Batch::create($validated);
-        return redirect()->route('batch.listbatch')->with('success','Batch Added Successfully!');
+        return redirect()->route('admin.batches.listbatch')->with('success','Batch Added Successfully!');
     }
 
     public function destroy(string $batchid)

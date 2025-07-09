@@ -12,7 +12,7 @@
     <div class="container mx-auto p-6">
         <div class="flex flex-row justify-between items-center mb-4">
             <h1 class="text-2xl font-bold">Tree List</h1>
-            <a href="{{ route('tree.create') }}" class="px-4 py-3 bg-blue-600 text-white rounded hover:bg-blue-700">
+            <a href="{{ route('admin.trees.create') }}" class="px-4 py-3 bg-blue-600 text-white rounded hover:bg-blue-700">
                 + Add New Tree
             </a>
         </div>
@@ -50,8 +50,8 @@
                                 <div class="relative group inline-block text-left">
                                     <button class="bg-gray-100 px-3 py-1 rounded hover:bg-gray-200">...</button>
                                     <div class="absolute hidden group-hover:block bg-white border rounded shadow z-10 mt-1 right-0 min-w-[140px]">
-                                        <a href="{{ route('tree.edit', $tree->treeid) }}" class="block px-4 py-2 text-sm hover:bg-gray-100">Edit</a>
-                                        <form action="{{ route('tree.destroy', $tree->treeid) }}" method="POST" onsubmit="return confirm('Are you sure?');">
+                                        <a href="{{ route('admin.trees.edit', $tree->treeid) }}" class="block px-4 py-2 text-sm hover:bg-gray-100">Edit</a>
+                                        <form action="{{ route('admin.trees.destroy', $tree->treeid) }}" method="POST" onsubmit="return confirm('Are you sure?');">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100">Delete</button>

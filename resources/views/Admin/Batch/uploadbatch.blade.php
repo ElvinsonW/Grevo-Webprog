@@ -17,7 +17,7 @@
             </div>
         @endif
 
-        <form class="w-full ml-5" action="{{ route('batch.store') }}" method="POST" enctype="multipart/form-data">
+        <form class="w-full ml-5" action="{{ route('admin.batches.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="w-full flex flex-row gap-4">
                 <!-- Left Column -->

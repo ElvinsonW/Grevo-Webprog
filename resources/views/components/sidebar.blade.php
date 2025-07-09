@@ -19,13 +19,13 @@
         <ul class="space-y-4">
             @php
                 $navItems = [
-                    ['img' => 'Home.svg', 'label' => 'Home', 'route' => 'organization.listorg'],
-                    ['img' => 'ProductList.svg', 'label' => 'Product List', 'route' => 'products.list'],
-                    ['img' => 'TreeList.svg', 'label' => 'Tree List', 'route' => 'tree.listtree'],
-                    ['img' => 'OrgList.svg', 'label' => 'Organization List', 'route'=> 'organization.listorg'],
-                    ['img' => 'OrderList.svg', 'label' => 'Order List', 'route' => 'organization.listorg'],
-                    ['img' => 'OrderTree.svg', 'label' => 'Order Tree', 'route' => 'organization.listorg'],
-                    ['img' => 'Reforestation.svg', 'label' => 'Reforestation', 'route' => 'batch.listbatch'],
+                    ['img' => 'Home.svg', 'label' => 'Home', 'route' => 'admin.organizations.index'],
+                    ['img' => 'ProductList.svg', 'label' => 'Product List', 'route' => 'admin.products.list'],
+                    ['img' => 'TreeList.svg', 'label' => 'Tree List', 'route' => 'admin.trees.listtree'],
+                    ['img' => 'OrgList.svg', 'label' => 'Organization List', 'route'=> 'admin.organizations.index'],
+                    ['img' => 'OrderList.svg', 'label' => 'Order List', 'route' => 'admin.organizations.index'],
+                    ['img' => 'OrderTree.svg', 'label' => 'Order Tree', 'route' => 'admin.organizations.index'],
+                    ['img' => 'Reforestation.svg', 'label' => 'Reforestation', 'route' => 'admin.batches.listbatch'],
                 ];
             @endphp
 
@@ -46,7 +46,7 @@
                 <span class ="link-text hidden">Admin</span>
             </div>
             <div class="ml-auto">
-                <a href="{{ route('organization.listorg') }}" class="flex items-center gap-2">
+                <a href="{{ route('admin.organizations.index') }}" class="flex items-center gap-2">
                     <img id="logoutIcon" src="{{ asset('images/Logout.svg') }}" alt="Logout" class="hidden h-8 w-auto">
                     <!-- <span class="link-text hidden">Logout</span> -->
                 </a>

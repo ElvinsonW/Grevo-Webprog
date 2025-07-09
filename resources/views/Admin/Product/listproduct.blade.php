@@ -21,7 +21,7 @@
                 <option value="out" {{ request('stock') === 'out' ? 'selected' : '' }}>Out of Stock</option>
             </select>
         </form>
-        <a href="{{ route('products.create') }}" class="px-4 py-3 bg-blue-600 text-white rounded hover:bg-blue-700">
+        <a href="{{ route('admin.products.create') }}" class="px-4 py-3 bg-blue-600 text-white rounded hover:bg-blue-700">
             + Add New Product
         </a>
     </div>
@@ -64,8 +64,8 @@
                             <div class="relative group inline-block text-left">
                                 <button class="bg-gray-100 px-3 py-1 rounded hover:bg-gray-200">...</button>
                                 <div class="absolute hidden group-hover:block bg-white border rounded shadow z-10 mt-1">
-                                    <a href="{{ route('products.edit', $product->id) }}" class="block px-4 py-2 text-sm hover:bg-gray-100">Edit</a>
-                                    <form action="{{ route('products.destroy', $product->id) }}" method="POST" onsubmit="return confirm('Delete this product?');">
+                                    <a href="{{ route('admin.products.edit', $product->id) }}" class="block px-4 py-2 text-sm hover:bg-gray-100">Edit</a>
+                                    <form action="{{ route('admin.products.destroy', $product->id) }}" method="POST" onsubmit="return confirm('Delete this product?');">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100">Delete</button>

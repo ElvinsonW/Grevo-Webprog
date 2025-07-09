@@ -12,7 +12,7 @@
     <div class="container mx-auto p-6">
         <div class="flex flex-row justify-between items-center mb-4">
             <h1 class="text-2xl font-bold">Batch List</h1>
-            <a href="{{ route('batch.create') }}" class="px-4 py-3 bg-blue-600 text-white rounded hover:bg-blue-700">
+            <a href="{{ route('admin.batches.create') }}" class="px-4 py-3 bg-blue-600 text-white rounded hover:bg-blue-700">
                 + Upload Proof
             </a>
         </div>

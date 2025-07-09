@@ -92,7 +92,7 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
-        return redirect()->route('products.list')->with('message', 'Product deleted successfully.');
+        return redirect()->route('admin.products.list')->with('message', 'Product deleted successfully.');
     }
 
     public function createSlug(string $name)

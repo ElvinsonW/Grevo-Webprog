@@ -17,19 +17,19 @@
         <div class="flex flex-row justify-between">
         {{-- Filter Buttons --}}
             <div class="mb-4 flex gap-3">
-                <a href="{{ route('organization.listorg', ['filter' => 'Active']) }}" 
+                <a href="{{ route('admin.organizations.index', ['filter' => 'Active']) }}" 
                     class="px-3 py-2 rounded text-sm font-medium 
                         {{ request()->query('filter') == 'Active' ? 'bg-green-400 text-white' : 'bg-green-200 text-green-800 hover:bg-green-300' }}">
                     Active
                 </a>
-                <a href="{{ route('organization.listorg', ['filter' => 'Not Active']) }}" 
+                <a href="{{ route('admin.organizations.index', ['filter' => 'Not Active']) }}" 
                     class="px-3 py-2 rounded text-sm font-medium 
                         {{ request()->query('filter') == 'Not Active' ? 'bg-red-400 text-white' : 'bg-red-200 text-red-800 hover:bg-red-300' }}">
                     Not Active
                 </a>
             </div>
             <div class="mb-4">
-                <a href="{{ route('organization.create') }}" class="px-2 py-3 bg-blue-600 text-white rounded hover:bg-blue-700">
+                <a href="{{ route('admin.organizations.create') }}" class="px-2 py-3 bg-blue-600 text-white rounded hover:bg-blue-700">
                     + Add New Organization
                 </a>
             </div>
@@ -73,8 +73,8 @@
                                 <div class="relative group inline-block text-left">
                                     <button class="bg-gray-100 px-3 py-1 rounded hover:bg-gray-200">...</button>
                                     <div class="absolute hidden group-hover:block bg-white border rounded shadow z-10 mt-1 right-0">
-                                        <a href="{{ route('organization.edit', $org->organization_id) }}" class="block px-4 py-2 text-sm hover:bg-gray-100">Edit Organization</a>
-                                        <form action="{{ route('organization.destroy', $org->organization_id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this organization and all its associated trees?')">
+                                        <a href="{{ route('admin.organizations.edit', $org->organization_id) }}" class="block px-4 py-2 text-sm hover:bg-gray-100">Edit Organization</a>
+                                        <form action="{{ route('admin.organizations.destroy', $org->organization_id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this organization and all its associated trees?')">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-100">Delete Organization</button>
