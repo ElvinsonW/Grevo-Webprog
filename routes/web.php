@@ -1,7 +1,7 @@
 <?php
 
 // # ivy nambahin dari sini
-use App\Http\Controllers\RegisterController; // Corrected to Auth\RegisterController based on common Laravel structure
+use App\Http\Controllers\RegisterController; 
 use App\Http\Controllers\LoginController;
 // # sampe sini
 
@@ -18,6 +18,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AddressesController;
+use App\Http\Controllers\TreeOrderController;
 
 // --- Import Middleware yang Diperlukan ---
 use App\Http\Middleware\CheckAdminRole;
@@ -115,6 +116,9 @@ Route::middleware(CheckUserRole::class)->group(function(){
 
     // Rute Detail Pesanan Spesifik
     Route::get('/order/{order_id}', [OrderController::class, 'show'])->name('order.show');
+
+    // Rute untuk menyimpan TreeOrder baru (misalnya dari tombol 'Adopt Now' di halaman detail pohon)
+    Route::post('/tree-orders', [TreeOrderController::class, 'store'])->name('tree-orders.store');
 });
 
 // --- 4. Admin Routes (Hanya dapat diakses oleh pengguna dengan peran 'admin') ---

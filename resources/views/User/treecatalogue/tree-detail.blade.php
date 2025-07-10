@@ -1,5 +1,3 @@
-{{-- resources/views/User/tree/tree-detail.blade.php --}}
-
 <x-layout>
     <div class="p-[4vw]">
         <div class="flex flex-wrap lg:flex-nowrap gap-10 pl-[3vw] pr-[3vw] mb-[3vw]">
@@ -12,10 +10,7 @@
                         </button>
 
                         @php
-                            // For simplicity, using treephoto as the main image.
-                            // If you have a separate TreeImage model, you'd iterate through $tree->tree_images
                             $treeImages = [asset('storage/' . $tree->treephoto)]; // Array for carousel
-                            // Add more static or dynamic images if available for a tree, e.g.:
                             // $treeImages[] = asset('images/tree_alt_1.png');
                             // $treeImages[] = asset('images/tree_alt_2.png');
 
@@ -26,10 +21,10 @@
                             <div id="carouselImages"
                                 class="flex flex-col gap-[1vw] transition-transform duration-500 ease-in-out">
                                 @foreach($treeImages as $image)
-                                    <div class="cursor-pointer w-[7vw] h-[7vw] overflow-hidden">
-                                        <img src="{{ $image }}"
-                                            class="preview-image w-full h-full object-cover transition-transform duration-500 hover:scale-150">
-                                    </div>
+                                        <div class="cursor-pointer w-[7vw] h-[7vw] overflow-hidden">
+                                            <img src="{{ $image }}"
+                                                class="preview-image w-full h-full object-cover transition-transform duration-500 hover:scale-150">
+                                        </div>
                                 @endforeach
                             </div>
                         </div>
@@ -48,12 +43,12 @@
                 </div>
             </div>
 
-            {{-- Form for adopting a tree (adjust action if needed) --}}
-            <form action="/adopt-tree" method="POST" class="inline-flex flex-col w-full lg:w-1/2 max-h-fit rounded-lg p-8"
+            {{-- PERBAIKAN DI SINI: method="POST" dan action="/tree-orders" --}}
+            <form action="/tree-orders" method="POST" class="inline-flex flex-col w-full lg:w-1/2 max-h-fit rounded-lg p-8"
                 style="background-color: #FCFCF5; box-shadow: 0px 0px 12.2px 0px rgba(0,0,0,0.06);">
                 @csrf
-                {{-- Tree Input --}}
-                <input type="text" name="tree_id" id="tree_id" value="{{ $tree->treeid }}" class="hidden">
+                <input type="hidden" name="tree_id" id="tree_id" value="{{ $tree->treeid }}">
+                <input type="hidden" name="amount" id="amountInput" value="1"> {{-- amount input hidden --}}
 
                 <div class="flex flex-col space-y-[9px] border-b mb-5" style="border-color: #D2D2B0;">
                     <div class="flex flex-row items-center justify-between">
@@ -73,7 +68,6 @@
                     <div class="flex flex-row items-center justify-between mb-[8px]">
                         <p class="text-red-600 text-lg font-bold mb-2 text-[1.2vw]">Rp
                             {{ number_format($tree->treeprice) }}</p>
-                        {{-- Removed stars, ratings, and sold information --}}
                     </div>
                 </div>
 
@@ -88,13 +82,11 @@
                             <button type="button"
                                 class="cursor-pointer bg-yellow-2 border w-8 h-8 flex items-center justify-center rounded-full"
                                 style="border-color: #D2D2B0;" id="subButton">-</button>
-                            <input type="number" name="amount" class="hidden" id="amountInput" value="1">
                             <span class="bold w-[1vw] text-center" id="amountView">1</span>
                             <button type="button"
                                 class="cursor-pointer bg-yellow-2 border w-8 h-8 flex items-center justify-center rounded-full"
                                 style="border-color: #D2D2B0;" id="addButton">+</button>
                         </div>
-                        {{-- Placeholder for available count --}}
                         <p class="text-sm text-gray-600 mb-2">Available: Many</p>
                     </div>
                     <button type="submit" class="cursor-pointer bg-orange-1 text-white font-bold w-[20vw] h-[3.5vw] rounded">ADOPT TREE</button>
@@ -130,8 +122,6 @@
                         <hr class="hidden mt-2 border-b-2 border-[#3E6137] rounded-full w-full"
                             id="process-underline">
                     </div>
-
-                    {{-- Removed Buyer Reviews Tab --}}
                 </div>
 
                 <div class="p-5 pl-8">
@@ -148,7 +138,6 @@
                         <div>
                             <h1 class="font-bold text-green-2 text-[1.3vw] mb-[0.5vw]">Tree Care</h1>
                             <p class="text-[1.2vw] text-gray-700">
-                                {{-- Assuming you might add a 'treecare' column to your Tree model --}}
                                 {{ $tree->treecare ?? 'Information about tree care will be available here.' }}
                             </p>
                         </div>
@@ -157,7 +146,6 @@
                     <div id="process-content" class="hidden space-y-3">
                         <h1 class="font-bold text-green-2 text-[1.3vw]">Organization Details</h1>
                         <p class="text-[1.2vw] text-gray-700">
-                            {{-- Assuming Tree has a relationship to Organization --}}
                             @if ($tree->organization)
                                 <strong>Organization Name:</strong> {{ $tree->organization->organization_name }}<br>
                                 <strong>Address:</strong> {{ $tree->organization->operational_address }}<br>
@@ -210,6 +198,19 @@
             </div>
         </div>
     </div>
+    @if (session('success'))
+        <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 3000)" x-show="show"
+            class="fixed top-20 left-1/2 -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded-lg shadow-md z-50">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if (session('error'))
+        <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 3000)" x-show="show"
+            class="fixed top-20 left-1/2 -translate-x-1/2 bg-red-500 text-white px-4 py-2 rounded-lg shadow-md z-50">
+            {{ session('error') }}
+        </div>
+    @endif
     <script>
         const carouselImages = document.getElementById('carouselImages');
         const prevBtn = document.getElementById('prevBtn');
@@ -247,7 +248,7 @@
 
         const addButton = document.querySelector("#addButton");
         const subButton = document.querySelector("#subButton");
-        const amountInput = document.querySelector("#amountInput");
+        const amountInput = document.querySelector("#amountInput"); // Ini sekarang hidden input
         const amountView = document.querySelector("#amountView");
 
         addButton.onclick = function() {

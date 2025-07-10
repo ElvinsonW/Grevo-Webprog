@@ -65,4 +65,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Address::class);
     }
+    public function treeOrders()
+    {
+        return $this->hasMany(TreeOrder::class);
+    }
 }

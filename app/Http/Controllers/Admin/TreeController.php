@@ -51,7 +51,7 @@ class TreeController extends Controller
                             ->limit(4)
                             ->get();
 
-        // Example: Dummy data for demonstration.
+        // aku pakek dummy dulu ya
         $treeBatches = collect([
             (object)['batch_name' => 'BATCH 30', 'description' => 'Tanggal + desc singkat apa gitu ya ges ya lalalall', 'planting_date' => now()->subDays(10)],
             (object)['batch_name' => 'BATCH 29', 'description' => 'Tanggal + desc singkat apa gitu ya ges ya lalalall', 'planting_date' => now()->subMonths(1)],
@@ -85,7 +85,7 @@ class TreeController extends Controller
 
         Tree::create($validated);
 
-        return redirect()->route('admin.trees.listtree')->with('success', 'Tree Added Successfully!');
+        return redirect()->route('tree.listtree')->with('success', 'Tree Added Successfully!');
     }
 
     public function edit(string $treeid)
@@ -120,7 +120,7 @@ class TreeController extends Controller
         }
 
         $tree->update($validated);
-        return redirect()->route('admin.trees.listtree')->with('success', 'Tree Updated Successfully');
+        return redirect()->route('tree.listtree')->with('success', 'Tree Updated Successfully');
     }
 
     public function destroy(string $treeid)
@@ -131,6 +131,6 @@ class TreeController extends Controller
         }
         $tree->delete();
 
-        return redirect()->route('admin.trees.listtree')->with('success', 'Tree Deleted Successfully!');
+        return redirect()->route('tree.listtree')->with('success', 'Tree Deleted Successfully!');
     }
 }
