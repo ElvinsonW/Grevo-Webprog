@@ -9,6 +9,8 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Admin\BatchController;
 use App\Http\Controllers\Admin\OrganizationController;
 use App\Http\Controllers\Admin\TreeController;
+use App\Http\Controllers\Admin\TreeOrderListController;
+use App\Http\Controllers\Admin\OrderListController;
 use App\Http\Controllers\CarbonCalculatorController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
@@ -161,4 +163,12 @@ Route::middleware(CheckAdminRole::class)->prefix('admin')->group(function(){
         Route::put('/products/{product}', 'update')->name('admin.products.update');
         Route::delete('/products/{product}', 'destroy')->name('admin.products.destroy');
     });
+
+    // Rute order list (admin)
+    Route::get('/order-list', [OrderListController::class, 'index'])->name('admin.orders.index');
+    Route::post('/orders/{order}/status-history', [OrderListController::class, 'storeStatusHistory'])
+    ->name('admin.orders.storeStatusHistory');
+
+    // Rute tree order list (admin)
+    Route::get('/tree-order-list', [TreeOrderListController::class, 'index'])->name('admin.treeorders.index');
 });

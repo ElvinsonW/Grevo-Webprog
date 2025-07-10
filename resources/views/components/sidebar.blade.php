@@ -23,8 +23,8 @@
                     ['img' => 'ProductList.svg', 'label' => 'Product List', 'route' => 'admin.products.list'],
                     ['img' => 'TreeList.svg', 'label' => 'Tree List', 'route' => 'admin.trees.listtree'],
                     ['img' => 'OrgList.svg', 'label' => 'Organization List', 'route'=> 'admin.organizations.index'],
-                    ['img' => 'OrderList.svg', 'label' => 'Order List', 'route' => 'admin.organizations.index'],
-                    ['img' => 'OrderTree.svg', 'label' => 'Order Tree', 'route' => 'admin.organizations.index'],
+                    ['img' => 'OrderList.svg', 'label' => 'Order List', 'route' => 'admin.orders.index'],
+                    ['img' => 'OrderTree.svg', 'label' => 'Order Tree', 'route' => 'admin.treeorders.index'],
                     ['img' => 'Reforestation.svg', 'label' => 'Reforestation', 'route' => 'admin.batches.listbatch'],
                 ];
             @endphp

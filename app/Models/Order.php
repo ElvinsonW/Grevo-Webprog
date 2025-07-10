@@ -27,4 +27,10 @@ class Order extends Model
     {
         return $this->hasMany(StatusHistory::class);
     }
+
+    public function latestStatus()
+    {
+        return $this->hasOne(StatusHistory::class)->latestOfMany('changed_at');
+    }
+
 }
