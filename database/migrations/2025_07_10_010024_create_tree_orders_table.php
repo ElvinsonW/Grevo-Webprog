@@ -12,23 +12,21 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tree_orders', function (Blueprint $table) {
-            $table->id(); // Primary key for tree_orders
+            $table->id(); 
 
-            // Foreign key to users table
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')
-                ->references('id') // Assuming 'id' is the primary key of your users table
+                ->references('id') 
                 ->on('users')
                 ->onDelete('cascade');
 
-            // Foreign key to trees table
             $table->unsignedBigInteger('tree_id');
             $table->foreign('tree_id')
-                ->references('treeid') // References the custom primary key of the trees table
+                ->references('treeid')
                 ->on('trees')
                 ->onDelete('cascade');
 
-            $table->integer('amount')->default(1); // Jumlah pohon yang diorder
+            $table->integer('amount')->default(1); 
             $table->decimal('total_price', 10, 5); // Total harga untuk order ini (amount * treeprice saat diorder)
             $table->timestamps();
         });

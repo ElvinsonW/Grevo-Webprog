@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\TreeOrder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Tree; // Pastikan model Tree diimport
-use App\Models\User; // Pastikan model User diimport
+use App\Models\Tree; 
+use App\Models\User; 
 
 class TreeOrderController extends Controller
 {
