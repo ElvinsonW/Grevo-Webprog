@@ -19,7 +19,7 @@
         <ul class="space-y-4">
             @php
                 $navItems = [
-                    ['img' => 'Home.svg', 'label' => 'Home', 'route' => 'admin.organizations.index'],
+                    ['img' => 'Home.svg', 'label' => 'Home', 'route' => 'admin.dashboard'],
                     ['img' => 'ProductList.svg', 'label' => 'Product List', 'route' => 'admin.products.list'],
                     ['img' => 'TreeList.svg', 'label' => 'Tree List', 'route' => 'admin.trees.listtree'],
                     ['img' => 'OrgList.svg', 'label' => 'Organization List', 'route'=> 'admin.organizations.index'],

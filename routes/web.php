@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\OrganizationController;
 use App\Http\Controllers\Admin\TreeController;
 use App\Http\Controllers\Admin\TreeOrderListController;
 use App\Http\Controllers\Admin\OrderListController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\CarbonCalculatorController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
@@ -171,4 +172,7 @@ Route::middleware(CheckAdminRole::class)->prefix('admin')->group(function(){
 
     // Rute tree order list (admin)
     Route::get('/tree-order-list', [TreeOrderListController::class, 'index'])->name('admin.treeorders.index');
+
+    // Dashboard (admin)
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 });
