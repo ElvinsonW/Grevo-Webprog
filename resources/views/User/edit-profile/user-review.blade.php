@@ -11,7 +11,7 @@
                         <div class="flex justify-between w-full">
                             <div class="flex gap-[1vw]">
                                 <img src="{{ asset('storage/' . $review->product->product_images->first()->image) }}" alt="elvinson"
-                                    class="w-[7vw] h-[7vw] rounded-[0.5vw] object-cover">
+                                    class="w-[5vw] h-[5vw] rounded-[0.5vw] object-cover">
                                 <div class="flex flex-col">
                                     <p class="text-[1.3vw] font-bold">{{ $review->product->name }}</p>
                                     

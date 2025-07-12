@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\ProductVariant;
 use App\Models\Review;
@@ -33,9 +34,10 @@ class ReviewController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Order $order)
     {
-        $product_variants = ProductVariant::take(5)->get();
+        $product_variants_id = $order->items->pluck('variant_id')->toArray();
+        $product_variants = ProductVariant::wherein('id', $product_variants_id)->get();
         return view('User.review.create-review', ["product_variants" => $product_variants]);
     }
 

@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
             BatchSeeder::class,
             AddressSeeder::class,
             OrderSeeder::class,
-            // OrderItemSeeder::class,
+            OrderItemSeeder::class,
             StatusHistorySeeder::class,
         ]);
 
@@ -50,7 +50,7 @@ class DatabaseSeeder extends Seeder
 
         foreach ($products as $product) {
             Review::factory(rand(10, 30))->recycle([
-                User::all()
+                User::where('user_id', '!=', '2')
             ])->create([
                 'product_id' => $product->id,
             ])->each(

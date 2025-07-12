@@ -17,21 +17,21 @@ class OrderSeeder extends Seeder
             'order_id' => 'ORD123456789',
             'shipping' => 10000,
             'payment_method' => 'Credit Card',
-            'user_id' => 1,
+            'user_id' => 2,
         ]);
 
         Order::create([
             'order_id' => 'ORD123456790',
             'shipping' => 15000,
             'payment_method' => 'Bank Transfer',
-            'user_id' => 1,
+            'user_id' => 2,
         ]);
 
         Order::create([
             'order_id' => 'ORD123456791',
             'shipping' => 8000,
             'payment_method' => 'Cash',
-            'user_id' => 1,
+            'user_id' => 2,
         ]);
     }
 }

@@ -13,6 +13,8 @@ class Order extends Model
         'user_id',
     ];
 
+    protected $with = ['items', 'user', 'statusHistories'];
+
     public function items()
     {
         return $this->hasMany(OrderItem::class);

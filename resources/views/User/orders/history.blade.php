@@ -7,24 +7,19 @@
             <!-- Right Side: Order History -->
             <div class="flex flex-col w-full">
                 <!-- search bar + filter-->
-                <div class="w-full bg-[#FCFCF5] h-fit rounded-xl px-5 mb-5" style="box-shadow: 0 0 12.2px 0 rgba(0,0,0,0.06);">
+                <div class="w-full bg-[#FCFCF5] h-fit rounded-xl px-5 mb-5"
+                    style="box-shadow: 0 0 12.2px 0 rgba(0,0,0,0.06);">
                     <!-- search bar -->
-                    <form method="GET" action="{{ route('orders') }}" class="w-full flex items-center p-4 gap-2 text-[#A6A66B]">
-                        <input
-                            type="text"
-                            name="keyword"
-                            value="{{ request('keyword') }}"
+                    <form method="GET" action="{{ route('orders') }}"
+                        class="w-full flex items-center p-4 gap-2 text-[#A6A66B]">
+                        <input type="text" name="keyword" value="{{ request('keyword') }}"
                             placeholder="Search by Order ID or Product Name"
-                            class="flex-1 border border-[#D2D2B0] rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#D2D2B0]"
-                        >
-                        <button
-                            type="submit"
-                            class="bg-[#D2D2B0] px-4 py-2 rounded hover:bg-[#bdbd8d] transition"
-                        >
+                            class="flex-1 border border-[#D2D2B0] rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#D2D2B0]">
+                        <button type="submit" class="bg-[#D2D2B0] px-4 py-2 rounded hover:bg-[#bdbd8d] transition">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
                     </form>
-                    
+
                     <!-- filter -->
                     <div class="flex gap-3 flex-wrap ml-6" style="margin-top: -10px;">
                         @php
@@ -34,10 +29,10 @@
                                 'to-receive' => 'To Receive',
                                 'delivered' => 'Delivered',
                                 'completed' => 'Completed',
-                                'cancelled' => 'Cancelled'
+                                'cancelled' => 'Cancelled',
                             ];
                             $active = request('status', 'all');
-    
+
                             // Mapping for filtering orders by status
                             $statusMap = [
                                 'to-ship' => ['ORDER PLACED'],
@@ -47,15 +42,14 @@
                                 'cancelled' => ['CANCELLED'],
                             ];
                         @endphp
-    
-                        @foreach($statuses as $key => $label)
-                            <a 
-                                href="{{ route('orders', ['status' => $key]) }}"
-                                class="relative px-4 py-2 {{ $active === $key ? 'text-[#3E6137] font-bold' : 'text-[#D2D2B0]' }}"
-                            >
+
+                        @foreach ($statuses as $key => $label)
+                            <a href="{{ route('orders', ['status' => $key]) }}"
+                                class="relative px-4 py-2 {{ $active === $key ? 'text-[#3E6137] font-bold' : 'text-[#D2D2B0]' }}">
                                 <span class="relative z-10">{{ $label }}</span>
-                                @if($active === $key)
-                                    <span class="absolute left-0 right-0 bottom-0 h-1 bg-[#3E6137] rounded" style="margin-left: -1px; margin-right: -1px;"></span>
+                                @if ($active === $key)
+                                    <span class="absolute left-0 right-0 bottom-0 h-1 bg-[#3E6137] rounded"
+                                        style="margin-left: -1px; margin-right: -1px;"></span>
                                 @endif
                             </a>
                         @endforeach
@@ -67,8 +61,8 @@
                 @forelse ($orders as $order)
                     <!-- order card -->
                     <div class="mb-5 rounded-xl" style="box-shadow: 0 0 12.2px 0 rgba(0,0,0,0.06);">
-                        <!-- atas -->  
-                        <div class="w-full bg-[#FCFCF5] h-fit rounded-xl px-8 py-6 flex flex-col">                        
+                        <!-- atas -->
+                        <div class="w-full bg-[#FCFCF5] h-fit rounded-xl px-8 py-6 flex flex-col">
                             <!-- header -->
                             <div class="flex justify-between items-center mb-5">
                                 <div class="flex flex-col gap-1">
@@ -81,78 +75,92 @@
                                 </div>
                                 <p class="font-bold text-[#D1764F] text-xl">
                                     @php
-                                    $status = $order->statusHistories->first()->status;
+                                        $status = $order->statusHistories->first()->status;
                                         $statusLabels = [
-                                            'ORDER PLACED'    => 'TO SHIP',
-                                            'ORDER SHIPPED'   => 'TO RECEIVE',
-                                            'ORDER ARRIVED'   => 'DELIVERED',
-                                            'ORDER RECEIVED'  => 'COMPLETED',
+                                            'ORDER PLACED' => 'TO SHIP',
+                                            'ORDER SHIPPED' => 'TO RECEIVE',
+                                            'ORDER ARRIVED' => 'DELIVERED',
+                                            'ORDER RECEIVED' => 'COMPLETED',
                                             'ORDER COMPLETED' => 'COMPLETED',
-                                            'CANCELLED'       => 'CANCELLED',
-                                            ];
-                                            @endphp
+                                            'CANCELLED' => 'CANCELLED',
+                                        ];
+                                    @endphp
                                     <span>
                                         {{ strtoupper($statusLabels[$status] ?? $status) }}
                                     </span>
                                 </p>
                             </div>
-                                
+
                             <a href="{{ route('order.show', $order->order_id) }}">
                                 <!-- products -->
                                 @foreach ($order->items as $item)
                                     <div class="flex items flex-col">
                                         <div class="flex items-center flex-row">
-                                            <img src="{{ asset('storage/' . $item->img) }}" alt="{{ $item->name }}" class="w-25 h-25 rounded-xs">
+                                            <img src="{{ asset('storage/' . $item->img) }}" alt="{{ $item->name }}"
+                                                class="w-25 h-25 rounded-xs">
                                             <div class="ml-4 flex-1">
                                                 <h2 class="text-[#3E6137] font-bold text-lg">{{ $item->name }}</h2>
                                                 <p class="text-[#7B8C7F] text-sm">Variant: {{ $item->varname }}</p>
                                                 <p class="text-[#7B8C7F] text-sm">{{ $item->quantity }}x</p>
                                             </div>
-                                            <p class="text-[#7B8C7F] text-md font-bold">Rp {{ number_format($item->price*$item->quantity, 0, ',', '.') }}</p>
-                                            
+                                            <p class="text-[#7B8C7F] text-md font-bold">Rp
+                                                {{ number_format($item->price * $item->quantity, 0, ',', '.') }}</p>
+
                                         </div>
                                         @if (!$loop->last)
-                                            <span class="h-[.5px] bg-[#D2D2B0] rounded my-5" style="margin-left: -1px; margin-right: -1px;"></span>
+                                            <span class="h-[.5px] bg-[#D2D2B0] rounded my-5"
+                                                style="margin-left: -1px; margin-right: -1px;"></span>
                                         @endif
                                     </div>
                                 @endforeach
-                            </a>    
+                            </a>
                         </div>
-                            
-                        
+
+
                         <!-- bawah -->
-                        <div class="flex flex-row justify-between items-center px-8 w-full bg-[#FFFFF4] h-fit rounded-xl px-8 py-6 rounded-lg">
+                        <div
+                            class="flex flex-row justify-between items-center px-8 w-full bg-[#FFFFF4] h-fit rounded-xl px-8 py-6 rounded-lg">
                             <!-- button Berdasarkan Status -->
                             <div class="flex gap-4">
                                 @php
-                                    $status = $order->statusHistories->first()->status;
+                                    $status = $order->latestStatus->status;
                                 @endphp
 
                                 @if ($status === 'ORDER PLACED')
-                                    <a href="" class="border border-[#7B8C7F] text-[#7B8C7F] text-sm font-semibold px-10 py-2 rounded-lg hover:bg-[#fef5f1] transition">
-                                        Cancel Order
-                                    </a>
-                                @elseif ($status === 'ORDER SHIPPED' || $status === 'ORDER ARRIVED')
-                                    <a href="" class="bg-[#3E6137] text-[#FCFCF5] text-sm font-semibold px-10 py-2 rounded-lg hover:bg-[#68806f] transition">
-                                        Order Received
-                                    </a>
+                                    <form action="/order/{{ $order->id }}/cancel" method="POST">
+                                        @csrf
+                                        <button type="submit"
+                                            class="border border-[#7B8C7F] text-[#7B8C7F] text-sm font-semibold px-10 py-2 rounded-lg hover:bg-[#fef5f1] transition">
+                                            Cancel Order
+                                        </button>
+                                    </form>
+                                @elseif ($status === 'ORDER ARRIVED')
+                                    <form action="/order/{{ $order->id }}/receive" method="POST">
+                                        @csrf
+
+                                        <button type="submit"
+                                            class="bg-[#3E6137] text-[#FCFCF5] text-sm font-semibold px-10 py-2 rounded-lg hover:bg-[#68806f] transition">
+                                            Order Received
+                                        </button>
+                                    </form>
                                 @elseif ($status === 'ORDER RECEIVED')
-                                    <a href="" class="bg-[#3E6137] text-[#FCFCF5] text-sm font-semibold px-10 py-2 rounded-lg hover:bg-[#68806f] transition">
+                                    <a href="/products"
+                                        class="bg-[#3E6137] text-[#FCFCF5] text-sm font-semibold px-10 py-2 rounded-lg hover:bg-[#68806f] transition">
                                         Buy Again
                                     </a>
-                                    <a href="" class="border border-[#7B8C7F] text-[#7B8C7F] text-sm font-semibold px-10 py-2 rounded-lg hover:bg-[#f0f5f2] transition">
+                                    <a href="/review/{{ $order->id }}/create"
+                                        class="border border-[#7B8C7F] text-[#7B8C7F] text-sm font-semibold px-10 py-2 rounded-lg hover:bg-[#f0f5f2] transition">
                                         Rate
                                     </a>
                                 @elseif ($status === 'ORDER COMPLETED')
-                                    <a href="" class="bg-[#3E6137] text-[#FCFCF5] text-sm font-semibold px-10 py-2 rounded-lg hover:bg-[#68806f] transition">
+                                    <a href=""
+                                        class="bg-[#3E6137] text-[#FCFCF5] text-sm font-semibold px-10 py-2 rounded-lg hover:bg-[#68806f] transition">
                                         Buy Again
                                     </a>
                                 @elseif ($status === 'CANCELLED')
-                                    <a href="" class="bg-[#3E6137] text-[#FCFCF5] text-sm font-semibold px-10 py-2 rounded-lg hover:bg-[#68806f] transition">
+                                    <a href="/products"
+                                        class="bg-[#3E6137] text-[#FCFCF5] text-sm font-semibold px-10 py-2 rounded-lg hover:bg-[#68806f] transition">
                                         Buy Again
-                                    </a>
-                                    <a href="" class="border border-[#7B8C7F] text-[#7B8C7F] text-sm font-semibold px-10 py-2 rounded-lg hover:bg-[#f5f5e8] transition">
-                                        View Cancellation Detail
                                     </a>
                                 @endif
                             </div>
@@ -172,13 +180,13 @@
                             </div>
                         </div>
                     </div>
-                    
+
                 @empty
                     <img src="{{ asset('images/noorders.svg') }}" alt="No Orders" class="h-50 w-auto mt-30">
-                    
+
                 @endforelse
 
             </div>
         </div>
-    </div>
+        </div>
 </x-layout>

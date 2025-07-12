@@ -94,6 +94,12 @@ Route::middleware(CheckUserRole::class)->group(function(){
     Route::get('/profile/orders', [ProfileController::class, 'showOrders'])->name('orders');
     Route::get('/profile/reviews', [ProfileController::class, 'showReviews'])->name('profile.reviews');
 
+    // Rute Batalin Order
+    Route::post('/order/{order:id}/cancel', [OrderController::class, 'cancelOrder'])->name('order.cancel');
+    
+    // Rute Terima Product Order
+    Route::post('/order/{order:id}/receive', [OrderController::class, 'receiveOrder'])->name('order.receive');
+
     // Rute Keranjang Belanja
     Route::resource('cart', CartController::class)->except(['create', 'edit']);
 
@@ -114,7 +120,8 @@ Route::middleware(CheckUserRole::class)->group(function(){
     });
 
     // Rute Ulasan Produk
-    Route::resource('/review', ReviewController::class);
+    Route::resource('/review', ReviewController::class)->except(["create"]);
+    Route::get('/review/{order:id}/create', [ReviewController::class, 'create']);
 
     // Rute Detail Pesanan Spesifik
     Route::get('/order/{order_id}', [OrderController::class, 'show'])->name('order.show');
