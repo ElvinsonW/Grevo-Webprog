@@ -74,7 +74,7 @@ class ReviewController extends Controller
             }
 
             DB::commit();
-            return redirect('/review');
+            return redirect('/review')->with('reviewSuccess', 'Review is submitted successfully!');
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect('/');

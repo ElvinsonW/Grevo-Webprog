@@ -28,6 +28,7 @@ class OrderItemSeeder extends Seeder
             'quantity' => 2,
             'price' => Variant::find(1)->price,
         ]);
+        
         OrderItem::create([
             'order_id' => 1,
             'variant_id' => 9,

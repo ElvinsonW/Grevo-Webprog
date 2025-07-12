@@ -63,6 +63,12 @@ class ProfileController extends Controller
 
         $orders = Order::with(['items', 'statusHistories' => fn($q) => $q->orderBy('changed_at', 'desc')])
             ->where('user_id', $user->id)
+            ->when($keyword, function ($query) use ($keyword) {
+                $query->where(function ($q) use ($keyword) {
+                    $q->where('order_id', 'like', "%$keyword%")
+                      ->orWhereHas('items', fn ($iq) => $iq->where('name', 'like', "%$keyword%"));
+                });
+            })
             ->get();
 
         if ($statusParam !== 'all' && isset($statusMap[$statusParam])) {

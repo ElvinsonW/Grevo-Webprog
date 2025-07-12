@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Order;
 use App\Services\RajaOngkirService;
+use Carbon\Carbon;
+use Illuminate\Container\Attributes\Auth;
 use Illuminate\Http\Request;
 use Stripe\Stripe;
 use Stripe\Customer;
@@ -12,33 +15,34 @@ use Stripe\Exception\ApiErrorException;
 
 class PaymentController extends Controller
 {
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
         $cartIds = $request->query('carts');
         return view('User.check-out.checkout', ["carts" => $cartIds]);
     }
-    
+
     public function checkout(Request $request)
     {
         Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
 
         try {
             $customer = Customer::create([
-                'email' => $request->user()->email ?? $request->email, 
+                'email' => $request->user()->email ?? $request->email,
                 'name' => $request->user()->name ?? $request->name
             ]);
 
-            
+
             $lineItems = [];
             $cartIds = $request->get('cartIds');
             $carts = Cart::whereIn('id', $cartIds)->get();
-            
-            foreach($carts as $cart){
+
+            foreach ($carts as $cart) {
                 $lineItems[] = [
                     'price_data' => [
                         'currency' => 'idr',
                         'product_data' => [
                             'name' => $cart->product_variant->product->name,
-                            
+
                         ],
                         'unit_amount' => $cart->product_variant->price * 100,
                     ],
@@ -55,7 +59,8 @@ class PaymentController extends Controller
                     ],
                     'unit_amount' => $shippingFee * 100,
                 ],
-                'quantity' => 1];
+                'quantity' => 1
+            ];
 
             $session = Session::create([
                 'customer' => $customer->id,
@@ -64,10 +69,13 @@ class PaymentController extends Controller
                 'mode' => 'payment',
                 'success_url' => route('checkout.success', [], true) . "?session_id={CHECKOUT_SESSION_ID}",
                 'cancel_url' => route('checkout.cancel', [], true),
+                'metadata' => [
+                    'cart_ids' => implode(',', $cartIds),
+                    'shipping_fee' => $shippingFee * 100
+                ],
             ]);
 
             return redirect($session->url);
-
         } catch (ApiErrorException $e) {
             return back()->with('error', 'Payment processing error. Please try again.');
         }
@@ -79,9 +87,33 @@ class PaymentController extends Controller
 
         try {
             $session = Session::retrieve($request->get('session_id'));
+            $shippingFee = $session->metadata->shipping_fee;
+            $cartIds = explode(',', $session->metadata->cart_ids); 
+            $carts = Cart::wherein('id', $cartIds)->get();
 
-            return view('homepage');
+            $order = Order::create([
+                "order_id" => "ORD" . fake()->randomNumber(),
+                'shipping' => $shippingFee,
+                'payment_method' => 'Credit Card',
+                'user_id' => auth()->user()->id
+            ]);
 
+            $order->statusHistories->create([
+                'status' => 'ORDER PLACED',
+                'changed_at' => Carbon::now()
+            ]);
+
+            foreach($carts as $cart){
+                $order->items->create([
+                    'variant_id' => $cart->product_variant->id,
+                    'quantity' => $cart->amount,
+                    'price' => $cart->total
+                ]);
+
+                $cart->delete();
+            }
+
+            return redirect('/order' . '/' . $order->id)->with('orderSuccess', 'Order is placed successfully!');
         } catch (ApiErrorException $e) {
             return redirect()->route('checkout.cancel')->with('error', 'Unable to verify payment.');
         }
@@ -92,7 +124,8 @@ class PaymentController extends Controller
         return view('checkout.cancel');
     }
 
-    public function calculateShippingCost(Request $request){
+    public function calculateShippingCost(Request $request)
+    {
         $origin = $request->input('origin');
         $weight = $request->input('weight');
 
