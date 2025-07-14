@@ -63,15 +63,15 @@
                             multiple 
                             class="hidden" 
                             accept="image/*"
-                            required
-                        />
+                            required/>
                         <label 
                             for="imagesUpload"
                             class="cursor-pointer inline-block px-4 py-2 bg-green-2 text-white rounded-md hover:bg-green-3 transition-all font-medium">
                             Upload Images
                         </label>
+                        @error('imagesUpload') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+
                     </div>
-                    @error('images.*') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
 
                     <div class="grid grid-cols-4 gap-4 mt-2">
                         @foreach ($images as $index => $img)
@@ -93,7 +93,7 @@
         </div>
     
     @elseif ($step === 2)
-    <div class="container ml-[2vw]">
+    <div class="w-[80vw] ml-[2vw]">
         <h1 class="text-4xl font-bold mb-4">Sales Information</h1>
 
         <!-- Toggle for No Variants -->
@@ -147,11 +147,16 @@
                 </div>
             </div>
         </div>
+        <div class="flex flex-col">
+            @error('sizes') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+            @error('colors') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+        </div>
     </div>
 
 
+
     @elseif ($step === 3)
-    <div class="space-y-4 container ml-[2vw]">
+    <div class="space-y-4 w-[80vw] ml-[2vw]">
         <h1 class="text-4xl font-bold mb-4">Variant Information</h1>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -221,12 +226,12 @@
 
         @if ($step < 3)
             <button type="button" wire:click="nextStep"
-                class="bg-green-2 hover:bg-green-3 text-white font-semibold py-2 px-4 rounded mr-[2vw]">
+                class="bg-green-2 hover:bg-green-3 text-white font-semibold py-2 px-4 rounded mr-[7.5vw]">
                 Next
             </button>
         @else
             <button type="button" wire:click="store"
-                class="bg-green-2 hover:bg-green-3 text-white font-semibold py-2 px-4 rounded mr-[2vw]">
+                class="bg-green-2 hover:bg-green-3 text-white font-semibold py-2 px-4 rounded mr-[7.5vw]">
                 Upload Product
             </button>
         @endif

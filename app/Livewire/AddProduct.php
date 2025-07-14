@@ -123,7 +123,7 @@ class AddProduct extends Component
 
     public function nextStep()
     {
-        $this->validateStep();
+        if (!$this->validateStep()) return;
         $this->step++;
 
         if ($this->step === 2 && !$this->hasVariants) {
@@ -152,14 +152,29 @@ class AddProduct extends Component
                 'process' => 'required|string',
                 'images.*' => 'image|max:2048'
             ]);
+
+            if (count($this->images) === 0) {
+                $this->addError('imagesUpload', 'Please upload at least one product image.');
+            }
         }
 
+
         if ($this->step === 2 && $this->hasVariants) {
+
+            if (count($this->sizes) === 0) {
+                $this->addError('sizes', 'Please add at least one size.');
+            }
+
+            if (count($this->colors) === 0) {
+                $this->addError('colors', 'Please add at least one color.');
+            }
             $this->validate([
                 'sizes' => 'required|array|min:1',
                 'colors' => 'required|array|min:1'
             ]);
         }
+
+        return !$this->getErrorBag()->isNotEmpty();
     }
 
     public function store()

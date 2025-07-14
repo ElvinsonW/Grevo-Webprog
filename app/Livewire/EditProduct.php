@@ -149,7 +149,7 @@ class EditProduct extends Component
 
     public function nextStep()
     {
-        $this->validateStep();
+        if (!$this->validateStep()) return;
         $this->step++;
     }
 
@@ -171,6 +171,13 @@ class EditProduct extends Component
                 'process' => 'required|string',
                 'images.*.temporary' => 'nullable|image|max:2048'
             ]);
+            $hasUploadedImage = collect($this->images)->contains(function ($img) {
+                return isset($img['temporary']) || isset($img['image']);
+            });
+
+            if (!$hasUploadedImage) {
+                $this->addError('imagesUpload', 'Please upload at least one product image.');
+            }
         }
 
         if ($this->step === 2 && $this->hasVariants) {
@@ -179,6 +186,7 @@ class EditProduct extends Component
                 'colors' => 'required|array|min:1'
             ]);
         }
+        return !$this->getErrorBag()->isNotEmpty();
     }
 
     public function updateProduct()

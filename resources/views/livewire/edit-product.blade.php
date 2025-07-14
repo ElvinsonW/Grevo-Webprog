@@ -66,9 +66,9 @@
                         class="cursor-pointer inline-block px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-all font-medium">
                         Upload Images
                     </label>
+                    @error('imagesUpload') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                 </div>
 
-                    @error('imagesUpload.*') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
 
                     <div class="grid grid-cols-4 gap-4 mt-2">
                         @foreach ($images as $index => $img)
@@ -94,7 +94,7 @@
         </div>
     @elseif ($step === 2)
         <!-- Step 2: Sizes and Colors -->
-        <div class="container ml-[7vw]">
+        <div class="w-[80vw] ml-[7vw]">
             <h1 class="text-4xl font-bold mb-4">Edit Variants - Sizes & Colors</h1>
 
             <!-- Toggle -->
@@ -149,12 +149,15 @@
                         @endforeach
                     </div>
                 </div>
-
+            </div>
+            <div class="flex flex-col">
+                @error('sizes') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                @error('colors') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
             </div>
         </div>
     @elseif ($step === 3)
         <!-- Step 3: Variant Data -->
-        <div class="space-y-4 container ml-[7vw]">
+        <div class="space-y-4 w-[80vw] ml-[7vw]">
             <h1 class="text-4xl font-bold mb-4">Sales Information</h1>
 
             @if ($hasVariants)
@@ -224,12 +227,12 @@
 
         @if ($step < 3)
             <button type="button" wire:click="nextStep"
-                class="bg-green-2 hover:bg-green-3 text-white font-semibold py-2 px-4 rounded ml-[2vw] mr-[2vw]">
+                class="bg-green-2 hover:bg-green-3 text-white font-semibold py-2 px-4 rounded ml-[2vw] mr-[7.5vw]">
                 Next
             </button>
         @else
             <button type="button" wire:click="updateProduct"
-                class="bg-green-2 hover:bg-green-3 text-white font-semibold py-2 px-4 rounded mr-[1vw]">
+                class="bg-green-2 hover:bg-green-3 text-white font-semibold py-2 px-4 rounded mr-[7.5vw]">
                 Update Product
             </button>
         @endif
