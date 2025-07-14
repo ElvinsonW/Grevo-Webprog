@@ -68,6 +68,14 @@
                 Review</p>
         </a>
 
+         <a href="{{ route('profile.tree-order') }}" class="flex items-center gap-[0.5vw]">
+            <i
+                class="fa-solid fa-tree text-[1vw] w-[1.2vw] {{ Request::routeIs('profile.tree-order') ? 'text-[var(--color-green-3)]' : 'text-gray-700' }}"></i>
+            <p
+                class="text-[1vw] font-bold {{ Request::routeIs('profile.tree-order') ? 'text-[var(--color-green-3)]' : 'text-gray-700' }}">
+                Tree Order</p>
+        </a>
+
         {{-- Logout Link (hanya tampil jika user login) atau Login Link (jika tidak login) --}}
         @auth
             <form action="{{ route('logout') }}" method="POST" class="mt-[1vw]">

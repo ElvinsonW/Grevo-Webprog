@@ -1,4 +1,4 @@
-<header class="flex items-center justify-around w-full h-[8vw] px-[5vw] bg-green-1">
+<header class="flex items-center justify-around w-full h-[9vw] px-[5vw] bg-green-1">
     <a href="/">
         <img src="{{ asset('images/logo.png') }}" alt="logo" class="w-[10vw]">
     </a>
@@ -18,11 +18,11 @@
                 <i class="fa-solid fa-magnifying-glass"></i>
             </button>
         </form>
-        <li class="list-none flex gap-[5vw] text-green-3 text-[1.2vw] font-bold mt-[0.25vw]">
-            <ul><a href="/">Home</a></ul>
-            <ul><a href="/products">Products</a></ul>
-            <ul><a href="/trees">Green Activity</a></ul>
-            <ul><a href="/carbon-calculator">Carbon calculator</a></ul>
+        <li class="list-none flex gap-[3vw] text-green-3 text-[1.2vw] font-bold mt-[0.25vw]">
+            <a href="/" class="pb-[0.5vw] px-[1vw] {{ request()->is('/') ? 'border-b-3 border-orange-1 text-orange-1' : 'text-green-3 hover:text-green-2' }}">Home</a>
+            <a href="/products" class="pb-[0.5vw] px-[1vw] {{ request()->is(['products', 'products/*']) ? 'border-b-3 border-orange-1 text-orange-1' : 'text-green-3 hover:text-green-2' }}">Products</a>
+            <a href="/trees" class="pb-[0.5vw] px-[1vw] {{ request()->is(['trees', 'trees/*']) ? 'border-b-3 border-orange-1 text-orange-1' : 'text-green-3 hover:text-green-2' }}">Green Activity</a>
+            <a href="/carbon-calculator" class="pb-[0.5vw] px-[1vw] {{ request()->is(['carbon-calculator', 'carbon-calculator/*']) ? 'border-b-3 border-orange-1 text-orange-1' : 'text-green-3 hover:text-green-2' }}">Carbon Calculator</a>
         </li>
     </div>
 

@@ -6,6 +6,8 @@ use App\Models\Product;
 use App\Models\ProductVariant;
 use App\Models\Review;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -73,6 +75,7 @@ class ReviewProduct extends Component
             $this->endError = "Please review all product first!";
         } else{
             $this->endError = "";
+            Storage::deleteDirectory('livewire-tmp');
             return redirect()->route("profile.reviews");
         }
 
