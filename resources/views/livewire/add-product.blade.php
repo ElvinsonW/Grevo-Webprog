@@ -55,23 +55,22 @@
                     <label class="block text-sm font-medium">
                         Product Images ({{ count($images) }}/8)
                     </label>
-                <div class="relative mt-2">
-                    <input 
-                        id="imagesUpload" 
-                        type="file" 
-                        wire:model="imagesUpload" 
-                        multiple 
-                        class="hidden" 
-                        accept="image/*"
-                        required
-                    />
-
-                    <label 
-                        for="imagesUpload"
-                        class="cursor-pointer inline-block px-4 py-2 bg-green-2 text-white rounded-md hover:bg-green-3 transition-all font-medium">
-                        Upload Images
-                    </label>
-                </div>
+                    <div class="relative mt-2">
+                        <input 
+                            id="imagesUpload" 
+                            type="file" 
+                            wire:model="imagesUpload" 
+                            multiple 
+                            class="hidden" 
+                            accept="image/*"
+                            required
+                        />
+                        <label 
+                            for="imagesUpload"
+                            class="cursor-pointer inline-block px-4 py-2 bg-green-2 text-white rounded-md hover:bg-green-3 transition-all font-medium">
+                            Upload Images
+                        </label>
+                    </div>
                     @error('images.*') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
 
                     <div class="grid grid-cols-4 gap-4 mt-2">
@@ -92,101 +91,126 @@
                 </div>
             </div>
         </div>
-@elseif ($step === 2)
-    <!-- Step 2: Sales Information -->
+    
+    @elseif ($step === 2)
     <div class="container ml-[2vw]">
         <h1 class="text-4xl font-bold mb-4">Sales Information</h1>
 
-        <div class="border border-green-300 rounded-md p-4 space-y-4 bg-green-50">
+        <!-- Toggle for No Variants -->
+        <div class="mb-4">
+            <label class="inline-flex items-center">
+                <input type="checkbox" wire:model="hasVariants" class="form-checkbox">
+                <span class="ml-2 text-sm font-medium">Enable size/color variants</span>
+            </label>
+        </div>
 
-            {{-- SIZE Input --}}
+        <div class="border border-green-300 rounded-md p-4 space-y-4 bg-green-50">
+            <!-- SIZE Input -->
             <div>
                 <label class="block font-semibold">Size</label>
-
                 <div class="flex gap-2 my-2">
                     <input type="text" wire:model="newSize" wire:keydown.enter.prevent="addSize"
                         class="border border-gray-400 rounded px-2 py-1 w-1/2"
-                        placeholder="Add size (press Enter)" />
+                        placeholder="Add size (press Enter)" @disabled(!$hasVariants) />
                     <button wire:click="addSize" type="button"
-                        class="bg-black text-white px-3 py-1 rounded hover:bg-gray-600">+</button>
+                        class="bg-black text-white px-3 py-1 rounded hover:bg-gray-600" @disabled(!$hasVariants)>+</button>
                 </div>
-
                 <div class="flex flex-wrap gap-2 p-2 border rounded">
                     @foreach ($sizes as $index => $size)
                         <div class="flex items-center bg-white border rounded px-3 py-1">
                             {{ $size }}
                             <button wire:click="removeSize({{ $index }})" type="button"
-                                class="ml-2 text-red-600 font-bold">✕</button>
+                                class="ml-2 text-red-600 font-bold" @disabled(!$hasVariants)>✕</button>
                         </div>
                     @endforeach
                 </div>
             </div>
 
-            {{-- COLOR Input --}}
+            <!-- COLOR Input -->
             <div>
                 <label class="block font-semibold">Color</label>
-
                 <div class="flex gap-2 my-2">
                     <input type="text" wire:model="newColor" wire:keydown.enter.prevent="addColor"
                         class="border border-gray-400 rounded px-2 py-1 w-1/2"
-                        placeholder="Add color (press Enter)" />
+                        placeholder="Add color (press Enter)" @disabled(!$hasVariants) />
                     <button wire:click="addColor" type="button"
-                        class="bg-black text-white px-3 py-1 rounded hover:bg-gray-600">+</button>
+                        class="bg-black text-white px-3 py-1 rounded hover:bg-gray-600" @disabled(!$hasVariants)>+</button>
                 </div>
-
                 <div class="flex flex-wrap gap-2 p-2 border rounded">
                     @foreach ($colors as $index => $color)
                         <div class="flex items-center bg-white border rounded px-3 py-1">
                             {{ $color }}
                             <button wire:click="removeColor({{ $index }})" type="button"
-                                class="ml-2 text-red-600 font-bold">✕</button>
+                                class="ml-2 text-red-600 font-bold" @disabled(!$hasVariants)>✕</button>
                         </div>
                     @endforeach
                 </div>
             </div>
-
         </div>
     </div>
+
+
     @elseif ($step === 3)
-        <!-- Step 3: Variant Data -->
-<div class="space-y-4 container ml-[2vw]">
-    <h1 class="text-4xl font-bold mb-4">Sales Information</h1>
+    <div class="space-y-4 container ml-[2vw]">
+        <h1 class="text-4xl font-bold mb-4">Variant Information</h1>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        @foreach ($variantData as $key => $data)
-            @php
-                [$size, $color] = explode('|', $key);
-            @endphp
-            <div class="border border-green-300 bg-green-50 rounded-md p-4">
-                <h3 class="font-semibold mb-3">Size = {{ $size }}, Color = {{ $color }}</h3>
-
-                <div class="space-y-3">
-                    <div>
-                        <label class="block font-medium">Stock</label>
-                        <input type="number" wire:model="variantData.{{ $key }}.stock"
-                            class="w-full border rounded px-3 py-2" />
-                    </div>
-
-                    <div>
-                        <label class="block font-medium">Price</label>
-                        <input type="number" wire:model="variantData.{{ $key }}.price"
-                            class="w-full border rounded px-3 py-2" />
-                    </div>
-
-                    <div>
-                        <label class="block font-medium">SKU</label>
-                        <input type="text" wire:model="variantData.{{ $key }}.sku"
-                            class="w-full border rounded px-3 py-2" />
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            @if (!$hasVariants)
+                <!-- Single variant -->
+                <div class="border border-green-300 bg-green-50 rounded-md p-4">
+                    <h3 class="font-semibold mb-3">Single Variant - {{ $name }}</h3>
+                    <div class="space-y-3">
+                        <div>
+                            <label class="block font-medium">Stock</label>
+                            <input type="number" wire:model="singleStock"
+                                class="w-full border rounded px-3 py-2" />
+                        </div>
+                        <div>
+                            <label class="block font-medium">Price</label>
+                            <input type="number" wire:model="singlePrice"
+                                class="w-full border rounded px-3 py-2" />
+                        </div>
+                        <div>
+                            <label class="block font-medium">SKU</label>
+                            <input type="text" wire:model="singleSku"
+                                class="w-full border rounded px-3 py-2" />
+                        </div>
                     </div>
                 </div>
-            </div>
-        @endforeach
+            @else
+                <!-- Variant combinations -->
+                @foreach ($variantData as $key => $data)
+                    @php
+                        [$size, $color] = explode('|', $key);
+                    @endphp
+                    <div class="border border-green-300 bg-green-50 rounded-md p-4">
+                        <h3 class="font-semibold mb-3">Size = {{ $size }}, Color = {{ $color }}</h3>
+                        <div class="space-y-3">
+                            <div>
+                                <label class="block font-medium">Stock</label>
+                                <input type="number" wire:model="variantData.{{ $key }}.stock"
+                                    class="w-full border rounded px-3 py-2" />
+                            </div>
+                            <div>
+                                <label class="block font-medium">Price</label>
+                                <input type="number" wire:model="variantData.{{ $key }}.price"
+                                    class="w-full border rounded px-3 py-2" />
+                            </div>
+                            <div>
+                                <label class="block font-medium">SKU</label>
+                                <input type="text" wire:model="variantData.{{ $key }}.sku"
+                                    class="w-full border rounded px-3 py-2" />
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            @endif
+        </div>
     </div>
-</div>
+@endif
 
-    @endif
 
-    <!-- Step Navigation -->
+    <!-- Navigation -->
     <div class="flex justify-between pt-3 ml-[2vw]">
         @if ($step > 1)
             <button type="button" wire:click="previousStep"

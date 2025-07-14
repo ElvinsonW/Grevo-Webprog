@@ -19,19 +19,20 @@ class AddProduct extends Component
 
     public $step = 1;
 
-    // Step 1 fields
+    // Step 1
     public $name, $category, $description, $material, $weight, $certificate, $process;
-    public $images = [];              // Final images
-    public $imagesUpload = [];        // Temporary input
+    public $images = [];
+    public $imagesUpload = [];
 
-    // Step 2 fields
+    // Step 2
     public $newSize = '', $newColor = '';
     public $sizes = [], $colors = [];
+    public $hasVariants = true;
 
-    // Step 3 fields
+    // Step 3
     public $variantData = [];
+    public $singleStock = '', $singlePrice = '', $singleSku = '';
 
-    // Step 1: Image Upload Handling
     public function updatedImagesUpload()
     {
         if (is_array($this->imagesUpload)) {
@@ -41,8 +42,7 @@ class AddProduct extends Component
                 }
             }
         }
-
-        $this->reset('imagesUpload'); // Allow re-uploading
+        $this->reset('imagesUpload');
     }
 
     public function removeImage($index)
@@ -51,7 +51,6 @@ class AddProduct extends Component
         $this->images = array_values($this->images);
     }
 
-    // Step 2: Add/Remove Sizes and Colors
     public function addSize()
     {
         $size = trim($this->newSize);
@@ -102,10 +101,37 @@ class AddProduct extends Component
         }
     }
 
+    public function updatedHasVariants($value)
+    {
+        if (!$value) {
+            $this->sizes = [];
+            $this->colors = [];
+            $this->variantData = [];
+
+            if (empty($this->singleSku) && !empty($this->name)) {
+                $this->singleSku = strtoupper(Str::slug($this->name));
+            }
+        }
+    }
+
+    public function updatedName()
+    {
+        if (!$this->hasVariants && empty($this->singleSku)) {
+            $this->singleSku = strtoupper(Str::slug($this->name));
+        }
+    }
+
     public function nextStep()
     {
         $this->validateStep();
         $this->step++;
+
+        if ($this->step === 2 && !$this->hasVariants) {
+            // Reset size/color data
+            $this->sizes = [];
+            $this->colors = [];
+            $this->variantData = [];
+        }
     }
 
     public function previousStep()
@@ -128,7 +154,7 @@ class AddProduct extends Component
             ]);
         }
 
-        if ($this->step === 2) {
+        if ($this->step === 2 && $this->hasVariants) {
             $this->validate([
                 'sizes' => 'required|array|min:1',
                 'colors' => 'required|array|min:1'
@@ -138,11 +164,19 @@ class AddProduct extends Component
 
     public function store()
     {
-        $this->validate([
-            'variantData.*.stock' => 'required|numeric|min:0',
-            'variantData.*.price' => 'required|numeric|min:0',
-            'variantData.*.sku' => 'required|unique:product_variants,sku'
-        ]);
+        if ($this->hasVariants) {
+            $this->validate([
+                'variantData.*.stock' => 'required|numeric|min:0',
+                'variantData.*.price' => 'required|numeric|min:0',
+                'variantData.*.sku' => 'required|unique:product_variants,sku'
+            ]);
+        } else {
+            $this->validate([
+                'singleStock' => 'required|numeric|min:0',
+                'singlePrice' => 'required|numeric|min:0',
+                'singleSku' => 'required|unique:product_variants,sku'
+            ]);
+        }
 
         DB::transaction(function () {
             $product = Product::create([
@@ -165,24 +199,37 @@ class AddProduct extends Component
                 ]);
             }
 
-            foreach ($this->variantData as $key => $data) {
-                [$size, $color] = explode('|', $key);
+            if ($this->hasVariants) {
+                foreach ($this->variantData as $key => $data) {
+                    [$sizeName, $colorName] = explode('|', $key);
 
-                $variant = ProductVariant::create([
+                    $variant = ProductVariant::create([
+                        'product_id' => $product->id,
+                        'stock' => $data['stock'],
+                        'price' => $data['price'],
+                        'sku' => $data['sku']
+                    ]);
+
+                    $size = Size::create([
+                        'product_variant_id' => $variant->id,
+                        'name' => $sizeName
+                    ]);
+
+                    Color::create([
+                        'product_variant_id' => $variant->id,
+                        'size_id' => $size->id,
+                        'name' => $colorName,
+                        'stock' => $data['stock'],
+                        'price' => $data['price'],
+                        'sku' => $data['sku']
+                    ]);
+                }
+            } else {
+                ProductVariant::create([
                     'product_id' => $product->id,
-                    'stock' => $data['stock'],
-                    'price' => $data['price'],
-                    'sku' => $data['sku']
-                ]);
-
-                Size::create([
-                    'product_variant_id' => $variant->id,
-                    'name' => $size
-                ]);
-
-                Color::create([
-                    'product_variant_id' => $variant->id,
-                    'name' => $color
+                    'stock' => $this->singleStock,
+                    'price' => $this->singlePrice,
+                    'sku' => $this->singleSku
                 ]);
             }
         });

@@ -20,17 +20,18 @@ class EditProduct extends Component
     public $productId;
     public $step = 1;
 
-    // Step 1 fields
+    // Step 1
     public $name, $category, $description, $material, $weight, $certificate, $process;
-    public $images = [];
-    public $imagesUpload = [];
+    public $images = [], $imagesUpload = [];
 
-    // Step 2 fields
+    // Step 2
     public $newSize = '', $newColor = '';
     public $sizes = [], $colors = [];
+    public $hasVariants = true;
 
-    // Step 3 fields
-    public $variantData = [];
+    // Step 3
+    public $variantData = [];        // for variants
+    public $singleStock = '', $singlePrice = '', $singleSku = ''; // for simple product
 
     public function mount($productId)
     {
@@ -47,26 +48,35 @@ class EditProduct extends Component
         $this->process = $product->process;
         $this->images = $product->product_images->toArray();
 
-        // Step 2
-        $this->sizes = $product->product_variants->pluck('size.name')->unique()->values()->toArray();
-        $this->colors = $product->product_variants->pluck('color.name')->unique()->values()->toArray();
+        $firstVariant = $product->product_variants->first();
 
-        // Step 3
-        foreach ($product->product_variants as $variant) {
-            $size = optional($variant->size)->name;
-            $color = optional($variant->color)->name;
+        if ($firstVariant && !$firstVariant->size && !$firstVariant->color) {
+            // Simple product (no size/color)
+            $this->hasVariants = false;
+            $this->singleStock = $firstVariant->stock;
+            $this->singlePrice = $firstVariant->price;
+            $this->singleSku = $firstVariant->sku;
+        } else {
+            // Variant product
+            $this->hasVariants = true;
+            $this->sizes = $product->product_variants->pluck('size.name')->unique()->filter()->values()->toArray();
+            $this->colors = $product->product_variants->pluck('color.name')->unique()->filter()->values()->toArray();
 
-            if ($size && $color) {
-                $key = "$size|$color";
-                $this->variantData[$key] = [
-                    'stock' => $variant->stock,
-                    'price' => $variant->price,
-                    'sku' => $variant->sku,
-                ];
+            foreach ($product->product_variants as $variant) {
+                $size = optional($variant->size)->name;
+                $color = optional($variant->color)->name;
+
+                if ($size && $color) {
+                    $key = "$size|$color";
+                    $this->variantData[$key] = [
+                        'stock' => $variant->stock,
+                        'price' => $variant->price,
+                        'sku' => $variant->sku,
+                    ];
+                }
             }
         }
     }
-
 
     public function updatedImagesUpload()
     {
@@ -75,7 +85,6 @@ class EditProduct extends Component
                 $this->images[] = ['temporary' => $img];
             }
         }
-
         $this->reset('imagesUpload');
     }
 
@@ -119,98 +128,26 @@ class EditProduct extends Component
         $this->generateVariants();
     }
 
-public function generateVariants()
-{
-    $existing = $this->variantData; // Keep previous data
-    $newVariantData = [];
+    public function generateVariants()
+    {
+        $existing = $this->variantData;
+        $newVariantData = [];
 
-    foreach ($this->sizes as $size) {
-        foreach ($this->colors as $color) {
-            $key = "$size|$color";
-            // Use existing data if available, otherwise empty default
-            $newVariantData[$key] = $existing[$key] ?? [
-                'stock' => '',
-                'price' => '',
-                'sku' => ''
-            ];
+        foreach ($this->sizes as $size) {
+            foreach ($this->colors as $color) {
+                $key = "$size|$color";
+                $newVariantData[$key] = $existing[$key] ?? [
+                    'stock' => '',
+                    'price' => '',
+                    'sku' => ''
+                ];
+            }
         }
+
+        $this->variantData = $newVariantData;
     }
 
-    $this->variantData = $newVariantData;
-}
-
-    public function updateProduct()
-    {
-        $this->validate([
-            'name' => 'required',
-            'category' => 'required|exists:product_categories,id',
-            'description' => 'required',
-            'material' => 'required',
-            'weight' => 'required|numeric',
-            'process' => 'required|string',
-            'variantData.*.stock' => 'required|numeric|min:0',
-            'variantData.*.price' => 'required|numeric|min:0',
-            'variantData.*.sku' => 'required'
-        ]);
-
-        DB::transaction(function () {
-            $product = Product::findOrFail($this->productId);
-            $product->update([
-                'name' => $this->name,
-                'slug' => Str::slug($this->name . '-' . Str::random(6)),
-                'product_category_id' => $this->category,
-                'description' => $this->description,
-                'material' => $this->material,
-                'weight' => $this->weight,
-                'certification' => $this->certificate,
-                'process' => $this->process,
-            ]);
-
-            // Optional: delete old variants/images
-            ProductVariant::where('product_id', $product->id)->delete();
-            ProductImage::where('product_id', $product->id)->delete();
-
-            foreach ($this->images as $image) {
-                $path = isset($image['temporary']) ? $image['temporary']->store('products', 'public') : $image['image'];
-                ProductImage::create([
-                    'product_id' => $product->id,
-                    'image' => $path
-                ]);
-            }
-
-            foreach ($this->variantData as $key => $data) {
-                [$size, $color] = explode('|', $key);
-
-                $variant = ProductVariant::create([
-                    'product_id' => $product->id,
-                    'stock' => $data['stock'],
-                    'price' => $data['price'],
-                    'sku' => $data['sku']
-                ]);
-
-                Size::create([
-                    'product_variant_id' => $variant->id,
-                    'name' => $size
-                ]);
-
-                Color::create([
-                    'product_variant_id' => $variant->id,
-                    'name' => $color
-                ]);
-            }
-        });
-
-        session()->flash('message', 'Product updated successfully!');
-        return redirect()->route('admin.products.list');
-    }
-
-    public function render()
-    {
-        return view('livewire.edit-product', [
-            'categories' => ProductCategory::all()
-        ]);
-    }
-       public function nextStep()
+    public function nextStep()
     {
         $this->validateStep();
         $this->step++;
@@ -236,7 +173,7 @@ public function generateVariants()
             ]);
         }
 
-        if ($this->step === 2) {
+        if ($this->step === 2 && $this->hasVariants) {
             $this->validate([
                 'sizes' => 'required|array|min:1',
                 'colors' => 'required|array|min:1'
@@ -244,4 +181,99 @@ public function generateVariants()
         }
     }
 
+    public function updateProduct()
+    {
+        $this->validate([
+            'name' => 'required',
+            'category' => 'required|exists:product_categories,id',
+            'description' => 'required',
+            'material' => 'required',
+            'weight' => 'required|numeric',
+            'process' => 'required|string',
+            'certificate' => 'nullable|string',
+        ]);
+
+        if ($this->hasVariants) {
+            $this->validate([
+                'variantData.*.stock' => 'required|numeric|min:0',
+                'variantData.*.price' => 'required|numeric|min:0',
+                'variantData.*.sku' => 'required'
+            ]);
+        } else {
+            $this->validate([
+                'singleStock' => 'required|numeric|min:0',
+                'singlePrice' => 'required|numeric|min:0',
+                'singleSku' => 'required'
+            ]);
+        }
+
+        DB::transaction(function () {
+            $product = Product::findOrFail($this->productId);
+            $product->update([
+                'name' => $this->name,
+                'slug' => Str::slug($this->name . '-' . Str::random(6)),
+                'product_category_id' => $this->category,
+                'description' => $this->description,
+                'material' => $this->material,
+                'weight' => $this->weight,
+                'certification' => $this->certificate,
+                'process' => $this->process,
+            ]);
+
+            // Remove old images & variants
+            ProductVariant::where('product_id', $product->id)->delete();
+            ProductImage::where('product_id', $product->id)->delete();
+
+            // Images
+            foreach ($this->images as $image) {
+                $path = isset($image['temporary']) ? $image['temporary']->store('products', 'public') : $image['image'];
+                ProductImage::create([
+                    'product_id' => $product->id,
+                    'image' => $path
+                ]);
+            }
+
+            // Variants
+            if ($this->hasVariants) {
+                foreach ($this->variantData as $key => $data) {
+                    [$size, $color] = explode('|', $key);
+
+                    $variant = ProductVariant::create([
+                        'product_id' => $product->id,
+                        'stock' => $data['stock'],
+                        'price' => $data['price'],
+                        'sku' => $data['sku']
+                    ]);
+
+                    $sizeModel = Size::create([
+                        'product_variant_id' => $variant->id,
+                        'name' => $size
+                    ]);
+
+                    Color::create([
+                        'product_variant_id' => $variant->id,
+                        'size_id' => $sizeModel->id,
+                        'name' => $color
+                    ]);
+                }
+            } else {
+                ProductVariant::create([
+                    'product_id' => $product->id,
+                    'stock' => $this->singleStock,
+                    'price' => $this->singlePrice,
+                    'sku' => $this->singleSku
+                ]);
+            }
+        });
+
+        session()->flash('message', 'Product updated successfully!');
+        return redirect()->route('admin.products.list');
+    }
+
+    public function render()
+    {
+        return view('livewire.edit-product', [
+            'categories' => ProductCategory::all()
+        ]);
+    }
 }
