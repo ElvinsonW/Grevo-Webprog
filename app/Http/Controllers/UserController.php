@@ -51,10 +51,14 @@ class UserController extends Controller
         if(Auth::attempt($credential)){
             $request->session()->regenerate();
 
-            return redirect('/products')->with('loginSuccess', 'Login successfully!');
+            if(auth()->user()->role == "admin"){
+
+            } else {
+                return redirect('/products')->with('loginSuccess', 'Login successfully!');
+            }
         }
 
-       return redirect('/login')
+        return redirect('/login')
                 ->with('loginError', 'The provided username and password do not match our records.')
                 ->withInput();
     }

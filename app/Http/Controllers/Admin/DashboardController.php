@@ -32,11 +32,11 @@ class DashboardController extends Controller
                 'product'     => $product,
                 'category'    => $category,
                 'variant_id'  => $item->variant_id,
-                'name'        => $item->name,
-                'varname'     => $item->varname,
-                'img'         => $item->img,
+                'name'        => $item->variant->product->name,
+                'varname'     => $item->variant->sku,
+                'img'         => $item->variant->product->product_images->first()->image,
                 'frequency'   => $group->sum('quantity'),
-                'total_price' => $group->sum(fn($i) => $i->quantity * $i->price),
+                'total_price' => $item->price,
             ];
         })->sortByDesc('frequency');
 
@@ -104,22 +104,28 @@ class DashboardController extends Controller
             foreach ($weekdays as $i => $day) {
                 $dayDate = $startOfWeek->copy()->addDays($i);
 
-                $ordersForDay = $weekOrders->filter(fn($order) =>
+                $ordersForDay = $weekOrders->filter(
+                    fn($order) =>
                     $order->created_at->isSameDay($dayDate)
                 );
 
-                $revenue = $ordersForDay->sum(fn($order) =>
+                $revenue = $ordersForDay->sum(
+                    fn($order) =>
                     $order->items->sum(fn($item) => $item->quantity * $item->price)
                 );
 
                 $dayRevenue->push($revenue);
             }
 
-            $weeklyData->put('Week '.$w, $dayRevenue);
+            $weeklyData->put('Week ' . $w, $dayRevenue);
         }
 
         return view('Admin.dashboard', compact(
-            'now', 'groupedItems', 'comparator', 'weeklyData', 'top5'
+            'now',
+            'groupedItems',
+            'comparator',
+            'weeklyData',
+            'top5'
         ));
     }
 }

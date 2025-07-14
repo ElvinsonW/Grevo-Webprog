@@ -193,11 +193,10 @@
             plugins: {
                 legend: {
                     position: 'bottom',
-                    align: 'start',
                     labels: {
-                        font: { size: 14 },
+                        font: { size: 12 },
                         usePointStyle: true
-                    }
+                    },
                 },
                 tooltip: {
                     callbacks: {
