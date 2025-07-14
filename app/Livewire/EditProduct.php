@@ -46,18 +46,21 @@ class EditProduct extends Component
         $this->weight = $product->weight;
         $this->certificate = $product->certification;
         $this->process = $product->process;
-        $this->images = $product->product_images->toArray();
 
+        // Prepare image preview
+        foreach ($product->product_images as $img) {
+            $this->images[] = ['image' => $img->image];
+        }
+
+        // Step 2 & 3
         $firstVariant = $product->product_variants->first();
 
         if ($firstVariant && !$firstVariant->size && !$firstVariant->color) {
-            // Simple product (no size/color)
             $this->hasVariants = false;
             $this->singleStock = $firstVariant->stock;
             $this->singlePrice = $firstVariant->price;
             $this->singleSku = $firstVariant->sku;
         } else {
-            // Variant product
             $this->hasVariants = true;
             $this->sizes = $product->product_variants->pluck('size.name')->unique()->filter()->values()->toArray();
             $this->colors = $product->product_variants->pluck('color.name')->unique()->filter()->values()->toArray();
@@ -65,15 +68,15 @@ class EditProduct extends Component
             foreach ($product->product_variants as $variant) {
                 $size = optional($variant->size)->name;
                 $color = optional($variant->color)->name;
+                $size = $size ?: '_';
+                $color = $color ?: '_';
+                $key = "$size|$color";
 
-                if ($size && $color) {
-                    $key = "$size|$color";
-                    $this->variantData[$key] = [
-                        'stock' => $variant->stock,
-                        'price' => $variant->price,
-                        'sku' => $variant->sku,
-                    ];
-                }
+                $this->variantData[$key] = [
+                    'stock' => $variant->stock,
+                    'price' => $variant->price,
+                    'sku' => $variant->sku,
+                ];
             }
         }
     }
@@ -133,8 +136,11 @@ class EditProduct extends Component
         $existing = $this->variantData;
         $newVariantData = [];
 
-        foreach ($this->sizes as $size) {
-            foreach ($this->colors as $color) {
+        $sizes = count($this->sizes) > 0 ? $this->sizes : ['_'];
+        $colors = count($this->colors) > 0 ? $this->colors : ['_'];
+
+        foreach ($sizes as $size) {
+            foreach ($colors as $color) {
                 $key = "$size|$color";
                 $newVariantData[$key] = $existing[$key] ?? [
                     'stock' => '',
@@ -143,7 +149,6 @@ class EditProduct extends Component
                 ];
             }
         }
-
         $this->variantData = $newVariantData;
     }
 
@@ -171,6 +176,7 @@ class EditProduct extends Component
                 'process' => 'required|string',
                 'images.*.temporary' => 'nullable|image|max:2048'
             ]);
+
             $hasUploadedImage = collect($this->images)->contains(function ($img) {
                 return isset($img['temporary']) || isset($img['image']);
             });
@@ -181,11 +187,13 @@ class EditProduct extends Component
         }
 
         if ($this->step === 2 && $this->hasVariants) {
-            $this->validate([
-                'sizes' => 'required|array|min:1',
-                'colors' => 'required|array|min:1'
-            ]);
+            if (count($this->sizes) === 0 && count($this->colors) === 0) {
+                $this->addError('sizes', 'Please add at least one size or color.');
+                $this->addError('colors', 'Please add at least one size or color.');
+                return false;
+            }
         }
+
         return !$this->getErrorBag()->isNotEmpty();
     }
 
@@ -228,13 +236,15 @@ class EditProduct extends Component
                 'process' => $this->process,
             ]);
 
-            // Remove old images & variants
             ProductVariant::where('product_id', $product->id)->delete();
             ProductImage::where('product_id', $product->id)->delete();
 
             // Images
-            foreach ($this->images as $image) {
-                $path = isset($image['temporary']) ? $image['temporary']->store('products', 'public') : $image['image'];
+            foreach ($this->images as $img) {
+                $path = isset($img['temporary'])
+                    ? $img['temporary']->store('products', 'public')
+                    : $img['image'];
+
                 ProductImage::create([
                     'product_id' => $product->id,
                     'image' => $path

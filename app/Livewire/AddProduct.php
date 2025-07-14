@@ -89,9 +89,29 @@ class AddProduct extends Component
     {
         $this->variantData = [];
 
-        foreach ($this->sizes as $size) {
+        if (!empty($this->sizes) && !empty($this->colors)) {
+            foreach ($this->sizes as $size) {
+                foreach ($this->colors as $color) {
+                    $key = "$size|$color";
+                    $this->variantData[$key] = [
+                        'stock' => '',
+                        'price' => '',
+                        'sku' => ''
+                    ];
+                }
+            }
+        } elseif (!empty($this->sizes)) {
+            foreach ($this->sizes as $size) {
+                $key = "$size|";
+                $this->variantData[$key] = [
+                    'stock' => '',
+                    'price' => '',
+                    'sku' => ''
+                ];
+            }
+        } elseif (!empty($this->colors)) {
             foreach ($this->colors as $color) {
-                $key = "$size|$color";
+                $key = "|$color";
                 $this->variantData[$key] = [
                     'stock' => '',
                     'price' => '',
@@ -100,6 +120,7 @@ class AddProduct extends Component
             }
         }
     }
+
 
     public function updatedHasVariants($value)
     {
@@ -160,17 +181,18 @@ class AddProduct extends Component
 
 
         if ($this->step === 2 && $this->hasVariants) {
+            $hasSize = is_array($this->sizes) && count($this->sizes) > 0;
+            $hasColor = is_array($this->colors) && count($this->colors) > 0;
 
-            if (count($this->sizes) === 0) {
-                $this->addError('sizes', 'Please add at least one size.');
+            if (!$hasSize && !$hasColor) {
+                $this->addError('sizes', 'Please add at least one size or color.');
+                $this->addError('colors', 'Please add at least one size or color.');
+                return false;
             }
 
-            if (count($this->colors) === 0) {
-                $this->addError('colors', 'Please add at least one color.');
-            }
             $this->validate([
-                'sizes' => 'required|array|min:1',
-                'colors' => 'required|array|min:1'
+                'sizes' => 'array',
+                'colors' => 'array'
             ]);
         }
 
@@ -216,7 +238,8 @@ class AddProduct extends Component
 
             if ($this->hasVariants) {
                 foreach ($this->variantData as $key => $data) {
-                    [$sizeName, $colorName] = explode('|', $key);
+                    [$sizeName, $colorName] = array_pad(explode('|', $key), 2, null);
+
 
                     $variant = ProductVariant::create([
                         'product_id' => $product->id,

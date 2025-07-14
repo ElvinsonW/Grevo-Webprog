@@ -111,16 +111,16 @@
                 <div class="flex gap-2 my-2">
                     <input type="text" wire:model="newSize" wire:keydown.enter.prevent="addSize"
                         class="border border-gray-400 rounded px-2 py-1 w-1/2"
-                        placeholder="Add size (press Enter)" @disabled(!$hasVariants) />
+                        placeholder="Add size (press Enter)" />
                     <button wire:click="addSize" type="button"
-                        class="bg-black text-white px-3 py-1 rounded hover:bg-gray-600" @disabled(!$hasVariants)>+</button>
+                        class="bg-black text-white px-3 py-1 rounded hover:bg-gray-600">+</button>
                 </div>
                 <div class="flex flex-wrap gap-2 p-2 border rounded">
                     @foreach ($sizes as $index => $size)
                         <div class="flex items-center bg-white border rounded px-3 py-1">
                             {{ $size }}
                             <button wire:click="removeSize({{ $index }})" type="button"
-                                class="ml-2 text-red-600 font-bold" @disabled(!$hasVariants)>✕</button>
+                                class="ml-2 text-red-600 font-bold">✕</button>
                         </div>
                     @endforeach
                 </div>
@@ -132,16 +132,16 @@
                 <div class="flex gap-2 my-2">
                     <input type="text" wire:model="newColor" wire:keydown.enter.prevent="addColor"
                         class="border border-gray-400 rounded px-2 py-1 w-1/2"
-                        placeholder="Add color (press Enter)" @disabled(!$hasVariants) />
+                        placeholder="Add color (press Enter)" />
                     <button wire:click="addColor" type="button"
-                        class="bg-black text-white px-3 py-1 rounded hover:bg-gray-600" @disabled(!$hasVariants)>+</button>
+                        class="bg-black text-white px-3 py-1 rounded hover:bg-gray-600" >+</button>
                 </div>
                 <div class="flex flex-wrap gap-2 p-2 border rounded">
                     @foreach ($colors as $index => $color)
                         <div class="flex items-center bg-white border rounded px-3 py-1">
                             {{ $color }}
                             <button wire:click="removeColor({{ $index }})" type="button"
-                                class="ml-2 text-red-600 font-bold" @disabled(!$hasVariants)>✕</button>
+                                class="ml-2 text-red-600 font-bold">✕</button>
                         </div>
                     @endforeach
                 </div>
@@ -186,10 +186,16 @@
                 <!-- Variant combinations -->
                 @foreach ($variantData as $key => $data)
                     @php
-                        [$size, $color] = explode('|', $key);
+                        $parts = explode('|', $key);
+                        $size = $parts[0] ?? null;
+                        $color = $parts[1] ?? null;
+
+                        $label = [];
+                        if ($size) $label[] = "Size = $size";
+                        if ($color) $label[] = "Color = $color";
                     @endphp
                     <div class="border border-green-300 bg-green-50 rounded-md p-4">
-                        <h3 class="font-semibold mb-3">Size = {{ $size }}, Color = {{ $color }}</h3>
+                        <h3 class="font-semibold mb-3">{{ implode(', ', $label) }}</h3>
                         <div class="space-y-3">
                             <div>
                                 <label class="block font-medium">Stock</label>
