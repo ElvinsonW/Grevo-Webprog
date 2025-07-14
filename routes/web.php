@@ -29,7 +29,7 @@ use App\Http\Middleware\CheckUserRole;
 
 // --- Import Facades ---
 use Illuminate\Support\Facades\Route;
-
+use Symfony\Component\HttpKernel\Profiler\Profile;
 
 // --- 1. Homepage & General Public Routes (Tidak memerlukan autentikasi) ---
 Route::get('/', function () {
@@ -93,6 +93,9 @@ Route::middleware(CheckUserRole::class)->group(function(){
     // Rute Pesanan & Ulasan
     Route::get('/profile/orders', [ProfileController::class, 'showOrders'])->name('orders');
     Route::get('/profile/reviews', [ProfileController::class, 'showReviews'])->name('profile.reviews');
+
+    // Rute Tree Order
+    Route::get('/profile/tree-order', [ProfileController::class, 'showTreeOrder'])->name('profile.tree-order');
 
     // Rute Batalin Order
     Route::post('/order/{order:id}/cancel', [OrderController::class, 'cancelOrder'])->name('order.cancel');

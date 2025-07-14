@@ -305,10 +305,10 @@
                             <a href="{{ route('products.show', $item->variant->product->slug) }}">
                                 <div class="flex items flex-col mx-10">
                                     <div class="flex items-center flex-row mx-10">
-                                        <img src="{{ asset('storage/' . $item->img) }}" alt="{{ $item->name }}"
+                                        <img src="{{ asset('storage/' . $item->variant->product->product_images->first()->image) }}" alt="{{ $item->variant->product->name }}"
                                             class="border w-25 h-25 rounded-xs">
                                         <div class="ml-4 flex-1">
-                                            <h2 class="text-[#3E6137] font-bold text-xl">{{ $item->name }}</h2>
+                                            <h2 class="text-[#3E6137] font-bold text-xl">{{ $item->variant->product->name }}</h2>
                                             <div class="flex gap-[0.5vw]">
                                                 <p class="text-[#7B8C7F] text-sm">Variant: {{ $item->variant->sku }}</p>
                                                 @if ($item->variant->color)
@@ -321,7 +321,7 @@
                                             <p class="text-[#7B8C7F] text-sm">{{ $item->quantity }}x</p>
                                         </div>
                                         <p class="text-[#7B8C7F] text-md font-bold">Rp
-                                            {{ number_format($item->price * $item->quantity, 0, ',', '.') }}</p>
+                                            {{ number_format($item->price, 0, ',', '.') }}</p>
                                     </div>
                                     @if (!$loop->last)
                                         <span class="h-[.5px] bg-[#D2D2B0] rounded my-5"></span>
@@ -354,7 +354,7 @@
 
                         <div class="flex flex-col gap-1 w-1/2">
                             @php
-                                $merchadise = $order->items->sum(fn($item) => $item->price * $item->quantity);
+                                $merchadise = $item->price;
                                 $shipping = $order->shipping;
                                 $total = $merchadise + $shipping;
                             @endphp

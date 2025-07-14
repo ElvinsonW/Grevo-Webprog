@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\Order;
+use App\Models\OrderItem;
+use App\Models\StatusHistory;
 use App\Services\RajaOngkirService;
 use Carbon\Carbon;
 use Illuminate\Container\Attributes\Auth;
@@ -51,13 +53,14 @@ class PaymentController extends Controller
             }
 
             $shippingFee = $request->get('shippingFee');
+
             $lineItems[] = [
                 'price_data' => [
                     'currency' => 'idr',
                     'product_data' => [
                         'name' => 'Shipping Fee',
                     ],
-                    'unit_amount' => $shippingFee * 100,
+                    'unit_amount' => $shippingFee * 100
                 ],
                 'quantity' => 1
             ];
@@ -71,7 +74,7 @@ class PaymentController extends Controller
                 'cancel_url' => route('checkout.cancel', [], true),
                 'metadata' => [
                     'cart_ids' => implode(',', $cartIds),
-                    'shipping_fee' => $shippingFee * 100
+                    'shipping_fee' => $shippingFee
                 ],
             ]);
 
@@ -91,20 +94,26 @@ class PaymentController extends Controller
             $cartIds = explode(',', $session->metadata->cart_ids); 
             $carts = Cart::wherein('id', $cartIds)->get();
 
+            do {
+                $orderId = 'ORD' . now()->format('YmdHis') . rand(1000, 9999);
+            } while (Order::where('order_id', $orderId)->exists());
+
             $order = Order::create([
-                "order_id" => "ORD" . fake()->randomNumber(),
+                "order_id" => $orderId,
                 'shipping' => $shippingFee,
                 'payment_method' => 'Credit Card',
                 'user_id' => auth()->user()->id
             ]);
 
-            $order->statusHistories->create([
+            StatusHistory::create([
+                'order_id' => $order->id,
                 'status' => 'ORDER PLACED',
                 'changed_at' => Carbon::now()
             ]);
 
             foreach($carts as $cart){
-                $order->items->create([
+                OrderItem::create([
+                    'order_id' => $order->id,
                     'variant_id' => $cart->product_variant->id,
                     'quantity' => $cart->amount,
                     'price' => $cart->total
@@ -113,7 +122,7 @@ class PaymentController extends Controller
                 $cart->delete();
             }
 
-            return redirect('/order' . '/' . $order->id)->with('orderSuccess', 'Order is placed successfully!');
+            return redirect()->route('order.show', $order->order_id)->with('orderSuccess', 'Order is placed successfully!');
         } catch (ApiErrorException $e) {
             return redirect()->route('checkout.cancel')->with('error', 'Unable to verify payment.');
         }

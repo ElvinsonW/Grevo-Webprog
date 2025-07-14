@@ -11,6 +11,7 @@ use App\Models\StatusHistory;
 use App\Models\OrderItem;
 use App\Models\Address; // Pastikan ini di-import jika Anda menggunakan model Address
 use App\Models\Review;
+use App\Models\TreeOrder;
 
 class ProfileController extends Controller
 {
@@ -93,6 +94,14 @@ class ProfileController extends Controller
         return view('User.edit-profile.user-review', [
             "user" => $user,
             "reviews" => Review::where("user_id", $user->id)->paginate(10)
+        ]);
+    }
+
+    public function showTreeOrder(){
+        $user = Auth::user();
+        return view('User.edit-profile.tree-order',[
+            "user" => $user,
+            "treeOrders" => TreeOrder::where('user_id', $user->id)->get()
         ]);
     }
 }

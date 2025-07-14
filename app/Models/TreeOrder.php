@@ -15,6 +15,7 @@ class TreeOrder extends Model
         'amount',
         'total_price',
     ];
+    protected $with = ['user', 'tree'];
 
     public function user()
     {

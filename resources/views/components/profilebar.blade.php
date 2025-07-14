@@ -68,11 +68,11 @@
                 Review</p>
         </a>
 
-         <a href="" class="flex items-center gap-[0.5vw]">
+         <a href="{{ route('profile.tree-order') }}" class="flex items-center gap-[0.5vw]">
             <i
-                class="fa-solid fa-tree text-[1vw] w-[1.2vw] {{ Request::routeIs('profile.reviews') ? 'text-[var(--color-green-3)]' : 'text-gray-700' }}"></i>
+                class="fa-solid fa-tree text-[1vw] w-[1.2vw] {{ Request::routeIs('profile.tree-order') ? 'text-[var(--color-green-3)]' : 'text-gray-700' }}"></i>
             <p
-                class="text-[1vw] font-bold {{ Request::routeIs('profile.reviews') ? 'text-[var(--color-green-3)]' : 'text-gray-700' }}">
+                class="text-[1vw] font-bold {{ Request::routeIs('profile.tree-order') ? 'text-[var(--color-green-3)]' : 'text-gray-700' }}">
                 Tree Order</p>
         </a>
 

@@ -27,7 +27,7 @@
         <div class="flex flex-col ml-[2vw] w-full bg-yellow-3 px-[3vw] py-[2vw] rounded-[1vw] drop-shadow-md">
             <div class="flex flex-col ">
                 @foreach ($reviews as $review)
-                    <div class="flex flex-col items-end gap-[2vw] py-[1.5vw] border-0 border-b-1 border-gray-300">
+                    <div class="flex flex-col items-end gap-[2vw] py-[1.5vw] border-0 border-b-1 border-b-[#7B8C7F]">
                         <div class="flex justify-between w-full">
                             <div class="flex gap-[1vw]">
                                 <img src="{{ asset('storage/' . $review->product->product_images->first()->image) }}" alt="elvinson"

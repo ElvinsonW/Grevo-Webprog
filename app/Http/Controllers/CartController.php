@@ -40,19 +40,20 @@ class CartController extends Controller
         }
         $product = Product::find($request->product_id);
         $product_variant_id = $color->product_variant->id ?? $size->product_variant->id ??  $product->product_variants->first()->id;
+        $product_variant = ProductVariant::find($product_variant_id);
         
         $cart = Cart::where("product_variant_id", $product_variant_id)->where('user_id', auth()->user()->id)->first();
 
         if($cart){
             $cart->amount = $request->amount;
-            $cart->total = $request->amount * $product->price;
+            $cart->total = $request->amount * $product_variant->price;
             $cart->save();
         } else {
             $cart1 = Cart::create([
                 "user_id" => auth()->user()->id,
                 "product_variant_id" => $product_variant_id,
                 "amount" => $request->amount,
-                "total" => $request->amount * $product->price
+                "total" => $request->amount * $product_variant->price
             ]);
         }
 

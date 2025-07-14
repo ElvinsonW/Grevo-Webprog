@@ -149,15 +149,15 @@
                                 @foreach ($order->items as $item)
                                     <div class="flex items flex-col">
                                         <div class="flex items-center flex-row">
-                                            <img src="{{ asset('storage/' . $item->img) }}" alt="{{ $item->name }}"
+                                            <img src="{{ asset('storage/' . $item->variant->product->product_images->first()->image) }}" alt="{{ $item->variant->product->name }}"
                                                 class="w-25 h-25 rounded-xs">
                                             <div class="ml-4 flex-1">
-                                                <h2 class="text-[#3E6137] font-bold text-lg">{{ $item->name }}</h2>
-                                                <p class="text-[#7B8C7F] text-sm">Variant: {{ $item->varname }}</p>
+                                                <h2 class="text-[#3E6137] font-bold text-lg">{{ $item->variant->product->name }}</h2>
+                                                <p class="text-[#7B8C7F] text-sm">Variant: {{ $item->variant->sku }}</p>
                                                 <p class="text-[#7B8C7F] text-sm">{{ $item->quantity }}x</p>
                                             </div>
                                             <p class="text-[#7B8C7F] text-md font-bold">Rp
-                                                {{ number_format($item->price * $item->quantity, 0, ',', '.') }}</p>
+                                                {{ number_format($item->price, 0, ',', '.') }}</p>
 
                                         </div>
                                         @if (!$loop->last)

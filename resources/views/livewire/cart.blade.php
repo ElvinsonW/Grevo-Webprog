@@ -25,7 +25,7 @@
     <div class="mx-[5vw] my-[2vw]">
         <h1 class="text-[2vw] font-bold mb-[3vw]">Shopping Cart</h1>
 
-        <div class="grid font-bold text-[1.2vw] border-b pb-[1vw] text-black gap-[1vw]"
+        <div class="grid font-bold text-[1.2vw] border-b border-b-[#7B8C7F] pb-[1vw] text-black gap-[1vw]"
             style="grid-template-columns: 5% 30% 15% 20% 18% 5%">
             <p></p>
             <p>Product</p>
@@ -37,7 +37,7 @@
         
         <form class="mb-[10vw]">
             @foreach ($cartProduct as $cart)
-                <div wire:key="cart-item-{{ $cart->id }}" class="grid py-[1vw] items-center text-[1.2vw] font-bold font-overpass text-black gap-[1vw] border-0 border-b-1"
+                <div wire:key="cart-item-{{ $cart->id }}" class="grid py-[1vw] items-center text-[1.2vw] font-bold font-overpass text-black gap-[1vw] border-0 border-b-1 border-b-[#7B8C7F]"
                     style="grid-template-columns: 0.5% 3.5% 30% 15% 20% 18% 5%">
                     
                     <p></p>

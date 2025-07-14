@@ -31,9 +31,6 @@ class DatabaseSeeder extends Seeder
             TreeSeeder::class,
             BatchSeeder::class,
             AddressSeeder::class,
-            OrderSeeder::class,
-            OrderItemSeeder::class,
-            StatusHistorySeeder::class,
         ]);
 
         $variants = ProductVariant::all();
@@ -50,7 +47,7 @@ class DatabaseSeeder extends Seeder
 
         foreach ($products as $product) {
             Review::factory(rand(10, 30))->recycle([
-                User::where('user_id', '!=', '2')
+                User::all()
             ])->create([
                 'product_id' => $product->id,
             ])->each(
@@ -108,5 +105,10 @@ class DatabaseSeeder extends Seeder
         //     }
         // );
 
+        $this->call([
+            OrderSeeder::class,
+            OrderItemSeeder::class,
+            StatusHistorySeeder::class,
+        ]);
     }
 }
