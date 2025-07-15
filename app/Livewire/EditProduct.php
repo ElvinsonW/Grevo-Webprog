@@ -256,6 +256,9 @@ class EditProduct extends Component
                 foreach ($this->variantData as $key => $data) {
                     [$size, $color] = explode('|', $key);
 
+                    $size = $size === '_' ? null : $size;
+                    $color = $color === '_' ? null : $color;
+
                     $variant = ProductVariant::create([
                         'product_id' => $product->id,
                         'stock' => $data['stock'],
@@ -263,16 +266,20 @@ class EditProduct extends Component
                         'sku' => $data['sku']
                     ]);
 
-                    $sizeModel = Size::create([
-                        'product_variant_id' => $variant->id,
-                        'name' => $size
-                    ]);
+                    if ($size) {
+                        $sizeModel = Size::create([
+                            'product_variant_id' => $variant->id,
+                            'name' => $size
+                        ]);
+                    }
 
-                    Color::create([
-                        'product_variant_id' => $variant->id,
-                        'size_id' => $sizeModel->id,
-                        'name' => $color
-                    ]);
+                    if ($color) {
+                        Color::create([
+                            'product_variant_id' => $variant->id,
+                            'name' => $color,
+                            'size_id' => $sizeModel?->id
+                        ]);
+                    }
                 }
             } else {
                 ProductVariant::create([
