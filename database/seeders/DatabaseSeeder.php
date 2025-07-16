@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use App\Models\Cart;
 use App\Models\Color;
+use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\ProductImage;
@@ -11,6 +13,7 @@ use App\Models\ProductVariant;
 use App\Models\Review;
 use App\Models\ReviewImage;
 use App\Models\Size;
+use App\Models\StatusHistory;
 use App\Models\User;
 use App\Services\RajaOngkirService;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -110,5 +113,46 @@ class DatabaseSeeder extends Seeder
             OrderItemSeeder::class,
             StatusHistorySeeder::class,
         ]);
+
+        Order::factory(5)
+            ->recycle([User::find(2)])
+            ->create()
+            ->each(function ($order) {
+
+                OrderItem::factory(rand(1, 3))
+                    ->recycle([ProductVariant::all()])
+                    ->create([
+                        'order_id' => $order->id
+                    ]);
+
+                $statuses = [
+                    'ORDER PLACED',
+                    'ORDER SHIPPED',
+                    'ORDER ARRIVED',
+                    'ORDER RECIEVED',
+                    'ORDER COMPLETED',
+                ];
+
+                $maxStatusIndex = rand(1, count($statuses));
+
+                $isCanceled = rand(0, 1) && $maxStatusIndex < count($statuses);
+                if ($isCanceled) {
+                    $statuses = array_slice($statuses, 0, $maxStatusIndex);
+                    $statuses[] = 'ORDER CANCEL';
+                } else {
+                    $statuses = array_slice($statuses, 0, $maxStatusIndex);
+                }
+
+                $startDate = now()->subMonths(rand(1, 12));
+                foreach ($statuses as $status) {
+                    $startDate = $startDate->addDays(rand(1, 5));
+
+                    StatusHistory::create([
+                        'order_id' => $order->id,
+                        'status' => $status,
+                        'changed_at' => $startDate,
+                    ]);
+                }
+            });
     }
 }

@@ -46,10 +46,12 @@
                 <span class ="link-text hidden">Admin</span>
             </div>
             <div class="ml-auto">
-                <a href="{{ route('admin.organizations.index') }}" class="flex items-center gap-2">
-                    <img id="logoutIcon" src="{{ asset('images/Logout.svg') }}" alt="Logout" class="hidden h-8 w-auto">
-                    <!-- <span class="link-text hidden">Logout</span> -->
-                </a>
+                <form action="{{ route('logout') }}" method="POST" class="flex items-center gap-2">
+                    @csrf
+                    <button type="submit">
+                        <img id="logoutIcon" src="{{ asset('images/Logout.svg') }}" alt="Logout" class="hidden h-8 w-auto">
+                    </button>
+                </form>
             </div>
         </div>      
     </div>

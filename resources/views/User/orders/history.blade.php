@@ -222,7 +222,7 @@
                             <div class="flex flex-row items-center gap-10 text-right">
                                 <p class="text-sm font-semibold text-[#7B8C7F]">Order total:</p>
                                 @php
-                                    $merchandise = $order->items->sum(fn($item) => $item->price * $item->quantity);
+                                    $merchandise = $order->items->sum(fn($item) => $item->price);
                                     $total = $merchandise + $order->shipping;
                                 @endphp
 

@@ -169,34 +169,7 @@
             </div>
         </div>
 
-        <div class="my-[2vw] px-[5vw]">
-            <span class="flex items-center justify-center space-x-[16px] mb-10">
-                <h1 class="text-[30px] font-bold text-[#3E6137]">TREE BATCHES</h1>
-            </span>
-
-            <div class="flex gap-4 mx-auto justify-center">
-                @forelse ($treeBatches as $batch)
-                    {{-- Assuming $batch has properties like batch_name, description, etc. --}}
-                    <div class="flex flex-col w-[20vw] h-[26vw] rounded-[1vw] overflow-hidden" style="box-shadow: 0 0 12.2px 0 rgba(0,0,0,0.06);">
-                        {{-- Placeholder for batch image, if any --}}
-                        <div class="w-full h-[15vw] bg-gray-200 flex items-center justify-center">
-                            {{-- <img src="{{ asset('storage/' . $batch->image) }}" alt="{{ $batch->name }}" class="w-full h-full object-cover"> --}}
-                            <span class="text-gray-500 text-[1.5vw]">BATCH IMAGE</span>
-                        </div>
-                        <div class="p-[1vw] flex flex-col justify-between flex-grow">
-                            <h3 class="font-bold text-[#3E6137] text-[1.2vw] mb-[0.5vw]">
-                                @if($loop->first) (newest) @endif {{ $batch->batch_name }}
-                            </h3>
-                            <p class="text-gray-600 text-[0.9vw] line-clamp-2 mb-[1vw]">{{ $batch->description }}</p>
-                            {{-- You can add batch-specific details here, e.g., planting date --}}
-                            <p class="text-gray-500 text-[0.8vw]">Planting Date: {{ $batch->planting_date->format('F d, Y') }}</p>
-                        </div>
-                    </div>
-                @empty
-                    <p class="text-[1.2vw] text-gray-700">No tree batches found.</p>
-                @endforelse
-            </div>
-        </div>
+        
     </div>
     @if (session('success'))
         <div 
@@ -238,6 +211,7 @@
             </button>
         </div>
     @endif
+
     <script>
         const carouselImages = document.getElementById('carouselImages');
         const prevBtn = document.getElementById('prevBtn');

@@ -57,32 +57,30 @@
             @endif
 
             {{-- Uncomment and adapt if you have a Batch model and pass $batchesFromOrganization --}}
-            {{--
-            @if(isset($batchesFromOrganization) && $batchesFromOrganization->count() > 0)
+            @if(isset($batches) && $batches->count() > 0)
                 <div class="my-[2vw] px-[5vw] w-full">
                     <span class="flex items-center justify-center space-x-[16px] mb-10">
                         <h3 class="text-[20px] font-bold text-[#3E6137]">EXPLORE</h3>
                         <h1 class="text-[30px] font-bold text-[#D1764F]">BATCHES FROM THIS ORGANIZATION</h1>
                     </span>
-                    <div class="flex gap-4 mx-auto justify-center">
-                        @foreach ($batchesFromOrganization as $batch)
-                            <div class="flex flex-col w-[20vw] h-[26vw] rounded-[1vw] overflow-hidden" style="box-shadow: 0 0 12.2px 0 rgba(0,0,0,0.06);">
-                                <div class="w-full h-[15vw] bg-gray-200 flex items-center justify-center">
-                                    <span class="text-gray-500 text-[1.5vw]">BATCH IMAGE</span>
-                                </div>
-                                <div class="p-[1vw] flex flex-col justify-between flex-grow">
-                                    <h3 class="font-bold text-[#3E6137] text-[1.2vw] mb-[0.5vw]">
-                                        @if($loop->first) (newest) @endif {{ $batch->batch_name ?? 'BATCH ' . $batch->id }}
+                    <div class="flex flex-wrap gap-[2vw] justify-center">
+                        @foreach ($batches as $batch)
+                            <div class="flex flex-col w-[20vw] h-[24vw] rounded-[1vw] overflow-hidden" style="box-shadow: 0 0 12.2px 0 rgba(0,0,0,0.06);">
+                                <img src="{{ asset('storage/' . $batch->batchproof) }}" alt="Batch Image" class="w-full h-[15vw] flex items-center justify-center"/>
+                                <div class="p-[1vw] flex flex-col flex-grow gap-[0.5vw]">
+                                    <h3 class="font-bold text-[#3E6137] text-[1.2vw]">
+                                        Batch {{ $loop->index + 1 }}
                                     </h3>
-                                    <p class="text-gray-600 text-[0.9vw] line-clamp-2 mb-[1vw]">{{ $batch->description ?? 'No description provided.' }}</p>
-                                    <p class="text-gray-500 text-[0.8vw]">Planting Date: {{ $batch->planting_date ? $batch->planting_date->format('F d, Y') : 'N/A' }}</p>
+                                    <p class="text-gray-600 text-[0.9vw]">Redeem Date: {{ $batch->startdate }} - {{ $batch->enddate }}</p>
+                                    <p class="text-gray-500 text-[0.8vw]">Planting Date: {{ $batch->dateofactivity }}</p>
+                                    <p class="text-gray-500 text-[0.8vw]">Total trees planted: {{ $batch->treesplanted }}</p>
                                 </div>
                             </div>
                         @endforeach
                     </div>
                 </div>
             @endif
-            --}}
+           
 
         </div>
     </div>

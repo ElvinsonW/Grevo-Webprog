@@ -23,5 +23,4 @@ class Tree extends Model
         'treephoto',
         'organization_id'
     ];
-    protected $with = ['organization'];
 }

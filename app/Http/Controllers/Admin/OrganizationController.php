@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Batch;
 use Illuminate\Http\Request;
 use App\Models\Tree;
 use App\Models\Organization;
@@ -19,8 +20,9 @@ class OrganizationController extends Controller
     public function show($organizationName)
     {
         $organization = Organization::where('organization_name', $organizationName)->firstOrFail();
-        $treesFromOrganization = Tree::where('organization_id', $organization->id)->get();
-        return view('User.treecatalogue.organization-detail', compact('organization', 'treesFromOrganization' /* , 'batchesFromOrganization' */));
+        $treesFromOrganization = Tree::where('organization_id', $organization->organization_id)->get();
+        $batches = Batch::where('organization_id', $organization->organization_id)->get();
+        return view('User.treecatalogue.organization-detail', compact('organization', 'treesFromOrganization' , 'batches'));
     }
 
     public function index(Request $request)

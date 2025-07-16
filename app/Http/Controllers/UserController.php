@@ -52,7 +52,7 @@ class UserController extends Controller
             $request->session()->regenerate();
 
             if(auth()->user()->role == "admin"){
-
+                return redirect('/admin/dashboard')->with('loginSuccess', 'Login successfully');
             } else {
                 return redirect('/products')->with('loginSuccess', 'Login successfully!');
             }
