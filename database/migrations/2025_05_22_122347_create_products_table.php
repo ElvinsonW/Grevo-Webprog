@@ -19,7 +19,7 @@ return new class extends Migration
             $table->float('weight');
             $table->text('material');
             $table->text('process');
-            $table->string('certification');
+            $table->string('certification')->nullable();
             $table->text('description');
             $table->integer('sold')->default(0);
             $table->timestamps();

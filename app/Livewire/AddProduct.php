@@ -153,6 +153,10 @@ class AddProduct extends Component
             $this->colors = [];
             $this->variantData = [];
         }
+
+        if ($this->step === 3 && $this->hasVariants && empty($this->variantData)) {
+            $this->generateVariants();
+        }
     }
 
     public function previousStep()
@@ -238,8 +242,7 @@ class AddProduct extends Component
 
             if ($this->hasVariants) {
                 foreach ($this->variantData as $key => $data) {
-                    [$sizeName, $colorName] = array_pad(explode('|', $key), 2, null);
-
+                [$sizeName, $colorName] = array_pad(explode('|', $key), 2, null);
 
                     $variant = ProductVariant::create([
                         'product_id' => $product->id,
@@ -248,20 +251,21 @@ class AddProduct extends Component
                         'sku' => $data['sku']
                     ]);
 
-                    $size = Size::create([
+                if (!empty($sizeName)) {
+                    $sizeModel = Size::create([
                         'product_variant_id' => $variant->id,
                         'name' => $sizeName
                     ]);
+                }
 
+                if (!empty($colorName)) {
                     Color::create([
                         'product_variant_id' => $variant->id,
-                        'size_id' => $size->id,
+                        'size_id' => $sizeModel?->id, // only if exists
                         'name' => $colorName,
-                        'stock' => $data['stock'],
-                        'price' => $data['price'],
-                        'sku' => $data['sku']
                     ]);
                 }
+            }
             } else {
                 ProductVariant::create([
                     'product_id' => $product->id,
