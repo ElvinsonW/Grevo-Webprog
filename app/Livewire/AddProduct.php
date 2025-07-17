@@ -179,7 +179,7 @@ class AddProduct extends Component
             ]);
 
             if (count($this->images) === 0) {
-                $this->addError('imagesUpload', 'Please upload at least one product image.');
+                $this->addError('imagesUpload', 'Tolong unggah minimal 1 gambar');
             }
         }
 
@@ -189,8 +189,8 @@ class AddProduct extends Component
             $hasColor = is_array($this->colors) && count($this->colors) > 0;
 
             if (!$hasSize && !$hasColor) {
-                $this->addError('sizes', 'Please add at least one size or color.');
-                $this->addError('colors', 'Please add at least one size or color.');
+                $this->addError('sizes', 'Tolong tambahkan setidaknya satu ukuran.');
+                $this->addError('colors', 'Tolong tambahkan setidaknya satu warna.');
                 return false;
             }
 
@@ -258,7 +258,7 @@ class AddProduct extends Component
                     ]);
                 }
 
-                if (!empty($colorName)) {
+                if (!empty($colorName)) {   
                     Color::create([
                         'product_variant_id' => $variant->id,
                         'size_id' => $sizeModel?->id, // only if exists
@@ -276,7 +276,7 @@ class AddProduct extends Component
             }
         });
 
-        session()->flash('message', 'Product added successfully!');
+        session()->flash('message', 'Produk berhasil ditambahkan!');
         return redirect()->route('admin.products.list');
     }
 

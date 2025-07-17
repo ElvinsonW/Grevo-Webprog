@@ -39,7 +39,7 @@ class BatchController extends Controller
         }
 
         Batch::create($validated);
-        return redirect()->route('admin.batches.listbatch')->with('success','Batch Added Successfully!');
+        return redirect()->route('admin.batches.listbatch')->with('success','Batch berhasil ditambahkan!');
     }
 
     public function destroy(string $batchid)
@@ -48,6 +48,6 @@ class BatchController extends Controller
         $batches = Batch::findOrFail($batchid);
         $batches->delete();
 
-        return redirect()->route('Admin.Batch.listbatch')->with('success', 'Batch Deleted Successfully!');
+        return redirect()->route('Admin.Batch.listbatch')->with('success', 'Batch berhasil dihapus!');
     }
 }

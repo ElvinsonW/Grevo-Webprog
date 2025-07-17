@@ -78,7 +78,7 @@ class OrganizationController extends Controller
 
         $organization->update($validated);
 
-        return redirect()->route('admin.organizations.index')->with('success', 'Organization Updated Successfully');
+        return redirect()->route('admin.organizations.index')->with('success', 'Organisasi berhasil diperbarui!');
     }
 
     public function store(Request $request)
@@ -100,7 +100,7 @@ class OrganizationController extends Controller
 
         Organization::create($validated);
 
-        return redirect()->route('admin.organizations.index')->with('success', 'Organization added successfully!');
+        return redirect()->route('admin.organizations.index')->with('success', 'Organisasi berhasil ditambahkan!');
     }
 
     public function destroy($organization_id)
@@ -113,6 +113,6 @@ class OrganizationController extends Controller
         
         $organization->delete();
 
-        return redirect()->route('admin.organizations.index')->with('success','Organization and associated trees deleted successfully!');
+        return redirect()->route('admin.organizations.index')->with('success','Organisasi berhasil dihapus!');
     }
 } 

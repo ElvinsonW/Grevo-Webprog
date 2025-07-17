@@ -78,7 +78,7 @@ class TreeController extends Controller
 
         Tree::create($validated);
 
-        return redirect()->route('tree.listtree')->with('success', 'Tree Added Successfully!');
+        return redirect()->route('tree.listtree')->with('success', 'Pohon berhasil ditambahkan!');
     }
 
     public function edit(string $treeid)
@@ -113,7 +113,7 @@ class TreeController extends Controller
         }
 
         $tree->update($validated);
-        return redirect()->route('tree.listtree')->with('success', 'Tree Updated Successfully');
+        return redirect()->route('tree.listtree')->with('success', 'Pohon berhasil diperbarui!');
     }
 
     public function destroy(string $treeid)
@@ -124,6 +124,6 @@ class TreeController extends Controller
         }
         $tree->delete();
 
-        return redirect()->route('tree.listtree')->with('success', 'Tree Deleted Successfully!');
+        return redirect()->route('tree.listtree')->with('success', 'Pohon berhasil dihapus!');
     }
 }

@@ -182,14 +182,14 @@ class EditProduct extends Component
             });
 
             if (!$hasUploadedImage) {
-                $this->addError('imagesUpload', 'Please upload at least one product image.');
+                $this->addError('imagesUpload', 'Tolong tambahkan setidaknya satu gambar.');
             }
         }
 
         if ($this->step === 2 && $this->hasVariants) {
             if (count($this->sizes) === 0 && count($this->colors) === 0) {
-                $this->addError('sizes', 'Please add at least one size or color.');
-                $this->addError('colors', 'Please add at least one size or color.');
+                $this->addError('sizes', 'Tolong tambahkan setidaknya satu ukuran.');
+                $this->addError('colors', 'Tolong tambahkan setidaknya satu warna.');
                 return false;
             }
         }
@@ -291,7 +291,7 @@ class EditProduct extends Component
             }
         });
 
-        session()->flash('message', 'Product updated successfully!');
+        session()->flash('message', 'Produk berhasil diperbarui!');
         return redirect()->route('admin.products.list');
     }
 
