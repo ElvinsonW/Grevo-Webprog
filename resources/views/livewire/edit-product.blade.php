@@ -1,19 +1,19 @@
 <div class="p-6">
     @if ($step === 1)
         <!-- Step 1: Basic Info -->
-        <h1 class="text-4xl font-bold mb-1 ml-25">Edit Product - Basic Information</h1>
+        <h1 class="text-4xl font-bold mb-1 ml-25">Edit Produk - Infomrasi Dasar</h1>
         <div class="flex flex-row gap-8 w-[91%] justify-content-center p-6 ml-20">
             <!-- Left Column -->
             <div class="space-y-4 w-1/2 border border-green-2 p-6 rounded-md">
                 <div>
-                    <label class="block text-sm font-medium">Product Name</label>
+                    <label class="block text-sm font-medium">Nama Produk</label>
                     <input type="text" wire:model="name" class="w-full border rounded px-3 py-2" />
                     @error('name') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                 </div>
                 <div>
-                    <label class="block text-sm font-medium">Category</label>
+                    <label class="block text-sm font-medium">Kategori</label>
                     <select wire:model="category" class="w-full border rounded px-3 py-2">
-                        <option value="">Select Category</option>
+                        <option value="">Pilih Kategori</option>
                         @foreach ($categories as $cat)
                             <option value="{{ $cat->id }}">{{ $cat->name }}</option>
                         @endforeach
@@ -21,7 +21,7 @@
                     @error('category') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                 </div>
                 <div>
-                    <label class="block text-sm font-medium">Description</label>
+                    <label class="block text-sm font-medium">Deskripsi</label>
                     <textarea wire:model="description" class="w-full border rounded px-3 py-2"></textarea>
                     @error('description') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                 </div>
@@ -31,7 +31,7 @@
                     @error('material') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                 </div>
                 <div>
-                    <label class="block text-sm font-medium">Weight (grams)</label>
+                    <label class="block text-sm font-medium">Massa (grams)</label>
                     <input type="number" wire:model="weight" class="w-full border rounded px-3 py-2" />
                     @error('weight') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                 </div>
@@ -40,17 +40,17 @@
             <!-- Right Column -->
             <div class="space-y-4 w-1/2 border border-green-2 p-6 rounded-md">
                 <div>
-                    <label class="block text-sm font-medium">Certificate</label>
+                    <label class="block text-sm font-medium">Sertifikat</label>
                     <input type="text" wire:model="certificate" class="w-full border rounded px-3 py-2" />
                     @error('certificate') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                 </div>
                 <div>
-                    <label class="block text-sm font-medium">Process</label>
+                    <label class="block text-sm font-medium">Proses</label>
                     <input type="text" wire:model="process" class="w-full border rounded px-3 py-2" />
                     @error('process') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                 </div>
                 <div>
-                    <label class="block text-sm font-medium">Product Images ({{ count($images) }}/8)</label>
+                    <label class="block text-sm font-medium">Gambar Produk ({{ count($images) }}/8)</label>
                     <div class="relative mt-2">
                     <input 
                         id="imagesUpload" 
@@ -64,7 +64,7 @@
                     <label 
                         for="imagesUpload"
                         class="cursor-pointer inline-block px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-all font-medium">
-                        Upload Images
+                        Unggah Gambar
                     </label>
                     @error('imagesUpload') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
                 </div>
@@ -95,13 +95,13 @@
     @elseif ($step === 2)
 <!-- Step 2: Sizes and Colors -->
 <div class="w-[80vw] ml-[7vw]">
-    <h1 class="text-4xl font-bold mb-4">Edit Variants - Sizes & Colors</h1>
+    <h1 class="text-4xl font-bold mb-4">Edit Varian - Ukuran & Warna</h1>
 
     <!-- Toggle -->
     <div class="mb-4">
         <label class="inline-flex items-center">
             <input type="checkbox" wire:model="hasVariants" class="form-checkbox">
-            <span class="ml-2 text-sm font-medium">This product has size and/or color variants</span>
+            <span class="ml-2 text-sm font-medium">Produk ini memiliki ukuran dan/ warna</span>
         </label>
     </div>
 
@@ -109,11 +109,11 @@
     <div class="border border-green-300 rounded-md p-4 space-y-4 bg-green-50">
         <!-- Size Input -->
         <div>
-            <label class="block font-semibold">Size</label>
+            <label class="block font-semibold">Ukuran</label>
             <div class="flex gap-2 my-2">
                 <input type="text" wire:model="newSize" wire:keydown.enter.prevent="addSize"
                     class="border border-gray-400 rounded px-2 py-1 w-1/2"
-                    placeholder="Add size (press Enter)" />
+                    placeholder="Tambah Ukuran (Tekan Enter)" />
                 <button wire:click="addSize" type="button"
                     class="bg-black text-white px-3 py-1 rounded hover:bg-gray-600">+</button>
             </div>
@@ -130,11 +130,11 @@
 
         <!-- Color Input -->
         <div>
-            <label class="block font-semibold">Color</label>
+            <label class="block font-semibold">Warna</label>
             <div class="flex gap-2 my-2">
                 <input type="text" wire:model="newColor" wire:keydown.enter.prevent="addColor"
                     class="border border-gray-400 rounded px-2 py-1 w-1/2"
-                    placeholder="Add color (press Enter)" />
+                    placeholder="Tambah Warna (Tekan Enter)" />
                 <button wire:click="addColor" type="button"
                     class="bg-black text-white px-3 py-1 rounded hover:bg-gray-600">+</button>
             </div>
@@ -158,7 +158,7 @@
 @elseif ($step === 3)
 <!-- Step 3: Variant Data -->
 <div class="space-y-4 w-[80vw] ml-[7vw]">
-    <h1 class="text-4xl font-bold mb-4">Sales Information</h1>
+    <h1 class="text-4xl font-bold mb-4">Informasi Penjualan</h1>
 
     @if ($hasVariants)
         @if (count($variantData))
@@ -177,12 +177,12 @@
                         <h3 class="font-semibold mb-3">{{ implode(', ', $label) }}</h3>
                         <div class="space-y-3">
                             <div>
-                                <label class="block font-medium">Stock</label>
+                                <label class="block font-medium">Stok</label>
                                 <input type="number" wire:model="variantData.{{ $key }}.stock"
                                     class="w-full border rounded px-3 py-2" />
                             </div>
                             <div>
-                                <label class="block font-medium">Price</label>
+                                <label class="block font-medium">Harga</label>
                                 <input type="number" wire:model="variantData.{{ $key }}.price"
                                     class="w-full border rounded px-3 py-2" />
                             </div>
@@ -196,18 +196,18 @@
                 @endforeach
             </div>
         @else
-            <div class="text-gray-600">No size or color combinations available yet.</div>
+            <div class="text-gray-600">Tidak ada ukuran atau warna</div>
         @endif
     @else
         <div class="border border-green-300 bg-green-50 rounded-md p-4 shadow-sm w-[40%]">
-            <h3 class="font-semibold mb-3">Single Variant - {{ $name }}</h3>
+            <h3 class="font-semibold mb-3">Satu Varian - {{ $name }}</h3>
             <div class="space-y-3">
                 <div>
-                    <label class="block font-medium">Stock</label>
+                    <label class="block font-medium">Stok</label>
                     <input type="number" wire:model="singleStock" class="w-full border rounded px-3 py-2" />
                 </div>
                 <div>
-                    <label class="block font-medium">Price</label>
+                    <label class="block font-medium">Harga</label>
                     <input type="number" wire:model="singlePrice" class="w-full border rounded px-3 py-2" />
                 </div>
                 <div>
@@ -225,19 +225,19 @@
         @if ($step > 1)
             <button type="button" wire:click="previousStep"
                 class="bg-green-2 hover:bg-green-3 text-white font-semibold py-2 px-4 rounded ml-[2vw]">
-                Back
+                Kembali
             </button>
         @endif
 
         @if ($step < 3)
             <button type="button" wire:click="nextStep"
                 class="bg-green-2 hover:bg-green-3 text-white font-semibold py-2 px-4 rounded ml-[2vw] mr-[7.5vw]">
-                Next
+                Selanjutnya
             </button>
         @else
             <button type="button" wire:click="updateProduct"
                 class="bg-green-2 hover:bg-green-3 text-white font-semibold py-2 px-4 rounded mr-[7.5vw]">
-                Update Product
+                Simpan Perubahan
             </button>
         @endif
     </div>

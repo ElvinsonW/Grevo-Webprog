@@ -9,7 +9,7 @@
 <body class="p-4 bg-yellow-2">
     @include('components.sidebar')
     <div class="px-20 py-4 mt-[3vw] ml-5">
-        <h1 class="text-4xl font-bold mb-4 ml-5">Upload Proof</h1>
+        <h1 class="text-4xl font-bold mb-4 ml-5">Unggah Bukti</h1>
 
         @if(session('success'))
             <div class="bg-green-100 text-green-700 p-2 border rounded mb-4 ml-5">
@@ -24,9 +24,9 @@
                 <div class="w-1/2 border border-green-2 flex flex-col gap-3 rounded-md p-4">
                     <!-- Organization -->
                     <div>
-                        <p class="font-medium">Reforestation Organization</p>
+                        <p class="font-medium">Organisasi Reboisasi</p>
                         <select name="organization_id" class="border w-full rounded-md p-2 border-green-2 bg-yellow-2" required>
-                            <option value="">-- Select Organization -- </option>
+                            <option value="">-- Pilih Organisasi -- </option>
                             @foreach($organizations as $org)
                                 <option value="{{ $org->organization_id }}" {{ old('organization_id') == $org->organization_id ? 'selected' : '' }}>
                                     {{ $org->organization_name }}
@@ -40,7 +40,7 @@
 
                     <!-- Date of Activity -->
                     <div>
-                        <p class="font-medium">Date of Activity</p>
+                        <p class="font-medium">Tanggal Kegiatan</p>
                         <input type="date" name="dateofactivity" class="border border-green-2 w-full rounded-md p-2" value="{{ old('dateofactivity') }}" required />
                         @error('dateofactivity')
                             <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
@@ -49,7 +49,7 @@
 
                     <!-- Trees Planted -->
                     <div>
-                        <p class="font-medium">Trees Planted</p>
+                        <p class="font-medium">Jumlah Pohon Ditanam</p>
                         <input type="number" name="treesplanted" class="border border-green-2 w-full rounded-md p-2" value="{{ old('treesplanted') }}" required />
                         @error('treesplanted')
                             <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
@@ -58,14 +58,14 @@
 
                     <!-- Batch Date -->
                     <div>
-                        <p class="font-medium">Start Date</p>
+                        <p class="font-medium">Tanggal Mulai</p>
                         <input type="date" name="startdate" class="border border-green-2 w-full rounded-md p-2" value="{{ old('startdate') }}" required />
                         @error('startdate')
                             <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                         @enderror
                     </div>
                     <div>
-                        <p class="font-medium">End Date</p>
+                        <p class="font-medium">Tanggal Akhir</p>
                         <input type="date" name="enddate" class="border border-green-2 w-full rounded-md p-2" value="{{ old('enddate') }}" required />
                         @error('enddate')
                             <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
@@ -77,7 +77,7 @@
                 <div class="w-1/2 border border-green-2 flex flex-col gap-3 rounded-md p-4">
                     <!-- Upload Photo -->
                     <div>
-                        <p class="font-medium">Upload Photo</p>
+                        <p class="font-medium">Unggah Foto</p>
                         <div class="relative w-full">
                             <input 
                                 id="batchproof" 
@@ -92,7 +92,7 @@
                             <label 
                                 for="batchproof" 
                                 class="cursor-pointer inline-block px-4 py-2 bg-green-2 text-white rounded hover:bg-green-3 text-center font-medium w-1/3">
-                                Upload Batch Proof
+                                Unggah Bukti Batch
                             </label>
                     </div>
                         @error('batchproof')
@@ -108,7 +108,7 @@
             </div>
 
             <div>
-                <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 mt-5">Upload Proof</button>
+                <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 mt-5">Unggah Bukti</button>
             </div>
         </form>
     </div>

@@ -11,9 +11,9 @@
 
     <div class="w-[90vw] ml-[5vw] mt-5 p-6">
         <div class="flex flex-row justify-between items-center mb-4">
-            <h1 class="text-4xl font-bold">Batch List</h1>
+            <h1 class="text-4xl font-bold">Daftar Batch</h1>
             <a href="{{ route('admin.batches.create') }}" class="px-4 py-3 bg-green-2 text-white rounded hover:bg-green-3 font-medium">
-                + Upload Proof
+                + Unggah Bukti
             </a>
         </div>
 
@@ -22,11 +22,11 @@
             <table class="min-w-full text-sm">
                 <thead class="bg-green-100 text-left">
                     <tr>
-                        <th class="px-4 py-3">Batch ID</th>
-                        <th class="px-4 py-3">Organization Name</th>
-                        <th class="px-4 py-3">Date of Activity</th>
-                        <th class="px-4 py-3">Trees Planted</th>
-                        <th class="px-4 py-3">Batch Date</th>
+                        <th class="px-4 py-3">ID Batch</th>
+                        <th class="px-4 py-3">Nama Organisasi</th>
+                        <th class="px-4 py-3">Tanggal Kegiatan</th>
+                        <th class="px-4 py-3">Jumlah Pohon Ditanam</th>
+                        <th class="px-4 py-3">Tanggal Batch</th>
                     </tr>
                 </thead>
                 <tbody class="bg-yellow-2">
@@ -45,7 +45,7 @@
 
                     @if ($batches->isEmpty())
                         <tr>
-                            <td colspan="5" class="text-center px-4 py-6 text-gray-500">No batches found.</td>
+                            <td colspan="5" class="text-center px-4 py-6 text-gray-500">Tidak ditemukan Batch.</td>
                         </tr>
                     @endif
                 </tbody>

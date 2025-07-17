@@ -11,7 +11,7 @@
 
     <div class="w-[93vw] ml-[5vw] p-6">
         <div class="flex flex-row justify-between items-center mb-4">
-            <h1 class="text-4xl font-bold">Organization List</h1>
+            <h1 class="text-4xl font-bold">Daftar Organisasi</h1>
         </div>
 
         <div class="flex flex-row justify-between">
@@ -30,7 +30,7 @@
             </div>
             <div class="mb-4">
                 <a href="{{ route('admin.organizations.create') }}" class="px-2 py-3 bg-green-2 text-white rounded hover:bg-green-3 font-medium">
-                    + Add New Organization
+                    + Tambah Organisasi Baru
                 </a>
             </div>
         </div>
@@ -40,12 +40,12 @@
             <table class="min-w-full text-sm">
                 <thead class="bg-green-100 text-left">
                     <tr>
-                        <th class="px-4 py-3">Organization Name</th>
-                        <th class="px-4 py-3">Organization ID</th>
-                        <th class="px-4 py-3">Address</th>
-                        <th class="px-4 py-3">Contact Info</th>
+                        <th class="px-4 py-3">Nama Organisasi</th>
+                        <th class="px-4 py-3">ID Organisasi</th>
+                        <th class="px-4 py-3">Alamat</th>
+                        <th class="px-4 py-3">Info Kontak</th>
                         <th class="px-4 py-3">Status</th>
-                        <th class="px-4 py-3">Action</th>
+                        <th class="px-4 py-3">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="bg-yellow-2">
@@ -73,11 +73,11 @@
                                 <div class="relative group inline-block text-left">
                                     <button class="bg-gray-100 px-3 py-1 rounded hover:bg-gray-200">...</button>
                                     <div class="absolute hidden group-hover:block bg-white border rounded shadow z-10 mt-1 right-0">
-                                        <a href="{{ route('admin.organizations.edit', $org->organization_id) }}" class="block px-4 py-2 text-sm hover:bg-gray-100">Edit Organization</a>
+                                        <a href="{{ route('admin.organizations.edit', $org->organization_id) }}" class="block px-4 py-2 text-sm hover:bg-gray-100">Edit Organisasi</a>
                                         <form action="{{ route('admin.organizations.destroy', $org->organization_id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this organization and all its associated trees?')">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-100">Delete Organization</button>
+                                            <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-100">Hapus Organisasi</button>
                                         </form>
                                     </div>
                                 </div>
@@ -87,7 +87,7 @@
 
                     @if ($organizations->isEmpty())
                         <tr>
-                            <td colspan="7" class="text-center px-4 py-6 text-gray-500">No organizations found.</td>
+                            <td colspan="7" class="text-center px-4 py-6 text-gray-500">Tidak ditemukan organisasi.</td>
                         </tr>
                     @endif
                 </tbody>

@@ -10,7 +10,7 @@
     @include('components.sidebar')
 
     <div class="px-20 py-6">
-        <h1 class="text-4xl font-bold mb-4 ml-4">Edit Tree</h1>
+        <h1 class="text-4xl font-bold mb-4 ml-4">Edit Pohon</h1>
 
         @if(session('success'))
             <div class="bg-green-100 text-green-700 p-2 border rounded mb-4">
@@ -26,7 +26,7 @@
                 <!-- Left Column -->
                 <div class="w-1/2 border border-green-2 bg-yellow-2 flex flex-col gap-3 rounded-md p-4">
                     <div>
-                        <p class="font-medium">Tree Name</p>
+                        <p class="font-medium">Nama Pohon</p>
                         <input type="text" name="treename" class="border border-green-2 w-full rounded-md p-2"
                                value="{{ old('treename', $trees->treename) }}" required />
                         @error('treename')
@@ -35,7 +35,7 @@
                     </div>
 
                     <div>
-                        <p class="font-medium">Tree Category</p>
+                        <p class="font-medium">Kategori Pohon</p>
                         <input type="text" name="treecategory" class="border border-green-2 w-full rounded-md p-2"
                                value="{{ old('treecategory', $trees->treecategory) }}" required />
                         @error('treecategory')
@@ -44,7 +44,7 @@
                     </div>
 
                     <div>
-                        <p class="font-medium">Tree Description</p>
+                        <p class="font-medium">Deskripsi Pohon</p>
                         <textarea name="treedesc" class="border border-green-2 w-full h-20 rounded-md p-2" required>{{ old('treedesc', $trees->treedesc) }}</textarea>
                         @error('treedesc')
                             <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
@@ -52,7 +52,7 @@
                     </div>
 
                     <div>
-                        <p class="font-medium">Tree Lifespan (Years)</p>
+                        <p class="font-medium">Umur Pohon (Tahun)</p>
                         <input type="number" name="treelife" class="border border-green-2 w-full rounded-md p-2"
                                value="{{ old('treelife', $trees->treelife) }}" required />
                         @error('treelife')
@@ -61,7 +61,7 @@
                     </div>
 
                     <div>
-                        <p class="font-medium">Tree Price</p>
+                        <p class="font-medium">Harga Pohon</p>
                         <input type="number" step="0.01" name="treeprice" class="border border-green-2 w-full rounded-md p-2"
                                value="{{ old('treeprice', $trees->treeprice) }}" required />
                         @error('treeprice')
@@ -73,9 +73,9 @@
                 <!-- Right Column -->
                 <div class="w-1/2 border border-green-2 bg-yellow-2 flex flex-col gap-3 rounded-md p-4">
                     <div>
-                        <p class="font-medium">Reforestation Organization</p>
+                        <p class="font-medium">Organisasi Reboisasi</p>
                         <select name="organization_id" class="border border-green-2 w-full rounded-md p-2 bg-yellow-2" required>
-                            <option value="">-- Select Organization --</option>
+                            <option value="">-- Pilih Organisasi --</option>
                             @foreach($organizations as $org)
                                 <option value="{{ $org->organization_id }}" {{ old('organization_id', $trees->organization_id) == $org->organization_id ? 'selected' : '' }}>
                                     {{ $org->organization_name }}
@@ -88,12 +88,12 @@
                     </div>
 
                     <div>
-                        <p class="font-medium">Tree Photo</p>
+                        <p class="font-medium">Foto Pohon</p>
                         @if($trees->treephoto)
                             <div class="mb-2">
                                 <img src="{{ asset('storage/' . $trees->treephoto) }}" alt="Current Photo"
                                      class="w-10 h-10 object-cover rounded-full">
-                                <p class="text-sm text-gray-500">Current photo. Upload a new one to replace it.</p>
+                                <p class="text-sm text-gray-500">Foto Sekarang. Unggah baru untuk menggantikannya.</p>
                             </div>
                         @endif
                         <div class="relative w-full">
@@ -109,7 +109,7 @@
                         <label 
                             for="treephoto" 
                             class="cursor-pointer inline-block px-4 py-2 bg-green-2 text-white rounded hover:bg-green-3 text-center font-medium w-1/3">
-                            Upload Tree Photo
+                            Unggah Foto Pohon
                         </label>
                     </div>
 
@@ -126,7 +126,7 @@
             </div>
 
             <div class="ml-4">
-                <button type="submit" class="bg-green-2 text-white px-4 py-2 rounded-md hover:bg-green-3 mt-5 font-medium">Update Tree</button>
+                <button type="submit" class="bg-green-2 text-white px-4 py-2 rounded-md hover:bg-green-3 mt-5 font-medium">Simpan Perubahan</button>
             </div>
         </form>
     </div>

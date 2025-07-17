@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Navbar</title>
-    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
 
      @vite('resources/css/app.css')
 </head>
@@ -19,13 +18,13 @@
         <ul class="space-y-4">
             @php
                 $navItems = [
-                    ['img' => 'Home.svg', 'label' => 'Home', 'route' => 'admin.dashboard'],
-                    ['img' => 'ProductList.svg', 'label' => 'Product List', 'route' => 'admin.products.list'],
-                    ['img' => 'TreeList.svg', 'label' => 'Tree List', 'route' => 'admin.trees.listtree'],
-                    ['img' => 'OrgList.svg', 'label' => 'Organization List', 'route'=> 'admin.organizations.index'],
-                    ['img' => 'OrderList.svg', 'label' => 'Order List', 'route' => 'admin.orders.index'],
-                    ['img' => 'OrderTree.svg', 'label' => 'Order Tree', 'route' => 'admin.treeorders.index'],
-                    ['img' => 'Reforestation.svg', 'label' => 'Reforestation', 'route' => 'admin.batches.listbatch'],
+                    ['img' => 'Home.svg', 'label' => 'Dashboard', 'route' => 'admin.dashboard'],
+                    ['img' => 'ProductList.svg', 'label' => 'Daftar Produk', 'route' => 'admin.products.list'],
+                    ['img' => 'TreeList.svg', 'label' => 'Daftar Pohon', 'route' => 'admin.trees.listtree'],
+                    ['img' => 'OrgList.svg', 'label' => 'Daftar Organisasi', 'route'=> 'admin.organizations.index'],
+                    ['img' => 'OrderList.svg', 'label' => 'Daftar Order Produk', 'route' => 'admin.orders.index'],
+                    ['img' => 'OrderTree.svg', 'label' => 'Daftar Order Pohon', 'route' => 'admin.treeorders.index'],
+                    ['img' => 'Reforestation.svg', 'label' => 'Reboisasi', 'route' => 'admin.batches.listbatch'],
                 ];
             @endphp
 
