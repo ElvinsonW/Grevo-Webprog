@@ -69,7 +69,7 @@ class TreeController extends Controller
             'treelife' => 'required|integer',
             'treeprice' => 'required|decimal:0,5',
             'organization_id' => 'required|exists:organizations,organization_id',
-            'treephoto' => 'image|mimes:jpeg,png,jpg|max:2048'
+            'treephoto' => 'required|image|mimes:jpeg,png,jpg|max:2048'
         ]);
 
         if($request->hasFile('treephoto')){
@@ -78,7 +78,7 @@ class TreeController extends Controller
 
         Tree::create($validated);
 
-        return redirect()->route('tree.listtree')->with('success', 'Pohon berhasil ditambahkan!');
+        return redirect()->route('admin.trees.listtree')->with('success', 'Pohon berhasil ditambahkan!');
     }
 
     public function edit(string $treeid)
@@ -113,7 +113,7 @@ class TreeController extends Controller
         }
 
         $tree->update($validated);
-        return redirect()->route('tree.listtree')->with('success', 'Pohon berhasil diperbarui!');
+        return redirect()->route('admin.trees.listtree')->with('success', 'Pohon berhasil diperbarui!');
     }
 
     public function destroy(string $treeid)
@@ -124,6 +124,6 @@ class TreeController extends Controller
         }
         $tree->delete();
 
-        return redirect()->route('tree.listtree')->with('success', 'Pohon berhasil dihapus!');
+        return redirect()->route('admin.trees.listtree')->with('success', 'Pohon berhasil dihapus!');
     }
 }

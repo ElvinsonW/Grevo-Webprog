@@ -69,7 +69,7 @@
                     <div>
                         <p class="font-medium">Organisasi Reboisasi</p>
                         <select name="organization_id" class="border border-green-2 w-full rounded-md p-2 bg-yellow-2" required>
-                            <option value="">-- Select Organization --</option>
+                            <option value="">-- Pilih Organisasi --</option>
                             @foreach($organizations as $org)
                                 <option value="{{ $org->organization_id }}" {{ old('organization_id') == $org->organization_id ? 'selected' : '' }}>
                                     {{ $org->organization_name }}

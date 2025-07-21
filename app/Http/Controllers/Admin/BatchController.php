@@ -30,9 +30,21 @@ class BatchController extends Controller
             'dateofactivity' => 'required|date',
             'treesplanted' => 'required|integer',
             'startdate' => 'required|date',
-            'enddate' => 'required|date',
-            'batchproof' => 'image|mimes:jpg,png,jpeg|max:2048'
-        ]);
+            'enddate' => 'required|date|after:startdate',
+            'batchproof' => 'required|image|mimes:jpg,png,jpeg|max:2048'
+        ],[
+        // Pesan error dalam Bahasa Indonesia
+        'organization_id.required' => 'Organisasi harus dipilih.',
+        'dateofactivity.required' => 'Tanggal kegiatan wajib diisi.',
+        'treesplanted.required' => 'Jumlah pohon wajib diisi.',
+        'startdate.required' => 'Tanggal mulai wajib diisi.',
+        'enddate.required' => 'Tanggal akhir wajib diisi.',
+        'enddate.after' => 'Tanggal akhir harus setelah tanggal mulai.',
+        'batchproof.required' => 'Foto bukti wajib diunggah.',
+        'batchproof.image' => 'File harus berupa gambar.',
+        'batchproof.mimes' => 'Format gambar harus jpeg, png, atau jpg.',
+        'batchproof.max' => 'Ukuran gambar maksimal 2MB.',
+    ]);
 
         if($request->hasFile('batchproof')){
             $validated['batchproof'] = $request->file('batchproof')->store('batchproof','public');

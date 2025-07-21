@@ -86,7 +86,7 @@
                                 class="hidden" 
                                 accept="image/*" 
                                 onchange="previewImage(event)"
-                                required
+                                
                             />
 
                             <label 

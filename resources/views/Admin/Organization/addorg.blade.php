@@ -68,7 +68,7 @@
         <div class="w-1/2 border border-green-2 flex flex-col gap-3 rounded-md p-4">
           <div>
             <p class="font-medium">Logo Organisasi</p>
-            <div>
+            
                     <div class="relative w-full">
                         <input 
                             id="organization_logo" 
@@ -77,7 +77,7 @@
                             class="hidden" 
                             accept="image/*" 
                             onchange="previewLogo(event)"
-                            required
+                            
                         />
 
                         <label 
@@ -85,11 +85,11 @@
                             class="cursor-pointer inline-block px-4 py-2 bg-green-2 text-white rounded hover:bg-green-3 text-center font-medium w-1/2">
                             Unggah Logo Organisasi
                         </label>
+                        @error('organization_logo')
+                          <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
-              </div>
-            @error('organization_logo')
-              <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
-            @enderror
+              
 
             <!-- Preview -->
             <div id="preview-container" class="mt-2">
@@ -109,8 +109,8 @@
             <p class="font-medium">Status Organisasi</p>
             <select name="organization_status" class="border border-green-2 w-full rounded-md p-2 bg-yellow-2" required>
               <option value="">-- Pilih Status --</option>
-              <option value="Active" {{ old('organization_status') == 'Active' ? 'selected' : '' }}>Active</option>
-              <option value="Not Active" {{ old('organization_status') == 'Not Active' ? 'selected' : '' }}>Not Active</option>
+              <option value="Active" {{ old('organization_status') == 'Active' ? 'selected' : '' }}>Aktif</option>
+              <option value="Not Active" {{ old('organization_status') == 'Not Active' ? 'selected' : '' }}>Nonaktif</option>
             </select>
             @error('organization_status')
               <p class="text-red-600 text-sm mt-1">{{ $message }}</p>

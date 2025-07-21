@@ -119,8 +119,8 @@
             <p class="font-medium">Status Organisasi</p>
             <select name="organization_status" class="border border-green-2 bg-yellow-2 w-full rounded-md p-2" required>
               <option value="">-- Pilih Status --</option>
-              <option value="Active" {{ old('organization_status', $organization->organization_status) == 'Active' ? 'selected' : '' }}>Active</option>
-              <option value="Not Active" {{ old('organization_status', $organization->organization_status) == 'Not Active' ? 'selected' : '' }}>Not Active</option>
+              <option value="Active" {{ old('organization_status', $organization->organization_status) == 'Active' ? 'selected' : '' }}>Aktif</option>
+              <option value="Not Active" {{ old('organization_status', $organization->organization_status) == 'Not Active' ? 'selected' : '' }}>Nonaktif</option>
             </select>
             @error('organization_status')
               <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
