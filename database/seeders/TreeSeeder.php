@@ -23,17 +23,18 @@ class TreeSeeder extends Seeder
         $org6 = Organization::skip(5)->first();
         Tree::create([
             'treename' => 'Mangrove',
-            'treecategory' => 'Pine',
-            'treedesc' => 'A wild tree has appeared!',
+            'treecategory' => 'Pinus',
+            'treedesc' => 'Pohon liar telah muncul!',
             'treelife' => 20,
             'treeprice' => 20.5,
             'treephoto' => 'treesphoto/close.png',
             'organization_id' => $org->organization_id
         ]);
+
         Tree::create([
-            'treename' => 'Oak',
-            'treecategory' => 'Deciduous',
-            'treedesc' => 'A sturdy tree known for its strong wood.',
+            'treename' => 'Ek',
+            'treecategory' => 'Gugur',
+            'treedesc' => 'Pohon kokoh yang dikenal dengan kayunya yang kuat.',
             'treelife' => 50,
             'treeprice' => 35.75,
             'treephoto' => 'treesphoto/oak.png',
@@ -41,9 +42,9 @@ class TreeSeeder extends Seeder
         ]);
 
         Tree::create([
-            'treename' => 'Bamboo',
-            'treecategory' => 'Grass',
-            'treedesc' => 'Fast-growing and versatile plant.',
+            'treename' => 'Bambu',
+            'treecategory' => 'Rumput',
+            'treedesc' => 'Tumbuhan yang tumbuh cepat dan serbaguna.',
             'treelife' => 15,
             'treeprice' => 12.99,
             'treephoto' => 'treesphoto/bamboo.png',
@@ -52,8 +53,8 @@ class TreeSeeder extends Seeder
 
         Tree::create([
             'treename' => 'Cedar',
-            'treecategory' => 'Coniferous',
-            'treedesc' => 'Evergreen with aromatic wood.',
+            'treecategory' => 'Konifer',
+            'treedesc' => 'Pohon hijau abadi dengan kayu aromatik.',
             'treelife' => 40,
             'treeprice' => 28.50,
             'treephoto' => 'treesphoto/cedar.png',
@@ -62,8 +63,8 @@ class TreeSeeder extends Seeder
 
         Tree::create([
             'treename' => 'Baobab',
-            'treecategory' => 'Succulent',
-            'treedesc' => 'Iconic tree with a thick trunk.',
+            'treecategory' => 'Sukulen',
+            'treedesc' => 'Pohon ikonik dengan batang tebal.',
             'treelife' => 100,
             'treeprice' => 45.00,
             'treephoto' => 'treesphoto/baobab.png',
@@ -71,9 +72,9 @@ class TreeSeeder extends Seeder
         ]);
 
         Tree::create([
-            'treename' => 'Palm',
-            'treecategory' => 'Tropical',
-            'treedesc' => 'Tall and flexible tropical tree.',
+            'treename' => 'Kelapa',
+            'treecategory' => 'Tropis',
+            'treedesc' => 'Pohon tropis yang tinggi dan fleksibel.',
             'treelife' => 30,
             'treeprice' => 22.25,
             'treephoto' => 'treesphoto/palm.png',
@@ -81,9 +82,9 @@ class TreeSeeder extends Seeder
         ]);
 
         Tree::create([
-            'treename' => 'Acacia',
-            'treecategory' => 'Savanna',
-            'treedesc' => 'Thrives in arid environments.',
+            'treename' => 'Akasia',
+            'treecategory' => 'Sabana',
+            'treedesc' => 'Tumbuh subur di lingkungan kering.',
             'treelife' => 25,
             'treeprice' => 18.80,
             'treephoto' => 'treesphoto/acacia.png',
@@ -91,9 +92,9 @@ class TreeSeeder extends Seeder
         ]);
 
         Tree::create([
-            'treename' => 'Maple',
-            'treecategory' => 'Deciduous',
-            'treedesc' => 'Known for vibrant autumn leaves.',
+            'treename' => 'Mapel',
+            'treecategory' => 'Gugur',
+            'treedesc' => 'Dikenal dengan daun musim gugur yang cerah.',
             'treelife' => 60,
             'treeprice' => 30.00,
             'treephoto' => 'treesphoto/maple.png',

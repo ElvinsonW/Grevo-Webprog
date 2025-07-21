@@ -12,67 +12,68 @@ class OrganizationSeeder extends Seeder
     {
         //
         Organization::create([
-            'organization_name' => 'Green Earth Foundation',
-            'operational_address' => '123 Forest Line',
-            'brief_description' => 'No Profit Organization focused on reforestation',
-            'coverage_region' => 'Asia Pacific',
-            'official_contact_info' => 'contactgef@gmail.com',
+            'organization_name' => 'Yayasan Bumi Hijau',
+            'operational_address' => 'Jalan Hutan 123',
+            'brief_description' => 'Organisasi nirlaba yang berfokus pada reboisasi',
+            'coverage_region' => 'Asia Pasifik',
+            'official_contact_info' => 'kontakgef@gmail.com',
             'organization_logo' => 'logos/AkademiCypto.png',
-            'existing_partner_or_sponsor' => 'New',
+            'existing_partner_or_sponsor' => 'Baru',
             'organization_status' => 'Active'
         ]);
+
         Organization::create([
-            'organization_name' => 'Blue Ocean Trust',
-            'operational_address' => '456 Coastal Avenue',
-            'brief_description' => 'Non-profit dedicated to marine conservation',
+            'organization_name' => 'Kepercayaan Samudra Biru',
+            'operational_address' => 'Jalan Pantai 456',
+            'brief_description' => 'Organisasi nirlaba yang berdedikasi pada konservasi laut',
             'coverage_region' => 'Global',
             'official_contact_info' => 'info@blueocean.org',
             'organization_logo' => 'logos/MarineBlue.png',
-            'existing_partner_or_sponsor' => 'Existing',
+            'existing_partner_or_sponsor' => 'Eksisting',
             'organization_status' => 'Active'
         ]);
 
         Organization::create([
-            'organization_name' => 'Urban Renewal Collective',
-            'operational_address' => '789 City Plaza',
-            'brief_description' => 'Community-driven urban sustainability projects',
-            'coverage_region' => 'North America',
+            'organization_name' => 'Kolektif Pembaruan Perkotaan',
+            'operational_address' => 'Plaza Kota 789',
+            'brief_description' => 'Proyek keberlanjutan perkotaan yang didorong oleh komunitas',
+            'coverage_region' => 'Amerika Utara',
             'official_contact_info' => 'urbanrenewal@outlook.com',
             'organization_logo' => 'logos/GreenPeace.png',
-            'existing_partner_or_sponsor' => 'New',
+            'existing_partner_or_sponsor' => 'Baru',
             'organization_status' => 'Active'
         ]);
 
         Organization::create([
-            'organization_name' => 'Desert Bloom Initiative',
-            'operational_address' => '101 Arid Road',
-            'brief_description' => 'Promoting agriculture in arid regions',
-            'coverage_region' => 'Middle East',
+            'organization_name' => 'Inisiatif Mekar Gurun',
+            'operational_address' => 'Jalan Kering 101',
+            'brief_description' => 'Mempromosikan pertanian di wilayah kering',
+            'coverage_region' => 'Timur Tengah',
             'official_contact_info' => 'desertbloom@yahoo.com',
             'organization_logo' => 'logos/DesertInitiative.png',
-            'existing_partner_or_sponsor' => 'Existing',
+            'existing_partner_or_sponsor' => 'Eksisting',
             'organization_status' => 'Not Active'
         ]);
 
         Organization::create([
-            'organization_name' => 'Mountain Guardians',
-            'operational_address' => '321 Highland Trail',
-            'brief_description' => 'Conservation of mountain ecosystems',
-            'coverage_region' => 'South America',
+            'organization_name' => 'Penjaga Gunung',
+            'operational_address' => 'Jalan Dataran Tinggi 321',
+            'brief_description' => 'Konservasi ekosistem pegunungan',
+            'coverage_region' => 'Amerika Selatan',
             'official_contact_info' => 'mountainguard@gmail.com',
             'organization_logo' => 'logos/MountainGuardian.png',
-            'existing_partner_or_sponsor' => 'New',
+            'existing_partner_or_sponsor' => 'Baru',
             'organization_status' => 'Not Active'
         ]);
 
         Organization::create([
-            'organization_name' => 'Clean Rivers Network',
-            'operational_address' => '654 Riverbank Drive',
-            'brief_description' => 'Restoring polluted rivers and waterways',
-            'coverage_region' => 'Europe',
+            'organization_name' => 'Jaringan Sungai Bersih',
+            'operational_address' => 'Jalan Tepi Sungai 654',
+            'brief_description' => 'Memulihkan sungai dan saluran air yang tercemar',
+            'coverage_region' => 'Eropa',
             'official_contact_info' => 'cleanrivers@protonmail.com',
             'organization_logo' => 'logos/RiverNetwork.png',
-            'existing_partner_or_sponsor' => 'Existing',
+            'existing_partner_or_sponsor' => 'Eksisting',
             'organization_status' => 'Not Active'
         ]);
     }

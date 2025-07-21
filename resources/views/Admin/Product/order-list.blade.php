@@ -10,7 +10,7 @@
     @include('components.sidebar')
 
 <div class="w-[93vw] p-6">
-    <h1 class="text-4xl font-bold mb-4 ml-[5vw]">Product List</h1>
+    <h1 class="text-4xl font-bold mb-4 ml-[5vw]">Daftar Produk</h1>
     <div class="flex flex-row justify-between mb-4 ml-[5vw]">
         {{-- Filter --}}
         <form method="GET" action="{{ route('admin.orders.index') }}">
@@ -18,7 +18,7 @@
                 $selectedStatus = request('status', 'new');
             @endphp
             <select name="status" onchange="this.form.submit()" class="border rounded px-3 py-1">
-                @foreach (['new' => 'New', 'shipping' => 'Shipping', 'arrived' => 'Arrived', 'done' => 'Done', 'cancelled' => 'Cancelled'] as $key => $label)
+                @foreach (['new' => 'Baru', 'shipping' => 'Dikirm', 'arrived' => 'Sudah Sampai', 'done' => 'Selesai', 'cancelled' => 'Dibatalkan'] as $key => $label)
                     <option value="{{ $key }}" {{ $selectedStatus === $key ? 'selected' : '' }}>
                         {{ $label }}
                     </option>
@@ -34,12 +34,12 @@
         <table class="min-w-full text-sm">
             <thead class="bg-green-100 text-left">
                 <tr>
-                    <th class="px-4 py-3">Order ID</th>
-                    <th class="px-4 py-3">Date</th>
-                    <th class="px-4 py-3">Customer</th>
-                    <th class="px-4 py-3">Order Items</th>
+                    <th class="px-4 py-3">ID Pesanan</th>
+                    <th class="px-4 py-3">Tanggal</th>
+                    <th class="px-4 py-3">Pelanggan</th>
+                    <th class="px-4 py-3">Pesanan Barang</th>
                     <th class="px-4 py-3">Status</th>
-                    <th class="px-4 py-3">Total Price</th>
+                    <th class="px-4 py-3">Total Harga</th>
                 </tr>
             </thead>
             <tbody class="bg-yellow-2">
@@ -78,7 +78,7 @@
                     @endphp
                     <tr class="border-b hover:bg-gray-50">
                         <td class="px-4 py-3 font-medium">{{ $order->order_id }}</td>
-                        <td class="px-4 py-3">{{ \Carbon\Carbon::parse($status->changed_at)->format('M d, Y') }}</td>
+                        <td class="px-4 py-3">{{ \Carbon\Carbon::parse($status->changed_at)->translatedformat('M d, Y') }}</td>
                         <td class="px-4 py-3">{{ $order->user->username }}</td>
                         <!-- order items -->
                         <td class="px-4 py-3"> 
