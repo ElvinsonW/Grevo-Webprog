@@ -17,8 +17,9 @@ class CheckGuest
     public function handle(Request $request, Closure $next): Response
     {
         if(Auth::check()){
-            return redirect("/")->with("roleError", "Only Guest can access this page!");
+            return redirect("/")->with("roleError", "Hanya Guest yang dapat mengakses aktivitas ini!");
         }
         return $next($request);
     }
 }
+

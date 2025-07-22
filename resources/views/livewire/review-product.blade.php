@@ -1,6 +1,6 @@
 <div class="px-[5vw] my-[2vw]">
     @if ($step == 1)
-        <h1 class="font-bold text-[2vw] mb-[1.5vw]">Select Product</h1>
+        <h1 class="font-bold text-[2vw] mb-[1.5vw]">Pilih Produk</h1>
         <div class="flex flex-wrap justify-between gap-[1.5vw] mb-[2vw]">
             @foreach ($product_variants as $variant)
                 <button type="button"
@@ -21,10 +21,10 @@
 
         <button wire:click="endReview"
             class="bg-green-2 w-fit px-[3vw] py-[1vw] font-bold text-white text-[1.3vw] rounded-[0.5vw]">
-            End Review
+            Akhiri Ulasan
         </button>
     @else
-        <h1 class="text-[2vw] font-bold mb-[2vw]">Review Product</h1>
+        <h1 class="text-[2vw] font-bold mb-[2vw]">Ulasan Produk</h1>
         <div class="flex items-center gap-[0.5vw] mb-[2vw]">
             <img src="{{ asset('storage/' . $selectedProduct->product_images->first()->image) }}"
                 alt="{{ $selectedProduct->name }}" class="w-[5vw] h-[5vw] object-cover rounded-[0.5vw]">
@@ -34,7 +34,7 @@
             @csrf
 
             <div class="flex flex-col gap-[1vw]">
-                <label for="rate" class="text-[1.2vw] font-bold">Rate</label>
+                <label for="rate" class="text-[1.2vw] font-bold">Rating</label>
                 <div class="flex gap-[0.5vw] cursor-pointer">
                     @for ($i = 1; $i <= 5; $i++)
                         <i class="fa-solid fa-star text-[2vw] cursor-pointer {{ $rate >= $i ? 'text-yellow-400' : 'text-gray-200' }}"
@@ -51,7 +51,7 @@
             </div>
 
             <div class="flex flex-col gap-[1vw]">
-                <label for="description" class="text-[1.2vw] font-bold">Description</label>
+                <label for="description" class="text-[1.2vw] font-bold">Deskripsi</label>
                 <textarea wire:model="desc" id="desc" rows="3"
                     class="rounded-[0.5vw] p-[1vw] focus:outline-none border text-[1.2vw]"></textarea>
                 @error('description')
@@ -62,10 +62,9 @@
             </div>
 
             <div class="flex flex-col gap-[1vw]">
-                <label for="images" class="text-[1.2vw] font-bold">Review Image</label>
+                <label for="images" class="text-[1.2vw] font-bold">Gambar Ulasan Produk</label>
                 <label for="images"
-                    class="cursor-pointer w-fit px-[2vw] py-[0.75vw] rounded-[0.5vw] bg-green-2 text-[1.1vw] text-white font-bold mb-[0.5vw]">Add
-                    Review Image +</label>
+                    class="cursor-pointer w-fit px-[2vw] py-[0.75vw] rounded-[0.5vw] bg-green-2 text-[1.1vw] text-white font-bold mb-[0.5vw]">Unggah Ulasan Gambar +</label>
                 <input id="images" wire:model="imagesUpload" type="file" class="hidden mb-[1vw]" multiple />
                 <div class="flex flex-wrap gap-[1vw]">
                     @if ($images)
@@ -91,7 +90,7 @@
             <button type="button"
                 class="cursor-pointer w-fit px-[2vw] py-[0.5vw] rounded-[0.5vw] bg-orange-1 text-white font-bold"
                 wire:click="saveReview">
-                Submit
+                Kirim
             </button>
         </form>
     @endif

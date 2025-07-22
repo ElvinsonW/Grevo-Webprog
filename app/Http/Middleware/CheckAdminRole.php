@@ -17,8 +17,9 @@ class CheckAdminRole
     public function handle(Request $request, Closure $next): Response
     {
         if(!Auth::check() || Auth::user()->role != "admin"){
-            redirect('/')->with('roleError', 'Only Admin Can Do This Activity');
+            redirect('/')->with('roleError', 'Hanya admin yang boleh mengakses aktivitas ini!');
         }
         return $next($request);
     }
 }
+

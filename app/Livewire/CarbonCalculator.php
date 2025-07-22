@@ -17,11 +17,8 @@ class CarbonCalculator extends Component
 
     public function nextStep(){
         if($this->answer[$this->step-1] == -1){
-            $this->error = "Please answer the question!";
+            $this->error = "Harap isi jawaban dari pertanyaannya!";
         } else {
-            if($this->step == 9){
-                // dd($this->answer[8]);
-            }
             if($this->step < 12){
                 $this->error = "";
                 $this->step++;

@@ -19,10 +19,10 @@
             </button>
         </form>
         <li class="list-none flex gap-[3vw] text-green-3 text-[1.2vw] font-bold mt-[0.25vw]">
-            <a href="/" class="pb-[0.5vw] px-[1vw] {{ request()->is('/') ? 'border-b-3 border-orange-1 text-orange-1' : 'text-green-3 hover:text-green-2' }}">Home</a>
-            <a href="/products" class="pb-[0.5vw] px-[1vw] {{ request()->is(['products', 'products/*']) ? 'border-b-3 border-orange-1 text-orange-1' : 'text-green-3 hover:text-green-2' }}">Products</a>
-            <a href="/trees" class="pb-[0.5vw] px-[1vw] {{ request()->is(['trees', 'trees/*']) ? 'border-b-3 border-orange-1 text-orange-1' : 'text-green-3 hover:text-green-2' }}">Green Activity</a>
-            <a href="/carbon-calculator" class="pb-[0.5vw] px-[1vw] {{ request()->is(['carbon-calculator', 'carbon-calculator/*']) ? 'border-b-3 border-orange-1 text-orange-1' : 'text-green-3 hover:text-green-2' }}">Carbon Calculator</a>
+            <a href="/" class="pb-[0.5vw] px-[1vw] {{ request()->is('/') ? 'border-b-3 border-orange-1 text-orange-1' : 'text-green-3 hover:text-green-2' }}">Beranda</a>
+            <a href="/products" class="pb-[0.5vw] px-[1vw] {{ request()->is(['products', 'products/*']) ? 'border-b-3 border-orange-1 text-orange-1' : 'text-green-3 hover:text-green-2' }}">Produk</a>
+            <a href="/trees" class="pb-[0.5vw] px-[1vw] {{ request()->is(['trees', 'trees/*']) ? 'border-b-3 border-orange-1 text-orange-1' : 'text-green-3 hover:text-green-2' }}">Aktivitas Hijau</a>
+            <a href="/carbon-calculator" class="pb-[0.5vw] px-[1vw] {{ request()->is(['carbon-calculator', 'carbon-calculator/*']) ? 'border-b-3 border-orange-1 text-orange-1' : 'text-green-3 hover:text-green-2' }}">Kalkulator Karbon</a>
         </li>
     </div>
 

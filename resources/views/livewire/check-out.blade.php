@@ -12,13 +12,13 @@
         <h1 class="text-[2vw] font-bold mb-[3vw]">Check Out</h1>
 
         <div class="mb-[3vw]">
-            <h2 class="text-[1.4vw] font-bold mb-[1.5vw]">Shopping Cart</h2>
+            <h2 class="text-[1.4vw] font-bold mb-[1.5vw]">Keranjang Belanja</h2>
             <div class="grid font-bold text-[1.2vw] border-b pb-[1vw] text-black gap-[1vw]"
                 style="grid-template-columns: 2% 30% 15% 20% 18% 5%">
                 <p></p>
-                <p>Product</p>
-                <p>Price</p>
-                <p>Quantity</p>
+                <p>Produk</p>
+                <p>Harga</p>
+                <p>Jumlah</p>
                 <p>Total</p>
                 <p></p>
             </div>
@@ -79,16 +79,16 @@
 
         <div class="flex justify-between">
             <div class="flex flex-col w-[62%]">
-                <h2 class="text-[1.4vw] font-bold mb-[1vw]">Delivery Information</h2>
+                <h2 class="text-[1.4vw] font-bold mb-[1vw]">Informasi Pengantaran</h2>
                 <div class="flex flex-col gap-[1vw] bg-yellow-3 p-[2vw] rounded-[0.75vw]">
                     <div class="flex flex-col gap-[0.5vw]">
-                        <p for="name" class="font-bold">Recipient name</p>
+                        <p for="name" class="font-bold">Nama Penerima</p>
                         <p id="recipient-name" class="px-[2vw] py-[0.75vw] rounded-[0.5vw] bg-green-2 text-white w-fit text-[1.1vw]">
                             {{ $recipientName }}</p>
                     </div>
 
                     <div class="flex flex-col gap-[0.5vw]">
-                        <label for="address" class="font-bold">Shipping Address</label>
+                        <label for="address" class="font-bold">Alamat Pengiriman</label>
                         <div class="relative">
                             <select wire:model="addressId" id="address" wire:change="changeAddressId($event.target.value)"
                                 class="appearance-none w-[100%] px-[2vw] py-[0.75vw] rounded-[0.5vw] focus:outline-none text-[1.1vw] bg-green-2 text-white">
@@ -122,7 +122,7 @@
                     </div>
 
                     <div class="flex flex-col gap-[0.5vw]">
-                        <p for="price" class="font-bold">Price</p>
+                        <p for="price" class="font-bold">Harga</p>
                         <p class="px-[2vw] py-[0.75vw] rounded-[0.5vw] bg-green-2 text-white w-fit text-[1.1vw]">Rp.
                             {{ number_format($shippingCost) }}</p>
                     </div>
@@ -130,7 +130,7 @@
             </div>
 
             <div class="flex flex-col w-[35%]">
-                <h2 class="text-[1.4vw] font-bold mb-[1vw]">Order Summary</h2>
+                <h2 class="text-[1.4vw] font-bold mb-[1vw]">Ringkasan Pesanan</h2>
 
                 <div class="flex flex-col gap-[0.5vw] mb-[1vw] bg-yellow-3 p-[2vw] rounded-[0.75vw]">
                     <div class="flex justify-between w-full font-semibold">
@@ -139,7 +139,7 @@
                     </div>
 
                     <div class="flex justify-between w-full font-semibold">
-                        <p>Delivery Fee</p>
+                        <p>Biaya Pengiriman</p>
                         <p>Rp. {{ number_format($shippingCost) }}</p>
                     </div>
                     <div class="border-b-2 mb-[0.75vw]"></div>

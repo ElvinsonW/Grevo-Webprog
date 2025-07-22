@@ -3,7 +3,7 @@
         
         <div 
             class="alert absolute z-40 flex items-center justify-center p-4 mb-4 w-[30vw] text-green-800 rounded-lg bg-green-50" 
-            style="top: 10%; left: 50%; transform: translate(-50%, -50%);" 
+            style="top: 2%; left: 50%; transform: translate(-50%, -50%);" 
             role="alert">
             <svg class="shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
@@ -23,14 +23,14 @@
     @endif
 
     <div class="mx-[5vw] my-[2vw]">
-        <h1 class="text-[2vw] font-bold mb-[3vw]">Shopping Cart</h1>
+        <h1 class="text-[2vw] font-bold mb-[3vw]">Keranjang Belanja</h1>
 
         <div class="grid font-bold text-[1.2vw] border-b border-b-[#7B8C7F] pb-[1vw] text-black gap-[1vw]"
             style="grid-template-columns: 5% 30% 15% 20% 18% 5%">
             <p></p>
-            <p>Product</p>
-            <p>Price</p>
-            <p>Quantity</p>
+            <p>Produk</p>
+            <p>Harga</p>
+            <p>Jumlah</p>
             <p>Total</p>
             <p></p>
         </div>
@@ -103,10 +103,10 @@
                             wire:change="$refresh"
                             id="selectAll" 
                             class="w-[1.5vw] h-[1.5vw] accent-green-2">
-                    <span>Select all</span> 
+                    <span>Pilih Semua</span> 
                 </label>
                 <div class="flex items-center gap-[2vw]">
-                    <p class="font-bold">Total ({{ count($selectedProduct) }} items selected) : <span class="text-green-2 text-[1.5vw]">Rp. {{ number_format($this->totalPrice) }}</span></p>
+                    <p class="font-bold">Total ({{ count($selectedProduct) }} item terpilih) : <span class="text-green-2 text-[1.5vw]">Rp. {{ number_format($this->totalPrice) }}</span></p>
                     <button type="button" 
                             wire:click="checkout" 
                             class="w-[15vw] h-[4vw] bg-orange-1 rounded-[0.5vw] text-white font-bold text-[1.5vw] cursor-pointer">

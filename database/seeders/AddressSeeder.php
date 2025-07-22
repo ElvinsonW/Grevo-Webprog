@@ -28,7 +28,7 @@ class AddressSeeder extends Seeder
             'urban_village' => 'Kebon Jeruk',
             'subdistrict' => 'Kebon Jeruk',
             'postal_code' => 11530,
-            'label' => 'Home',
+            'label' => 'Rumah',
             'is_default' => true,
             'rajaOngkirId' => 17486
         ]);
@@ -43,7 +43,7 @@ class AddressSeeder extends Seeder
             'urban_village' => 'Kembangan Selatan',
             'subdistrict' => 'Kembangan',
             'postal_code' => 11610,
-            'label' => 'Office',
+            'label' => 'Kantor',
             'is_default' => false,
             'rajaOngkirId' => 17493
         ]);

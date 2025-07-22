@@ -10,13 +10,11 @@ use App\Models\Organization;
 
 class OrganizationController extends Controller
 {
-    //
     public function create()
     {
         return view('Admin.Organization.addorg');
     }
 
-    // aku nambahin fungsi ini buat nampilin di detail organisasi nanti
     public function show($organizationName)
     {
         $organization = Organization::where('organization_name', $organizationName)->firstOrFail();

@@ -18,11 +18,6 @@ class Cart extends Component
         $this->selectAll = false;
     }
 
-    public function updatedSelectedProduct($value)
-    {
-        
-    }
-
     public function refreshCart()
     {
         $this->cartProduct = CartModel::where('user_id', auth()->user()->id)
@@ -48,6 +43,11 @@ class Cart extends Component
             $cart->save();
             $this->refreshCart();
         }
+    }
+
+    public function updatedSelectedProduct($value)
+    {
+        
     }
 
     public function delete($id)

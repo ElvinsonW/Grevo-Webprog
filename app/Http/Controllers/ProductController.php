@@ -29,11 +29,6 @@ class ProductController extends Controller
         return view('Admin.Product.addproduct');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request) {}
-
     public function show(string $slug)
     {
         $product = Product::withAvg("reviews", "rate")->where("slug", $slug)->firstOrFail();
@@ -111,7 +106,7 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
-        return redirect()->route('admin.products.list')->with('message', 'Product deleted successfully.');
+        return redirect()->route('admin.products.list')->with('message', 'Produk berhasil dihapus.');
     }
 
     public function createSlug(string $name)

@@ -6,6 +6,7 @@ use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\StatusHistory;
+use App\Models\User;
 use App\Services\RajaOngkirService;
 use Carbon\Carbon;
 use Illuminate\Container\Attributes\Auth;
@@ -76,11 +77,12 @@ class PaymentController extends Controller
                     'cart_ids' => implode(',', $cartIds),
                     'shipping_fee' => $shippingFee
                 ],
+                'locale' => 'id'
             ]);
 
             return redirect($session->url);
         } catch (ApiErrorException $e) {
-            return back()->with('error', 'Payment processing error. Please try again.');
+            return back()->with('error', 'Pembayaran gagal! Tolong coba lagi.');
         }
     }
 
@@ -110,6 +112,8 @@ class PaymentController extends Controller
                 'status' => 'ORDER PLACED',
                 'changed_at' => Carbon::now()
             ]);
+            
+            $totalOrder = 0;
 
             foreach($carts as $cart){
                 OrderItem::create([
@@ -118,19 +122,24 @@ class PaymentController extends Controller
                     'quantity' => $cart->amount,
                     'price' => $cart->total
                 ]);
+                $totalOrder += $cart->total;
 
                 $cart->delete();
             }
 
-            return redirect()->route('order.show', $order->order_id)->with('orderSuccess', 'Order is placed successfully!');
+            $user = User::find(auth()->user()->id);
+            $user->points = round($user->points + $totalOrder / 10000);
+            $user->save();
+
+            return redirect()->route('order.show', $order->order_id)->with('orderSuccess', 'Pesanan berhasil ditambahkan!');
         } catch (ApiErrorException $e) {
-            return redirect()->route('checkout.cancel')->with('error', 'Unable to verify payment.');
+            return redirect()->route('checkout.cancel')->with('error', 'Tidak bisa memverifikasi pembayaran.');
         }
     }
 
     public function cancel(Request $request)
     {
-        return view('checkout.cancel');
+        return redirect()->route('cart.index');
     }
 
     public function calculateShippingCost(Request $request)

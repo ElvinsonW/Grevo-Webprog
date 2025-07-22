@@ -42,8 +42,8 @@
 
     {{-- Card utama untuk form Sign Up --}}
     <div class="w-full max-w-md bg-white rounded-lg shadow-lg p-10 text-center relative z-20">
-        <h2 class="text-2xl text-gray-800 mb-2 font-semibold">Sign up to GREVO</h2>
-        <p class="text-sm text-gray-600 mb-8">Quick & Simple way to your online shopping</p>
+        <h2 class="text-2xl text-gray-800 mb-2 font-semibold">Sign up ke GREVO</h2>
+        <p class="text-sm text-gray-600 mb-8">Cara Cepat dan Simpel untuk kepuasan belanja online</p>
 
         {{-- Pesan sukses (misalnya dari redirect setelah register) --}}
         @if (session('success'))
@@ -58,7 +58,7 @@
 
             {{-- Field NAME --}}
             <div class="mb-5 text-left">
-                <label for="name" class="block text-xs text-gray-700 uppercase font-semibold mb-1">NAME</label>
+                <label for="name" class="block text-xs text-gray-700 uppercase font-semibold mb-1">NAMA</label>
                 <input type="text" id="name" name="name" value="{{ old('name') }}" placeholder="Ivy"
                     required autocomplete="name" autofocus
                     class="w-full px-4 py-3 border border-gray-300 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-[var(--color-green-3)]"
@@ -86,12 +86,12 @@
 
             {{-- Field GENDER --}}
             <div class="mb-5 text-left">
-                <label for="gender" class="block text-xs text-gray-700 uppercase font-semibold mb-1">GENDER</label>
+                <label for="gender" class="block text-xs text-gray-700 uppercase font-semibold mb-1">JENIS KELAMIN</label>
                 <div class="relative">
                     <select id="gender" name="gender"
                         class="appearance-none w-full px-4 py-3 border border-gray-300 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-[var(--color-green-3)]"
                         style="border-color: var(--color-green-3);" {{-- Menggunakan --color-green-3 dari app.css untuk fokus --}} required>
-                        <option value="" disabled selected hidden>Select a category...</option>
+                        <option value="" disabled selected hidden>Pilih kategori...</option>
                         @if (old('gender') == 'male')
                             <option value="male" selected class="text-black">Male</option>
                         @else
@@ -121,7 +121,7 @@
             {{-- Field EMAIL ADDRESS --}}
             <div class="mb-5 text-left">
                 <label for="email" class="block text-xs text-gray-700 uppercase font-semibold mb-1">EMAIL
-                    ADDRESS</label>
+                    </label>
                 <input type="email" id="email" name="email" value="{{ old('email') }}"
                     placeholder="ivy@stay.com" required autocomplete="email"
                     class="w-full px-4 py-3 border border-gray-300 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-[var(--color-green-3)]"
@@ -135,7 +135,7 @@
 
             {{-- Field Phone Number --}}
             <div class="mb-5 text-left">
-                <label for="phone_number" class="block text-xs text-gray-700 uppercase font-semibold mb-1">PHONE NUMBER</label>
+                <label for="phone_number" class="block text-xs text-gray-700 uppercase font-semibold mb-1">NOMOR TELEPON</label>
                 <input type="text" id="phone_number" name="phone_number" value="{{ old('phone_number') }}"
                     placeholder="085263506419" required
                     class="w-full px-4 py-3 border border-gray-300 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-[var(--color-green-3)]"
@@ -149,7 +149,7 @@
 
             {{-- Field Address --}}
             <div class="mb-5 text-left">
-                <label for="address" class="block text-xs text-gray-700 uppercase font-semibold mb-1">ADDRESS</label>
+                <label for="address" class="block text-xs text-gray-700 uppercase font-semibold mb-1">ALAMAT</label>
                 <input type="text" id="address" name="address" value="{{ old('address') }}"
                     placeholder="Jalan Pakuan 3" required
                     class="w-full px-4 py-3 border border-gray-300 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-[var(--color-green-3)]"
@@ -186,7 +186,7 @@
             {{-- Field CONFIRM PASSWORD ya --}}
             <div class="mb-8 text-left">
                 <label for="password_confirmation"
-                    class="block text-xs text-gray-700 uppercase font-semibold mb-1">CONFIRM PASSWORD</label>
+                    class="block text-xs text-gray-700 uppercase font-semibold mb-1">KONFIRMASI PASSWORD</label>
                 <div class="relative">
                     <input type="password" id="password_confirmation" name="password_confirmation"
                         placeholder="********" required autocomplete="new-password"
@@ -209,16 +209,15 @@
                 <input type="checkbox" id="terms" name="terms" {{ old('terms') ? 'checked' : '' }} required
                     class="mr-2 min-w-4 min-h-4 cursor-pointer" style="accent-color: var(--color-green-3);">
                 {{-- Menggunakan --color-green-3 untuk accent-color --}}
-                <label for="terms">I agree to the <a href="#" class="no-underline hover:underline"
-                        style="color: var(--color-green-3);">terms of Service</a> and <a href="#"
-                        class="no-underline hover:underline" style="color: var(--color-green-3);">Privacy
-                        Policy</a>.</label>
+                <label for="terms">Saya menyetujui <a href="#" class="no-underline hover:underline"
+                        style="color: var(--color-green-3);">Syarat dan Ketentuan</a> and <a href="#"
+                        class="no-underline hover:underline" style="color: var(--color-green-3);">Kebijakan Privasi</a>.</label>
             </div>
 
             {{-- Tombol CREATE AN ACCOUNT --}}
             <button type="submit"
                 class="w-full py-3 text-white rounded-md text-base font-semibold cursor-pointer hover:bg-green-600 transition-colors duration-300"
-                style="background-color: var(--color-green-2);">CREATE AN ACCOUNT</button>
+                style="background-color: var(--color-green-2);">BUAT AKUN</button>
         </form>
     </div>
 

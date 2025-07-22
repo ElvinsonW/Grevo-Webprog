@@ -19,7 +19,7 @@ class OrderController extends Controller
             ->where('user_id', $user->id)
             ->firstOrFail();
 
-        return view('User.orders.order-detail', compact('user', 'order')); // Adjust the view path as necessary
+        return view('User.orders.order-detail', compact('user', 'order')); 
     }
 
     public function cancelOrder(Order $order){
@@ -29,9 +29,9 @@ class OrderController extends Controller
                 "created_at" => Carbon::now()
             ]);
 
-            return redirect('/profile/orders')->with('cancelSuccess', 'Your order has been cancelled!');
+            return redirect('/profile/orders')->with('cancelSuccess', 'Pesanan berhasil dibatalkan!');
         } else {
-            return redirect('/profile/orders')->with('cancelFailed', 'Your order can\'\t be cancelled!');
+            return redirect('/profile/orders')->with('cancelFailed', 'Pesanan tidak bisa dibatalkan!');
         }
     }
 
@@ -40,6 +40,6 @@ class OrderController extends Controller
             "status" => "ORDER RECEIVED",
             "created_at" => Carbon::now()
         ]);
-        return redirect('/profile/orders')->with('recievedSuccess', 'Your order has been received!');
+        return redirect('/profile/orders')->with('recievedSuccess', 'Pesanan mu telah diterima!');
     }
 }

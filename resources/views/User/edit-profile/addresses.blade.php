@@ -14,10 +14,10 @@
 
             {{-- Header with Add New Address Button --}}
             <div class="flex justify-between items-center mb-[3vw]">
-                <h1 class="text-[2vw] font-bold">Addresses</h1>
+                <h1 class="text-[2vw] font-bold">Alamat</h1>
                 <button type="button" id="addAddressBtn"
                     class="px-[1.5vw] py-[0.75vw] text-[1vw] rounded-[0.3vw] bg-[var(--color-green-3)] text-white hover:bg-[var(--color-green-2)]">
-                    + Add New Address
+                    + Tambah Alamat Baru
                 </button>
             </div>
 
@@ -83,21 +83,22 @@
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit"
-                                    class="text-[0.9vw] text-gray-500 hover:text-red-600">Delete</button>
+                                    class="text-[0.9vw] text-gray-500 hover:text-red-600">Hapus</button>
                             </form>
                             @if (!$address->is_default)
                                 <form action="{{ route('addresses.setDefault', $address) }}" method="POST">
                                     @csrf
                                     @method('PATCH')
                                     <button type="submit"
-                                        class="px-[1.2vw] py-[0.5vw] text-[0.9vw] rounded-[0.3vw] border border-gray-300 text-gray-600 hover:bg-gray-100">Set
-                                        as Default</button>
+                                        class="px-[1.2vw] py-[0.5vw] text-[0.9vw] rounded-[0.3vw] border border-gray-300 text-gray-600 hover:bg-gray-100">
+                                        Atur sebagai default
+                                    </button>
                                 </form>
                             @endif
                         </div>
                     </div>
                 @empty
-                    <p class="text-gray-500 text-[1vw] text-center py-[2vw]">No addresses found.</p>
+                    <p class="text-gray-500 text-[1vw] text-center py-[2vw]">Alamat tidak dapat ditemukan.</p>
                 @endforelse
             </div>
         </div>
@@ -221,16 +222,16 @@
                     <label class="block text-[0.9vw] font-medium text-gray-700 mb-[0.5vw]">Label As</label>
                     <div class="flex gap-[1vw]">
                         <label class="focus:outline-none inline-flex items-center">
-                            <input type="radio" name="label" value="Home"
+                            <input type="radio" name="label" value="Rumah"
                                 class="form-radio text-[var(--color-green-3)]" id="edit_label_home">
                             <span
-                                class="ml-[0.5vw] text-[0.9vw] text-gray-700 border border-gray-300 px-[1vw] py-[0.5vw] rounded-[0.3vw] cursor-pointer has-[:checked]:bg-[var(--color-green-1)] has-[:checked]:border-[var(--color-green-3)] has-[:checked]:text-[var(--color-green-3)]">Home</span>
+                                class="ml-[0.5vw] text-[0.9vw] text-gray-700 border border-gray-300 px-[1vw] py-[0.5vw] rounded-[0.3vw] cursor-pointer has-[:checked]:bg-[var(--color-green-1)] has-[:checked]:border-[var(--color-green-3)] has-[:checked]:text-[var(--color-green-3)]">Rumah</span>
                         </label>
                         <label class="inline-flex items-center">
-                            <input type="radio" name="label" value="Work"
+                            <input type="radio" name="label" value="Kantor"
                                 class="form-radio text-[var(--color-green-3)]" id="edit_label_work">
                             <span
-                                class="ml-[0.5vw] text-[0.9vw] text-gray-700 border border-gray-300 px-[1vw] py-[0.5vw] rounded-[0.3vw] cursor-pointer has-[:checked]:bg-[var(--color-green-1)] has-[:checked]:border-[var(--color-green-3)] has-[:checked]:text-[var(--color-green-3)]">Work</span>
+                                class="ml-[0.5vw] text-[0.9vw] text-gray-700 border border-gray-300 px-[1vw] py-[0.5vw] rounded-[0.3vw] cursor-pointer has-[:checked]:bg-[var(--color-green-1)] has-[:checked]:border-[var(--color-green-3)] has-[:checked]:text-[var(--color-green-3)]">Kantor</span>
                         </label>
                     </div>
                     @error('label')
@@ -363,18 +364,18 @@
                     <label class="block text-[0.9vw] font-medium text-gray-700 mb-[0.5vw]">Label As</label>
                     <div class="flex gap-[1vw]">
                         <label class="inline-flex items-center">
-                            <input type="radio" name="label" value="Home"
+                            <input type="radio" name="label" value="Rumah"
                                 class="form-radio text-[var(--color-green-3)]" id="add_label_home"
                                 {{ old('label') == 'Home' ? 'checked' : '' }}>
                             <span
-                                class="ml-[0.5vw] text-[0.9vw] text-gray-700 border border-gray-300 px-[1vw] py-[0.5vw] rounded-[0.3vw] cursor-pointer has-[:checked]:bg-[var(--color-green-1)] has-[:checked]:border-[var(--color-green-3)] has-[:checked]:text-[var(--color-green-3)]">Home</span>
+                                class="ml-[0.5vw] text-[0.9vw] text-gray-700 border border-gray-300 px-[1vw] py-[0.5vw] rounded-[0.3vw] cursor-pointer has-[:checked]:bg-[var(--color-green-1)] has-[:checked]:border-[var(--color-green-3)] has-[:checked]:text-[var(--color-green-3)]">Rumah</span>
                         </label>
                         <label class="inline-flex items-center">
-                            <input type="radio" name="label" value="Work"
+                            <input type="radio" name="label" value="Kantor"
                                 class="form-radio text-[var(--color-green-3)]" id="add_label_work"
                                 {{ old('label') == 'Work' ? 'checked' : '' }}>
                             <span
-                                class="ml-[0.5vw] text-[0.9vw] text-gray-700 border border-gray-300 px-[1vw] py-[0.5vw] rounded-[0.3vw] cursor-pointer has-[:checked]:bg-[var(--color-green-1)] has-[:checked]:border-[var(--color-green-3)] has-[:checked]:text-[var(--color-green-3)]">Work</span>
+                                class="ml-[0.5vw] text-[0.9vw] text-gray-700 border border-gray-300 px-[1vw] py-[0.5vw] rounded-[0.3vw] cursor-pointer has-[:checked]:bg-[var(--color-green-1)] has-[:checked]:border-[var(--color-green-3)] has-[:checked]:text-[var(--color-green-3)]">Kantor</span>
                         </label>
                     </div>
                     @error('label')

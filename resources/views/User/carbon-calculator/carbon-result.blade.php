@@ -1,9 +1,9 @@
 <x-layout>
     <div class="flex flex-col mx-[5vw] my-[2vw]">
-        <h1 class="text-[2vw] font-bold mb-[3vw]">Carbon Footprint Calculator</h1>
+        <h1 class="text-[2vw] font-bold mb-[3vw]">Kalkulator Jejak Karbon</h1>
 
         <div class="flex flex-col items-center">
-            <h2 class="text-[1.5vw] font-bold mb-[1.5vw]">Your Carbon Footprint</h2>
+            <h2 class="text-[1.5vw] font-bold mb-[1.5vw]">Jejak Karbon Mu</h2>
 
             @php
                 $isGood = $carbon <= 60;
@@ -22,13 +22,13 @@
                 <!-- Value & Label -->
                 <div class="absolute top-[5vw] text-center">
                     <div class="text-[4vw] font-bold" id="progressValue">{{ $carbon }}</div>
-                    <div class="text-[1.5vw] font-bold mt-[-0.5vw]" id="progressLabel">{{ $isGood ? 'GOOD' : 'POOR' }}</div>
+                    <div class="text-[1.5vw] font-bold mt-[-0.5vw]" id="progressLabel">{{ $isGood ? 'BAIK' : 'BURUK' }}</div>
                 </div>
 
                 <!-- Min & Max Labels -->
                 <div class="flex justify-between w-[28vw] mt-[1.5vw]">
                     <span class="text-white text-[1.1vw] font-bold w-[5vw] text-center px-[0.5vw] py-[0.25vw] rounded-[0.5vw] bg-green-2">0</span>
-                    <span class="text-white text-[1.1vw] font-bold w-[5vw] text-center px-[0.5vw] py-[0.25vw] rounded-[0.5vw] bg-orange-1">100</span>
+                    <span class="text-white text-[1.1vw] font-bold w-[5vw] text-center px-[0.5vw] py-[0.25vw] rounded-[0.5vw] bg-orange-1">178</span>
                 </div>
 
                 <p id="resultDesc" class="text-[1.4vw] font-bold text-center mt-[3vw] w-[70%]">

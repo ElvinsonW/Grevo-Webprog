@@ -24,20 +24,6 @@ class AddressesController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     * (Not typically used when using modals, but kept for convention or API purposes)
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        // This method is generally not needed when using modals where the form
-        // is part of the main page or triggered directly by JS.
-        // If it were an API endpoint, you might return a JSON response.
-        return abort(404); // Or return response()->json(['message' => 'Not found'], 404);
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -79,27 +65,7 @@ class AddressesController extends Controller
 
         $request->session()->forget('show_add_modal');
 
-        return redirect()->route('addresses')->with('success', 'Address added successfully.');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     * (This method is generally not needed when using modals where data is pre-filled by JS)
-     *
-     * @param  \App\Models\Address  $address
-     * @return \Illuminate\Http\Response|\Illuminate\Http\JsonResponse
-     */
-    public function edit(Address $address)
-    {
-        // In a modal-based UI, this method typically doesn't return a view.
-        // Data is pre-filled by client-side JS using data-attributes from the list.
-        // If you were to use this as an API endpoint to fetch data for editing:
-        // Ensure the authenticated user owns this address
-        if (Auth::id() !== $address->user_id) {
-            abort(403, 'Unauthorized action.');
-        }
-        // return response()->json($address); // Uncomment if you need an API endpoint
-        abort(404); // If not used as an API, it's safer to block direct access.
+        return redirect()->route('addresses')->with('success', 'Alamat berhasil ditambahkan.');
     }
 
     /**
@@ -151,7 +117,7 @@ class AddressesController extends Controller
         $request->session()->forget('show_edit_modal_id');
         $request->session()->forget('old_edit_data');
 
-        return redirect()->route('addresses')->with('success', 'Address updated successfully.');
+        return redirect()->route('addresses')->with('success', 'Alamat berhasil diubah.');
     }
 
     /**
@@ -180,7 +146,7 @@ class AddressesController extends Controller
 
         $address->delete();
 
-        return redirect()->route('addresses')->with('success', 'Address deleted successfully.');
+        return redirect()->route('addresses')->with('success', 'Alamat berhasil dihapus.');
     }
 
     /**
@@ -201,7 +167,7 @@ class AddressesController extends Controller
         // Set the chosen address as default
         $address->update(['is_default' => true]);
 
-        return redirect()->route('addresses')->with('success', 'Address set as default.');
+        return redirect()->route('addresses')->with('success', 'Alamat berhasil diatur sebagai default.');
     }
     
     public function searchRajaOngkirId(string $search){

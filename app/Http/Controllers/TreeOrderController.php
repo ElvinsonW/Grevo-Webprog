@@ -10,13 +10,6 @@ use App\Models\User;
 
 class TreeOrderController extends Controller
 {
-    public function index()
-    {
-        $user = Auth::user();
-        $treeOrders = $user->treeOrders()->with('tree')->latest()->get();
-        return response()->json($treeOrders); // Mengembalikan JSON, bukan view
-    }
-
     public function store(Request $request)
     {
         $request->validate([

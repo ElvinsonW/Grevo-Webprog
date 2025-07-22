@@ -22,9 +22,10 @@
         rel="stylesheet">
 </head>
 
-<body class="bg-yellow-2 font-quicksand">
+<body class="bg-yellow-2 font-quicksand relative min-h-[100vh] pb-[10vw]">
     <x-navbar></x-navbar>
     {{ $slot }}
+    <x-footer></x-footer>   
 
     <script>
         const closeButtons = document.querySelectorAll('.close-button');
@@ -38,11 +39,11 @@
 
         const alerts = document.querySelectorAll('.alert');
 
-        alerts.forEach((alert) => {
-            setTimeout(() => {
-                alert.style.display = "none";
-            }, 3000); 
-        });
+        // alerts.forEach((alert) => {
+        //     setTimeout(() => {
+        //         alert.style.display = "none";
+        //     }, 3000); 
+        // });
     </script>
 </body>
 

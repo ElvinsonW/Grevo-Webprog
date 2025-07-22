@@ -14,28 +14,29 @@ class ProductCategorySeeder extends Seeder
     public function run(): void
     {
         ProductCategory::create([
-            "name" => "Home & Living",
-            "slug" => "home-living"
+            "name" => "Rumah & Hunian",
+            "slug" => "rumah-hunian"
         ]);
 
         ProductCategory::create([
-            "name" => "Cleaning Supplies",
-            "slug" => "cleaning-supplies"
+            "name" => "Perlengkapan Kebersihan",
+            "slug" => "perlengkapan-kebersihan"
         ]);
 
         ProductCategory::create([
-            "name" => "Health & Beauty",
-            "slug" => "health-beauty"
+            "name" => "Kesehatan & Kecantikan",
+            "slug" => "kesehatan-kecantikan"
         ]);
 
         ProductCategory::create([
-            "name" => "Kitchen",
-            "slug" => "kitchen"
+            "name" => "Dapur",
+            "slug" => "dapur"
         ]);
 
         ProductCategory::create([
-            "name" => "Accessories",
-            "slug" => "accessories"
+            "name" => "Aksesoris",
+            "slug" => "aksesoris"
         ]);
+
     }
 }

@@ -16,9 +16,10 @@ class CheckUserRole
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(!Auth::check()){
-            return redirect('/')->with('roleError', 'Only User Can Do This Actvity');
+        if(!Auth::check() ){
+            return redirect('/')->with('roleError', 'Hanya user yang dapat mengakses aktivitas ini!');
         }
         return $next($request);
     }
 }
+

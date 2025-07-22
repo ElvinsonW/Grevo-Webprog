@@ -1,17 +1,17 @@
 <x-layout>
     <div class="mx-[5vw] my-[2vw]">
-        <h1 class="text-[2vw] font-bold mb-[1.5vw]">Product Review</h1>
+        <h1 class="text-[2vw] font-bold mb-[1.5vw]">Ulasan Produk</h1>
         <div class="flex items-center h-fit pb-[1.5vw] border-0 border-b-1 border-b-gray-300">
             <div class="h-[9vw] flex flex-col justify-center border-0 border-r-2 border-r-gray-300 pr-[3vw]">
-                <h2 class="text-[1.3vw] font-bold">Total Reviews</h2>
+                <h2 class="text-[1.3vw] font-bold">Total Ulasan</h2>
                 <h3 class="text-[2.5vw] font-bold">
                     {{ $totalReview }}
                 </h3>
-                <p class="text-[1vw] font-bold text-gray-400">Product : {{ $reviews->first()->product->name }}</p>
+                <p class="text-[1vw] font-bold text-gray-400">Produk : {{ $reviews->first()->product->name }}</p>
             </div>
 
             <div class="h-[9vw] flex flex-col justify-center border-0 border-r-2 border-r-gray-300 px-[3vw]">
-                <h2 class="text-[1.3vw] font-bold">Average Ratings</h2>
+                <h2 class="text-[1.3vw] font-bold">Rata-Rata Ratings</h2>
                 <div class="flex gap-[1vw] items-center">
                     <h3 class="text-[2.5vw] font-bold">{{ $avgRate }}</h3>
                     @php
@@ -32,7 +32,7 @@
                         @endfor
                     </div>
                 </div>
-                <p class="text-[1vw] font-bold text-gray-400">Product : {{ $reviews->first()->product->name }}</p>
+                <p class="text-[1vw] font-bold text-gray-400">Produk : {{ $reviews->first()->product->name }}</p>
             </div>
 
             <div class="flex flex-col px-[3vw]">

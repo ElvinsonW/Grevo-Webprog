@@ -32,7 +32,7 @@
                         class="fa-regular fa-user text-[1vw] w-[1.2vw] {{ Request::routeIs('profile') || Request::routeIs('addresses') ? 'text-[var(--color-green-3)]' : 'text-gray-700' }}"></i>
                     <p
                         class="text-[1vw] font-bold {{ Request::routeIs('profile') || Request::routeIs('addresses') ? 'text-[var(--color-green-3)]' : 'text-gray-700' }}">
-                        My Account</p>
+                        Akun Saya</p>
                 </div>
                 {{-- Ikon panah dropdown --}}
                 <i class="fa-solid fa-chevron-down text-[1vw] transition-transform duration-400 rotate-180"
@@ -47,7 +47,7 @@
                 class="text-[1vw] font-bold {{ Request::routeIs('profile') ? 'text-[var(--color-green-3)]' : 'text-gray-700' }}">Profile</a>
             {{-- Link Addresses (active class berdasarkan route) --}}
             <a href="{{ route('addresses') }}"
-                class="text-[1vw] font-bold {{ Request::routeIs('addresses') ? 'text-[var(--color-green-3)]' : 'text-gray-700' }}">Addresses</a>
+                class="text-[1vw] font-bold {{ Request::routeIs('addresses') ? 'text-[var(--color-green-3)]' : 'text-gray-700' }}">Alamat</a>
         </div>
 
         {{-- Order Link --}}
@@ -56,7 +56,7 @@
                 class="fa-solid fa-box-open text-[1vw] w-[1.2vw] {{ Request::routeIs('orders') ? 'text-[var(--color-green-3)]' : 'text-gray-700' }}"></i>
             <p
                 class="text-[1vw] font-bold {{ Request::routeIs('orders') ? 'text-[var(--color-green-3)]' : 'text-gray-700' }}">
-                Order</p>
+                Pesanan</p>
         </a>
 
         {{-- Review Link --}}
@@ -65,7 +65,7 @@
                 class="fa-regular fa-comment-dots text-[1vw] w-[1.2vw] {{ Request::routeIs('profile.reviews') ? 'text-[var(--color-green-3)]' : 'text-gray-700' }}"></i>
             <p
                 class="text-[1vw] font-bold {{ Request::routeIs('profile.reviews') ? 'text-[var(--color-green-3)]' : 'text-gray-700' }}">
-                Review</p>
+                Ulasan</p>
         </a>
 
          <a href="{{ route('profile.tree-order') }}" class="flex items-center gap-[0.5vw]">
@@ -73,7 +73,7 @@
                 class="fa-solid fa-tree text-[1vw] w-[1.2vw] {{ Request::routeIs('profile.tree-order') ? 'text-[var(--color-green-3)]' : 'text-gray-700' }}"></i>
             <p
                 class="text-[1vw] font-bold {{ Request::routeIs('profile.tree-order') ? 'text-[var(--color-green-3)]' : 'text-gray-700' }}">
-                Tree Order</p>
+                Pesanan Pohon</p>
         </a>
 
         {{-- Logout Link (hanya tampil jika user login) atau Login Link (jika tidak login) --}}

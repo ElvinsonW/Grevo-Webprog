@@ -19,16 +19,14 @@ class OrderListController extends Controller
             'cancelled' => ['ORDER CANCELLED'],
         ];
 
-        // Default ke 'new' jika parameter tidak ada
         $statusKey = $request->get('status', 'new');
 
-        // Pastikan mapping tersedia
         $mappedStatuses = $statusMap[$statusKey] ?? [];
 
         $query = Order::with([
             'user',
             'items.variant.product',
-            'latestStatus' // Relasi tunggal untuk status terbaru
+            'latestStatus' 
         ])
         ->whereHas('latestStatus', function ($q) use ($mappedStatuses) {
             $q->whereIn('status', $mappedStatuses);

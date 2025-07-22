@@ -27,7 +27,7 @@ class UserController extends Controller
             'terms' => ['accepted'],
             'role' => ['prohibited']
         ], [
-            'password.regex' => 'Password must include at least one uppercase letter, one lowercase letter, and one number.',
+            'password.regex' => 'Password harus minimal memiliki satu huruf kapital, satu huruf kecil, dan satu angka.',
         ]);
 
         $validatedData['password'] = Hash::make($validatedData['password']);
@@ -35,7 +35,7 @@ class UserController extends Controller
 
         User::create($validatedData);
 
-        return redirect('/login')->with('registerSuccess', 'Registration Success, Please Login!');
+        return redirect('/login')->with('registerSuccess', 'Registrasi berhasil, Tolong Login!');
     }
 
     public function loginForm(){
@@ -52,14 +52,14 @@ class UserController extends Controller
             $request->session()->regenerate();
 
             if(auth()->user()->role == "admin"){
-                return redirect('/admin/dashboard')->with('loginSuccess', 'Login successfully');
+                return redirect('/admin/dashboard')->with('loginSuccess', 'Login berhasil');
             } else {
-                return redirect('/products')->with('loginSuccess', 'Login successfully!');
+                return redirect('/products')->with('loginSuccess', 'Login berhasil!');
             }
         }
 
         return redirect('/login')
-                ->with('loginError', 'The provided username and password do not match our records.')
+                ->with('loginError', 'Username dan password tidak cocok.')
                 ->withInput();
     }
 
@@ -103,9 +103,9 @@ class UserController extends Controller
             }
 
             $user->update(Arr::except($validatedData, ['role']));
-            return redirect('/profile')->with('updateSuccess', 'Profile updated successfully');
+            return redirect('/profile')->with('updateSuccess', 'Profile berhasil diubah!');
         }
-        return redirect('/profile')->with('updateError', 'There is no user with this username');
+        return redirect('/profile')->with('updateError', 'Tidak ada user dengan username tersebut!');
     }
 
     /**
@@ -119,6 +119,6 @@ class UserController extends Controller
     
         $request->session()->regenerateToken();
     
-        return redirect('/login')->with("logoutSuccess", "Logout Successfully!");
+        return redirect('/login')->with("logoutSuccess", "Logout berhasil!");
     }
 }
