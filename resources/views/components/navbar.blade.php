@@ -33,7 +33,7 @@
         @auth
             <a href="/profile" class="flex items-center gap-[0.5vw]">
                 <i class="fa-solid fa-user text-[2vw] text-green-3"></i>
-                <p class="font-bold text-green-3">{{ auth()->user()->username }}</p>    
+                <p class="font-bold text-green-3">{{ Str::limit(auth()->user()->username, 10) }}</p>    
             </a>
         @else
             <button class="">

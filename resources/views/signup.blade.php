@@ -111,7 +111,7 @@
                         </svg>
                     </div>
                 </div>
-                @error('phone_number')
+                @error('gender')
                     <p id="filled_error_help" class="mt-2 text-xs text-red-600 dark:text-red-400">
                         {{ $message }}
                     </p>

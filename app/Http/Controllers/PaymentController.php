@@ -120,7 +120,7 @@ class PaymentController extends Controller
                     'order_id' => $order->id,
                     'variant_id' => $cart->product_variant->id,
                     'quantity' => $cart->amount,
-                    'price' => $cart->total
+                    'price' => $cart->amount * $cart->product_variant->price
                 ]);
                 $totalOrder += $cart->total;
 
