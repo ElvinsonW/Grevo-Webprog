@@ -89,7 +89,7 @@
                         </div>
                         <p class="text-sm text-gray-600 mb-2">Available: Many</p>
                     </div>
-                    <button type="submit" class="cursor-pointer bg-orange-1 text-white font-bold w-[20vw] h-[3.5vw] rounded">ADOPT TREE</button>
+                    <button type="submit" class="cursor-pointer bg-orange-1 text-white font-bold w-[20vw] h-[3.5vw] rounded">Tukar Pohon</button>
                 </div>
             </form>
         </div>
@@ -100,7 +100,7 @@
                     <div class="flex flex-col w-fit" id="details-tab">
                         <button class="cursor-pointer text-green-2 text-[1.3vw] font-semibold"
                             onclick="setActiveTab('details')">
-                            Tree Description
+                            Deskripsi Pohon
                         </button>
                         <hr class="mt-2 border-b-2 border-green-2 rounded-full w-full" id="details-underline">
                     </div>
@@ -108,7 +108,7 @@
                     <div class="flex flex-col w-fit ml-10" id="material-tab">
                         <button class="cursor-pointer text-[#7B8C7F] text-[1.3vw] font-normal"
                             onclick="setActiveTab('material')">
-                            Tree Care
+                            Perawatan Pohon
                         </button>
                         <hr class="hidden mt-2 border-b-2 border-[#3E6137] rounded-full w-full"
                             id="material-underline">
@@ -117,7 +117,7 @@
                     <div class="flex flex-col w-fit ml-10" id="process-tab">
                         <button class="cursor-pointer text-[#7B8C7F] text-[1.3vw] font-normal"
                             onclick="setActiveTab('process')">
-                            Organization Details
+                            Informasi Organisasi
                         </button>
                         <hr class="hidden mt-2 border-b-2 border-[#3E6137] rounded-full w-full"
                             id="process-underline">
@@ -127,7 +127,7 @@
                 <div class="p-5 pl-8">
                     <div id="details-content" class="flex flex-col gap-[1vw]">
                         <div>
-                            <h1 class="font-bold text-green-2 text-[1.3vw] mb-[0.5vw]">Tree Description</h1>
+                            <h1 class="font-bold text-green-2 text-[1.3vw] mb-[0.5vw]">Deskripsi Pohon</h1>
                             <p class="text-[1.2vw] text-gray-700">
                                 {{ $tree->treedesc }}
                             </p>
@@ -136,15 +136,15 @@
 
                     <div id="material-content" class="hidden space-y-3">
                         <div>
-                            <h1 class="font-bold text-green-2 text-[1.3vw] mb-[0.5vw]">Tree Care</h1>
+                            <h1 class="font-bold text-green-2 text-[1.3vw] mb-[0.5vw]">Perawatan Pohon</h1>
                             <p class="text-[1.2vw] text-gray-700">
-                                {{ $tree->treecare ?? 'Information about tree care will be available here.' }}
+                                {{ $tree->treecare ?? 'Informasi mengenai perawatan tanaman akan ditampilkan disini.' }}
                             </p>
                         </div>
                     </div>
 
                     <div id="process-content" class="hidden space-y-3">
-                        <h1 class="font-bold text-green-2 text-[1.3vw]">Organization Details</h1>
+                        <h1 class="font-bold text-green-2 text-[1.3vw]">Informasi Organisasi</h1>
                         <p class="text-[1.2vw] text-gray-700">
                             @if ($tree->organization)
                                 <strong>Organization Name:</strong> {{ $tree->organization->organization_name }}<br>
@@ -152,14 +152,14 @@
                                 <strong>Description:</strong> {{ $tree->organization->brief_description }}<br>
                                 <strong>Contact:</strong> {{ $tree->organization->official_contact_info }}
                             @else
-                                No organization details available for this tree.
+                                Tidak ada informasi organisasi untuk pohon ini.
                             @endif
                         </p>
                         {{-- ADD THIS "SEE DETAILS" BUTTON --}}
                         @if ($tree->organization)
                             <a href="{{ route('treecatalogue.organization-detail', ['organizationName' => $tree->organization->organization_name]) }}"
                                class="inline-block bg-orange-1 text-white font-bold px-4 py-2 rounded mt-4 hover:bg-orange-2 transition-colors duration-200">
-                                See Details
+                                Lihat lebih banyak...
                             </a>
                         @endif
                     </div>
@@ -174,7 +174,7 @@
     @if (session('success'))
         <div 
             class="alert absolute z-40 flex items-center justify-center p-4 mb-4 w-[30vw] text-green-800 rounded-lg bg-green-50" 
-            style="top: 10%; left: 50%; transform: translate(-50%, -50%);" 
+            style="top: 4%; left: 50%; transform: translate(-50%, -50%);" 
             role="alert">
             <svg class="shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
@@ -194,7 +194,7 @@
 
     @if (session('error'))
         <div class="alert absolute z-40 flex items-center p-4 mb-4 w-[30vw] text-red-800 rounded-lg bg-red-50 " 
-            style="top: 10%; left: 50%; transform: translate(-50%, -50%);" 
+            style="top: 4%; left: 50%; transform: translate(-50%, -50%);" 
             role="alert">
             <svg class="shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>

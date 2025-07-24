@@ -50,9 +50,17 @@
                         $base = $last ?: 1; // Hindari divide by zero
                         $growth = round(($diff / $base) * 100, 2);
                         $status = $growth >= 0 ? 'increase' : 'decrease';
-
                         $label = Str::title(str_replace('_', ' ', $key));
-
+                        
+                        if ($label == "Total Orders") {
+                            $label = "Jumlah Pesanan";
+                        } else if($label == "Sold Items"){
+                            $label = "Produk Terjual";
+                        } else if($label == "net_revenue"){
+                            $label = "Pendapatan Bersih";
+                        } else {
+                            $label = "Total Penjualan";
+                        }
                     @endphp
 
                     <div class="bg-[#DDECD5] p-4 rounded-lg shadow">
@@ -80,9 +88,9 @@
 
                         </div>
                         @if ($last == 0)
-                            <p class="text-xs text-gray-500">new this month</p>
+                            <p class="text-xs text-gray-500">baru bulan ini</p>
                         @else
-                            <p class="text-xs text-gray-500">{{ abs($growth) }}% {{ $status }} from last month
+                            <p class="text-xs text-gray-500">{{ abs($growth) }}% {{ $status }} dari bulan lalu
                             </p>
                         @endif
                     </div>

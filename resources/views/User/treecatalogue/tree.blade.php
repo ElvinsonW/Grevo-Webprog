@@ -69,8 +69,10 @@
                             class="flex flex-col gap-3 p-[1vw] bg-green-2 w-[15vw] h-[21vw] product-card"
                             style="box-shadow: 0px 4px 4px 2px rgba(0,0,0,0.25);">
                             <div class="relative w-[13vw] h-[13vw]">
-                                <img src="{{ asset('storage/' . ($product->treephoto ?? 'images/product-placeholder.jpg')) }}"
-                                    alt="{{ $product->treename }}" class="w-full h-full object-cover">
+                                <div class="w-full h-full overflow-hidden">
+                                    <img src="{{ asset('storage/' . ($product->treephoto ?? 'images/product-placeholder.jpg')) }}"
+                                        alt="{{ $product->treename }}" class="w-full h-full object-cover transition-transform duration-500 hover:scale-150">
+                                </div>
                                 <p class="absolute bottom-0 right-0 text-xs text-white font-bold px-3 py-1 bg-orange-1">
                                     PTS {{ number_format($product->treeprice) }}</p>
                             </div>

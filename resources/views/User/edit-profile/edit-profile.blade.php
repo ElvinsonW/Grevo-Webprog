@@ -6,12 +6,6 @@
 
         {{-- Right Content: Profile Details --}}
         <div class="flex flex-col ml-[2vw] w-full">
-            {{-- Filter Bar --}}
-            <div class="flex border-b border-gray-300 mb-[3vw] text-[1.2vw]">
-                <a href="{{ route('profile') }}" class="py-[0.75vw] px-[2vw] text-[var(--color-green-3)] font-bold border-b-[0.2vw] border-[var(--color-green-3)] -mb-px">Profile</a>
-                <a href="{{ route('addresses') }}" class="py-[0.75vw] px-[2vw] text-gray-600 hover:text-[var(--color-green-3)] border-l border-gray-300">Addresses</a>
-            </div>
-
             <h1 class="text-[2vw] font-bold mb-[1vw]">Edit Profile</h1>
 
             <form action="/user/{{ Auth::user()->username }}" method="POST" enctype="multipart/form-data" class="flex flex-col gap-[3vw]">

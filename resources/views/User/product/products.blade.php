@@ -45,12 +45,12 @@
                             @if (!$hasCategoryQuery)
                                 <i class="fa-solid fa-bag-shopping"></i>
                                 <a href="{{ url('products') . '?' . http_build_query($queryParams) }}"
-                                    class="font-bold">All Product</a>
+                                    class="font-bold">Semua Produk</a>
                             @else
                                 @php
                                     unset($queryParams['category']);
                                 @endphp
-                                <a href="{{ url('products') . '?' . http_build_query($queryParams) }}">All Product</a>
+                                <a href="{{ url('products') . '?' . http_build_query($queryParams) }}">Semua produk</a>
                             @endif
                         </div>
                         @foreach ($categories as $category)

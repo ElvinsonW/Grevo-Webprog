@@ -44,7 +44,7 @@
         <div class="flex flex-col gap-[0.5vw] ml-[1.7vw] mb-[0.25vw]" id="profile-dropdown">
             {{-- Link Profile (active class berdasarkan route) --}}
             <a href="{{ route('profile') }}"
-                class="text-[1vw] font-bold {{ Request::routeIs('profile') ? 'text-[var(--color-green-3)]' : 'text-gray-700' }}">Profile</a>
+                class="text-[1vw] font-bold {{ Request::routeIs('profile') ? 'text-[var(--color-green-3)]' : 'text-gray-700' }}">Profil</a>
             {{-- Link Addresses (active class berdasarkan route) --}}
             <a href="{{ route('addresses') }}"
                 class="text-[1vw] font-bold {{ Request::routeIs('addresses') ? 'text-[var(--color-green-3)]' : 'text-gray-700' }}">Alamat</a>

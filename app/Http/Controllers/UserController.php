@@ -96,7 +96,7 @@ class UserController extends Controller
             $validatedData = $request->validate($rules);
             
             if($request->image){
-                if($user->image != 'profile-image/elvinson.jpg'){
+                if($user->image && $user->image != 'profile-image/elvinson.jpg'){
                     Storage::delete($user->image);
                 }
                 $validatedData['image'] = $request->image->store('profile-image');

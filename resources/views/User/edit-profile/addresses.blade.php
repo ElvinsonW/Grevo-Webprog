@@ -4,13 +4,6 @@
         <x-profilebar :user="$user" />
 
         <div class="flex flex-col ml-[2vw] w-full">
-            {{-- Filter Bar --}}
-            <div class="flex border-b border-gray-300 mb-[3vw] text-[1.2vw]">
-                <a href="{{ route('profile') }}"
-                    class="py-[0.75vw] px-[2vw] text-gray-600 hover:text-[var(--color-green-3)] border-r border-gray-300">Profile</a>
-                <a href="{{ route('addresses') }}"
-                    class="py-[0.75vw] px-[2vw] text-[var(--color-green-3)] font-bold border-b-[0.2vw] border-[var(--color-green-3)] -mb-px">Addresses</a>
-            </div>
 
             {{-- Header with Add New Address Button --}}
             <div class="flex justify-between items-center mb-[3vw]">
