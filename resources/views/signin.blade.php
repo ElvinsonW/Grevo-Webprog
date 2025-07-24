@@ -61,8 +61,8 @@
 
     {{-- Card utama untuk form Sign In --}}
     <div class="w-full max-w-md bg-white rounded-lg shadow-lg p-10 text-center relative z-20">
-        <h2 class="text-2xl text-gray-800 mb-2 font-semibold">Sign in to GREVO</h2>
-        <p class="text-sm text-gray-600 mb-8">Quick & Simple way to your online shopping</p>
+        <h2 class="text-2xl text-gray-800 mb-2 font-semibold">Sign in ke GREVO</h2>
+        <p class="text-sm text-gray-600 mb-8">Cara Cepat dan Mudah untuk Berbelanja Online</p>
 
         {{-- Pesan sukses (misalnya dari redirect setelah register) --}}
         @if (session('success'))
@@ -77,8 +77,7 @@
 
             {{-- Field EMAIL ADDRESS --}}
             <div class="mb-5 text-left">
-                <label for="email" class="block text-xs text-gray-700 uppercase font-semibold mb-1">EMAIL
-                    ADDRESS</label>
+                <label for="email" class="block text-xs text-gray-700 uppercase font-semibold mb-1">ALAMAT EMAIL</label>
                 <input type="email" id="email" name="email" value="{{ old('email') }}"
                     placeholder="ivy@stay.com" required autofocus
                     class="w-full px-4 py-3 border border-gray-300 rounded-md text-base focus:outline-none focus:ring-2 focus:ring-[var(--color-green-3)]"
@@ -114,9 +113,9 @@
                 <div class="flex items-center">
                     <input type="checkbox" name="remember" id="remember" class="mr-2 min-w-4 min-h-4 cursor-pointer"
                         style="accent-color: var(--color-green-3);">
-                    <label for="remember" class="text-gray-700">Remember me</label>
+                    <label for="remember" class="text-gray-700">Ingat Data</label>
                 </div>
-                <a href="#" class="text-gray-500 hover:underline" style="color: var(--color-green-3);">Forgot
+                <a href="#" class="text-gray-500 hover:underline" style="color: var(--color-green-3);">Lupa
                     Password?</a>
             </div> --}}
 
@@ -130,13 +129,13 @@
             {{-- Tombol SIGN IN --}}
             <button type="submit"
                 class="w-full py-3 text-white rounded-md text-base font-semibold cursor-pointer hover:bg-green-600 transition-colors duration-300"
-                style="background-color: var(--color-green-2);">SIGN IN</button>
+                style="background-color: var(--color-green-2);">MASUK</button>
         </form>
     </div>
 
     {{-- Copyright footer --}}
     <div class="absolute bottom-8 text-xs text-gray-500">
-        © 2025 All Rights Reserved. GREVO
+        © 2025 Hak Cipta Dilindungi. GREVO
     </div>
 
     {{-- JeEs nya toggle password mata-mata --}}

@@ -223,7 +223,7 @@
 
     {{-- Copyright footer --}}
     <div class="absolute bottom-8 text-xs text-gray-500">
-        © 2025 All Rights Reserved. GREVO
+        © 2025 Hak Cipta Dilindungi. GREVO
     </div>
 
     {{-- JeEs nya mata-mata --}}

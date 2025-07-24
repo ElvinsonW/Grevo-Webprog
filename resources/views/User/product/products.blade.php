@@ -26,13 +26,13 @@
         @endif
         <div
             class="w-fit px-[7vw] py-[1.5vw] rounded-[1vw] bg-yellow-2 {{ !request()->query() ? 'mt-[-6vw]' : '' }} mb-[3vw]">
-            <h1 class="text-[5vw] font-bold text-green-2">GREVO CATALOGUE</h1>
+            <h1 class="text-[5vw] font-bold text-green-2">KATALOG GREVO</h1>
         </div>
         <div class="flex w-full px-[5vw] gap-[6vw]">
             <div class="flex flex-col gap-[2vw]">
                 <div
                     class="flex flex-col bg-green-1 w-[18vw] px-[1.5vw] py-[1.5vw] rounded-[0.5vw] text-green-2 shadow-lg">
-                    <h2 class="text-[2vw] font-bold ">CATEGORY</h2>
+                    <h2 class="text-[2vw] font-bold ">KATEGORI</h2>
                     <div class="w-full border-b-2 border-green-2 mt-[0.5vw] mb-[1vw]"></div>
                     <div class="flex flex-col gap-[0.5vw]">
                         @php
@@ -118,7 +118,7 @@
                                 class="px-[1vw] py-[0.5vw] rounded-[0.5vw] border border-green-2 focus:outline-none"
                                 placeholder="Minimum Rating">
                             <button
-                                class="w-[50%] h-[3vw] rounded-[0.5vw] bg-green-2 font-bold text-white mt-[1vw]">Apply</button>
+                                class="w-[50%] h-[3vw] rounded-[0.5vw] bg-green-2 font-bold text-white mt-[1vw]">Terapkan</button>
                         </form>
                     </div>
                 </div>

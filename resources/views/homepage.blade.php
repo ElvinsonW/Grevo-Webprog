@@ -24,8 +24,8 @@
 
         <div class="flex flex-col items-center w-full">
             <div class="relative flex justify-center w-[60vw] mb-[3vw]">
-                <h1 class="relative z-10 text-[7vw] font-bold text-green-3">New Collection</h1>
-                <h1 class="absolute z-0 top-[0.2vw] left-[5.5vw] text-[7vw] font-bold text-black">New Collection</h1>
+                <h1 class="relative z-10 text-[7vw] font-bold text-green-3">Koleksi Baru</h1>
+                <h1 class="absolute z-0 top-[0.2vw] left-[9.5vw] text-[7vw] font-bold text-black">Koleksi Baru</h1>
             </div>
 
             <div class="flex flex-col items-center w-full h-fit px-[7.5vw] py-[5vw] gap-[4vw] bg-green-2">
@@ -37,7 +37,7 @@
 
                 <button class="cursor-pointer font-bold px-[3vw] py-[0.5vw] text-[1.5vw] text-yellow-1 border border-yellow-1 hover:border-0 hover:bg-yellow-1 hover:text-green-2">
                     <a href="/products">
-                        See More
+                        Lihat Selengkapnya
                         <i class="fa-solid fa-arrow-right"></i>
                     </a>
                 </button>
@@ -48,8 +48,8 @@
         <div class="relative flex gap-[4vw] px-[10vw] py-[7vw] mb-[3vw]">
             <img src="{{ asset('images/home2.jpg') }}" alt="home2" class="w-[35vw] ">
             <div class="flex flex-col gap-[2vw] w-[33vw]">
-                <h1 class="text-[4.5vw] font-poppins leading-none font-bold text-green-2">BEST ECO - FRIENDLY EVER</h1>
-                <p class="text-green-2 text-justify">Born in 2025 in Sukaraja, West Java, Indonesia, Grevo Marketplace emerged from a simple yet powerful idea: to make sustainable living accessible to everyone. We envisioned a platform where individuals could easily discover and support businesses offering environmentally friendly products. Our commitment goes beyond just facilitating transactions; we aim to cultivate a community that values our planet and embraces conscious consumption.</p>
+                <h1 class="text-[4.5vw] font-poppins leading-none font-bold text-green-2">PRODUK RAMAH LINGKUNGAN</h1>
+                <p class="text-green-2 text-justify">Didirikan pada tahun 2025 di Sukaraja, Jawa Barat, Indonesia, Grevo Marketplace lahir dari ide sederhana namun kuat: menjadikan gaya hidup berkelanjutan dapat diakses oleh semua orang. Kami membayangkan sebuah platform di mana individu dapat dengan mudah menemukan dan mendukung bisnis yang menawarkan produk ramah lingkungan. Komitmen kami tidak hanya sebatas memfasilitasi transaksi; kami berupaya membangun komunitas yang menghargai planet kita dan mengadopsi konsumsi yang sadar.</p>
             </div>
 
             <div class="absolute bottom-[5vw] right-[13vw] flex w-[45vw] py-[1vw] bg-green-3 text-white opacity-[80%]">
@@ -70,11 +70,11 @@
 
         <div class="flex gap-[5vw]  pl-[7.5vw] py-[5vw] bg-yellow-2 mb-[3vw]">
             <div class="flex flex-col w-[35vw] gap-[2vw]">
-                <h1 class="text-[4vw] leading-tight font-bold text-green-2">BEST SELLER PRODUCT</h1>
-                <p class="text-green-2">Don't miss out! Discover our most sought-after, eco-friendly best seller collection right now on the GREVO marketplace. From daily essentials to sustainable lifestyle items, everything you need is here.</p>
+                <h1 class="text-[4vw] leading-tight font-bold text-green-2">PRODUK TERLARIS</h1>
+                <p class="text-green-2">Jangan sampai ketinggalan! Temukan koleksi best seller ramah lingkungan yang paling diminati di GREVO marketplace sekarang juga. Dari barang-barang kebutuhan sehari-hari hingga produk gaya hidup berkelanjutan, semua yang Anda butuhkan ada di sini.</p>
                 <button class="cursor-pointer w-fit font-bold px-[3vw] py-[0.5vw] text-[1.5vw] text-orange-1 border border-orange-1 hover:border-0 hover:bg-orange-1 hover:text-white mt-[1vw]">
                     <a href="/products">
-                        See More
+                        Lihat Selengkapnya
                         <i class="fa-solid fa-arrow-right"></i>
                     </a>
                 </button>
@@ -111,16 +111,16 @@
         </div>
 
         <div class="flex flex-col items-center gap-[3vw]">
-            <h1 class="text-[4.5vw] font-bold text-green-2">ECO GREEN ACTIVITY</h1>
+            <h1 class="text-[4.5vw] font-bold text-green-2">AKTIVITAS RAMAH LINGKUNGAN</h1>
             <div class="flex items-center gap-[7vw] w-full bg-green-2 px-[7.5vw] py-[5vw]">
                 <div class="flex flex-col w-[35vw] gap-[1vw]">
-                    <h2 class="text-yellow-1 text-[4.5vw] leading-tight font-bold mb-[1vw]">Change Points to adopt a Tree!</h2>
+                    <h2 class="text-yellow-1 text-[4.5vw] leading-tight font-bold mb-[1vw]">Ubah Poin untuk mengadopsi Pohon!</h2>
                     <p class="text-white mb-[1.5vw]">
-                        One Click, One Tree Planted! <br>
-                        At Grevo, every purchase you make doesn't just mean getting the best eco-friendly products, but also participating in our #GrevoReforestation mission! We believe nature is our greatest asset. Therefore, a portion of your purchase will be allocated to reforestation efforts, replanting life in areas that need it most.</p>
+                        Satu Klik, Satu Pohon Ditanam! <br>
+                        Di Grevo, setiap pembelian yang Anda lakukan tidak hanya berarti mendapatkan produk ramah lingkungan terbaik, tetapi juga ikut serta dalam misi #GrevoReforestation kami! Kami percaya alam adalah aset terbesar kita. Oleh karena itu, sebagian dari pembelian Anda akan dialokasikan untuk upaya reboisasi, menanam kembali kehidupan di daerah-daerah yang paling membutuhkannya.</p>
                     <button class="font-bold w-fit px-[3vw] py-[0.5vw] text-[1.5vw] text-yellow-1 border border-yellow-1 hover:border-0 hover:bg-yellow-1 hover:text-green-2">
                         <a href="/trees">
-                            See More
+                            Lihat Selengkapnya
                             <i class="fa-solid fa-arrow-right"></i>
                         </a>
                     </button>
