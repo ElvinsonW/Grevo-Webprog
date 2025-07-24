@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
             ProductSeeder::class,
             OrganizationSeeder::class,
             TreeSeeder::class,
+            TreeOrderSeeder::class,
             BatchSeeder::class,
             AddressSeeder::class,
         ]);

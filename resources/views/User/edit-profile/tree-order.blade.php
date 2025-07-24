@@ -39,7 +39,7 @@
                                 </div>
 
                                 <div class="flex flex-col items-end">
-                                    <p class="text-[1.2vw] text-orange-1 font-bold">{{ number_format($order->tree->treeprice, 0) }} pts</p>
+                                    <p class="text-[1.2vw] text-orange-1 font-bold">{{ number_format($order->total_price, 0) }} pts</p>
                                 </div>
                             </div>
                         </div>
