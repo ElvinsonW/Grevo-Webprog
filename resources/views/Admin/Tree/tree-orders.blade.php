@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product List</title>
+    <title>Daftar Pesanan Pohon</title>
     @vite('resources/css/app.css')
 </head>
 <body class="p-4 bg-yellow-2">
@@ -12,19 +12,19 @@
 
     <div class="w-[93vw] p-15 ml-5 mt-5">
         <div class="flex flex-row justify-between items-center mb-4 ml-[5vw]">
-            <h1 class="text-4xl font-bold">Tree Order List</h1>
+            <h1 class="text-4xl font-bold">Daftar Pesanan Pohon</h1>
         </div>
 
         <div class="bg-white rounded shadow ml-[5vw]">
             <table class="min-w-full text-sm">
                 <thead class="bg-green-100 text-left">
                     <tr>
-                        <th class="px-4 py-3">Order ID</th>
-                        <th class="px-4 py-3">Date</th>
-                        <th class="px-4 py-3">Customer</th>
-                        <th class="px-4 py-3">Item Name</th>
-                        <th class="px-4 py-3">Organization</th>
-                        <th class="px-4 py-3">Qty</th>
+                        <th class="px-4 py-3">ID Pesanan</th>
+                        <th class="px-4 py-3">Tanggal</th>
+                        <th class="px-4 py-3">Pelanggan</th>
+                        <th class="px-4 py-3">Nama Benda</th>
+                        <th class="px-4 py-3">Organisasi</th>
+                        <th class="px-4 py-3">Kuantitas</th>
                         <th class="px-4 py-3">Total</th>
                     </tr>
                 </thead>
@@ -43,7 +43,7 @@
 
                     @if ($treeorders->isEmpty())
                         <tr>
-                            <td colspan="7" class="text-center px-4 py-6 text-gray-500">No tree orders found.</td>
+                            <td colspan="7" class="text-center px-4 py-6 text-gray-500">Tidak ditemukan pesanan pohon.</td>
                         </tr>
                     @endif
                 </tbody>
