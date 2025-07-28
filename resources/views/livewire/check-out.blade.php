@@ -67,10 +67,7 @@
                         </div>
 
                         <div>
-                            <button type="button" wire:click="delete({{ $cart->id }})"
-                                class="w-[2.5vw] h-[2.5vw] rounded-[2vw] bg-red-300">
-                                <i class="fa-solid fa-trash-can text-red-500"></i>
-                            </button>
+                            
                         </div>
                     </div>
                 @endforeach

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('province');
             $table->string('urban_village');
             $table->string('subdistrict');
-            $table->integer('postal_code')->unique();
+            $table->integer('postal_code');
             $table->string('label')->nullable(); // e.g., 'Home', 'Office', 'Toko'
             $table->boolean('is_default')->default(false); // Default value false
             $table->integer('rajaOngkirId');

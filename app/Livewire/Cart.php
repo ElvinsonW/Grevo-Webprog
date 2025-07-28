@@ -72,9 +72,11 @@ class Cart extends Component
 
     public function checkout()
     {
-        return redirect()->route('checkout', [
-            'carts' => $this->selectedProduct
-        ]);
+        if(count($this->selectedProduct) > 0){
+            return redirect()->route('checkout', [
+                'carts' => $this->selectedProduct
+            ]);
+        }
     }
 
     public function updatedSelectAll($value)

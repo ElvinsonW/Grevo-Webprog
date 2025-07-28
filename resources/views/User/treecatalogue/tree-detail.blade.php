@@ -66,13 +66,13 @@
                     </div>
 
                     <div class="flex flex-row items-center justify-between mb-[8px]">
-                        <p class="text-red-600 text-lg font-bold mb-2 text-[1.2vw]">Rp
-                            {{ number_format($tree->treeprice) }}</p>
+                        <p class="text-red-600 text-lg font-bold mb-2 text-[1.2vw]">
+                            {{ number_format($tree->treeprice) }} PTS</p>
                     </div>
                 </div>
 
                 <div class="flex items-center mb-8 ">
-                    <p class="w-[10vw] text-green-2 text-[1.2vw]">Life Expectancy</p>
+                    <p class="w-[10vw] text-green-2 text-[1.2vw]">Perkiraan umur</p>
                     <p class="text-sm text-green-2 text-[1.2vw]">{{ $tree->treelife }} years</p>
                 </div>
 
@@ -87,7 +87,7 @@
                                 class="cursor-pointer bg-yellow-2 border w-8 h-8 flex items-center justify-center rounded-full"
                                 style="border-color: #D2D2B0;" id="addButton">+</button>
                         </div>
-                        <p class="text-sm text-gray-600 mb-2">Available: Many</p>
+                        <p class="text-sm text-gray-600 mb-2">Tersedia: Banyak</p>
                     </div>
                     <button type="submit" class="cursor-pointer bg-orange-1 text-white font-bold w-[20vw] h-[3.5vw] rounded">Tukar Pohon</button>
                 </div>
