@@ -246,7 +246,8 @@
                                         <div class="flex flex-col">
                                             <p class="text-[1.3vw] font-bold">{{ $review->user->name }}</p>
                                             <p class="text-[0.9vw] font-bold text-orange-600">
-                                                {{ $review->created_at->format('F d, Y') }}</p>
+                                                {{ $review->created_at->translatedformat('F d, Y') }}
+                                            </p>
                                         </div>
                                     </div>
 
@@ -282,8 +283,7 @@
                             @endforeach
 
                             <a href="/review/{{ $product->slug }}"
-                                class="cursor-pointer hover:text-green-2 text-[1.5vw] text-center text-orange-1 font-bold mt-[2vw]">See
-                                more review</a>
+                                class="cursor-pointer hover:text-green-2 text-[1.5vw] text-center text-orange-1 font-bold mt-[2vw]">Lihat selengkapnya</a>
                         </div>
                     </div>
                 </div>

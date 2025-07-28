@@ -114,7 +114,7 @@
                         <img src="{{ asset('storage/' . $review->user->image) }}" alt="elvinson" class="w-[4vw] h-[4vw] rounded-[0.5vw] object-cover">
                         <div class="flex flex-col">
                             <p class="text-[1.3vw] font-bold">{{ $review->user->name }}</p>
-                            <p class="text-[0.9vw] font-bold text-orange-600">{{ $review->created_at->format("F d, Y") }}</p>
+                            <p class="text-[0.9vw] font-bold text-orange-600">{{ $review->created_at->translatedformat("F d, Y") }}</p>
                         </div>
                     </div>
                 
