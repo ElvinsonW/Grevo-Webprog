@@ -30,23 +30,23 @@
 
                 <div class="flex flex-col w-full lg:w-2/3 max-h-fit rounded-lg p-8"
                     style="background-color: #FCFCF5; box-shadow: 0px 0px 12.2px 0px rgba(0,0,0,0.06);">
-                    <h2 class="font-bold text-[#3E6137] text-[1.8vw] mb-4">DESCRIPTION GENERAL</h2>
+                    <h2 class="font-bold text-[#3E6137] text-[1.8vw] mb-4">DESKRIPSI UMUM</h2>
                     <p class="text-[1.2vw] text-gray-700 mb-4">{{ $organization->brief_description }}</p>
 
-                    <h2 class="font-bold text-[#3E6137] text-[1.8vw] mb-4">CONTACT INFORMATION</h2>
-                    <p class="text-[1.2vw] text-gray-700"><strong>Address:</strong> {{ $organization->operational_address }}</p>
-                    <p class="text-[1.2vw] text-gray-700"><strong>Coverage Region:</strong> {{ $organization->coverage_region }}</p>
-                    <p class="text-[1.2vw] text-gray-700"><strong>Official Contact:</strong> {{ $organization->official_contact_info }}</p>
+                    <h2 class="font-bold text-[#3E6137] text-[1.8vw] mb-4">INFORMASI KONTAK</h2>
+                    <p class="text-[1.2vw] text-gray-700"><strong>Alamat:</strong> {{ $organization->operational_address }}</p>
+                    <p class="text-[1.2vw] text-gray-700"><strong>Wilayah Cakupan:</strong> {{ $organization->coverage_region }}</p>
+                    <p class="text-[1.2vw] text-gray-700"><strong>Nomor Kontak:</strong> {{ $organization->official_contact_info }}</p>
                     <p class="text-[1.2vw] text-gray-700"><strong>Status:</strong> {{ $organization->organization_status }}</p>
-                    <p class="text-[1.2vw] text-gray-700"><strong>Partner/Sponsor:</strong> {{ $organization->existing_partner_or_sponsor }}</p>
+                    <p class="text-[1.2vw] text-gray-700"><strong>Mitra/Sponsor:</strong> {{ $organization->existing_partner_or_sponsor }}</p>
                 </div>
             </div>
 
             @if(isset($treesFromOrganization) && $treesFromOrganization->count() > 0)
                 <div class="my-[2vw] px-[5vw] w-full">
                     <span class="flex items-center justify-center space-x-[16px] mb-10">
-                        <h3 class="text-[20px] font-bold text-[#3E6137]">EXPLORE</h3>
-                        <h1 class="text-[30px] font-bold text-[#D1764F]">TREES FROM THIS ORGANIZATION</h1>
+                        <h3 class="text-[20px] font-bold text-[#3E6137]">JELAJAHI</h3>
+                        <h1 class="text-[30px] font-bold text-[#D1764F]">POHON DARI ORGANISASI INI</h1>
                     </span>
                     <div class="flex flex-wrap gap-[1.5vw] justify-center">
                         @foreach ($treesFromOrganization as $tree)
@@ -60,8 +60,8 @@
             @if(isset($batches) && $batches->count() > 0)
                 <div class="my-[2vw] px-[5vw] w-full">
                     <span class="flex items-center justify-center space-x-[16px] mb-10">
-                        <h3 class="text-[20px] font-bold text-[#3E6137]">EXPLORE</h3>
-                        <h1 class="text-[30px] font-bold text-[#D1764F]">BATCHES FROM THIS ORGANIZATION</h1>
+                        <h3 class="text-[20px] font-bold text-[#3E6137]">JELAJAHI</h3>
+                        <h1 class="text-[30px] font-bold text-[#D1764F]">BATCH DARI ORGANISASI INI</h1>
                     </span>
                     <div class="flex flex-wrap gap-[2vw] justify-center">
                         @foreach ($batches as $batch)
@@ -71,9 +71,9 @@
                                     <h3 class="font-bold text-[#3E6137] text-[1.2vw]">
                                         Batch {{ $loop->index + 1 }}
                                     </h3>
-                                    <p class="text-gray-600 text-[0.9vw]">Redeem Date: {{ $batch->startdate }} - {{ $batch->enddate }}</p>
-                                    <p class="text-gray-500 text-[0.8vw]">Planting Date: {{ $batch->dateofactivity }}</p>
-                                    <p class="text-gray-500 text-[0.8vw]">Total trees planted: {{ $batch->treesplanted }}</p>
+                                    <p class="text-gray-600 text-[0.9vw]">Tanggal Penukaran: {{ $batch->startdate }} - {{ $batch->enddate }}</p>
+                                    <p class="text-gray-500 text-[0.8vw]">Tanggal Penanaman: {{ $batch->dateofactivity }}</p>
+                                    <p class="text-gray-500 text-[0.8vw]">Total pohon ditanam: {{ $batch->treesplanted }}</p>
                                 </div>
                             </div>
                         @endforeach

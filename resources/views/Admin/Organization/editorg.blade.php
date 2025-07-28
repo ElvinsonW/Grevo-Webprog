@@ -130,7 +130,7 @@
       </div>
 
       <div>
-        <button type="submit" class="bg-green-2 text-white px-4 py-2 rounded-md hover:bg-green-3 font-medium mt-5">Save Changes</button>
+        <button type="submit" class="bg-green-2 text-white px-4 py-2 rounded-md hover:bg-green-3 font-medium mt-5">Simpan Perubahan</button>
       </div>
     </form>
   </div>

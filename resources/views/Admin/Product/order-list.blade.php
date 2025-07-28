@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product List</title>
+    <title>Daftar Pesanan Produk</title>
     @vite('resources/css/app.css')
 </head>
 <body class="p-4 bg-yellow-2">
     @include('components.sidebar')
 
 <div class="w-[93vw] p-6">
-    <h1 class="text-4xl font-bold mb-4 ml-[5vw]">Daftar Produk</h1>
+    <h1 class="text-4xl font-bold mb-4 ml-[5vw]">Daftar Pesanan Produk</h1>
     <div class="flex flex-row justify-between mb-4 ml-[5vw]">
         {{-- Filter --}}
         <form method="GET" action="{{ route('admin.orders.index') }}">

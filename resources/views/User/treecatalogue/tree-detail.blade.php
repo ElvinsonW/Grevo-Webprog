@@ -56,12 +56,12 @@
                         <div class="relative">
                             <button onclick="copyLink()" type="button" class="flex items-center gap-2 cursor-pointer">
                                 <img src="{{ asset('images/share-button.svg') }}" alt="">
-                                <span class="text-[1vw]">Share</span>
+                                <span class="text-[1vw]">Bagikan</span>
                             </button>
 
                             <p id="copyStatus"
                                 class="absolute top-[3vw] right-[-2.5vw] bg-green-50 text-green-3 py-[0.75vw] w-[10vw] flex justify-center hidden">
-                                Link copied!</p>
+                                Link berhasil disalin!</p>
                         </div>
                     </div>
 
@@ -72,8 +72,8 @@
                 </div>
 
                 <div class="flex items-center mb-8 ">
-                    <p class="w-[10vw] text-green-2 text-[1.2vw]">Perkiraan umur</p>
-                    <p class="text-sm text-green-2 text-[1.2vw]">{{ $tree->treelife }} years</p>
+                    <p class="w-[10vw] text-green-2 text-[1.2vw]">Harapan Hidup</p>
+                    <p class="text-sm text-green-2 text-[1.2vw]">{{ $tree->treelife }} tahun</p>
                 </div>
 
                 <div class="flex items-center justify-center">
@@ -147,10 +147,10 @@
                         <h1 class="font-bold text-green-2 text-[1.3vw]">Informasi Organisasi</h1>
                         <p class="text-[1.2vw] text-gray-700">
                             @if ($tree->organization)
-                                <strong>Organization Name:</strong> {{ $tree->organization->organization_name }}<br>
-                                <strong>Address:</strong> {{ $tree->organization->operational_address }}<br>
-                                <strong>Description:</strong> {{ $tree->organization->brief_description }}<br>
-                                <strong>Contact:</strong> {{ $tree->organization->official_contact_info }}
+                                <strong>Nama Organisasi:</strong> {{ $tree->organization->organization_name }}<br>
+                                <strong>Alamat:</strong> {{ $tree->organization->operational_address }}<br>
+                                <strong>Deskripsi:</strong> {{ $tree->organization->brief_description }}<br>
+                                <strong>Kontak:</strong> {{ $tree->organization->official_contact_info }}
                             @else
                                 Tidak ada informasi organisasi untuk pohon ini.
                             @endif
@@ -272,7 +272,7 @@
             navigator.clipboard.writeText(url).then(() => {
                 const status = document.getElementById('copyStatus');
                 status.classList.remove('hidden');
-                status.textContent = 'Link copied!';
+                status.textContent = 'Link disalin!';
 
                 setTimeout(() => {
                     status.classList.add('hidden');
