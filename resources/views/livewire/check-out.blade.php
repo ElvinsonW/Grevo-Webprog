@@ -8,6 +8,7 @@
         <input type="hidden" name="shippingFee" value="{{ $shippingCost }}">
         <input type="hidden" name="name" value="{{ auth()->user()->name }}">
         <input type="hidden" name="email" value="{{ auth()->user()->email }}">
+        <input type="hidden" name="addressId" value="{{ $address->id }}">
 
         <h1 class="text-[2vw] font-bold mb-[3vw]">Check Out</h1>
 
@@ -67,10 +68,7 @@
                         </div>
 
                         <div>
-                            <button type="button" wire:click="delete({{ $cart->id }})"
-                                class="w-[2.5vw] h-[2.5vw] rounded-[2vw] bg-red-300">
-                                <i class="fa-solid fa-trash-can text-red-500"></i>
-                            </button>
+                            
                         </div>
                     </div>
                 @endforeach

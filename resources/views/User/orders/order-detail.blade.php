@@ -340,9 +340,9 @@
                                 <h1 class="text-sm text-[#D1764F] font-bold">Shipping Address</h1>
                                 <div class="text-xs text-[#7B8C7F] font-medium">
                                     <p>{{ $user->name }}</p>
-                                    <p>Jl. Pakuan no.3, Sumur Batu, Kec. Babakan Madang,</p>
-                                    <p>Kabupaten Bogor</p>
-                                    <p>Jawa Barat 16810</p>
+                                    <p>{{ $order->address->street_address }}</p>
+                                    <p>{{ $order->address->urban_village }}, {{ $order->address->subdistrict }}, {{ $order->address->city }}</p>
+                                    <p>{{ $order->address->province . ' ' . $order->address->postal_code }}</p>
                                 </div>
                             </div>
                             <div class="flex flex-col gap-2">

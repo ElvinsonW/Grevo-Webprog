@@ -66,8 +66,8 @@
                     </div>
 
                     <div class="flex flex-row items-center justify-between mb-[8px]">
-                        <p class="text-red-600 text-lg font-bold mb-2 text-[1.2vw]">Rp
-                            {{ number_format($tree->treeprice) }}</p>
+                        <p class="text-red-600 text-lg font-bold mb-2 text-[1.2vw]">
+                            {{ number_format($tree->treeprice) }} PTS</p>
                     </div>
                 </div>
 

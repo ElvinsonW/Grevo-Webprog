@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Address;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -21,7 +22,8 @@ class OrderFactory extends Factory
             'order_id' => 'ORD' . fake()->unique()->numberBetween(123456800, 9999999999),
             'shipping' => fake()->numberBetween(10,60) * 1000,
             'payment_method' => 'Credit Card',
-            'user_id' => User::factory()
+            'user_id' => User::factory(),
+            'address_id' => fake()->numberBetween(1,3)
         ];
     }
 }
