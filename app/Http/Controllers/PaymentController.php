@@ -38,6 +38,7 @@ class PaymentController extends Controller
             $lineItems = [];
             $cartIds = $request->get('cartIds');
             $carts = Cart::whereIn('id', $cartIds)->get();
+            $addressId = $request->get('addressId');
 
             foreach ($carts as $cart) {
                 $lineItems[] = [
@@ -75,7 +76,8 @@ class PaymentController extends Controller
                 'cancel_url' => route('checkout.cancel', [], true),
                 'metadata' => [
                     'cart_ids' => implode(',', $cartIds),
-                    'shipping_fee' => $shippingFee
+                    'shipping_fee' => $shippingFee,
+                    'address_id' => $addressId
                 ],
                 'locale' => 'id'
             ]);
@@ -95,6 +97,7 @@ class PaymentController extends Controller
             $shippingFee = $session->metadata->shipping_fee;
             $cartIds = explode(',', $session->metadata->cart_ids); 
             $carts = Cart::wherein('id', $cartIds)->get();
+            $addressId = $session->metadata->address_id;
 
             do {
                 $orderId = 'ORD' . now()->format('YmdHis') . rand(1000, 9999);
@@ -104,7 +107,8 @@ class PaymentController extends Controller
                 "order_id" => $orderId,
                 'shipping' => $shippingFee,
                 'payment_method' => 'Credit Card',
-                'user_id' => auth()->user()->id
+                'user_id' => auth()->user()->id,
+                'address_id' => $addressId
             ]);
 
             StatusHistory::create([

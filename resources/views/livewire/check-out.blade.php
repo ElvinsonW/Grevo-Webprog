@@ -8,6 +8,7 @@
         <input type="hidden" name="shippingFee" value="{{ $shippingCost }}">
         <input type="hidden" name="name" value="{{ auth()->user()->name }}">
         <input type="hidden" name="email" value="{{ auth()->user()->email }}">
+        <input type="hidden" name="addressId" value="{{ $address->id }}">
 
         <h1 class="text-[2vw] font-bold mb-[3vw]">Check Out</h1>
 

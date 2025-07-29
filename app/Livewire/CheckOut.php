@@ -51,16 +51,6 @@ class CheckOut extends Component
         }
     }
 
-    public function delete($id)
-    {
-        $product = CartModel::findOrFail($id);
-        $product->delete();
-
-        $this->selectedProductIds = array_values(array_diff($this->selectedProductIds, [$id]));
-
-        $this->refreshCart();
-    }
-
     public function getSubTotalPriceProperty()
     {
         return 
@@ -94,15 +84,6 @@ class CheckOut extends Component
 
         $this->calculateShippingCost();   
     }
-
-    public function checkout()
-    {
-       return redirect()->route('checkout.payment', [
-            'cartIds' => $this->selectedProductIds,
-            'email' => auth()->user()->email,
-            'name' => auth()->user()->name
-        ]);
-    }   
 
     public function render()
     {

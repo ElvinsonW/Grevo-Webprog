@@ -18,6 +18,7 @@ class OrderSeeder extends Seeder
             'shipping' => 10000,
             'payment_method' => 'Credit Card',
             'user_id' => 2,
+            'address_id' => 1
         ]);
 
         Order::create([
@@ -25,6 +26,7 @@ class OrderSeeder extends Seeder
             'shipping' => 15000,
             'payment_method' => 'Bank Transfer',
             'user_id' => 2,
+            'address_id' => 2
         ]);
 
         Order::create([
@@ -32,6 +34,7 @@ class OrderSeeder extends Seeder
             'shipping' => 8000,
             'payment_method' => 'Cash',
             'user_id' => 2,
+            'address_id' => 3
         ]);
     }
 }

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('shipping');
             $table->string('payment_method');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('address_id')->constrained('addresses')->onDelete('cascade');
             $table->timestamps();
         });
     }
