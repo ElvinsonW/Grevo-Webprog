@@ -38,12 +38,12 @@
                         <a href="javascript:history.back()" class="btn flex flex-row gap-5">
                             <i class="fa-solid fa-chevron-down text-[1vw] transition-transform duration-400 rotate-90 text-[#7B8C7F]"
                                 id="dropdown-icon"></i>
-                            <h1 class="font-bold text-lg text-[#7B8C7F]">BACK</h1>
+                            <h1 class="font-bold text-lg text-[#7B8C7F]">Kembali</h1>
                         </a>
 
                         <!-- order info -->
                         <div class="flex flex-row gap-4 text-right">
-                            <h1 class="font-bold text-lg text-[#3E6137]">ORDER ID: {{ $order->order_id }}</h1>
+                            <h1 class="font-bold text-lg text-[#3E6137]">ID Pesanan: {{ $order->order_id }}</h1>
                             <h1 class="font-semibold text-xl text-[#7B8C7F]">|</h1>
                             <h1 class="font-bold text-lg text-[#D1764F]">{{ $status->status }}</h1>
                         </div>
@@ -56,10 +56,10 @@
                         @if ($status->status === 'ORDER PLACED')
                             <div class="flex flex-col gap-4 justify-center items-center">
                                 <div class="flex flex-row justify-between items-center w-full px-23">
-                                    <h3 class="text-sm font-bold w-30 text-center text-[#7B8C7F]">Order Placed</h3>
-                                    <h3 class="text-sm font-bold w-30 text-center text-[#7B8C7F]">To Ship</h3>
-                                    <h3 class="text-sm font-bold w-30 text-center text-[#7B8C7F]">To Receive</h3>
-                                    <h3 class="text-sm font-bold w-30 text-center text-[#7B8C7F]">To Rate</h3>
+                                    <h3 class="text-sm font-bold w-30 text-center text-[#7B8C7F]">Pesanan dibuat</h3>
+                                    <h3 class="text-sm font-bold w-30 text-center text-[#7B8C7F]">Disiapkan</h3>
+                                    <h3 class="text-sm font-bold w-30 text-center text-[#7B8C7F]">Diterima</h3>
+                                    <h3 class="text-sm font-bold w-30 text-center text-[#7B8C7F]">Di nilai</h3>
                                 </div>
 
                                 <img src="{{ asset('images/placed.svg') }}" alt="">
@@ -89,10 +89,10 @@
                         @elseif ($status->status === 'ORDER SHIPPED')
                             <div class="flex flex-col gap-4 justify-center items-center">
                                 <div class="flex flex-row justify-between items-center w-full px-23">
-                                    <h3 class="text-sm font-bold w-30 text-center text-[#7B8C7F]">Order Placed</h3>
-                                    <h3 class="text-sm font-bold w-30 text-center text-[#7B8C7F]">Order Shipped</h3>
-                                    <h3 class="text-sm font-bold w-30 text-center text-[#7B8C7F]">To Receive</h3>
-                                    <h3 class="text-sm font-bold w-30 text-center text-[#7B8C7F]">To Rate</h3>
+                                     <h3 class="text-sm font-bold w-30 text-center text-[#7B8C7F]">Pesanan dibuat</h3>
+                                    <h3 class="text-sm font-bold w-30 text-center text-[#7B8C7F]">Disiapkan</h3>
+                                    <h3 class="text-sm font-bold w-30 text-center text-[#7B8C7F]">Diterima</h3>
+                                    <h3 class="text-sm font-bold w-30 text-center text-[#7B8C7F]">Di nilai</h3>
                                 </div>
 
                                 <img src="{{ asset('images/shipped.svg') }}" alt="">
@@ -125,10 +125,10 @@
                         @elseif ($status->status === 'ORDER ARRIVED')
                             <div class="flex flex-col gap-4 justify-center items-center">
                                 <div class="flex flex-row justify-between items-center w-full px-23">
-                                    <h3 class="text-sm font-bold w-30 text-center text-[#7B8C7F]">Order Placed</h3>
-                                    <h3 class="text-sm font-bold w-30 text-center text-[#7B8C7F]">Order Shipped</h3>
-                                    <h3 class="text-sm font-bold w-30 text-center text-[#7B8C7F]">To Receive</h3>
-                                    <h3 class="text-sm font-bold w-30 text-center text-[#7B8C7F]">To Rate</h3>
+                                     <h3 class="text-sm font-bold w-30 text-center text-[#7B8C7F]">Pesanan dibuat</h3>
+                                    <h3 class="text-sm font-bold w-30 text-center text-[#7B8C7F]">Disiapkan</h3>
+                                    <h3 class="text-sm font-bold w-30 text-center text-[#7B8C7F]">Diterima</h3>
+                                    <h3 class="text-sm font-bold w-30 text-center text-[#7B8C7F]">Di nilai</h3>
                                 </div>
 
                                 <img src="{{ asset('images/arrived.svg') }}" alt="">
@@ -163,10 +163,10 @@
                         @elseif ($status->status === 'ORDER RECEIVED')
                             <div class="flex flex-col gap-4 justify-center items-center">
                                 <div class="flex flex-row justify-between items-center w-full px-23">
-                                    <h3 class="text-sm font-bold w-30 text-center text-[#7B8C7F]">Order Placed</h3>
-                                    <h3 class="text-sm font-bold w-30 text-center text-[#7B8C7F]">Order Shipped</h3>
-                                    <h3 class="text-sm font-bold w-30 text-center text-[#7B8C7F]">Order Received</h3>
-                                    <h3 class="text-sm font-bold w-30 text-center text-[#7B8C7F]">To Rate</h3>
+                                     <h3 class="text-sm font-bold w-30 text-center text-[#7B8C7F]">Pesanan dibuat</h3>
+                                    <h3 class="text-sm font-bold w-30 text-center text-[#7B8C7F]">Disiapkan</h3>
+                                    <h3 class="text-sm font-bold w-30 text-center text-[#7B8C7F]">Diterima</h3>
+                                    <h3 class="text-sm font-bold w-30 text-center text-[#7B8C7F]">Di nilai</h3>
                                 </div>
 
                                 <img src="{{ asset('images/received.svg') }}" alt="">
@@ -201,10 +201,10 @@
                         @elseif ($status->status === 'ORDER COMPLETED')
                             <div class="flex flex-col gap-4 justify-center items-center">
                                 <div class="flex flex-row justify-between items-center w-full px-23">
-                                    <h3 class="text-sm font-bold w-30 text-center text-[#7B8C7F]">Order Placed</h3>
-                                    <h3 class="text-sm font-bold w-30 text-center text-[#7B8C7F]">Order Shipped</h3>
-                                    <h3 class="text-sm font-bold w-30 text-center text-[#7B8C7F]">Order Received</h3>
-                                    <h3 class="text-sm font-bold w-30 text-center text-[#7B8C7F]">Order Completed</h3>
+                                     <h3 class="text-sm font-bold w-30 text-center text-[#7B8C7F]">Pesanan dibuat</h3>
+                                    <h3 class="text-sm font-bold w-30 text-center text-[#7B8C7F]">Disiapkan</h3>
+                                    <h3 class="text-sm font-bold w-30 text-center text-[#7B8C7F]">Diterima</h3>
+                                    <h3 class="text-sm font-bold w-30 text-center text-[#7B8C7F]">Di nilai</h3>
                                 </div>
 
                                 <img src="{{ asset('images/completed.svg') }}" alt="">
@@ -312,10 +312,10 @@
                                             <div class="flex gap-[0.5vw]">
                                                 <p class="text-[#7B8C7F] text-sm">Variant: {{ $item->variant->sku }}</p>
                                                 @if ($item->variant->color)
-                                                    <p class="text-[#7B8C7F] text-sm">Color: {{ $item->variant->color->name }}</p>
+                                                    <p class="text-[#7B8C7F] text-sm">Warna: {{ $item->variant->color->name }}</p>
                                                 @endif
                                                 @if ($item->variant->size)
-                                                    <p class="text-[#7B8C7F] text-sm">Color: {{ $item->variant->size->name }}</p>
+                                                    <p class="text-[#7B8C7F] text-sm">Ukuran: {{ $item->variant->size->name }}</p>
                                                 @endif
                                             </div>
                                             <p class="text-[#7B8C7F] text-sm">{{ $item->quantity }}x</p>
@@ -337,7 +337,7 @@
                     <div class="flex flex-row justify-between items-top mx-20 my-8 text-left gap-10 mb-16">
                         <div class="flex flex-col gap-10 w-2/3">
                             <div class="flex flex-col gap-2">
-                                <h1 class="text-sm text-[#D1764F] font-bold">Shipping Address</h1>
+                                <h1 class="text-sm text-[#D1764F] font-bold">Alamat Pengiriman</h1>
                                 <div class="text-xs text-[#7B8C7F] font-medium">
                                     <p>{{ $user->name }}</p>
                                     <p>{{ $order->address->street_address }}</p>
@@ -346,7 +346,7 @@
                                 </div>
                             </div>
                             <div class="flex flex-col gap-2">
-                                <h1 class="text-sm text-[#D1764F] font-bold">Payment Method</h1>
+                                <h1 class="text-sm text-[#D1764F] font-bold">Metode Pembayaran</h1>
                                 <p class="text-xs text-[#7B8C7F] font-medium">{{ $order->payment_method }}</p>
                             </div>
 
@@ -358,10 +358,10 @@
                                 $shipping = $order->shipping;
                                 $total = $merchadise + $shipping;
                             @endphp
-                            <h1 class="text-sm text-[#D1764F] font-bold">Billing Details</h1>
+                            <h1 class="text-sm text-[#D1764F] font-bold">Detail Harga</h1>
                             <div class="flex flex-row justfy-between items-center">
                                 <div class="text-xs text-[#7B8C7F] font-medium text-right pl-5 w-1/2">
-                                    <p>Merchandise Subtotal</p>
+                                    <p>Subtotal Produk</p>
                                 </div>
 
                                 <div class="text-md text-[#7B8C7F] font-semibold text-right pl-5 w-1/2">
@@ -371,7 +371,7 @@
 
                             <div class="flex flex-row justfy-between items-center">
                                 <div class="text-xs text-[#7B8C7F] font-medium text-right pl-5 w-1/2">
-                                    <p>Shipping</p>
+                                    <p>Pengiriman</p>
                                 </div>
 
                                 <div class="text-md text-[#7B8C7F] font-semibold text-right pl-5 w-1/2">

@@ -116,7 +116,7 @@
                 <div class="grid grid-cols-2 gap-[1.5vw] mb-[1.5vw]">
                     <div>
                         <label for="edit_recipient_name"
-                            class="block text-[0.9vw] font-medium text-gray-700 mb-[0.5vw]">Full Name</label>
+                            class="block text-[0.9vw] font-medium text-gray-700 mb-[0.5vw]">Nama Penerima</label>
                         <input type="text" name="recipient_name" id="edit_recipient_name"
                             class="focus:outline-none w-full border border-gray-300 rounded-[0.3vw] p-[0.75vw] text-[0.9vw] focus:ring-blue-500 focus:border-blue-500 @error('recipient_name') border-red-500 @enderror"
                             required value="{{ session('old_edit_data.recipient_name', '') }}">
@@ -126,7 +126,7 @@
                     </div>
                     <div>
                         <label for="edit_phone_number"
-                            class="block text-[0.9vw] font-medium text-gray-700 mb-[0.5vw]">Phone Number</label>
+                            class="block text-[0.9vw] font-medium text-gray-700 mb-[0.5vw]">Nomor Telepon</label>
                         <input type="text" name="phone_number" id="edit_phone_number"
                             class="focus:outline-none w-full border border-gray-300 rounded-[0.3vw] p-[0.75vw] text-[0.9vw] focus:ring-blue-500 focus:border-blue-500 @error('phone_number') border-red-500 @enderror"
                             required value="{{ session('old_edit_data.phone_number', '') }}">
@@ -138,7 +138,7 @@
 
                 <div class="mb-[1.5vw]">
                     <label for="edit_province"
-                        class="block text-[0.9vw] font-medium text-gray-700 mb-[0.5vw]">Province</label>
+                        class="block text-[0.9vw] font-medium text-gray-700 mb-[0.5vw]">Provinsi</label>
                     <input type="text" name="province" id="edit_province"
                         class="focus:outline-none w-full border border-gray-300 rounded-[0.3vw] p-[0.75vw] text-[0.9vw] focus:ring-blue-500 focus:border-blue-500 @error('province') border-red-500 @enderror"
                         required value="{{ session('old_edit_data.province', '') }}">
@@ -150,7 +150,7 @@
                 <div class="grid grid-cols-2 gap-[1.5vw] mb-[1.5vw]">
                     <div>
                         <label for="edit_city"
-                            class="block text-[0.9vw] font-medium text-gray-700 mb-[0.5vw]">City</label>
+                            class="block text-[0.9vw] font-medium text-gray-700 mb-[0.5vw]">Kota</label>
                         <input type="text" name="city" id="edit_city"
                             class="focus:outline-none w-full border border-gray-300 rounded-[0.3vw] p-[0.75vw] text-[0.9vw] focus:ring-blue-500 focus:border-blue-500 @error('city') border-red-500 @enderror"
                             required value="{{ session('old_edit_data.city', '') }}">
@@ -160,8 +160,7 @@
                     </div>
                     <div>
                         <label for="edit_subdistrict"
-                            class="block text-[0.9vw] font-medium text-gray-700 mb-[0.5vw]">Subdistrict
-                            (Kecamatan)</label>
+                            class="block text-[0.9vw] font-medium text-gray-700 mb-[0.5vw]">Kecamatan</label>
                         <input type="text" name="subdistrict" id="edit_subdistrict"
                             class="focus:outline-none w-full border border-gray-300 rounded-[0.3vw] p-[0.75vw] text-[0.9vw] focus:ring-blue-500 focus:border-blue-500 @error('subdistrict') border-red-500 @enderror"
                             value="{{ session('old_edit_data.subdistrict', '') }}">
@@ -175,8 +174,7 @@
 
                     <div>
                         <label for="edit_urban_village"
-                            class="block text-[0.9vw] font-medium text-gray-700 mb-[0.5vw]">Urban Village
-                            (Kelurahan/Desa)</label>
+                            class="block text-[0.9vw] font-medium text-gray-700 mb-[0.5vw]">kelurahan/Desa</label>
                         <input type="text" name="urban_village" id="edit_urban_village"
                             class="focus:outline-none w-full border border-gray-300 rounded-[0.3vw] p-[0.75vw] text-[0.9vw] focus:ring-blue-500 focus:border-blue-500 @error('urban_village') border-red-500 @enderror"
                             value="{{ session('old_edit_data.urban_village', '') }}">
@@ -187,8 +185,7 @@
 
                     <div>
                         <label for="edit_postal_code"
-                            class="block text-[0.9vw] font-medium text-gray-700 mb-[0.5vw]">Postal Code
-                            (Kode Pos)</label>
+                            class="block text-[0.9vw] font-medium text-gray-700 mb-[0.5vw]">Kode Pos</label>
                         <input type="text" name="postal_code" id="edit_postal_code"
                             class="focus:outline-none w-full border border-gray-300 rounded-[0.3vw] p-[0.75vw] text-[0.9vw] focus:ring-blue-500 focus:border-blue-500 @error('postal_code') border-red-500 @enderror"
                             value="{{ session('old_edit_data.postal_code', '') }}">
@@ -201,8 +198,7 @@
 
                 <div class="mb-[1.5vw]">
                     <label for="edit_street_address"
-                        class="block text-[0.9vw] font-medium text-gray-700 mb-[0.5vw]">Street Name, Building, House
-                        Number</label>
+                        class="block text-[0.9vw] font-medium text-gray-700 mb-[0.5vw]">Nama Jalan, Gedung, Nomor Rumah</label>
                     <textarea name="street_address" id="edit_street_address" rows="3"
                         class="focus:outline-none w-full border border-gray-300 rounded-[0.3vw] p-[0.75vw] text-[0.9vw] focus:ring-blue-500 focus:border-blue-500 @error('street_address') border-red-500 @enderror"
                         required>{{ session('old_edit_data.street_address', '') }}</textarea>
@@ -234,9 +230,9 @@
 
                 <div class="flex justify-end gap-[1vw]">
                     <button type="button" id="cancelEditModal"
-                        class="font-bold px-[2.5vw] py-[0.75vw] text-[1vw] border border-orange-1 rounded-[0.3vw] text-orange-1 hover:border-green-2">Cancel</button>
+                        class="font-bold px-[2.5vw] py-[0.75vw] text-[1vw] border border-orange-1 rounded-[0.3vw] text-orange-1 hover:border-green-2">Batal</button>
                     <button type="submit"
-                        class="font-bold px-[2.5vw] py-[0.75vw] text-[1vw] rounded-[0.3vw] bg-orange-1 text-white hover:bg-green-2">Submit</button>
+                        class="font-bold px-[2.5vw] py-[0.75vw] text-[1vw] rounded-[0.3vw] bg-orange-1 text-white hover:bg-green-2">Ubah</button>
                 </div>
             </form>
         </div>
@@ -252,7 +248,7 @@
                 &times;
             </button>
 
-            <h2 class="text-[1.8vw] font-bold mb-[2vw]">Add New Address</h2>
+            <h2 class="text-[1.8vw] font-bold mb-[2vw]">Tambah Alamat Baru</h2>
 
             {{-- Form Add New Address --}}
             <form id="addAddressForm" action="{{ route('addresses.store') }}" method="POST">
@@ -261,7 +257,7 @@
                 <div class="grid grid-cols-2 gap-[1.5vw] mb-[1.5vw]">
                     <div>
                         <label for="add_recipient_name"
-                            class="block text-[0.9vw] font-medium text-gray-700 mb-[0.5vw]">Recipient Name</label>
+                            class="block text-[0.9vw] font-medium text-gray-700 mb-[0.5vw]">Nama Penerima</label>
                         <input type="text" name="recipient_name" id="add_recipient_name"
                             class="focus:outline-none w-full border border-gray-300 rounded-[0.3vw] p-[0.75vw] text-[0.9vw] focus:ring-blue-500 focus:border-blue-500 @error('recipient_name') border-red-500 @enderror"
                             required value="{{ old('recipient_name') }}">
@@ -271,7 +267,7 @@
                     </div>
                     <div>
                         <label for="add_phone_number"
-                            class="block text-[0.9vw] font-medium text-gray-700 mb-[0.5vw]">Phone Number</label>
+                            class="block text-[0.9vw] font-medium text-gray-700 mb-[0.5vw]">Nomor Telepon</label>
                         <input type="text" name="phone_number" id="add_phone_number"
                             class="focus:outline-none w-full border border-gray-300 rounded-[0.3vw] p-[0.75vw] text-[0.9vw] focus:ring-blue-500 focus:border-blue-500 @error('phone_number') border-red-500 @enderror"
                             required value="{{ old('phone_number') }}">
@@ -283,7 +279,7 @@
 
                 <div class="mb-[1.5vw]">
                     <label for="add_province"
-                        class="block text-[0.9vw] font-medium text-gray-700 mb-[0.5vw]">Province</label>
+                        class="block text-[0.9vw] font-medium text-gray-700 mb-[0.5vw]">Provinsi</label>
                     <input type="text" name="province" id="add_province"
                         class="focus:outline-none w-full border border-gray-300 rounded-[0.3vw] p-[0.75vw] text-[0.9vw] focus:ring-blue-500 focus:border-blue-500 @error('province') border-red-500 @enderror"
                         required value="{{ old('province') }}">
@@ -295,7 +291,7 @@
                 <div class="grid grid-cols-2 gap-[1.5vw] mb-[1.5vw]">
                     <div>
                         <label for="add_city"
-                            class="block text-[0.9vw] font-medium text-gray-700 mb-[0.5vw]">City</label>
+                            class="block text-[0.9vw] font-medium text-gray-700 mb-[0.5vw]">Kota</label>
                         <input type="text" name="city" id="add_city"
                             class="focus:outline-none w-full border border-gray-300 rounded-[0.3vw] p-[0.75vw] text-[0.9vw] focus:ring-blue-500 focus:border-blue-500 @error('city') border-red-500 @enderror"
                             required value="{{ old('city') }}">
@@ -305,8 +301,7 @@
                     </div>
                     <div>
                         <label for="add_subdistrict"
-                            class="block text-[0.9vw] font-medium text-gray-700 mb-[0.5vw]">Subdistrict
-                            (Kecamatan)</label>
+                            class="block text-[0.9vw] font-medium text-gray-700 mb-[0.5vw]">Kecamatan</label>
                         <input type="text" name="subdistrict" id="add_subdistrict"
                             class="focus:outline-none w-full border border-gray-300 rounded-[0.3vw] p-[0.75vw] text-[0.9vw] focus:ring-blue-500 focus:border-blue-500 @error('subdistrict') border-red-500 @enderror"
                             value="{{ old('subdistrict') }}">
@@ -319,8 +314,7 @@
                 <div class="grid grid-cols-2 gap-[1.5vw] mb-[1.5vw]">
                     <div>
                         <label for="add_urban_village"
-                            class="block text-[0.9vw] font-medium text-gray-700 mb-[0.5vw]">Urban Village
-                            (Kelurahan/Desa)</label>
+                            class="block text-[0.9vw] font-medium text-gray-700 mb-[0.5vw]">Kelurahan/Desa</label>
                         <input type="text" name="urban_village" id="add_urban_village"
                             class="focus:outline-none w-full border border-gray-300 rounded-[0.3vw] p-[0.75vw] text-[0.9vw] focus:ring-blue-500 focus:border-blue-500 @error('urban_village') border-red-500 @enderror"
                             value="{{ old('urban_village') }}">
@@ -331,8 +325,7 @@
 
                     <div>
                         <label for="add_postal_code"
-                            class="block text-[0.9vw] font-medium text-gray-700 mb-[0.5vw]">Postal Code
-                            (Kode Pos)</label>
+                            class="block text-[0.9vw] font-medium text-gray-700 mb-[0.5vw]">Kode Pos</label>
                         <input type="text" name="postal_code" id="add_postal_code"
                             class="focus:outline-none w-full border border-gray-300 rounded-[0.3vw] p-[0.75vw] text-[0.9vw] focus:ring-blue-500 focus:border-blue-500 @error('postal_code') border-red-500 @enderror"
                             value="{{ old('postal_code', '') }}">
@@ -343,8 +336,7 @@
                 </div>
                 <div class="mb-[1.5vw]">
                     <label for="add_street_address"
-                        class="block text-[0.9vw] font-medium text-gray-700 mb-[0.5vw]">Street Name, Building, House
-                        Number</label>
+                        class="block text-[0.9vw] font-medium text-gray-700 mb-[0.5vw]">Nama Jalan, Gedung, Nomor Rumah</label>
                     <textarea name="street_address" id="add_street_address" rows="3"
                         class="focus:outline-none w-full border border-gray-300 rounded-[0.3vw] p-[0.75vw] text-[0.9vw] focus:ring-blue-500 focus:border-blue-500 @error('street_address') border-red-500 @enderror"
                         required>{{ old('street_address') }}</textarea>
@@ -354,7 +346,7 @@
                 </div>
 
                 <div class="mb-[1.5vw]">
-                    <label class="block text-[0.9vw] font-medium text-gray-700 mb-[0.5vw]">Label As</label>
+                    <label class="block text-[0.9vw] font-medium text-gray-700 mb-[0.5vw]">Ditandai Sebagai</label>
                     <div class="flex gap-[1vw]">
                         <label class="inline-flex items-center">
                             <input type="radio" name="label" value="Rumah"
@@ -381,10 +373,9 @@
 
                 <div class="flex justify-end gap-[1vw]">
                     <button type="button" id="cancelAddModal"
-                        class="px-[1.5vw] py-[0.75vw] text-[1vw] border border-gray-300 rounded-[0.3vw] text-gray-700 hover:bg-gray-100">Cancel</button>
+                        class="px-[1.5vw] py-[0.75vw] text-[1vw] border border-gray-300 rounded-[0.3vw] text-gray-700 hover:bg-gray-100">Batal</button>
                     <button type="submit"
-                        class="px-[1.5vw] py-[0.75vw] text-[1vw] rounded-[0.3vw] bg-[var(--color-green-3)] text-white hover:bg-[var(--color-green-2)]">Add
-                        Address</button>
+                        class="px-[1.5vw] py-[0.75vw] text-[1vw] rounded-[0.3vw] bg-[var(--color-green-3)] text-white hover:bg-[var(--color-green-2)]">Tambah Alamat</button>
                 </div>
             </form>
         </div>

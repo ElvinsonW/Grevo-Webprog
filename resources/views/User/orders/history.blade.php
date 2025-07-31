@@ -61,7 +61,7 @@
                             @endif
                         @endforeach
                         <input type="text" name="keyword" value="{{ request('keyword') }}"
-                            placeholder="Search by Order ID or Product Name"
+                            placeholder="Cari Berdasarkan ID Pesanan atau Nama Produk"
                             class="flex-1 border border-[#D2D2B0] rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#D2D2B0]">
                         <button type="submit" class="bg-[#D2D2B0] px-4 py-2 rounded hover:bg-[#bdbd8d] transition">
                             <i class="fa-solid fa-magnifying-glass"></i>
@@ -72,12 +72,12 @@
                     <div class="flex gap-3 flex-wrap ml-6" style="margin-top: -10px;">
                         @php
                             $statuses = [
-                                'all' => 'All',
-                                'to-ship' => 'To Ship',
-                                'to-receive' => 'To Receive',
-                                'delivered' => 'Delivered',
-                                'completed' => 'Completed',
-                                'cancelled' => 'Cancelled',
+                                'all' => 'Semua',
+                                'to-ship' => 'Disiapkan',
+                                'to-receive' => 'Dikirim',
+                                'delivered' => 'Sampai',
+                                'completed' => 'Selesai',
+                                'cancelled' => 'Batal',
                             ];
                             $active = request('status', 'all');
 
@@ -120,7 +120,7 @@
                             <div class="flex justify-between items-center mb-5">
                                 <div class="flex flex-col gap-1">
                                     <p class="text-[#D1764F] text-sm font-bold">
-                                        ORDER ID: {{ $order->order_id }}
+                                        ID PESANAN: {{ $order->order_id }}
                                     </p>
                                     <p class="text-[#7B8C7F] text-sm font-semibold">
                                         {{ \Carbon\Carbon::parse($order->statusHistories->last()->changed_at)->format('d M Y, g:i A') }}
@@ -130,12 +130,12 @@
                                     @php
                                         $status = $order->statusHistories->first()->status;
                                         $statusLabels = [
-                                            'ORDER PLACED' => 'TO SHIP',
-                                            'ORDER SHIPPED' => 'TO RECEIVE',
-                                            'ORDER ARRIVED' => 'DELIVERED',
-                                            'ORDER RECEIVED' => 'COMPLETED',
-                                            'ORDER COMPLETED' => 'COMPLETED',
-                                            'CANCELLED' => 'CANCELLED',
+                                            'ORDER PLACED' => 'DISIAPKAN',
+                                            'ORDER SHIPPED' => 'DIKIRIM',
+                                            'ORDER ARRIVED' => 'SAMPAI',
+                                            'ORDER RECEIVED' => 'SELESAI',
+                                            'ORDER COMPLETED' => 'SELESAI',
+                                            'CANCELLED' => 'BATAL',
                                         ];
                                     @endphp
                                     <span>
@@ -184,7 +184,7 @@
                                         @csrf
                                         <button type="submit"
                                             class="border border-[#7B8C7F] text-[#7B8C7F] text-sm font-semibold px-10 py-2 rounded-lg hover:bg-[#fef5f1] transition">
-                                            Cancel Order
+                                            Batalkan Pesanan
                                         </button>
                                     </form>
                                 @elseif ($status === 'ORDER ARRIVED')
@@ -193,27 +193,27 @@
 
                                         <button type="submit"
                                             class="bg-[#3E6137] text-[#FCFCF5] text-sm font-semibold px-10 py-2 rounded-lg hover:bg-[#68806f] transition">
-                                            Order Received
+                                            Pesanan Diterima
                                         </button>
                                     </form>
                                 @elseif ($status === 'ORDER RECEIVED')
                                     <a href="/products"
                                         class="bg-[#3E6137] text-[#FCFCF5] text-sm font-semibold px-10 py-2 rounded-lg hover:bg-[#68806f] transition">
-                                        Buy Again
+                                        Beli lagi
                                     </a>
                                     <a href="/review/{{ $order->id }}/create"
                                         class="border border-[#7B8C7F] text-[#7B8C7F] text-sm font-semibold px-10 py-2 rounded-lg hover:bg-[#f0f5f2] transition">
-                                        Rate
+                                        Nilai
                                     </a>
                                 @elseif ($status === 'ORDER COMPLETED')
                                     <a href=""
                                         class="bg-[#3E6137] text-[#FCFCF5] text-sm font-semibold px-10 py-2 rounded-lg hover:bg-[#68806f] transition">
-                                        Buy Again
+                                        Beli lagi
                                     </a>
                                 @elseif ($status === 'CANCELLED')
                                     <a href="/products"
                                         class="bg-[#3E6137] text-[#FCFCF5] text-sm font-semibold px-10 py-2 rounded-lg hover:bg-[#68806f] transition">
-                                        Buy Again
+                                        Beli lagi
                                     </a>
                                 @endif
                             </div>

@@ -62,15 +62,23 @@ class ProfileController extends Controller
             'cancelled'  => ['CANCELLED'],
         ];
 
-        $orders = Order::with(['items', 'statusHistories' => fn($q) => $q->orderBy('changed_at', 'desc')])
+        $orders = Order::with([
+            'items.variant.product',
+            'statusHistories' => fn($q) => $q->orderBy('changed_at', 'desc')
+        ])
             ->where('user_id', $user->id)
             ->when($keyword, function ($query) use ($keyword) {
                 $query->where(function ($q) use ($keyword) {
                     $q->where('order_id', 'like', "%$keyword%")
-                      ->orWhereHas('items', fn ($iq) => $iq->where('name', 'like', "%$keyword%"));
+                        ->orWhereHas(
+                            'items.variant.product',
+                            fn($pq) =>
+                            $pq->where('name', 'like', "%$keyword%")
+                        );
                 });
             })
             ->get();
+
 
         if ($statusParam !== 'all' && isset($statusMap[$statusParam])) {
             $statuses = $statusMap[$statusParam];
@@ -97,9 +105,10 @@ class ProfileController extends Controller
         ]);
     }
 
-    public function showTreeOrder(){
+    public function showTreeOrder()
+    {
         $user = Auth::user();
-        return view('User.edit-profile.tree-order',[
+        return view('User.edit-profile.tree-order', [
             "user" => $user,
             "treeOrders" => TreeOrder::where('user_id', $user->id)->get()
         ]);

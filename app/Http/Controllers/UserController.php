@@ -20,7 +20,7 @@ class UserController extends Controller
             'name' => ['required'],
             'username' => ['required', 'min:4', 'max:15', 'unique:users,username'],
             'email' => ['required', 'email', 'unique:users,email'],
-            'phone_number' => ['required', 'unique:users,phone_number'],
+            'phone_number' => ['required', 'unique:users,phone_number', 'regex:/^(\+62|62|0)[2-9][0-9]{8,14}$/'],
             'address' => ['required'],
             'gender' => ['required'],
             'password' => ['required','min:8','regex:/[A-Z]/','regex:/[a-z]/', 'regex:/[0-9]/', 'confirmed' ],
@@ -83,7 +83,7 @@ class UserController extends Controller
             $rules =[
                 'name' => ['required', 'min:5'],
                 'address' => ['required'],
-                'phone_number' => ['required', 'regex:/^(\+62|62|0)[2-9][0-9]{8,14}$/'],
+                'gender' => ['required'],
                 'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:1024']
             ];
 
@@ -91,6 +91,8 @@ class UserController extends Controller
                 $rules['email'] = ['required', 'email', 'unique:users,email,'];
             } else if ($request->username != $user->username){
                 $rules['username'] = ['required', 'min:5', 'unique:users,username'];
+            } else if($request->phone_number != $user->phone_number){
+                $rules['phone_number'] = ['required', 'unique:users,phone_number', 'regex:/^(\+62|62|0)[2-9][0-9]{8,14}$/'];
             }
             
             $validatedData = $request->validate($rules);
